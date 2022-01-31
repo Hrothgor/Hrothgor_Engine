@@ -9,13 +9,15 @@
 #define GAMEOBJECT_HPP_
 
 #include "../include.hpp"
-#include "Object.hpp"
 #include "Component.hpp"
+
+namespace Components {
+    class Transform;
+}
 
 class GameObject : public Object {
     public:
         GameObject(GameObject *parent = nullptr);
-        GameObject(const GameObject &parent = nullptr);
         ~GameObject();
 
         template <typename Comp>
@@ -62,8 +64,9 @@ class GameObject : public Object {
                 std::cout << "2 components of the same type : " + std::string(typeid(Comp).name()) << std::endl;
                 exit(84);
             }
-            _components[typeid(Comp)] = new Comp(this);
-            return _components[typeid(Comp)];
+            Comp* newComp = new Comp(this);
+            _components[typeid(Comp)] = newComp;
+            return newComp;
         }
 
         template <typename Comp>
@@ -77,16 +80,18 @@ class GameObject : public Object {
         virtual void LateUpdate() override;
         virtual void End() override;
 
-        Transform *GetTransform() const;
+        Components::Transform *GetTransform() const;
         GameObject *GetParent() const;
         std::unordered_map<std::type_index, Component *> GetComponents() const;
+
+        void AddChild(GameObject *child);
 
     protected:
     private:
         GameObject *_parent = nullptr;
         std::vector<GameObject *> _childs;
         std::unordered_map<std::type_index, Component *> _components;
-        Transform *_transform = nullptr;
+        Components::Transform *_transform = nullptr;
 };
 
 #endif /* !GAMEOBJECT_HPP_ */

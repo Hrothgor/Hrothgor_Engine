@@ -6,11 +6,17 @@
 */
 
 #include "GameObject.hpp"
+#include "../Components/Transform.hpp"
+#include "Engine.hpp"
 
 GameObject::GameObject(GameObject *parent)
     : _parent(parent)
 {
     _name = "GameObject";
+    _transform = new Components::Transform(this);
+    if (parent)
+        parent->AddChild(this);
+    Engine::Get()->AddEntity(this);
 }
 
 GameObject::~GameObject()
@@ -62,7 +68,7 @@ GameObject *GameObject::GetParent() const
     return _parent;
 }
 
-Transform *GameObject::GetTransform() const
+Components::Transform *GameObject::GetTransform() const
 {
     return _transform;
 }
@@ -70,4 +76,9 @@ Transform *GameObject::GetTransform() const
 std::unordered_map<std::type_index, Component *> GameObject::GetComponents() const
 {
     return _components;
+}
+
+void GameObject::AddChild(GameObject *child)
+{
+    _childs.push_back(child);
 }

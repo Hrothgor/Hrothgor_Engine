@@ -9,8 +9,13 @@
 #define MASTER3DRENDERER_HPP_
 
 #include "../include.hpp"
-#include "../Ecs/GameObject.hpp"
 #include "EntityRenderer.hpp"
+
+namespace Components {
+    class MainCamera3D;
+}
+
+class GameObject;
 
 class Master3DRenderer {
     public:
@@ -27,8 +32,8 @@ class Master3DRenderer {
 
     protected:
     private:
-        // Camera3D *camera;
-        EntityRenderer entityRenderer;
+        Components::MainCamera3D *_camera;
+        EntityRenderer _entityRenderer;
 
     protected:
         static Master3DRenderer *instance;

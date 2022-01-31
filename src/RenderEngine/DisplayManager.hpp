@@ -9,7 +9,6 @@
 #define DISPLAYMANAGER_HPP_
 
 #include "../include.hpp"
-#include "Ecs/Object.cpp"
 #include "Master3DRenderer.hpp"
 #include "Master2DRenderer.hpp"
 

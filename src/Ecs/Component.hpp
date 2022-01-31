@@ -12,7 +12,10 @@
 #include "../include.hpp"
 #include "Object.hpp"
 
-class Transform;
+namespace Components {
+    class Transform;
+}
+
 class GameObject;
 
 class Component : public Object {
@@ -25,12 +28,12 @@ class Component : public Object {
         virtual void LateUpdate() override {};
         virtual void End() override {};
 
-    protected:
         GameObject *GetGameObject() const;
-        Transform *GetTransform() const;
+        Components::Transform *GetTransform() const;
+    protected:
     private:
         GameObject *_gameObject = nullptr;
-        Transform *_transform = nullptr;
+        Components::Transform *_transform = nullptr;
 };
 
 #endif /* !COMPONENT_HPP_ */

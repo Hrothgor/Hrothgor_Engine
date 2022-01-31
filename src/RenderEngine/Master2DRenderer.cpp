@@ -6,6 +6,7 @@
 */
 
 #include "Master2DRenderer.hpp"
+#include "../Ecs/GameObject.hpp"
 
 Master2DRenderer *Master2DRenderer::instance = nullptr;
 

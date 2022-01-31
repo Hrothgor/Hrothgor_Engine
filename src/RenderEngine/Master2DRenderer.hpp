@@ -11,6 +11,8 @@
 #include "../include.hpp"
 #include "../Ecs/GameObject.hpp"
 
+class GameObject;
+
 class Master2DRenderer {
     public:
         Master2DRenderer();

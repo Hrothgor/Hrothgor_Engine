@@ -10,12 +10,13 @@
 
 #include "../include.hpp"
 #include "GameObject.hpp"
-#include "../RenderEngine/DisplayManager.hpp"
 
 class Engine {
     public:
         Engine();
         ~Engine();
+
+        void LoadScene();
 
         void Start();
         void Update();
@@ -34,6 +35,8 @@ class Engine {
         GameObject *Find(const std::string &name);
         GameObject *Instantiate(GameObject *object, GameObject *parent = nullptr);
         void Destroy(GameObject *object, float t = 0);
+
+        void AddEntity(GameObject *object);
     private:
         std::vector<GameObject *> _entities;
 

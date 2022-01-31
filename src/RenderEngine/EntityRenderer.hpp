@@ -10,7 +10,8 @@
 
 #include "../include.hpp"
 #include "rlights.h"
-#include "../Ecs/GameObject.hpp"
+
+class GameObject;
 
 class EntityRenderer {
     public:

@@ -22,6 +22,7 @@ class Object {
 	    virtual void End() = 0;
         
         std::string GetName() const;
+        void SetName(const std::string &name);
         bool IsActive() const;
 	    void SetActive(bool);
     

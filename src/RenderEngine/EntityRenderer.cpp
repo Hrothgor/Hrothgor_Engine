@@ -6,6 +6,9 @@
 */
 
 #include "EntityRenderer.hpp"
+#include "../Ecs/GameObject.hpp"
+#include "../Components/Transform.hpp"
+#include "../Components/MeshRenderer.hpp"
 
 EntityRenderer::EntityRenderer()
 {
@@ -26,9 +29,9 @@ void EntityRenderer::Draw()
 {
     Start();
     for (GameObject *object : _objects) {
-        Transform *transform = object->GetTransform();
-        Model *model = object->GetComponent<Model>();
-        DrawModelEx(*model, transform->translation, Vector3Zero(), 0, transform->scale, WHITE);
+        Components::Transform *transform = object->GetTransform();
+        Components::MeshRenderer *meshRenderer = object->GetComponent<Components::MeshRenderer>();
+        DrawModelEx(meshRenderer->GetModel(), transform->GetPosition(), Vector3Zero(), 0, transform->GetScale(), WHITE);
     }
     End();
 }

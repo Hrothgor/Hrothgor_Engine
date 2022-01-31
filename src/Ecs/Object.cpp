@@ -22,6 +22,11 @@ std::string Object::GetName() const
     return _name;
 }
 
+void Object::SetName(const std::string &name)
+{
+    _name = name;
+}
+
 bool Object::IsActive() const
 {
     return _active;

@@ -6,6 +6,10 @@
 */
 
 #include "Engine.hpp"
+#include "../RenderEngine/DisplayManager.hpp"
+
+#include "../Components/MeshRenderer.hpp"
+#include "../Components/MainCamera3D.hpp"
 
 Engine *Engine::instance = nullptr;
 
@@ -17,6 +21,17 @@ Engine::~Engine()
 {
 }
 
+void Engine::LoadScene()
+{
+    GameObject *mainCamera = new GameObject();
+    mainCamera->SetName("mainCamera");
+    mainCamera->AddComponent<Components::MainCamera3D>();
+
+    GameObject *test1 = new GameObject();
+    test1->SetName("test1");
+    test1->AddComponent<Components::MeshRenderer>()->Load("ressources/dragon.obj");
+}
+
 void Engine::Start()
 {
     SetTraceLogLevel(TraceLogLevel::LOG_WARNING);
@@ -25,6 +40,7 @@ void Engine::Start()
 	ToggleFullscreen();
     InitAudioDevice();
 
+    LoadScene();
     for (auto ent : _entities)
         ent->Start();
 }
@@ -79,4 +95,9 @@ void Engine::Destroy(GameObject *object, float t)
     } else {
         t -= GetFrameTime();
     }
+}
+
+void Engine::AddEntity(GameObject *gameObject)
+{
+    _entities.push_back(gameObject);
 }

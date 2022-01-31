@@ -7,6 +7,7 @@
 
 #include "Component.hpp"
 #include "GameObject.hpp"
+#include "../Components/Transform.hpp"
 
 Component::Component(GameObject *gameObject)
 	: _gameObject(gameObject)
@@ -15,12 +16,16 @@ Component::Component(GameObject *gameObject)
     _name = "Component";
 }
 
+Component::~Component()
+{
+}
+
 GameObject *Component::GetGameObject() const
 {
     return _gameObject;
 }
 
-Transform *Component::GetTransform() const
+Components::Transform *Component::GetTransform() const
 {
     return _transform;
 }
