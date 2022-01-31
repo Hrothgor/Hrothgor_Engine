@@ -32,4 +32,3 @@ Camera3D Components::MainCamera3D::GetCamera3D() const
 {
     return _camera;
 }
-
