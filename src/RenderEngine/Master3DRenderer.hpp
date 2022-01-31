@@ -1,38 +1,45 @@
 /*
-** EPITECH PROJECT, 2021
-** indieStudio
+** EPITECH PROJECT, 2022
+** Physics_engine
 ** File description:
 ** Master3DRenderer
 */
 
-#pragma once
 #ifndef MASTER3DRENDERER_HPP_
 #define MASTER3DRENDERER_HPP_
 
 #include "../include.hpp"
-#include "../Entities/Camera.hpp"
+#include "../Ecs/GameObject.hpp"
 #include "EntityRenderer.hpp"
-#include "ParticlesRenderer.hpp"
 
-namespace IS {
-    class Master3DRenderer {
-        public:
-            Master3DRenderer();
-            ~Master3DRenderer();
+class Master3DRenderer {
+    public:
+        Master3DRenderer();
+        ~Master3DRenderer();
 
-            void start(IS::Camera *camera);
-            void stop();
-            void render(int scene, IS::Camera *camera);
+        void Start();
+        void Draw();
+        void End();
 
-            void addLight(const LightValue &light);
-            void addEntity(int scene, Entity *entity);
-            void addParticles(const Particle &particles);
+        void RegisterObject(GameObject *model);
+        void RegisterLight(GameObject *light);
+        // void Register(Particle *particles);
 
-        protected:
-        private:
-            EntityRenderer _entityRenderer;
-            ParticlesRenderer _particlesRenderer;
-    };
-}
+    protected:
+    private:
+        // Camera3D *camera;
+        EntityRenderer entityRenderer;
+
+    protected:
+        static Master3DRenderer *instance;
+    public:
+        Master3DRenderer(Master3DRenderer &other) = delete;
+        void operator=(const Master3DRenderer &) = delete;
+        static Master3DRenderer *Get() {
+            if (instance == nullptr)
+                instance = new Master3DRenderer();
+            return instance;
+        };
+};
 
 #endif /* !MASTER3DRENDERER_HPP_ */

@@ -1,42 +1,33 @@
 /*
-** EPITECH PROJECT, 2021
-** indieStudio
+** EPITECH PROJECT, 2022
+** Physics_engine
 ** File description:
 ** EntityRenderer
 */
 
-#pragma once
 #ifndef ENTITYRENDERER_HPP_
 #define ENTITYRENDERER_HPP_
 
 #include "../include.hpp"
-#include "../Entities/Camera.hpp"
-#include "../Entities/Entity.hpp"
-#include "../Entities/Light.hpp"
-#include "../Shaders/LightShader.hpp"
 #include "rlights.h"
+#include "../Ecs/GameObject.hpp"
 
-namespace IS {
-    class EntityRenderer {
-        public:
-            EntityRenderer();
-            ~EntityRenderer();
+class EntityRenderer {
+    public:
+        EntityRenderer();
+        ~EntityRenderer();
 
-            void prepare(int scene, Camera *camera);
-            void render(int scene, IS::Camera *camera);
-            void prepareEntity(Entity *entity);
-            void clear(int scene);
+        void Start();
+        void Draw();
+        void End();
 
-            void addLight(int scene, const LightValue &light);
-            void addEntity(int scene, Entity *entity);
+        void RegisterLight(GameObject *light);
+        void RegisterObject(GameObject *model);
 
-        protected:
-        private:
-            LightShader _lightShader;
-
-            std::vector<Light> _lights;
-            std::map<int, std::vector<Entity *>> _entities;
-    };
-}
+    protected:
+    private:
+        std::vector<GameObject *> _objects;
+        std::vector<GameObject *> _lights;
+};
 
 #endif /* !ENTITYRENDERER_HPP_ */

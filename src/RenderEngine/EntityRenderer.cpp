@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2021
+** EPITECH PROJECT, 2022
 ** indieStudio
 ** File description:
 ** EntityRenderer
@@ -7,70 +7,44 @@
 
 #include "EntityRenderer.hpp"
 
-#define RLIGHTS_IMPLEMENTATION
-#include "rlights.h"
-
-IS::EntityRenderer::EntityRenderer()
+EntityRenderer::EntityRenderer()
 {
 }
 
-IS::EntityRenderer::~EntityRenderer()
+EntityRenderer::~EntityRenderer()
 {
 }
 
 
-void IS::EntityRenderer::prepare(int scene, Camera *camera)
+void EntityRenderer::Start()
 {
-    for (Light &light : _lights) {
-        UpdateLightValues(_lightShader.getShader(), light);
-        DrawSphere(light.position, 1000, YELLOW);
+    // for (Light &light : _lights)
+        // UpdateLightValues(_lightShader.getShader(), light);
+}
+
+void EntityRenderer::Draw()
+{
+    Start();
+    for (GameObject *object : _objects) {
+        Transform *transform = object->GetTransform();
+        Model *model = object->GetComponent<Model>();
+        DrawModelEx(*model, transform->translation, Vector3Zero(), 0, transform->scale, WHITE);
     }
+    End();
 }
 
-void IS::EntityRenderer::render(int scene, IS::Camera *camera)
+void EntityRenderer::End()
 {
-    prepare(scene, camera);
-    for (auto &list : _entities) {
-        if (list.first != scene)
-            continue;
-        for (Entity *entity : list.second) {
-            prepareEntity(entity);
-            if (!entity->update(camera))
-                continue;
-            DrawModel(entity->getTexturedModel().getModel(), entity->getPosition(), entity->getScale(), WHITE);
-        }
-    }
-    clear(scene);
+    _objects.clear();
+    _lights.clear();
 }
 
-void IS::EntityRenderer::prepareEntity(Entity *entity)
+void EntityRenderer::RegisterLight(GameObject *light)
 {
-    if (!entity->getTexturedModel().hasShader())
-        entity->getTexturedModel().setShader(_lightShader.getShader());
-    
-    for (int i = 0; i < entity->getTexturedModel().getModel().materialCount; i++)
-        entity->getTexturedModel().setColor(entity->getColor(i), i);
+    _lights.push_back(light);
 }
 
-void IS::EntityRenderer::clear(int scene)
+void EntityRenderer::RegisterObject(GameObject *object)
 {
-    for (auto &list : _entities) {
-        list.second.clear();
-    }
-}
-
-void IS::EntityRenderer::addLight(int scene, const LightValue &light)
-{
-    _lights.push_back(CreateLight(LIGHT_POINT, light.getPosition(), Vector3Zero(), light.getColor(), _lightShader.getShader()));
-}
-
-void IS::EntityRenderer::addEntity(int scene, Entity *entity)
-{
-    for (auto &list : _entities) {
-        if (list.first == scene) {
-            list.second.push_back(entity);
-            return;
-        }
-    }
-    _entities[scene] = std::vector<Entity *> { entity };
+    _objects.push_back(object);
 }

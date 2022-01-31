@@ -1,37 +1,39 @@
 /*
-** EPITECH PROJECT, 2021
-** 3D
+** EPITECH PROJECT, 2022
+** Physics_engine
 ** File description:
 ** DisplayManager
 */
 
-#pragma once
 #ifndef DISPLAYMANAGER_HPP_
 #define DISPLAYMANAGER_HPP_
 
-#include "../global.hpp"
-#include "../Entities/Camera.hpp"
-#include "../Entities/Light.hpp"
-#include "../Models/TexturedModel.hpp"
-#include "../Particles/ParticleSystem.hpp"
+#include "../include.hpp"
+#include "Ecs/Object.cpp"
 #include "Master3DRenderer.hpp"
 #include "Master2DRenderer.hpp"
 
-namespace IS {
-    class DisplayManager {
-        public:
-            DisplayManager();
-            ~DisplayManager();
+class DisplayManager {
+    public:
+        DisplayManager();
+        ~DisplayManager();
 
-            void run();
-            void load();
-            void clean();
+        void Clear(Color color);
+        void Draw();
 
-        protected:
-        private:
-            Master3DRenderer _3Drenderer;
-            Master2DRenderer _2Drenderer;
-    };
-}
+    protected:
+    private:
+
+    protected:
+        static DisplayManager *instance;
+    public:
+        DisplayManager(DisplayManager &other) = delete;
+        void operator=(const DisplayManager &) = delete;
+        static DisplayManager *Get() {
+            if (instance == nullptr)
+                instance = new DisplayManager();
+            return instance;
+        };
+};
 
 #endif /* !DISPLAYMANAGER_HPP_ */

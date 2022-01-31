@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2021
+** EPITECH PROJECT, 2022
 ** indieStudio
 ** File description:
 ** Clock
@@ -8,8 +8,7 @@
 #ifndef CLOCK_HPP_
 #define CLOCK_HPP_
 
-#include <chrono>
-#include <iostream>
+#include "../include.hpp"
 
 namespace IS
 {

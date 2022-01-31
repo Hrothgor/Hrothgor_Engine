@@ -1,31 +1,40 @@
 /*
-** EPITECH PROJECT, 2021
-** indieStudio
+** EPITECH PROJECT, 2022
+** Physics_engine
 ** File description:
 ** Master2DRenderer
 */
 
-#pragma once
 #ifndef MASTER2DRENDERER_HPP_
 #define MASTER2DRENDERER_HPP_
 
 #include "../include.hpp"
-#include "ButtonsRenderer.hpp"
+#include "../Ecs/GameObject.hpp"
 
-namespace IS {
-    class Master2DRenderer {
-        public:
-            Master2DRenderer();
-            ~Master2DRenderer();
+class Master2DRenderer {
+    public:
+        Master2DRenderer();
+        ~Master2DRenderer();
 
-            void start();
-            void stop();
-            void render(int scene);
+        void Start();
+        void Draw();
+        void End();
 
-        protected:
-        private:
-            ButtonsRenderer _buttonsRenderer;
-    };
-}
+        // void Register(GameObject *object);
+
+    protected:
+    private:
+
+    protected:
+        static Master2DRenderer *instance;
+    public:
+        Master2DRenderer(Master2DRenderer &other) = delete;
+        void operator=(const Master2DRenderer &) = delete;
+        static Master2DRenderer *Get() {
+            if (instance == nullptr)
+                instance = new Master2DRenderer();
+            return instance;
+        };
+};
 
 #endif /* !MASTER2DRENDERER_HPP_ */

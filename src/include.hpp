@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2021
+** EPITECH PROJECT, 2022
 ** indieStudio
 ** File description:
 ** include
@@ -11,7 +11,6 @@
 
 #define WIDTH 1920.0
 #define HEIGHT 1080.0
-#define GRAVITY 9.8
 
 #define GLSL_VERSION 330
 #define MAX_COLOR 21
@@ -26,6 +25,10 @@
 #include <unordered_map>
 #include <time.h>
 #include <filesystem>
+#include <typeindex>
+#include <optional>
+#include <chrono>
+#include <any>
 
 #include "raylib.h"
 #include "raymath.h"
@@ -34,7 +37,5 @@
 #include "Tools/Maths.hpp"
 #include "Tools/GenMesh.hpp"
 #include "Tools/Clock.hpp"
-
-#include "Audio/Sounds.hpp"
 
 #endif /* !INCLUDE_HPP_ */

@@ -1,0 +1,26 @@
+/*
+** EPITECH PROJECT, 2022
+** Physics_engine
+** File description:
+** Component
+*/
+
+#include "Component.hpp"
+#include "GameObject.hpp"
+
+Component::Component(GameObject *gameObject)
+	: _gameObject(gameObject)
+{
+	_transform = _gameObject->GetTransform();
+    _name = "Component";
+}
+
+GameObject *Component::GetGameObject() const
+{
+    return _gameObject;
+}
+
+Transform *Component::GetTransform() const
+{
+    return _transform;
+}

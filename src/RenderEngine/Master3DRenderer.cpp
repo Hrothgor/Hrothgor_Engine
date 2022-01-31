@@ -1,59 +1,49 @@
 /*
-** EPITECH PROJECT, 2021
-** indieStudio
+** EPITECH PROJECT, 2022
+** Physics_engine
 ** File description:
 ** Master3DRenderer
 */
 
 #include "Master3DRenderer.hpp"
+#include "../Ecs/Engine.hpp"
 
-IS::Master3DRenderer::Master3DRenderer()
+Master3DRenderer *Master3DRenderer::instance = nullptr;
+
+Master3DRenderer::Master3DRenderer()
+{
+    // _camera = Engine::Get()->FindObjectOfType<MainCamera3D>();
+}
+
+Master3DRenderer::~Master3DRenderer()
 {
 }
 
-IS::Master3DRenderer::~Master3DRenderer()
+void Master3DRenderer::Start()
 {
+    // BeginMode3D(&_camera);
 }
 
-void IS::Master3DRenderer::start(IS::Camera *camera)
+void Master3DRenderer::End()
 {
-    ClearBackground(DARKBLUE);
-    BeginMode3D(camera->getCamera3D());
+    // EndMode3D();
 }
 
-void IS::Master3DRenderer::stop()
+void Master3DRenderer::Draw()
 {
-    EndMode3D();
-}
-
-void IS::Master3DRenderer::render(int scene, IS::Camera *camera)
-{
-    start(camera);
+    Start();
     DrawGrid(100, 1.0f);
-    {
-        _entityRenderer.render(scene, camera);
-    }
-    {
-        rlDisableDepthMask();
-        //BeginBlendMode(BLEND_ADDITIVE);
-        _particlesRenderer.render(scene, camera);
-        //EndBlendMode();
-        rlEnableDepthMask();
-    }
-    stop();
+    entityRenderer.Draw();
+    //draw particles
+    End();
 }
 
-void IS::Master3DRenderer::addLight(const LightValue &light)
+void Master3DRenderer::RegisterObject(GameObject *model)
 {
-    _entityRenderer.addLight(0, light);
+    entityRenderer.RegisterObject(model);
 }
 
-void IS::Master3DRenderer::addEntity(int scene, Entity *entity)
+void Master3DRenderer::RegisterLight(GameObject *light)
 {
-    _entityRenderer.addEntity(scene, entity);
-}
-
-void IS::Master3DRenderer::addParticles(const Particle &particles)
-{
-    _particlesRenderer.addParticles(particles);
+    entityRenderer.RegisterLight(light);
 }

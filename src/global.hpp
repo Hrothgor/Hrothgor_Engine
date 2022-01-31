@@ -1,5 +1,5 @@
 /*
-** EPITECH PROJECT, 2021
+** EPITECH PROJECT, 2022
 ** indieStudio
 ** File description:
 ** global
@@ -11,13 +11,6 @@
 #include "include.hpp"
 
 namespace IS {
-    class TexturedModel;
-    class ParticleTexturedModel;
-    class ParticleSystem;
-    class Sounds;
-    class Entity;
-    class Camera;
-
     namespace GLOBAL {
         inline std::map<std::string, TexturedModel *> _texturedModels;
         inline std::map<std::string, ParticleTexturedModel *> _particleTexturedModels;
