@@ -7,32 +7,32 @@
 
 #include "Object.hpp"
 
-Object::Object()
+hr::Object::Object()
 {
 
 }
 
-Object::~Object()
+hr::Object::~Object()
 {
 
 }
 
-std::string Object::GetName() const
+std::string hr::Object::GetName() const
 {
     return _name;
 }
 
-void Object::SetName(const std::string &name)
+void hr::Object::SetName(const std::string &name)
 {
     _name = name;
 }
 
-bool Object::IsActive() const
+bool hr::Object::IsActive() const
 {
     return _active;
 }
 
-void Object::SetActive(bool active)
+void hr::Object::SetActive(bool active)
 {
     _active = active;
 }

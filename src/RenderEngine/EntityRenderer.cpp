@@ -6,48 +6,60 @@
 */
 
 #include "EntityRenderer.hpp"
+#include "../Ecs/Engine.hpp"
 #include "../Ecs/GameObject.hpp"
+
 #include "../Components/Transform.hpp"
 #include "../Components/MeshRenderer.hpp"
+#include "../Components/Light.hpp"
+#include "../Components/MainCamera3D.hpp"
 
-EntityRenderer::EntityRenderer()
+hr::EntityRenderer::EntityRenderer()
+{
+    _camera = Engine::Get()->FindObjectOfType<MainCamera3D>();
+}
+
+hr::EntityRenderer::~EntityRenderer()
 {
 }
 
-EntityRenderer::~EntityRenderer()
+
+void hr::EntityRenderer::Start()
 {
+    for (GameObject *object : _lights) {
+        Transform *transform = object->GetTransform();
+        Light *light = object->GetComponent<Light>();
+        light->UpdateValues(_lightShader.GetShader());
+        _lightShader.UpdateCameraLoc(_camera->GetCamera3D());
+    }
 }
 
-
-void EntityRenderer::Start()
-{
-    // for (Light &light : _lights)
-        // UpdateLightValues(_lightShader.getShader(), light);
-}
-
-void EntityRenderer::Draw()
+void hr::EntityRenderer::Draw()
 {
     Start();
     for (GameObject *object : _objects) {
-        Components::Transform *transform = object->GetTransform();
-        Components::MeshRenderer *meshRenderer = object->GetComponent<Components::MeshRenderer>();
-        DrawModelEx(meshRenderer->GetModel(), transform->GetPosition(), Vector3Zero(), 0, transform->GetScale(), WHITE);
+        Transform *transform = object->GetTransform();
+        MeshRenderer *meshRenderer = object->GetComponent<MeshRenderer>();
+        for (int i = 0; i < meshRenderer->GetModel().materialCount; i++)
+            meshRenderer->GetModel().materials[i].shader = _lightShader.GetShader();
+        AxisAngle axisAngle = transform->GetRotationAxisAngle();
+        DrawModelEx(meshRenderer->GetModel(), transform->GetPosition(), axisAngle.axis, axisAngle.angle, transform->GetScale(), WHITE);
     }
     End();
 }
 
-void EntityRenderer::End()
+void hr::EntityRenderer::End()
 {
     _objects.clear();
     _lights.clear();
 }
 
-void EntityRenderer::RegisterLight(GameObject *light)
+void hr::EntityRenderer::RegisterLight(GameObject *light)
 {
     _lights.push_back(light);
 }
 
-void EntityRenderer::RegisterObject(GameObject *object)
+void hr::EntityRenderer::RegisterObject(GameObject *object)
 {
     _objects.push_back(object);
 }

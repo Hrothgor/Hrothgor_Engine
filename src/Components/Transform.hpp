@@ -11,7 +11,12 @@
 #include "../include.hpp"
 #include "../Ecs/Component.hpp"
 
-namespace Components {
+namespace hr {
+    struct AxisAngle {
+        Vector3 axis;
+        float angle;
+    };
+
     class Transform : public Component {
         public:
             Transform(GameObject *gameObject);
@@ -24,11 +29,16 @@ namespace Components {
             void SetPosition(Vector3 pos);
             void SetPosition(float x, float y, float z);
             Vector3 GetRotation() const;
+            Quaternion GetRotationQuaternion() const;
+            AxisAngle GetRotationAxisAngle() const;
+            Matrix GetRotationMatrix() const;
             void SetRotation(Vector3 rotation);
             void SetRotation(float x, float y, float z);
             Vector3 GetScale() const;
             void SetScale(Vector3 scale);
             void SetScale(float x, float y, float z);
+
+            static Quaternion EulerToQuaternion(Vector3 euler);
         protected:
         private:
             Vector3 _position;

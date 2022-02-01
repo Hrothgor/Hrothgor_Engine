@@ -7,15 +7,15 @@
 
 #include "GenMesh.hpp"
 
-IS::GenMesh::GenMesh()
+hr::GenMesh::GenMesh()
 {
 }
 
-IS::GenMesh::~GenMesh()
+hr::GenMesh::~GenMesh()
 {
 }
 
-Mesh IS::GenMesh::GenMeshSquare(float size)
+Mesh hr::GenMesh::GenMeshSquare(float size)
 {
     Mesh mesh = { 0 };
 

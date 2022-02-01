@@ -12,27 +12,29 @@
 #include "Master3DRenderer.hpp"
 #include "Master2DRenderer.hpp"
 
-class DisplayManager {
-    public:
-        DisplayManager();
-        ~DisplayManager();
+namespace hr {
+    class DisplayManager {
+        public:
+            DisplayManager();
+            ~DisplayManager();
 
-        void Clear(Color color);
-        void Draw();
+            void Clear(Color color);
+            void Draw();
 
-    protected:
-    private:
+        protected:
+        private:
 
-    protected:
-        static DisplayManager *instance;
-    public:
-        DisplayManager(DisplayManager &other) = delete;
-        void operator=(const DisplayManager &) = delete;
-        static DisplayManager *Get() {
-            if (instance == nullptr)
-                instance = new DisplayManager();
-            return instance;
-        };
-};
+        protected:
+            static DisplayManager *instance;
+        public:
+            DisplayManager(DisplayManager &other) = delete;
+            void operator=(const DisplayManager &) = delete;
+            static DisplayManager *Get() {
+                if (instance == nullptr)
+                    instance = new DisplayManager();
+                return instance;
+            };
+    };
+}
 
 #endif /* !DISPLAYMANAGER_HPP_ */

@@ -11,7 +11,7 @@
 #include "../include.hpp"
 #include "../Ecs/Component.hpp"
 
-namespace Components {
+namespace hr {
     class MeshRenderer : public Component {
         public:
             MeshRenderer(GameObject *gameObject);

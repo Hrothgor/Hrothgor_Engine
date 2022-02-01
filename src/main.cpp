@@ -13,16 +13,16 @@ int main(void)
     srand(time(NULL));
 
     try {
-        Engine::Get()->Start();
-        Engine::Get()->Update();
+        hr::Engine::Get()->Start();
+        hr::Engine::Get()->Update();
     }
     catch (const std::exception& e)
 	{
 		std::cout << e.what() << std::endl;
-		Engine::Get()->End();
+		hr::Engine::Get()->End();
 		return (84);
 	}
-	Engine::Get()->End();
+	hr::Engine::Get()->End();
 
     return 0;
 }

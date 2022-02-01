@@ -9,26 +9,31 @@
 #define ENTITYRENDERER_HPP_
 
 #include "../include.hpp"
-#include "rlights.h"
+#include "../Shader/LightShader.hpp"
 
-class GameObject;
+namespace hr {
+    class MainCamera3D;
+    class GameObject;
 
-class EntityRenderer {
-    public:
-        EntityRenderer();
-        ~EntityRenderer();
+    class EntityRenderer {
+        public:
+            EntityRenderer();
+            ~EntityRenderer();
 
-        void Start();
-        void Draw();
-        void End();
+            void Start();
+            void Draw();
+            void End();
 
-        void RegisterLight(GameObject *light);
-        void RegisterObject(GameObject *model);
+            void RegisterLight(GameObject *light);
+            void RegisterObject(GameObject *model);
 
-    protected:
-    private:
-        std::vector<GameObject *> _objects;
-        std::vector<GameObject *> _lights;
-};
+        protected:
+        private:
+            std::vector<GameObject *> _objects;
+            std::vector<GameObject *> _lights;
+            LightShader _lightShader;
+            MainCamera3D *_camera;
+    };
+}
 
 #endif /* !ENTITYRENDERER_HPP_ */

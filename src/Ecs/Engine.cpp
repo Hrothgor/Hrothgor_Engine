@@ -10,29 +10,35 @@
 
 #include "../Components/MeshRenderer.hpp"
 #include "../Components/MainCamera3D.hpp"
+#include "../Components/Transform.hpp"
+#include "../Components/Light.hpp"
 
-Engine *Engine::instance = nullptr;
+hr::Engine *hr::Engine::instance = nullptr;
 
-Engine::Engine()
+hr::Engine::Engine()
 {
 }
 
-Engine::~Engine()
+hr::Engine::~Engine()
 {
 }
 
-void Engine::LoadScene()
+void hr::Engine::LoadScene()
 {
     GameObject *mainCamera = new GameObject();
     mainCamera->SetName("mainCamera");
-    mainCamera->AddComponent<Components::MainCamera3D>();
+    mainCamera->AddComponent<MainCamera3D>();
 
-    GameObject *test1 = new GameObject();
-    test1->SetName("test1");
-    test1->AddComponent<Components::MeshRenderer>()->Load("ressources/dragon.obj");
+    GameObject *lightDir = new GameObject();
+    lightDir->SetName("lightDir");
+    lightDir->AddComponent<Light>();
+
+    GameObject *dragon = new GameObject();
+    dragon->SetName("dragon");
+    dragon->AddComponent<MeshRenderer>()->Load("ressources/dragon.obj");
 }
 
-void Engine::Start()
+void hr::Engine::Start()
 {
     SetTraceLogLevel(TraceLogLevel::LOG_WARNING);
     InitWindow(WIDTH, HEIGHT, "Physics Engine");
@@ -45,7 +51,7 @@ void Engine::Start()
         ent->Start();
 }
 
-void Engine::Update()
+void hr::Engine::Update()
 {
     while (!WindowShouldClose())
     {
@@ -62,7 +68,7 @@ void Engine::Update()
     }
 }
 
-void Engine::End()
+void hr::Engine::End()
 {
     for (auto ent : _entities)
         ent->End();
@@ -70,7 +76,7 @@ void Engine::End()
     CloseWindow();
 }
 
-GameObject *Engine::Find(const std::string &name)
+hr::GameObject *hr::Engine::Find(const std::string &name)
 {
     for (auto ent : _entities)
         if (ent->GetName() == name)
@@ -78,12 +84,12 @@ GameObject *Engine::Find(const std::string &name)
     return nullptr;
 }
 
-GameObject *Engine::Instantiate(GameObject *object, GameObject *parent)
+hr::GameObject *hr::Engine::Instantiate(GameObject *object, GameObject *parent)
 {
     return nullptr;
 }
 
-void Engine::Destroy(GameObject *object, float t)
+void hr::Engine::Destroy(GameObject *object, float t)
 {
     if (t > 0) {
         for (auto it = _entities.begin(); it != _entities.end(); it++)
@@ -97,7 +103,7 @@ void Engine::Destroy(GameObject *object, float t)
     }
 }
 
-void Engine::AddEntity(GameObject *gameObject)
+void hr::Engine::AddEntity(GameObject *gameObject)
 {
     _entities.push_back(gameObject);
 }

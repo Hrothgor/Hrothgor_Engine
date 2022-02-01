@@ -11,28 +11,28 @@
 
 #include "../Components/MainCamera3D.hpp"
 
-Master3DRenderer *Master3DRenderer::instance = nullptr;
+hr::Master3DRenderer *hr::Master3DRenderer::instance = nullptr;
 
-Master3DRenderer::Master3DRenderer()
+hr::Master3DRenderer::Master3DRenderer()
 {
-    _camera = Engine::Get()->FindObjectOfType<Components::MainCamera3D>();
+    _camera = Engine::Get()->FindObjectOfType<MainCamera3D>();
 }
 
-Master3DRenderer::~Master3DRenderer()
+hr::Master3DRenderer::~Master3DRenderer()
 {
 }
 
-void Master3DRenderer::Start()
+void hr::Master3DRenderer::Start()
 {
     BeginMode3D(_camera->GetCamera3D());
 }
 
-void Master3DRenderer::End()
+void hr::Master3DRenderer::End()
 {
     EndMode3D();
 }
 
-void Master3DRenderer::Draw()
+void hr::Master3DRenderer::Draw()
 {
     Start();
     DrawGrid(100, 1.0f);
@@ -41,12 +41,12 @@ void Master3DRenderer::Draw()
     End();
 }
 
-void Master3DRenderer::RegisterObject(GameObject *model)
+void hr::Master3DRenderer::RegisterObject(GameObject *model)
 {
     _entityRenderer.RegisterObject(model);
 }
 
-void Master3DRenderer::RegisterLight(GameObject *light)
+void hr::Master3DRenderer::RegisterLight(GameObject *light)
 {
     _entityRenderer.RegisterLight(light);
 }

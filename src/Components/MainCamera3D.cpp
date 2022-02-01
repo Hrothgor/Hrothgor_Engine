@@ -7,7 +7,7 @@
 
 #include "MainCamera3D.hpp"
 
-Components::MainCamera3D::MainCamera3D(GameObject *gameObject)
+hr::MainCamera3D::MainCamera3D(GameObject *gameObject)
     : Component(gameObject)
 {
     _camera = { 0 };
@@ -19,16 +19,16 @@ Components::MainCamera3D::MainCamera3D(GameObject *gameObject)
     SetCameraMode(_camera, CAMERA_FIRST_PERSON);
 }
 
-Components::MainCamera3D::~MainCamera3D()
+hr::MainCamera3D::~MainCamera3D()
 {
 }
 
-void Components::MainCamera3D::Update()
+void hr::MainCamera3D::Update()
 {
     UpdateCamera(&_camera);
 }
 
-Camera3D Components::MainCamera3D::GetCamera3D() const
+Camera3D hr::MainCamera3D::GetCamera3D() const
 {
     return _camera;
 }

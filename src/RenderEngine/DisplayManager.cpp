@@ -7,22 +7,22 @@
 
 #include "DisplayManager.hpp"
 
-DisplayManager *DisplayManager::instance = nullptr;
+hr::DisplayManager *hr::DisplayManager::instance = nullptr;
 
-DisplayManager::DisplayManager()
+hr::DisplayManager::DisplayManager()
 {
 }
 
-DisplayManager::~DisplayManager()
+hr::DisplayManager::~DisplayManager()
 {
 }
 
-void DisplayManager::Clear(Color color)
+void hr::DisplayManager::Clear(Color color)
 {
     ClearBackground(color);
 }
 
-void DisplayManager::Draw()
+void hr::DisplayManager::Draw()
 {
     Master3DRenderer::Get()->Draw();
     Master2DRenderer::Get()->Draw();

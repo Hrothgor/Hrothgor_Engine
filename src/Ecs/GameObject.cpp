@@ -9,21 +9,21 @@
 #include "../Components/Transform.hpp"
 #include "Engine.hpp"
 
-GameObject::GameObject(GameObject *parent)
+hr::GameObject::GameObject(GameObject *parent)
     : _parent(parent)
 {
     _name = "GameObject";
-    _transform = new Components::Transform(this);
+    _transform = new Transform(this);
     if (parent)
         parent->AddChild(this);
     Engine::Get()->AddEntity(this);
 }
 
-GameObject::~GameObject()
+hr::GameObject::~GameObject()
 {
 }
 
-void GameObject::Start()
+void hr::GameObject::Start()
 {
     for (auto [type, comp] : _components)
         if (comp->IsActive())
@@ -33,7 +33,7 @@ void GameObject::Start()
     //         child->Start();
 }
 
-void GameObject::Update()
+void hr::GameObject::Update()
 {
     for (auto [type, comp] : _components)
         if (comp->IsActive())
@@ -43,7 +43,7 @@ void GameObject::Update()
     //         child->Update();
 }
 
-void GameObject::LateUpdate()
+void hr::GameObject::LateUpdate()
 {
     for (auto [type, comp] : _components)
         if (comp->IsActive())
@@ -53,7 +53,7 @@ void GameObject::LateUpdate()
     //         child->LateUpdate();
 }
 
-void GameObject::End()
+void hr::GameObject::End()
 {
     for (auto [type, comp] : _components)
         if (comp->IsActive())
@@ -63,22 +63,22 @@ void GameObject::End()
     //         child->End();
 }
 
-GameObject *GameObject::GetParent() const
+hr::GameObject *hr::GameObject::GetParent() const
 {
     return _parent;
 }
 
-Components::Transform *GameObject::GetTransform() const
+hr::Transform *hr::GameObject::GetTransform() const
 {
     return _transform;
 }
 
-std::unordered_map<std::type_index, Component *> GameObject::GetComponents() const
+std::unordered_map<std::type_index, hr::Component *> hr::GameObject::GetComponents() const
 {
     return _components;
 }
 
-void GameObject::AddChild(GameObject *child)
+void hr::GameObject::AddChild(GameObject *child)
 {
     _childs.push_back(child);
 }

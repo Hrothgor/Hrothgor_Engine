@@ -11,7 +11,7 @@
 
 #include "../include.hpp"
 
-namespace IS {
+namespace hr {
     class GenMesh {
         public:
             GenMesh();

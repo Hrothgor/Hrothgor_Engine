@@ -4,7 +4,7 @@ if (UNIX)
 	set(CMAKE_CXX_STANDARD 17)
 	find_package(raylib 2.5.0 REQUIRED) # Requires at least version 2.5.0
 	file(GLOB_RECURSE my_project_src "src/*.cpp")
-	SET(CMAKE_CXX_FLAGS  "-std=c++17 -O2")
+	SET(CMAKE_CXX_FLAGS  "-std=c++17 -O2 -g3")
 	add_executable(physics_engine ${my_project_src})
 	target_link_libraries(physics_engine raylib)
 	target_compile_definitions(physics_engine PUBLIC ASSETS_PATH="${CMAKE_CURRENT_SOURCE_DIR}/")

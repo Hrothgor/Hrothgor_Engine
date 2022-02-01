@@ -9,23 +9,23 @@
 #include "GameObject.hpp"
 #include "../Components/Transform.hpp"
 
-Component::Component(GameObject *gameObject)
+hr::Component::Component(GameObject *gameObject)
 	: _gameObject(gameObject)
 {
 	_transform = _gameObject->GetTransform();
     _name = "Component";
 }
 
-Component::~Component()
+hr::Component::~Component()
 {
 }
 
-GameObject *Component::GetGameObject() const
+hr::GameObject *hr::Component::GetGameObject() const
 {
     return _gameObject;
 }
 
-Components::Transform *Component::GetTransform() const
+hr::Transform *hr::Component::GetTransform() const
 {
     return _transform;
 }

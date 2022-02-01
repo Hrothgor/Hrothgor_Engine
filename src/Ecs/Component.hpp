@@ -12,28 +12,29 @@
 #include "../include.hpp"
 #include "Object.hpp"
 
-namespace Components {
+namespace hr {
     class Transform;
+    class GameObject;
+
+    class Component : public Object {
+        public:
+            Component(GameObject *gameObject);
+            ~Component();
+
+            virtual void Start() override {};
+            virtual void Update() override {};
+            virtual void LateUpdate() override {};
+            virtual void End() override {};
+
+            GameObject *GetGameObject() const;
+            Transform *GetTransform() const;
+        protected:
+        private:
+            GameObject *_gameObject = nullptr;
+            Transform *_transform = nullptr;
+    };
 }
 
-class GameObject;
 
-class Component : public Object {
-    public:
-        Component(GameObject *gameObject);
-        ~Component();
-
-        virtual void Start() override {};
-        virtual void Update() override {};
-        virtual void LateUpdate() override {};
-        virtual void End() override {};
-
-        GameObject *GetGameObject() const;
-        Components::Transform *GetTransform() const;
-    protected:
-    private:
-        GameObject *_gameObject = nullptr;
-        Components::Transform *_transform = nullptr;
-};
 
 #endif /* !COMPONENT_HPP_ */

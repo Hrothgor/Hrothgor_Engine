@@ -11,7 +11,7 @@
 #include "../include.hpp"
 #include "../Ecs/Component.hpp"
 
-namespace Components {
+namespace hr {
     class MainCamera3D : public Component {
         public:
             MainCamera3D(GameObject *gameObject);
@@ -23,7 +23,7 @@ namespace Components {
         protected:
         private:
             Camera3D _camera;
-};
+    };
 }
 
 #endif /* !MAINCAMERA3D_HPP_ */

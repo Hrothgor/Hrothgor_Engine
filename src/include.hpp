@@ -34,8 +34,6 @@
 #include "raymath.h"
 #include "rlgl.h"
 
-#include "Tools/Maths.hpp"
 #include "Tools/GenMesh.hpp"
-#include "Tools/Clock.hpp"
 
 #endif /* !INCLUDE_HPP_ */
