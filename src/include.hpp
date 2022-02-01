@@ -33,6 +33,8 @@
 #include "raylib.h"
 #include "raymath.h"
 #include "rlgl.h"
+#include "imgui.h"
+#include "rlImGui.h"
 
 #include "Tools/GenMesh.hpp"
 

@@ -42,6 +42,7 @@ void hr::Engine::Start()
 {
     SetTraceLogLevel(TraceLogLevel::LOG_WARNING);
     InitWindow(WIDTH, HEIGHT, "Physics Engine");
+    rlImGuiSetup(true);
     SetConfigFlags(FLAG_MSAA_4X_HINT);
 	ToggleFullscreen();
     InitAudioDevice();
@@ -56,6 +57,7 @@ void hr::Engine::Update()
     while (!WindowShouldClose())
     {
         BeginDrawing();
+        rlImGuiBegin();
         {
             for (auto ent : _entities)
                 ent->Update();
@@ -63,7 +65,11 @@ void hr::Engine::Update()
                 ent->LateUpdate();
             DisplayManager::Get()->Clear(DARKBLUE);
             DisplayManager::Get()->Draw();
+            ImGui::Begin("Test");
+            ImGui::Button("Hello");
+            ImGui::End();
         }
+        rlImGuiEnd();
         EndDrawing();
     }
 }
@@ -72,6 +78,7 @@ void hr::Engine::End()
 {
     for (auto ent : _entities)
         ent->End();
+    rlImGuiShutdown();
     CloseAudioDevice();
     CloseWindow();
 }
@@ -86,6 +93,9 @@ hr::GameObject *hr::Engine::Find(const std::string &name)
 
 hr::GameObject *hr::Engine::Instantiate(GameObject *object, GameObject *parent)
 {
+    (void)object;
+    (void)parent;
+    // for unused parameter
     return nullptr;
 }
 
@@ -95,7 +105,6 @@ void hr::Engine::Destroy(GameObject *object, float t)
         for (auto it = _entities.begin(); it != _entities.end(); it++)
             if (*it == object) {
                 _entities.erase(it);
-                delete *it;
                 return;
             }
     } else {
