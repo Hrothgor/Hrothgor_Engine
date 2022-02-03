@@ -32,7 +32,6 @@ void hr::Engine::LoadScene()
     GameObject *lightDir = new GameObject();
     lightDir->SetName("lightDir");
     lightDir->AddComponent<Light>();
-    lightDir->AddComponent<MeshRenderer>()->Load("ressources/dragon.obj");
 
     GameObject *dragon = new GameObject();
     dragon->SetName("dragon");

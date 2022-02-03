@@ -8,6 +8,7 @@
 #include "GameObject.hpp"
 #include "../Components/Transform.hpp"
 #include "Engine.hpp"
+#include "../RenderEngine/Master3DRenderer.hpp"
 
 hr::GameObject::GameObject(GameObject *parent)
     : _parent(parent)
@@ -37,6 +38,7 @@ void hr::GameObject::Start()
 
 void hr::GameObject::Update()
 {
+    Master3DRenderer::Get()->RegisterGizmos(this);
     if (!IsActive())
         return;
     for (auto [type, comp] : _components)
@@ -58,6 +60,19 @@ void hr::GameObject::LateUpdate()
         if (child->IsActive())
             child->LateUpdate();
 }
+
+void hr::GameObject::OnDrawGizmos()
+{
+    if (!IsActive())
+        return;
+    for (auto [type, comp] : _components)
+        if (comp->IsActive())
+            comp->OnDrawGizmos();
+    for (GameObject *child : _childs)
+        if (child->IsActive())
+            child->OnDrawGizmos();
+}
+
 
 void hr::GameObject::End()
 {

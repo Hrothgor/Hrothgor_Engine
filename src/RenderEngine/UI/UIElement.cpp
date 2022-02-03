@@ -38,6 +38,18 @@ namespace hr {
         EndField();
     }
 
+    void UIElement::SliderFloatField(const std::string &label, std::function<float()> getter, std::function<void(float)> setter, float min, float max, const char* format, float power)
+    {
+        StartField(label);
+
+        float value = getter();
+
+		if (ImGui::SliderScalarN("", ImGuiDataType_Float, &value, 1, &min, &max, format, power))
+            setter(value);
+        
+		EndField();
+    }
+
     void UIElement::FloatField(const std::string &label, std::function<float()> getter, std::function<void(float)> setter, float speed, float min, float max, const char* format)
     {
         StartField(label);
@@ -83,6 +95,7 @@ namespace hr {
         Color col = getter();
         Vector4 nCol = ColorNormalize(col);
         float value[4] = {nCol.x, nCol.y, nCol.z, nCol.w};
+
 
 		if (ImGui::ColorEdit4("", value))
             setter(ColorFromNormalized((Vector4){value[0], value[1], value[2], value[3]}));

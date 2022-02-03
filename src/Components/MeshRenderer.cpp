@@ -9,6 +9,12 @@
 #include "../RenderEngine/UI/UIElement.hpp"
 #include "../RenderEngine/Master3DRenderer.hpp"
 
+static inline bool ends_with(std::string const &value, std::string const &ending)
+{
+    if (ending.size() > value.size()) return false;
+    return std::equal(ending.rbegin(), ending.rend(), value.rbegin());
+}
+
 hr::MeshRenderer::MeshRenderer(GameObject *gameObject)
     : Component(gameObject)
 {
@@ -30,12 +36,12 @@ void hr::MeshRenderer::Update()
 
 void hr::MeshRenderer::Load(const std::string &path, const std::string &texturePath)
 {
-    if (std::filesystem::exists(path)) {
+    if (std::filesystem::exists(path) && ends_with(path, ".obj")) {
         if (_model.meshCount > 0)
             UnloadModel(_model);
         _model = LoadModel(path.c_str());
         _modelPath = path;
-        if (texturePath != "" && std::filesystem::exists(texturePath)) {
+        if (texturePath != "" && std::filesystem::exists(texturePath) && ends_with(texturePath, ".png")) {
             if (_texture.id != 0)
                 UnloadTexture(_texture);
             _texture = LoadTexture(texturePath.c_str());
@@ -47,7 +53,7 @@ void hr::MeshRenderer::Load(const std::string &path, const std::string &textureP
 
 void hr::MeshRenderer::LoadModelFromPath(const std::string &path)
 {
-    if (std::filesystem::exists(path)) {
+    if (std::filesystem::exists(path) && ends_with(path, ".obj")) {
         if (_model.meshCount > 0)
             UnloadModel(_model);
         _model = LoadModel(path.c_str());
@@ -59,7 +65,7 @@ void hr::MeshRenderer::LoadModelFromPath(const std::string &path)
 
 void hr::MeshRenderer::LoadTextureFromPath(const std::string &path)
 {
-    if (std::filesystem::exists(path)) {
+    if (std::filesystem::exists(path) && ends_with(path, ".png")) {
         if (_texture.id != 0)
             UnloadTexture(_texture);
         _texture = LoadTexture(path.c_str());

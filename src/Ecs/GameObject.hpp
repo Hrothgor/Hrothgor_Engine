@@ -102,6 +102,7 @@ namespace hr {
             virtual void Start() override;
             virtual void Update() override;
             virtual void LateUpdate() override;
+            virtual void OnDrawGizmos() override;
             virtual void End() override;
 
             Transform *GetTransform() const;

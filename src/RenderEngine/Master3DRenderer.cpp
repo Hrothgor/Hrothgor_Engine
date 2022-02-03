@@ -37,8 +37,14 @@ void hr::Master3DRenderer::Draw()
     Start();
     DrawGrid(100, 1.0f);
     _entityRenderer.Draw();
+    _gizmosRenderer.Draw();
     //draw particles
     End();
+}
+
+void hr::Master3DRenderer::RegisterGizmos(GameObject *object)
+{
+    _gizmosRenderer.RegisterObject(object);
 }
 
 void hr::Master3DRenderer::RegisterObject(GameObject *model)

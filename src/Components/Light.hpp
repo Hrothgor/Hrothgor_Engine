@@ -11,7 +11,6 @@
 #include "../include.hpp"
 #include "../Ecs/Component.hpp"
 
-
 namespace hr {
     enum LightType {
         DIRECTIONAL,
@@ -41,10 +40,12 @@ namespace hr {
             void SetColor(const Color &color);
 
             virtual void ImGuiRender() override;
+            virtual void OnDrawGizmos() override;
         protected:
         private:
             LightType _type;
             Vector3 _target;
+            Vector3 _front;
             float _range;
             Color _color;
             float _intensity;

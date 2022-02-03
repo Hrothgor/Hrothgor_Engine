@@ -17,7 +17,7 @@ hr::MainCamera3D::MainCamera3D(GameObject *gameObject)
     _camera.up = { 0.0, 1.0, 0.0 };
     _camera.fovy = 70;
     _camera.projection = CAMERA_PERSPECTIVE;
-    SetCameraMode(_camera, CAMERA_FIRST_PERSON);
+    // SetCameraMode(_camera, CAMERA_FIRST_PERSON);
 }
 
 hr::MainCamera3D::~MainCamera3D()

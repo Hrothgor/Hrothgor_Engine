@@ -15,6 +15,8 @@ namespace hr {
         public:
             static void CheckBox(const std::string &label, std::function<bool()> getter, std::function<void(bool)> setter);
 
+            static void SliderFloatField(const std::string &label, std::function<float()> getter, std::function<void(float)> setter, float min = 0.0, float max = 0.0, const char* format = "%.3f", float power = 1.0);
+
             // static bool FloatN(const char* fieldName, float* value, uint32_t count = 1, float speed = 1.0, float min = 0.0, float max = 0.0, const char* format = "%.3f");
             static void FloatField(const std::string &label, std::function<float()> getter, std::function<void(float)> setter, float speed = 1.0, float min = 0.0, float max = 0.0, const char* format = "%.3f");
             static void Vector2Field(const std::string &label, std::function<Vector2()> getter, std::function<void(Vector2)> setter, float speed = 1.0, float min = 0.0, float max = 0.0, const char* format = "%.3f");

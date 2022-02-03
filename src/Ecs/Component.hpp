@@ -27,6 +27,7 @@ namespace hr {
             virtual void End() override {};
 
             virtual void ImGuiRender() {};
+            virtual void OnDrawGizmos() {};
 
             GameObject *GetGameObject() const;
             Transform *GetTransform() const;

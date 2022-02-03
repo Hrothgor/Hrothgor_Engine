@@ -10,6 +10,7 @@
 
 #include "../include.hpp"
 #include "EntityRenderer.hpp"
+#include "GizmosRenderer.hpp"
 
 namespace hr {
     class MainCamera3D;
@@ -24,6 +25,7 @@ namespace hr {
             void Draw();
             void End();
 
+            void RegisterGizmos(GameObject *model);
             void RegisterObject(GameObject *model);
             void RegisterLight(GameObject *light);
             // void Register(Particle *particles);
@@ -32,6 +34,7 @@ namespace hr {
         private:
             MainCamera3D *_camera;
             EntityRenderer _entityRenderer;
+            GizmosRenderer _gizmosRenderer;
 
         protected:
             static Master3DRenderer *instance;
