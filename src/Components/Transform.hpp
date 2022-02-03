@@ -39,6 +39,8 @@ namespace hr {
             void SetScale(float x, float y, float z);
 
             static Quaternion EulerToQuaternion(Vector3 euler);
+
+            virtual void ImGuiRender() override;
         protected:
         private:
             Vector3 _position;

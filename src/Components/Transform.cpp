@@ -6,6 +6,7 @@
 */
 
 #include "Transform.hpp"
+#include "../RenderEngine/UI/UIElement.hpp"
 
 hr::Transform::Transform(GameObject *gameObject)
     : Component(gameObject)
@@ -112,4 +113,11 @@ Quaternion hr::Transform::EulerToQuaternion(Vector3 euler)
     q.z = cr * cp * sy - sr * sp * cy;
 
     return q;
+}
+
+void hr::Transform::ImGuiRender()
+{
+    UIElement::Vector3Field("Position", [this](){return GetPosition();}, [this](Vector3 vec){SetPosition(vec);});
+    UIElement::Vector3Field("Rotation", [this](){return GetRotation();}, [this](Vector3 vec){SetRotation(vec);});
+    UIElement::Vector3Field("Scale", [this](){return GetScale();}, [this](Vector3 vec){SetScale(vec);});
 }

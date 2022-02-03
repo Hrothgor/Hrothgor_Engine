@@ -6,8 +6,10 @@
 */
 
 #include "InspectorPanel.hpp"
-#include "../../Ecs/Engine.hpp"
-#include "../../Ecs/GameObject.hpp"
+#include "../../../Ecs/Engine.hpp"
+#include "../../../Ecs/GameObject.hpp"
+
+#include "../../../Components/Transform.hpp"
 
 namespace hr {
     InspectorPanel::InspectorPanel()
@@ -58,6 +60,8 @@ namespace hr {
 				wannaDestroy = true;
 
 			ImGui::Separator();
+
+            entity->GetTransform()->ImGuiRender();
 
 // 			for (const auto& componentTypeID : entity.GetComponentsTypeIDList())
 // 			{

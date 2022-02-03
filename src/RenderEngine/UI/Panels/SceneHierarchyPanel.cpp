@@ -6,8 +6,8 @@
 */
 
 #include "SceneHierarchyPanel.hpp"
-#include "../../Ecs/Engine.hpp"
-#include "../../Ecs/GameObject.hpp"
+#include "../../../Ecs/Engine.hpp"
+#include "../../../Ecs/GameObject.hpp"
 
 namespace hr {
     SceneHierarchyPanel::SceneHierarchyPanel()
