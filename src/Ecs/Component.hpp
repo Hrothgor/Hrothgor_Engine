@@ -26,6 +26,8 @@ namespace hr {
             virtual void LateUpdate() override {};
             virtual void End() override {};
 
+            virtual void ImGuiRender() {};
+
             GameObject *GetGameObject() const;
             Transform *GetTransform() const;
         protected:

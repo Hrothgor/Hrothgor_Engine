@@ -10,6 +10,7 @@
 
 #pragma once
 #include "../include.hpp"
+#include "uuid_v4.h"
 
 namespace hr {
     class Object {
@@ -24,12 +25,16 @@ namespace hr {
             
             std::string GetName() const;
             void SetName(const std::string &name);
+
+            UUIDv4::UUID GetUUID() const;
+
             bool IsActive() const;
             void SetActive(bool);
         
         protected:
             std::string _name = "";
             bool _active = true;
+            UUIDv4::UUID _uuid;
         private:
     };
 }

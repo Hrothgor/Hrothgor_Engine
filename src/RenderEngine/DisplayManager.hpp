@@ -11,6 +11,8 @@
 #include "../include.hpp"
 #include "Master3DRenderer.hpp"
 #include "Master2DRenderer.hpp"
+#include "UI/Panels/SceneHierarchyPanel.hpp"
+#include "UI/Panels/InspectorPanel.hpp"
 
 namespace hr {
     class DisplayManager {
@@ -21,8 +23,13 @@ namespace hr {
             void Clear(Color color);
             void Draw();
 
+            void DrawImGui();
+            void ImGuiSetStyle();
+
         protected:
         private:
+            SceneHierarchyPanel _sceneHierarchyPanel;
+            InspectorPanel _inspectorPanel;
 
         protected:
             static DisplayManager *instance;

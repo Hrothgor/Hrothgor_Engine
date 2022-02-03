@@ -50,7 +50,10 @@ target_include_directories(physics_engine
         ${IMGUI_DIR}
 )
 
-target_compile_options(physics_engine PRIVATE -W -Wall -Wextra -Wno-missing-field-initializers -O2 -g3)
+target_compile_options(physics_engine PRIVATE 
+    -W -Wall -Wextra -Wno-missing-field-initializers
+    -march=native
+    -O2 -g3)
 
 target_link_libraries(physics_engine imgui)
 target_link_libraries(physics_engine raylib)

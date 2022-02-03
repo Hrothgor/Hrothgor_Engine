@@ -81,16 +81,24 @@ namespace hr {
 
             Transform *GetTransform() const;
             GameObject *GetParent() const;
+            std::vector<GameObject *> GetChilds() const;
             std::unordered_map<std::type_index, Component *> GetComponents() const;
 
             void AddChild(GameObject *child);
+            void RemoveChild(GameObject *child);
 
+            void DetachFromParent();
+            void SetParent(GameObject *parent);
+
+            void Destroy();
         protected:
         private:
             GameObject *_parent = nullptr;
             std::vector<GameObject *> _childs;
             std::unordered_map<std::type_index, Component *> _components;
             Transform *_transform = nullptr;
+
+            bool ParentIsChild(GameObject *parent);
     };
 }
 

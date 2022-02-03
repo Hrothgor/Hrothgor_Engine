@@ -31,6 +31,6 @@ void hr::Master2DRenderer::End()
 void hr::Master2DRenderer::Draw()
 {
     Start();
-    DrawText(std::to_string(GetFPS()).c_str(), 0, 0, 50, RED);
+    DrawText(std::to_string(GetFPS()).c_str(), 450, 0, 50, RED);
     End();
 }
