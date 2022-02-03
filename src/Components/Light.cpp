@@ -11,17 +11,12 @@
 #include "../Ecs/GameObject.hpp"
 #include "../RenderEngine/UI/UIElement.hpp"
 
-#define MAX_LIGHTS 100
-
-static int lightsCount = 0;
-
 hr::Light::Light(GameObject *gameObject)
     : Component(gameObject)
-    , _locations(LOC_COUNT, -1)
 {
     _name = "Light";
     _type = DIRECTIONAL;
-    _target = {0, -1, 0};
+    _target = Vector3Zero();
     _range = 10.0;
     _color = WHITE;
     _intensity = 1;
@@ -33,56 +28,17 @@ hr::Light::~Light()
 
 void hr::Light::Update()
 {
+    Vector3 rotation = GetTransform()->GetRotation();
+    Vector3 front;
+
+    front.x = cos(DEG2RAD * rotation.x) * cos(DEG2RAD * rotation.y);
+    front.y = sin(DEG2RAD * rotation.y);
+    front.z = sin(DEG2RAD * rotation.x) * cos(DEG2RAD * rotation.y);
+    front = Vector3Normalize(front);
+
+    _target = Vector3Add(GetTransform()->GetPosition(), front);
+
     Master3DRenderer::Get()->RegisterLight(GetGameObject());
-}
-
-void hr::Light::UpdateValues(Shader shader)
-{
-    if (lightsCount < MAX_LIGHTS && _locations[0] == -1)
-    {
-        std::string enabledName = "lights[" + std::to_string(lightsCount) + "].enabled";
-        std::string typeName = "lights[" + std::to_string(lightsCount) + "].type";
-        std::string targetName = "lights[" + std::to_string(lightsCount) + "].target";
-        std::string posName = "lights[" + std::to_string(lightsCount) + "].position";
-        std::string rangeName = "lights[" + std::to_string(lightsCount) + "].range";
-        std::string colorName = "lights[" + std::to_string(lightsCount) + "].color";
-        std::string intensityName = "lights[" + std::to_string(lightsCount) + "].intensity";
-
-        _locations[LOC_ENABLED] = GetShaderLocation(shader, enabledName.c_str());
-        _locations[LOC_TYPE] = GetShaderLocation(shader, typeName.c_str());
-        _locations[LOC_TARGET] = GetShaderLocation(shader, targetName.c_str());
-        _locations[LOC_POS] = GetShaderLocation(shader, posName.c_str());
-        _locations[LOC_RANGE] = GetShaderLocation(shader, rangeName.c_str());
-        _locations[LOC_COLOR] = GetShaderLocation(shader, colorName.c_str());
-        _locations[LOC_INTENSITY] = GetShaderLocation(shader, intensityName.c_str());
-
-        lightsCount++;
-    }
-
-    if (_locations[0] == -1)
-        return;
-
-    int enabled = 1;
-    SetShaderValue(shader, _locations[LOC_ENABLED], &enabled, SHADER_UNIFORM_INT);
-
-    SetShaderValue(shader, _locations[LOC_TYPE], &_type, SHADER_UNIFORM_INT);
-
-    float target[3] = {_target.x, _target.y, _target.z};
-    SetShaderValue(shader, _locations[LOC_TARGET], &target, SHADER_UNIFORM_VEC3);
-
-    Transform *transform = GetTransform();
-    float pos[3] = {transform->GetPosition().x,
-                    transform->GetPosition().y,
-                    transform->GetPosition().z};
-    SetShaderValue(shader, _locations[LOC_POS], &pos, SHADER_UNIFORM_VEC3);
-
-    SetShaderValue(shader, _locations[LOC_RANGE], &_range, SHADER_UNIFORM_FLOAT);
-
-    Vector4 vec = ColorNormalize(_color);
-    float color[4] = {vec.x, vec.y, vec.z, vec.w};
-    SetShaderValue(shader, _locations[LOC_COLOR], &color, SHADER_UNIFORM_VEC4);
-
-    SetShaderValue(shader, _locations[LOC_INTENSITY], &_intensity, SHADER_UNIFORM_FLOAT);
 }
 
 hr::LightType hr::Light::GetType() const

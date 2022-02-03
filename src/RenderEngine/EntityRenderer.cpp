@@ -26,12 +26,7 @@ hr::EntityRenderer::~EntityRenderer()
 
 void hr::EntityRenderer::Start()
 {
-    for (GameObject *object : _lights) {
-        Light *light = object->GetComponent<Light>();
-        light->UpdateValues(_lightShader.GetShader());
-        _lightShader.UpdateCameraLoc(_camera->GetCamera3D());
-    }
-    // TODO UPDATE ALL LIGHT BECAUSE WHNE THERE IS NO LIGHT IT DONT UPDATE THE LIGHT BUT KEEP THE OLD LIGHT
+    _lightShader.UpdateLightsLoc(_lights);
 }
 
 void hr::EntityRenderer::Draw()

@@ -50,8 +50,8 @@ namespace hr {
                 std::memcpy(buf, entity->GetName().data(), entity->GetName().size());
                 ImGui::PushID(entity->GetUUID().str().data());
 
-                ImGui::InputText("", buf, IM_ARRAYSIZE(buf));
-                entity->SetName(buf);
+                if (ImGui::InputText("", buf, IM_ARRAYSIZE(buf)))
+                    entity->SetName(buf);
                 
                 ImGui::PopID();
             }
@@ -74,11 +74,23 @@ namespace hr {
 
             auto entityComponents = entity->GetComponents();
             for (auto [compId, comp] : entityComponents) {
-                if (HasComponentId<Transform>(compId)) { ImGuiRenderComponent<Transform>(entity); continue; }
-                if (HasComponentId<Light>(compId)) { ImGuiRenderComponent<Light>(entity); continue; }
-                if (HasComponentId<MeshRenderer>(compId)) { ImGuiRenderComponent<MeshRenderer>(entity); continue; }
-                if (HasComponentId<MainCamera3D>(compId)) { ImGuiRenderComponent<MainCamera3D>(entity); continue; }
+                if (entity->HasComponentId<Transform>(compId)) { ImGuiRenderComponent<Transform>(entity); continue; }
+                if (entity->HasComponentId<Light>(compId)) { ImGuiRenderComponent<Light>(entity); continue; }
+                if (entity->HasComponentId<MeshRenderer>(compId)) { ImGuiRenderComponent<MeshRenderer>(entity); continue; }
+                if (entity->HasComponentId<MainCamera3D>(compId)) { ImGuiRenderComponent<MainCamera3D>(entity); continue; }
             }
+
+            if (ImGui::Button("Add Component##Button", ImVec2(-1.0f, 40.0f)))
+				ImGui::OpenPopup("Add Component##Popup");
+
+			if (ImGui::BeginPopup("Add Component##Popup"))
+			{
+                if (!entity->HasComponent<Light>()) { ImGuiRenderAddComponent<Light>("Light", entity); }
+                if (!entity->HasComponent<MeshRenderer>()) { ImGuiRenderAddComponent<MeshRenderer>("MeshRenderer", entity); }
+                if (!entity->HasComponent<MainCamera3D>()) { ImGuiRenderAddComponent<MainCamera3D>("MainCamera3D", entity); }
+				ImGui::EndPopup();
+			}
+    
 
 			if (wannaDestroy)
 			{

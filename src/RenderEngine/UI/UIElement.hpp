@@ -13,9 +13,6 @@
 namespace hr {
     class UIElement {
         public:
-            // UIElement();
-            // ~UIElement();
-
             static void CheckBox(const std::string &label, std::function<bool()> getter, std::function<void(bool)> setter);
 
             // static bool FloatN(const char* fieldName, float* value, uint32_t count = 1, float speed = 1.0, float min = 0.0, float max = 0.0, const char* format = "%.3f");
@@ -24,8 +21,11 @@ namespace hr {
             static void Vector3Field(const std::string &label, std::function<Vector3()> getter, std::function<void(Vector3)> setter, float speed = 1.0, float min = 0.0, float max = 0.0, const char* format = "%.3f");
             static void ColorField(const std::string &label, std::function<Color()> getter, std::function<void(Color)> setter);
 
+            static void StringField(const std::string &label, std::function<std::string()> getter, std::function<void(std::string)> setter);
         protected:
         private:
+            static void StartField(const std::string &label);
+            static void EndField();
     };
 }
 

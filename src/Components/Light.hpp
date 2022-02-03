@@ -13,17 +13,6 @@
 
 
 namespace hr {
-    enum LightLoc {
-        LOC_ENABLED = 0,
-        LOC_TYPE,
-        LOC_TARGET,
-        LOC_POS,
-        LOC_RANGE,
-        LOC_COLOR,
-        LOC_INTENSITY,
-        LOC_COUNT
-    };
-
     enum LightType {
         DIRECTIONAL,
         POINT,
@@ -35,8 +24,6 @@ namespace hr {
             ~Light();
 
             virtual void Update() override;
-
-            void UpdateValues(Shader shader);
 
             LightType GetType() const;
             void SetType(const LightType &type);
@@ -61,8 +48,6 @@ namespace hr {
             float _range;
             Color _color;
             float _intensity;
-
-            std::vector<int> _locations;
     };
 }
 

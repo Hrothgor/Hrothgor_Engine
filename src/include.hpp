@@ -12,8 +12,7 @@
 #define WIDTH 1920.0
 #define HEIGHT 1080.0
 
-#define GLSL_VERSION 330
-#define MAX_COLOR 21
+#define MAX_LIGHTS 100
 
 #include <string>
 #include <iostream>

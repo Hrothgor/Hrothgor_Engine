@@ -25,11 +25,15 @@ namespace hr {
             {
                 Comp *comp = entity->GetComponent<Comp>();
 
+                ImGui::PushID(("##button" + std::string(typeid(Comp).name())).c_str());
                 if (ImGui::Button("X"))
                 {
                     entity->RemoveComponent<Comp>();
+                    ImGui::PopID();
                     return;
                 }
+                ImGui::PopID();
+
                 ImGui::SameLine();
 
                 ImGui::PushID(("##checkbox" + std::string(typeid(Comp).name())).c_str());
@@ -77,12 +81,12 @@ namespace hr {
                     ImGui::Separator();
                 }
             }
-            template<typename Comp>
-            bool HasComponentId(std::type_index typeId)
+
+            template <typename Comp>
+            void ImGuiRenderAddComponent(const std::string &label, GameObject *entity) 
             {
-                if (typeId == typeid(Comp))
-                    return true;
-                return false;
+                if (ImGui::Selectable(label.c_str()))
+                    entity->AddComponent<Comp>();
             }
         protected:
         private:

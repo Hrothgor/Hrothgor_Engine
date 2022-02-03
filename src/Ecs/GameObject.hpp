@@ -91,6 +91,14 @@ namespace hr {
                 return TryGetComponent<Comp>() != nullptr;
             }
 
+            template<typename Comp>
+            bool HasComponentId(std::type_index typeId)
+            {
+                if (typeId == typeid(Comp))
+                    return true;
+                return false;
+            }
+
             virtual void Start() override;
             virtual void Update() override;
             virtual void LateUpdate() override;
