@@ -16,7 +16,7 @@ namespace hr {
     // {
     // }
 
-    void UIElement::CheckBox(const std::string &label, bool (*getter)(void), void (*setter)(bool))
+    void UIElement::CheckBox(const std::string &label, std::function<bool()> getter, std::function<void(bool)> setter)
     {
         bool value = getter();
         
@@ -33,7 +33,7 @@ namespace hr {
         ImGui::Columns();
     }
 
-    void UIElement::FloatField(const std::string &label, float (*getter)(void), void (*setter)(float), float speed, float min, float max, const char* format)
+    void UIElement::FloatField(const std::string &label, std::function<float()> getter, std::function<void(float)> setter, float speed, float min, float max, const char* format)
     {
         float value = getter();
 
@@ -52,7 +52,7 @@ namespace hr {
         ImGui::Columns();
     }
 
-    void UIElement::Vector2Field(const std::string &label, Vector2 (*getter)(void), void (*setter)(Vector2), float speed, float min, float max, const char* format)
+    void UIElement::Vector2Field(const std::string &label, std::function<Vector2()> getter, std::function<void(Vector2)> setter, float speed, float min, float max, const char* format)
     {
         Vector2 vec = getter();
         float value[2] = {vec.x, vec.y};
@@ -92,10 +92,11 @@ namespace hr {
         ImGui::Columns();
     }
 
-    void UIElement::ColorField(const std::string &label, Color (*getter)(void), void (*setter)(Color))
+    void UIElement::ColorField(const std::string &label, std::function<Color()> getter, std::function<void(Color)> setter)
     {
         Color col = getter();
-        float value[4] = {(float) col.r, (float) col.g, (float) col.b, (float) col.a};
+        Vector4 nCol = ColorNormalize(col);
+        float value[4] = {nCol.x, nCol.y, nCol.z, nCol.w};
 
         ImGui::Columns(2);
         ImGui::TextUnformatted(label.c_str());
@@ -104,7 +105,7 @@ namespace hr {
 		ImGui::PushID(label.c_str());
 
 		if (ImGui::ColorEdit4("", value))
-            setter((Color){(unsigned char) value[0], (unsigned char) value[1], (unsigned char) value[2], (unsigned char) value[3]});
+            setter(ColorFromNormalized((Vector4){value[0], value[1], value[2], value[3]}));
 
 		ImGui::PopID();
 		ImGui::PopItemWidth();

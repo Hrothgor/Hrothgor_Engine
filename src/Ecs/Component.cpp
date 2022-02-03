@@ -7,7 +7,6 @@
 
 #include "Component.hpp"
 #include "GameObject.hpp"
-#include "../Components/Transform.hpp"
 
 hr::Component::Component(GameObject *gameObject)
 	: _gameObject(gameObject)

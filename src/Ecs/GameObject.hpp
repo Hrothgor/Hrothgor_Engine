@@ -22,10 +22,11 @@ namespace hr {
             template <typename Comp>
             Comp *GetComponent()
             {
-                auto it = _components.find(typeid(Comp));
+                auto it = std::find_if(_components.begin(), _components.end(),
+                    [&](const std::pair<std::type_index, Component *> &element){ return element.first == typeid(Comp);} );
 
                 if (it == _components.end()) {
-                    std::cout << "Missing component : " + std::string(typeid(Comp).name()) << std::endl;
+                    std::cout << _name + ": Can't get missing component : " + std::string(typeid(Comp).name()) << std::endl;
                     exit(84);
                 }
                 return static_cast<Comp *>(it->second);
@@ -48,7 +49,8 @@ namespace hr {
             template <typename Comp>
             Comp *TryGetComponent()
             {
-                auto it = _components.find(typeid(Comp));
+                auto it = std::find_if(_components.begin(), _components.end(),
+                    [&](const std::pair<std::type_index, Component *> &element){ return element.first == typeid(Comp);} );
 
                 if (it == _components.end())
                     return nullptr;
@@ -58,14 +60,29 @@ namespace hr {
             template <typename Comp>
             Comp *AddComponent()
             {
-                auto it = _components.find(typeid(Comp));
+                auto it = std::find_if(_components.begin(), _components.end(),
+                    [&](const std::pair<std::type_index, Component *> &element){ return element.first == typeid(Comp);} );
+
                 if (it != _components.end()) {
-                    std::cout << "2 components of the same type : " + std::string(typeid(Comp).name()) << std::endl;
+                    std::cout << _name + " has 2 components of the same type : " + std::string(typeid(Comp).name()) << std::endl;
                     exit(84);
                 }
-                Comp* newComp = new Comp(this);
-                _components[typeid(Comp)] = newComp;
+                Comp *newComp = new Comp(this);
+                _components.push_back(std::make_pair<std::type_index, Component *>(typeid(Comp), newComp));
                 return newComp;
+            }
+
+            template <typename Comp>
+            void RemoveComponent()
+            {
+                auto it = std::find_if(_components.begin(), _components.end(),
+                    [&](const std::pair<std::type_index, Component *> &element){ return element.first == typeid(Comp);} );
+            
+                if (it == _components.end()) {
+                    std::cout << _name + ": Can't remove missing component : " + std::string(typeid(Comp).name()) << std::endl;
+                    exit(84);
+                }
+                _components.erase(it);
             }
 
             template <typename Comp>
@@ -82,7 +99,8 @@ namespace hr {
             Transform *GetTransform() const;
             GameObject *GetParent() const;
             std::vector<GameObject *> GetChilds() const;
-            std::unordered_map<std::type_index, Component *> GetComponents() const;
+            std::vector<std::pair<std::type_index, Component *>> GetComponents() const;
+            void SetComponents(std::vector<std::pair<std::type_index, Component *>> components);
 
             void AddChild(GameObject *child);
             void RemoveChild(GameObject *child);
@@ -95,7 +113,7 @@ namespace hr {
         private:
             GameObject *_parent = nullptr;
             std::vector<GameObject *> _childs;
-            std::unordered_map<std::type_index, Component *> _components;
+            std::vector<std::pair<std::type_index, Component *>> _components;
             Transform *_transform = nullptr;
 
             bool ParentIsChild(GameObject *parent);

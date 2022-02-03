@@ -10,6 +10,7 @@
 hr::Template::Template(GameObject *gameObject)
     : Component(gameObject)
 {
+    _name = "Template";
 }
 
 hr::Template::~Template()

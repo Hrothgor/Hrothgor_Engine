@@ -11,6 +11,7 @@
 hr::MeshRenderer::MeshRenderer(GameObject *gameObject)
     : Component(gameObject)
 {
+    _name = "MeshRenderer";
 }
 
 hr::MeshRenderer::~MeshRenderer()

@@ -52,6 +52,8 @@ namespace hr {
 
             Color GetColor() const;
             void SetColor(const Color &color);
+
+            virtual void ImGuiRender() override;
         protected:
         private:
             LightType _type;

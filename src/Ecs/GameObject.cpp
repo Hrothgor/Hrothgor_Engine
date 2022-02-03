@@ -86,9 +86,14 @@ hr::Transform *hr::GameObject::GetTransform() const
     return _transform;
 }
 
-std::unordered_map<std::type_index, hr::Component *> hr::GameObject::GetComponents() const
+std::vector<std::pair<std::type_index, hr::Component *>> hr::GameObject::GetComponents() const
 {
     return _components;
+}
+
+void hr::GameObject::SetComponents(std::vector<std::pair<std::type_index, hr::Component *>> components)
+{
+    _components = components;
 }
 
 void hr::GameObject::AddChild(GameObject *child)

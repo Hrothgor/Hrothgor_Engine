@@ -10,6 +10,7 @@
 hr::MainCamera3D::MainCamera3D(GameObject *gameObject)
     : Component(gameObject)
 {
+    _name = "MainCamera3D";
     _camera = { 0 };
     _camera.position = {50, 20, 50};
     _camera.target = { 0.0, 0.0, 0.0 };

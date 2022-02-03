@@ -10,6 +10,9 @@
 #include "../../../Ecs/GameObject.hpp"
 
 #include "../../../Components/Transform.hpp"
+#include "../../../Components/Light.hpp"
+#include "../../../Components/MeshRenderer.hpp"
+#include "../../../Components/MainCamera3D.hpp"
 
 namespace hr {
     InspectorPanel::InspectorPanel()
@@ -32,7 +35,7 @@ namespace hr {
 		{
 
             {
-                ImGui::PushID("activation");
+                ImGui::PushID("##checkbox");
                 bool value = entity->IsActive();
                 if (ImGui::Checkbox("", &value))
                     entity->SetActive(value);
@@ -61,32 +64,21 @@ namespace hr {
 
 			ImGui::Separator();
 
-            entity->GetTransform()->ImGuiRender();
+            ImGui::PushID(("##collapsingHeader" + entity->GetUUID().str()).c_str());
+            ImGui::SetNextItemOpen(true, ImGuiCond_Once);
+            if (ImGui::CollapsingHeader(entity->GetTransform()->GetName().c_str())) {
+                entity->GetTransform()->ImGuiRender();
+                ImGui::Separator();
+            }
+            ImGui::PopID();
 
-// 			for (const auto& componentTypeID : entity.GetComponentsTypeIDList())
-// 			{
-// 				CheckComponentEditor<TransformComponent>(componentTypeID, entity);
-// 				CheckComponentEditor<SpriteRendererComponent>(componentTypeID, entity);
-// 				CheckComponentEditor<CameraComponent>(componentTypeID, entity);
-// 				CheckComponentEditor<RigidBody2DComponent>(componentTypeID, entity);
-// 				CheckComponentEditor<Colliders2DComponent>(componentTypeID, entity);
-// 			}
-
-// //			if (ImGui::Button("Add Component##Button", ImVec2(-1.0f, 40.0f)))
-// 			if (ImGui::Button("Add Component##Button"))
-// 				ImGui::OpenPopup("Add Component##Popup");
-
-// 			if (ImGui::BeginPopup("Add Component##Popup"))
-// 			{
-// 				CheckAddComponent<TransformComponent>(entity, "Transform##AddComponentPopup");
-// 				CheckAddComponent<SpriteRendererComponent>(entity, "SpriteRenderer##AddComponentPopup", nullptr);
-// 				CheckAddComponent<CameraComponent>(entity, "Camera##AddComponentPopup");
-// 				CheckAddComponent<RigidBody2DComponent>(entity, "RigidBody2D##AddComponentPopup");
-// 				CheckAddComponent<Colliders2DComponent>(entity, "Colliders2D##AddComponentPopup");
-
-// 				ImGui::EndPopup();
-// 			}
-
+            auto entityComponents = entity->GetComponents();
+            for (auto [compId, comp] : entityComponents) {
+                if (HasComponentId<Transform>(compId)) { ImGuiRenderComponent<Transform>(entity); continue; }
+                if (HasComponentId<Light>(compId)) { ImGuiRenderComponent<Light>(entity); continue; }
+                if (HasComponentId<MeshRenderer>(compId)) { ImGuiRenderComponent<MeshRenderer>(entity); continue; }
+                if (HasComponentId<MainCamera3D>(compId)) { ImGuiRenderComponent<MainCamera3D>(entity); continue; }
+            }
 
 			if (wannaDestroy)
 			{
@@ -100,12 +92,5 @@ namespace hr {
 		}
 
 		ImGui::End();
-        
-
-        // ImGui::Begin("Inspector");
-        // for (auto [type, comp] : _components)
-        //     if (comp->IsActive())
-        //         comp->ImGuiRender();
-        // ImGui::End();
     }
 }

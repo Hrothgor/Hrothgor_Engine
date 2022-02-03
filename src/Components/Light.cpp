@@ -8,6 +8,8 @@
 #include "Light.hpp"
 #include "../RenderEngine/Master3DRenderer.hpp"
 #include "Transform.hpp"
+#include "../Ecs/GameObject.hpp"
+#include "../RenderEngine/UI/UIElement.hpp"
 
 #define MAX_LIGHTS 100
 
@@ -17,6 +19,7 @@ hr::Light::Light(GameObject *gameObject)
     : Component(gameObject)
     , _locations(LOC_COUNT, -1)
 {
+    _name = "Light";
     _type = DIRECTIONAL;
     _target = {0, -1, 0};
     _range = 10.0;
@@ -67,14 +70,16 @@ void hr::Light::UpdateValues(Shader shader)
     float target[3] = {_target.x, _target.y, _target.z};
     SetShaderValue(shader, _locations[LOC_TARGET], &target, SHADER_UNIFORM_VEC3);
 
-    float pos[3] = {GetTransform()->GetPosition().x,
-                    GetTransform()->GetPosition().y,
-                    GetTransform()->GetPosition().z};
+    Transform *transform = GetTransform();
+    float pos[3] = {transform->GetPosition().x,
+                    transform->GetPosition().y,
+                    transform->GetPosition().z};
     SetShaderValue(shader, _locations[LOC_POS], &pos, SHADER_UNIFORM_VEC3);
 
     SetShaderValue(shader, _locations[LOC_RANGE], &_range, SHADER_UNIFORM_FLOAT);
 
-    float color[4] = {(float)(_color.r / 255), (float)(_color.g / 255), (float)(_color.b / 255), (float)(_color.a / 255)};
+    Vector4 vec = ColorNormalize(_color);
+    float color[4] = {vec.x, vec.y, vec.z, vec.w};
     SetShaderValue(shader, _locations[LOC_COLOR], &color, SHADER_UNIFORM_VEC4);
 
     SetShaderValue(shader, _locations[LOC_INTENSITY], &_intensity, SHADER_UNIFORM_FLOAT);
@@ -128,4 +133,9 @@ Color hr::Light::GetColor() const
 void hr::Light::SetColor(const Color &color)
 {
     _color = color;
+}
+
+void hr::Light::ImGuiRender()
+{
+    UIElement::ColorField("Color", [this](){return GetColor();}, [this](Color col){SetColor(col);});
 }

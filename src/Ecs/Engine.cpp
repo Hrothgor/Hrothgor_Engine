@@ -32,6 +32,7 @@ void hr::Engine::LoadScene()
     GameObject *lightDir = new GameObject();
     lightDir->SetName("lightDir");
     lightDir->AddComponent<Light>();
+    lightDir->AddComponent<MeshRenderer>()->Load("ressources/dragon.obj");
 
     GameObject *dragon = new GameObject();
     dragon->SetName("dragon");
@@ -117,6 +118,9 @@ hr::GameObject *hr::Engine::Instantiate(GameObject *object, GameObject *parent)
 
 void hr::Engine::Destroy(GameObject *object, float t)
 {
+    (void)t;
+    // for unused parameter
+
     object->Destroy();
 
     // if (t > 0) {

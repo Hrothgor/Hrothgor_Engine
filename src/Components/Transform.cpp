@@ -11,6 +11,7 @@
 hr::Transform::Transform(GameObject *gameObject)
     : Component(gameObject)
 {
+    _name = "Transform";
     _position = Vector3Zero();
     _rotation = Vector3Zero();
     _scale = {1, 1, 1};
