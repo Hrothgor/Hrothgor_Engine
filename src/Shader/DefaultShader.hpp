@@ -8,7 +8,7 @@
 #ifndef DEFAULTSHADER_HPP_
 #define DEFAULTSHADER_HPP_
 
-#include "../include.hpp"
+#include "include.hpp"
 
 namespace hr {
     class DefaultShader {

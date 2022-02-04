@@ -7,6 +7,7 @@
 
 #include "Transform.hpp"
 #include "../RenderEngine/UI/UIElement.hpp"
+#include "ImGuizmo.h"
 
 hr::Transform::Transform(GameObject *gameObject)
     : Component(gameObject)
@@ -31,6 +32,21 @@ void hr::Transform::Rotate(Vector3 vec)
     _rotation = Vector3Add(_rotation, vec);
 }
 
+void hr::Transform::Rotate(float x, float y, float z)
+{
+    _rotation = Vector3Add(_rotation, (Vector3){x, y, z});
+}
+
+// Matrix hr::Transform::GetTransformMatrix() const
+// {
+//     AxisAngle rot = GetRotationAxisAngle();
+//     Matrix rotation = MatrixRotate(rot.axis, rot.angle);
+//     Matrix scale = MatrixScale(_scale.x, _scale.y, _scale.z);
+//     Matrix translate = MatrixTranslate(_position.x, _position.y, _position.z);
+
+//     return MatrixMultiply(MatrixMultiply(translate, rotation), scale);
+// }
+
 Vector3 hr::Transform::GetPosition() const
 {
     return _position;
@@ -49,6 +65,11 @@ void hr::Transform::SetPosition(float x, float y, float z)
 Vector3 hr::Transform::GetRotation() const
 {
     return _rotation;
+}
+
+Vector3 hr::Transform::GetRotationRadian() const
+{
+    return {_rotation.x * DEG2RAD, _rotation.y * DEG2RAD, _rotation.z * DEG2RAD};
 }
 
 Quaternion hr::Transform::GetRotationQuaternion() const

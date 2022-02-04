@@ -8,7 +8,7 @@
 #ifndef ENGINE_HPP_
 #define ENGINE_HPP_
 
-#include "../include.hpp"
+#include "include.hpp"
 #include "GameObject.hpp"
 
 namespace hr {

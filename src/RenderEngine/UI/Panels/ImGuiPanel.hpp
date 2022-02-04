@@ -8,7 +8,7 @@
 #ifndef IMGUIPANEL_HPP_
 #define IMGUIPANEL_HPP_
 
-#include "../../../include.hpp"
+#include "include.hpp"
 
 namespace hr {
     class ImGuiPanel {

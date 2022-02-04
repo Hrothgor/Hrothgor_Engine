@@ -8,7 +8,7 @@
 #ifndef GAMEOBJECT_HPP_
 #define GAMEOBJECT_HPP_
 
-#include "../include.hpp"
+#include "include.hpp"
 #include "Component.hpp"
 
 namespace hr {

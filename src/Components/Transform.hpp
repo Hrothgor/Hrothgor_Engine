@@ -8,7 +8,7 @@
 #ifndef TRANSFORM_HPP_
 #define TRANSFORM_HPP_
 
-#include "../include.hpp"
+#include "include.hpp"
 #include "../Ecs/Component.hpp"
 
 namespace hr {
@@ -24,11 +24,15 @@ namespace hr {
 
             void Translate(Vector3 vec);
             void Rotate(Vector3 vec);
+            void Rotate(float x, float y, float z);
+
+            // Matrix GetTransformMatrix() const;
 
             Vector3 GetPosition() const;
             void SetPosition(Vector3 pos);
             void SetPosition(float x, float y, float z);
             Vector3 GetRotation() const;
+            Vector3 GetRotationRadian() const;
             Quaternion GetRotationQuaternion() const;
             AxisAngle GetRotationAxisAngle() const;
             Matrix GetRotationMatrix() const;

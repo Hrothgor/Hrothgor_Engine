@@ -9,7 +9,7 @@
 #define COMPONENT_HPP_
 
 #pragma once
-#include "../include.hpp"
+#include "include.hpp"
 #include "Object.hpp"
 
 namespace hr {

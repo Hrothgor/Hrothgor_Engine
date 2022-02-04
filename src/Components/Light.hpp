@@ -8,7 +8,7 @@
 #ifndef LIGHT_HPP_
 #define LIGHT_HPP_
 
-#include "../include.hpp"
+#include "include.hpp"
 #include "../Ecs/Component.hpp"
 
 namespace hr {

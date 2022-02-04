@@ -8,11 +8,10 @@
 #ifndef DISPLAYMANAGER_HPP_
 #define DISPLAYMANAGER_HPP_
 
-#include "../include.hpp"
+#include "include.hpp"
 #include "Master3DRenderer.hpp"
 #include "Master2DRenderer.hpp"
-#include "UI/Panels/SceneHierarchyPanel.hpp"
-#include "UI/Panels/InspectorPanel.hpp"
+#include "ImGuiLayer.hpp"
 
 namespace hr {
     class DisplayManager {
@@ -23,13 +22,13 @@ namespace hr {
             void Clear(Color color);
             void Draw();
 
-            void DrawImGui();
-            void ImGuiSetStyle();
+            RenderTexture GetRenderTexture() const;
+            Texture *GetFrameBufferTexture();
 
         protected:
         private:
-            SceneHierarchyPanel _sceneHierarchyPanel;
-            InspectorPanel _inspectorPanel;
+            RenderTexture _renderTexture;
+            ImGuiLayer _imGuiLayer;
 
         protected:
             static DisplayManager *instance;

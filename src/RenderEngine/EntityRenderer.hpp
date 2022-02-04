@@ -8,7 +8,7 @@
 #ifndef ENTITYRENDERER_HPP_
 #define ENTITYRENDERER_HPP_
 
-#include "../include.hpp"
+#include "include.hpp"
 #include "../Shader/LightShader.hpp"
 
 namespace hr {

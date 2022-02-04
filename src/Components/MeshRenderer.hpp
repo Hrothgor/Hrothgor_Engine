@@ -8,7 +8,7 @@
 #ifndef MESHRENDERER_HPP_
 #define MESHRENDERER_HPP_
 
-#include "../include.hpp"
+#include "include.hpp"
 #include "../Ecs/Component.hpp"
 
 namespace hr {

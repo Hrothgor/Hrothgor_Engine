@@ -9,7 +9,7 @@
 #ifndef GENMESH_HPP_
 #define GENMESH_HPP_
 
-#include "../include.hpp"
+#include "include.hpp"
 
 namespace hr {
     class GenMesh {

@@ -65,7 +65,6 @@ void hr::Engine::Update()
     while (!WindowShouldClose())
     {
         BeginDrawing();
-        rlImGuiBegin();
         {
             for (auto ent : _entities)
                 if (ent->GetParent() == nullptr)
@@ -73,10 +72,9 @@ void hr::Engine::Update()
             for (auto ent : _entities)
                 if (ent->GetParent() == nullptr)
                     ent->LateUpdate();
-            DisplayManager::Get()->Clear(DARKBLUE);
+            DisplayManager::Get()->Clear(DARKGRAY);
             DisplayManager::Get()->Draw();
         }
-        rlImGuiEnd();
         EndDrawing();
     }
 }

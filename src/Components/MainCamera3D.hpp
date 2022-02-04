@@ -8,7 +8,7 @@
 #ifndef MAINCAMERA3D_HPP_
 #define MAINCAMERA3D_HPP_
 
-#include "../include.hpp"
+#include "include.hpp"
 #include "../Ecs/Component.hpp"
 
 namespace hr {
