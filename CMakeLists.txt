@@ -28,6 +28,20 @@ target_sources(imgui
 
 target_include_directories(imgui PUBLIC ${IMGUI_DIR})
 
+##############################
+# ImGuizmos lib
+##############################
+
+set(IMGUIZMO_DIR ${CMAKE_CURRENT_SOURCE_DIR}/ImGuizmo)
+add_library(ImGuizmo STATIC)
+
+target_sources(ImGuizmo
+    PRIVATE
+        ${IMGUIZMO_DIR}/ImGuizmo.cpp
+)
+
+target_include_directories(ImGuizmo PUBLIC ${IMGUIZMO_DIR})
+
 
 ##############################
 # physics_engine executable
@@ -48,6 +62,7 @@ target_include_directories(physics_engine
         ${PROJECT_ROOT}/include/
         ${PROJECT_ROOT}/rlImGui/
         ${IMGUI_DIR}
+        ${IMGUIZMO_DIR}
 )
 
 target_compile_options(physics_engine PRIVATE 
@@ -57,6 +72,7 @@ target_compile_options(physics_engine PRIVATE
 
     
 target_link_libraries(physics_engine imgui)
+target_link_libraries(physics_engine ImGuizmo)
 target_link_libraries(physics_engine raylib)
 if (NOT raylib_FOUND)
     include(FetchContent)
