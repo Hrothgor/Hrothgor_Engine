@@ -6,140 +6,168 @@
 */
 
 #include "Transform.hpp"
+#include "../Ecs/GameObject.hpp"
 #include "../RenderEngine/UI/UIElement.hpp"
 #include "ImGuizmo.h"
 
-hr::Transform::Transform(GameObject *gameObject)
-    : Component(gameObject)
-{
-    _name = "Transform";
-    _position = Vector3Zero();
-    _rotation = Vector3Zero();
-    _scale = Vector3One();
-}
+namespace hr {
+    Transform::Transform(GameObject *gameObject)
+        : Component(gameObject)
+    {
+        _name = "Transform";
+        _position = Vector3Zero();
+        _rotation = Vector3Zero();
+        _scale = Vector3One();
+    }
 
-hr::Transform::~Transform()
-{
-}
+    Transform::~Transform()
+    {
+    }
 
-void hr::Transform::Translate(Vector3 vec)
-{
-    _position = Vector3Add(_position, vec);
-}
+    void Transform::Translate(Vector3 vec)
+    {
+        _position = Vector3Add(_position, vec);
+    }
 
-void hr::Transform::Rotate(Vector3 vec)
-{
-    _rotation = Vector3Add(_rotation, vec);
-}
+    void Transform::Rotate(Vector3 vec)
+    {
+        _rotation = Vector3Add(_rotation, vec);
+    }
 
-void hr::Transform::Rotate(float x, float y, float z)
-{
-    _rotation = Vector3Add(_rotation, (Vector3){x, y, z});
-}
+    void Transform::Rotate(float x, float y, float z)
+    {
+        _rotation = Vector3Add(_rotation, (Vector3){x, y, z});
+    }
 
-// Matrix hr::Transform::GetTransformMatrix() const
-// {
-//     AxisAngle rot = GetRotationAxisAngle();
-//     Matrix rotation = MatrixRotate(rot.axis, rot.angle);
-//     Matrix scale = MatrixScale(_scale.x, _scale.y, _scale.z);
-//     Matrix translate = MatrixTranslate(_position.x, _position.y, _position.z);
+    // Matrix Transform::GetTransformMatrix() const
+    // {
+    //     AxisAngle rot = GetRotationAxisAngle();
+    //     Matrix rotation = MatrixRotate(rot.axis, rot.angle);
+    //     Matrix scale = MatrixScale(_scale.x, _scale.y, _scale.z);
+    //     Matrix translate = MatrixTranslate(_position.x, _position.y, _position.z);
 
-//     return MatrixMultiply(MatrixMultiply(translate, rotation), scale);
-// }
+    //     return MatrixMultiply(MatrixMultiply(translate, rotation), scale);
+    // }
 
-Vector3 hr::Transform::GetPosition() const
-{
-    return _position;
-}
+    Vector3 Transform::GetPosition() const
+    {
+        return _position;
+    }
 
-void hr::Transform::SetPosition(Vector3 pos)
-{
-    _position = pos;
-}
+    Vector3 Transform::GetPositionWorld() const
+    {
+        if (GetGameObject()->GetParent())
+            return Vector3Add(GetGameObject()->GetParent()->GetTransform()->GetPositionWorld(), _position);
+        return _position;
+    }
 
-void hr::Transform::SetPosition(float x, float y, float z)
-{
-    _position = {x, y, z};
-}
+    void Transform::SetPosition(Vector3 pos)
+    {
+        _position = pos;
+    }
 
-Vector3 hr::Transform::GetRotation() const
-{
-    return _rotation;
-}
+    void Transform::SetPosition(float x, float y, float z)
+    {
+        _position = {x, y, z};
+    }
 
-Vector3 hr::Transform::GetRotationRadian() const
-{
-    return {_rotation.x * DEG2RAD, _rotation.y * DEG2RAD, _rotation.z * DEG2RAD};
-}
+    Vector3 Transform::GetRotation() const
+    {
+        return _rotation;
+    }
 
-Quaternion hr::Transform::GetRotationQuaternion() const
-{
-    return EulerToQuaternion(_rotation);
-}
+    Vector3 Transform::GetRotationRadian() const
+    {
+        return {_rotation.x * DEG2RAD, _rotation.y * DEG2RAD, _rotation.z * DEG2RAD};
+    }
 
-hr::AxisAngle hr::Transform::GetRotationAxisAngle() const
-{
-    AxisAngle ret;
-    QuaternionToAxisAngle(GetRotationQuaternion(), &ret.axis, &ret.angle);
-    ret.angle *= RAD2DEG;
-    return ret;
-}
+    Quaternion Transform::GetRotationQuaternion() const
+    {
+        return EulerToQuaternion(_rotation);
+    }
 
-Matrix hr::Transform::GetRotationMatrix() const
-{
-    return MatrixRotateXYZ({DEG2RAD * _rotation.x, DEG2RAD *_rotation.y, DEG2RAD *_rotation.z});
-}
+    AxisAngle Transform::GetRotationAxisAngle() const
+    {
+        AxisAngle ret;
+        QuaternionToAxisAngle(GetRotationQuaternion(), &ret.axis, &ret.angle);
+        ret.angle *= RAD2DEG;
+        return ret;
+    }
 
-void hr::Transform::SetRotation(Vector3 rotation)
-{
-    _rotation = rotation;
-}
+    Matrix Transform::GetRotationMatrix() const
+    {
+        return MatrixRotateXYZ({DEG2RAD * _rotation.x, DEG2RAD *_rotation.y, DEG2RAD *_rotation.z});
+    }
 
-void hr::Transform::SetRotation(float x, float y, float z)
-{
-    _rotation = {x, y, z};
-}
+    void Transform::SetRotation(Vector3 rotation)
+    {
+        _rotation = rotation;
+    }
 
-Vector3 hr::Transform::GetScale() const
-{
-    return _scale;
-}
+    void Transform::SetRotation(float x, float y, float z)
+    {
+        _rotation = {x, y, z};
+    }
 
-void hr::Transform::SetScale(Vector3 scale)
-{
-    _scale = scale;
-}
+    Vector3 Transform::GetScale() const
+    {
+        return _scale;
+    }
 
-void hr::Transform::SetScale(float x, float y, float z)
-{
-    _scale = {x, y, z};
-}
+    void Transform::SetScale(Vector3 scale)
+    {
+        _scale = scale;
+    }
 
-Quaternion hr::Transform::EulerToQuaternion(Vector3 euler)
-{
-    float yaw = euler.z * DEG2RAD;
-    float pitch = euler.y * DEG2RAD;
-    float roll = euler.x * DEG2RAD;
+    void Transform::SetScale(float x, float y, float z)
+    {
+        _scale = {x, y, z};
+    }
 
-    double cy = cos(yaw * 0.5);
-    double sy = sin(yaw * 0.5);
-    double cp = cos(pitch * 0.5);
-    double sp = sin(pitch * 0.5);
-    double cr = cos(roll * 0.5);
-    double sr = sin(roll * 0.5);
+    Quaternion Transform::EulerToQuaternion(Vector3 euler)
+    {
+        float yaw = euler.z * DEG2RAD;
+        float pitch = euler.y * DEG2RAD;
+        float roll = euler.x * DEG2RAD;
 
-    Quaternion q;
-    q.w = cr * cp * cy + sr * sp * sy;
-    q.x = sr * cp * cy - cr * sp * sy;
-    q.y = cr * sp * cy + sr * cp * sy;
-    q.z = cr * cp * sy - sr * sp * cy;
+        double cy = cos(yaw * 0.5);
+        double sy = sin(yaw * 0.5);
+        double cp = cos(pitch * 0.5);
+        double sp = sin(pitch * 0.5);
+        double cr = cos(roll * 0.5);
+        double sr = sin(roll * 0.5);
 
-    return q;
-}
+        Quaternion q;
+        q.w = cr * cp * cy + sr * sp * sy;
+        q.x = sr * cp * cy - cr * sp * sy;
+        q.y = cr * sp * cy + sr * cp * sy;
+        q.z = cr * cp * sy - sr * sp * cy;
 
-void hr::Transform::ImGuiRender()
-{
-    UIElement::Vector3Field("Position", [this](){return GetPosition();}, [this](Vector3 vec){SetPosition(vec);});
-    UIElement::Vector3Field("Rotation", [this](){return GetRotation();}, [this](Vector3 vec){SetRotation(vec);});
-    UIElement::Vector3Field("Scale", [this](){return GetScale();}, [this](Vector3 vec){SetScale(vec);});
+        return q;
+    }
+
+    void Transform::ImGuiRender()
+    {
+        UIElement::Vector3Field("Position", [this](){return GetPosition();}, [this](Vector3 vec){SetPosition(vec);});
+        UIElement::Vector3Field("Rotation", [this](){return GetRotation();}, [this](Vector3 vec){SetRotation(vec);});
+        UIElement::Vector3Field("Scale", [this](){return GetScale();}, [this](Vector3 vec){SetScale(vec);});
+    }
+
+    nlohmann::json Transform::ToJson() const
+    {
+        nlohmann::json json;
+
+        json["position"] = {_position.x, _position.y, _position.z};
+        json["rotation"] = {_rotation.x, _rotation.y, _rotation.z};
+        json["scale"] = {_scale.x, _scale.y, _scale.z};
+
+        return json;
+    }
+
+    void Transform::FromJson(const nlohmann::json &json)
+    {
+        _position = {json["position"][0].get<float>(), json["position"][1].get<float>(), json["position"][2].get<float>()};
+        _rotation = {json["rotation"][0].get<float>(), json["rotation"][1].get<float>(), json["rotation"][2].get<float>()};
+        _scale = {json["scale"][0], json["scale"][1], json["scale"][2]};
+    }
 }

@@ -7,10 +7,16 @@
 
 #include "ImGuiLayer.hpp"
 #include "ImGuizmo.h"
+#include "Panels/SceneHierarchyPanel.hpp"
+#include "Panels/InspectorPanel.hpp"
+#include "Panels/ViewPortPanel.hpp"
 
 namespace hr {
     ImGuiLayer::ImGuiLayer()
     {
+        _panels.push_back(new SceneHierarchyPanel());
+        _panels.push_back(new InspectorPanel());
+        _panels.push_back(new ViewPortPanel());
     }
 
     ImGuiLayer::~ImGuiLayer()
@@ -18,6 +24,12 @@ namespace hr {
     }
 
     void ImGuiLayer::Start()
+    {
+        for (auto &panel : _panels)
+            panel->Start();
+    }
+
+    void ImGuiLayer::BeginFrame()
     {
         rlImGuiBegin();
         ImGuizmo::BeginFrame();
@@ -56,6 +68,8 @@ namespace hr {
 
     void ImGuiLayer::Draw()
     {
+        BeginFrame();
+    
         ImGuiSetStyle();
 
         DrawDockSpace();
@@ -96,12 +110,13 @@ namespace hr {
 		// ImGui::PopStyleVar();
 
 
-        _sceneHierarchyPanel.ImGuiRender();
-        _inspectorPanel.ImGuiRender();
-        _viewPortPanel.ImGuiRender();
+        for (auto &panel : _panels)
+            panel->ImGuiRender();
+
+        EndFrame();
     }
 
-    void ImGuiLayer::End()
+    void ImGuiLayer::EndFrame()
     {
         rlImGuiEnd();
     }
@@ -139,5 +154,11 @@ namespace hr {
         colors[ImGuiCol_TitleBg] = ImVec4{ 0.15f, 0.1505f, 0.151f, 1.0f };
         colors[ImGuiCol_TitleBgActive] = ImVec4{ 0.15f, 0.1505f, 0.151f, 1.0f };
         colors[ImGuiCol_TitleBgCollapsed] = ImVec4{ 0.15f, 0.1505f, 0.151f, 1.0f };
+    }
+
+    void ImGuiLayer::End()
+    {
+        for (auto &panel : _panels)
+            panel->End();
     }
 }

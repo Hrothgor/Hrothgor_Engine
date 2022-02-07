@@ -10,6 +10,7 @@
 
 #include "include.hpp"
 #include "../Ecs/Component.hpp"
+#include "json.hpp"
 
 namespace hr {
     struct AxisAngle {
@@ -29,6 +30,7 @@ namespace hr {
             // Matrix GetTransformMatrix() const;
 
             Vector3 GetPosition() const;
+            Vector3 GetPositionWorld() const;
             void SetPosition(Vector3 pos);
             void SetPosition(float x, float y, float z);
             Vector3 GetRotation() const;
@@ -45,6 +47,9 @@ namespace hr {
             static Quaternion EulerToQuaternion(Vector3 euler);
 
             virtual void ImGuiRender() override;
+
+            virtual nlohmann::json ToJson() const override;
+            virtual void FromJson(const nlohmann::json &json) override;
         protected:
         private:
             Vector3 _position;

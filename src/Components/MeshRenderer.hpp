@@ -10,6 +10,7 @@
 
 #include "include.hpp"
 #include "../Ecs/Component.hpp"
+#include "json.hpp"
 
 namespace hr {
     class MeshRenderer : public Component {
@@ -31,6 +32,9 @@ namespace hr {
             std::string GetTexturePath() const;
 
             virtual void ImGuiRender() override;
+
+            virtual nlohmann::json ToJson() const override;
+            virtual void FromJson(const nlohmann::json &json) override;
         protected:
         private:
             Model _model = {};

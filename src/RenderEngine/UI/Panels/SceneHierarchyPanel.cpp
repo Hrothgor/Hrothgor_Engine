@@ -18,6 +18,10 @@ namespace hr {
     {
     }
 
+    void SceneHierarchyPanel::Start()
+    {
+    }
+
     void SceneHierarchyPanel::ImGuiRender()
     {
         ImGui::Begin("Scene Hierarchy", &_isOpen);
@@ -113,5 +117,9 @@ namespace hr {
 				ImGui::TreePop();
 			}
         }
+    }
+
+    void SceneHierarchyPanel::End()
+    {
     }
 }

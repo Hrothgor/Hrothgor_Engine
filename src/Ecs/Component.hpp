@@ -11,6 +11,7 @@
 #pragma once
 #include "include.hpp"
 #include "Object.hpp"
+#include "json.hpp"
 
 namespace hr {
     class Transform;
@@ -29,17 +30,12 @@ namespace hr {
             virtual void ImGuiRender() {};
             virtual void OnDrawGizmos() {};
 
+            virtual nlohmann::json ToJson() const = 0;
+            virtual void FromJson(const nlohmann::json &json) = 0;
 
             GameObject *GetGameObject() const;
             Transform *GetTransform() const;
-
-            friend std::ostream& operator<<(std::ostream& os, Component const& data)
-            {
-                data.print(os);
-                return os;
-            }
         protected:
-            virtual void print(std::ostream& os) const;
         private:
             GameObject *_gameObject = nullptr;
             Transform *_transform = nullptr;

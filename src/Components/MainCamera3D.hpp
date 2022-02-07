@@ -10,6 +10,7 @@
 
 #include "include.hpp"
 #include "../Ecs/Component.hpp"
+#include "json.hpp"
 
 namespace hr {
     class MainCamera3D : public Component {
@@ -20,6 +21,9 @@ namespace hr {
             virtual void Update() override;
 
             Camera3D GetCamera3D() const;
+
+            virtual nlohmann::json ToJson() const override;
+            virtual void FromJson(const nlohmann::json &json) override;
         protected:
         private:
             Camera3D _camera;

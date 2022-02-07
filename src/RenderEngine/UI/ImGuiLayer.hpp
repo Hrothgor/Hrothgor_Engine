@@ -9,9 +9,7 @@
 #define IMGUILAYER_HPP_
 
 #include "include.hpp"
-#include "Panels/SceneHierarchyPanel.hpp"
-#include "Panels/InspectorPanel.hpp"
-#include "Panels/ViewPortPanel.hpp"
+#include "Panels/ImGuiPanel.hpp"
 
 namespace hr {
     class ImGuiLayer {
@@ -20,16 +18,20 @@ namespace hr {
             ~ImGuiLayer();
 
             void Start();
+            void End();
+
+            void BeginFrame();
             void DrawDockSpace();
             void Draw();
-            void End();
+            void EndFrame();
 
             void ImGuiSetStyle();
         protected:
         private:
-            SceneHierarchyPanel _sceneHierarchyPanel;
-            InspectorPanel _inspectorPanel;
-            ViewPortPanel _viewPortPanel;
+            std::vector<ImGuiPanel *> _panels;
+            // SceneHierarchyPanel _sceneHierarchyPanel;
+            // InspectorPanel _inspectorPanel;
+            // ViewPortPanel _viewPortPanel;
     };
 }
 

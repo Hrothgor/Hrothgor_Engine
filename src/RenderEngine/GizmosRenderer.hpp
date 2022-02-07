@@ -19,8 +19,11 @@ namespace hr {
             ~GizmosRenderer();
 
             void Start();
-            void Draw();
             void End();
+
+            void BeginFrame();
+            void Draw();
+            void EndFrame();
 
             void RegisterObject(GameObject *object);
         protected:

@@ -14,47 +14,58 @@
 #include "../Components/Light.hpp"
 #include "../Components/MainCamera3D.hpp"
 
-hr::EntityRenderer::EntityRenderer()
-{
-    _camera = Engine::Get()->FindObjectOfType<MainCamera3D>();
-}
-
-hr::EntityRenderer::~EntityRenderer()
-{
-}
-
-
-void hr::EntityRenderer::Start()
-{
-    _lightShader.UpdateLightsLoc(_lights);
-}
-
-void hr::EntityRenderer::Draw()
-{
-    Start();
-    for (GameObject *object : _objects) {
-        Transform *transform = object->GetTransform();
-        MeshRenderer *meshRenderer = object->GetComponent<MeshRenderer>();
-        for (int i = 0; i < meshRenderer->GetModel().materialCount; i++)
-            meshRenderer->GetModel().materials[i].shader = _lightShader.GetShader();
-        AxisAngle axisAngle = transform->GetRotationAxisAngle();
-        DrawModelEx(meshRenderer->GetModel(), transform->GetPosition(), axisAngle.axis, axisAngle.angle, transform->GetScale(), WHITE);
+namespace hr {
+    EntityRenderer::EntityRenderer()
+    {
     }
-    End();
-}
 
-void hr::EntityRenderer::End()
-{
-    _objects.clear();
-    _lights.clear();
-}
+    EntityRenderer::~EntityRenderer()
+    {
+    }
 
-void hr::EntityRenderer::RegisterLight(GameObject *light)
-{
-    _lights.push_back(light);
-}
+    void EntityRenderer::Start()
+    {
+        _camera = Engine::Get()->GetMainCamera()->GetComponent<MainCamera3D>();
+    }
 
-void hr::EntityRenderer::RegisterObject(GameObject *object)
-{
-    _objects.push_back(object);
+    void EntityRenderer::BeginFrame()
+    {
+        _lightShader.UpdateLightsLoc(_lights);
+        _lightShader.UpdateCameraLoc(_camera->GetCamera3D());
+    }
+
+    void EntityRenderer::Draw()
+    {
+        BeginFrame();
+        for (GameObject *object : _objects) {
+            Transform *transform = object->GetTransform();
+            MeshRenderer *meshRenderer = object->GetComponent<MeshRenderer>();
+            for (int i = 0; i < meshRenderer->GetModel().materialCount; i++)
+                meshRenderer->GetModel().materials[i].shader = _lightShader.GetShader();
+            AxisAngle axisAngle = transform->GetRotationAxisAngle();
+            DrawModelEx(meshRenderer->GetModel(), transform->GetPositionWorld(), axisAngle.axis, axisAngle.angle, transform->GetScale(), WHITE);
+        }
+        EndFrame();
+    }
+
+    void EntityRenderer::EndFrame()
+    {
+        _objects.clear();
+        _lights.clear();
+    }
+
+    void EntityRenderer::RegisterLight(GameObject *light)
+    {
+        _lights.push_back(light);
+    }
+
+    void EntityRenderer::RegisterObject(GameObject *object)
+    {
+        _objects.push_back(object);
+    }
+
+    void EntityRenderer::End()
+    {
+        UnloadShader(_lightShader.GetShader());
+    }
 }

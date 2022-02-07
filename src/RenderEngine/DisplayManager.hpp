@@ -9,8 +9,6 @@
 #define DISPLAYMANAGER_HPP_
 
 #include "include.hpp"
-#include "Master3DRenderer.hpp"
-#include "Master2DRenderer.hpp"
 #include "UI/ImGuiLayer.hpp"
 
 namespace hr {
@@ -18,6 +16,9 @@ namespace hr {
         public:
             DisplayManager();
             ~DisplayManager();
+
+            void Start();
+            void End();
 
             void Clear(Color color);
             void Draw();
@@ -28,6 +29,7 @@ namespace hr {
         protected:
         private:
             RenderTexture _renderTexture;
+
             ImGuiLayer _imGuiLayer;
 
         protected:

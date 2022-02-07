@@ -19,7 +19,9 @@ namespace hr {
             ViewPortPanel();
             ~ViewPortPanel();
             
+            virtual void Start() override;
             virtual void ImGuiRender() override;
+            virtual void End() override;
 
             void DrawGuizmo();
         protected:

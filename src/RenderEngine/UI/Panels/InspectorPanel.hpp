@@ -18,7 +18,9 @@ namespace hr {
             InspectorPanel();
             ~InspectorPanel();
                 
+            virtual void Start() override;
             virtual void ImGuiRender() override;
+            virtual void End() override;
 
             template <typename Comp>
             void ImGuiRenderComponent(GameObject *entity) 

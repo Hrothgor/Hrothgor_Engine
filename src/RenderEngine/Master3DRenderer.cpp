@@ -11,48 +11,62 @@
 
 #include "../Components/MainCamera3D.hpp"
 
-hr::Master3DRenderer *hr::Master3DRenderer::instance = nullptr;
+namespace hr {
+    Master3DRenderer *Master3DRenderer::instance = nullptr;
 
-hr::Master3DRenderer::Master3DRenderer()
-{
-    _camera = Engine::Get()->FindObjectOfType<MainCamera3D>();
-}
+    Master3DRenderer::Master3DRenderer()
+    {
+    }
 
-hr::Master3DRenderer::~Master3DRenderer()
-{
-}
+    Master3DRenderer::~Master3DRenderer()
+    {
+    }
 
-void hr::Master3DRenderer::Start()
-{
-    BeginMode3D(_camera->GetCamera3D());
-}
+    void Master3DRenderer::Start()
+    {
+        _camera = Engine::Get()->GetMainCamera()->GetComponent<MainCamera3D>();
+        _entityRenderer.Start();
+        _gizmosRenderer.Start();
+    }
 
-void hr::Master3DRenderer::End()
-{
-    EndMode3D();
-}
+    void Master3DRenderer::BeginFrame()
+    {
+        BeginMode3D(_camera->GetCamera3D());
+    }
 
-void hr::Master3DRenderer::Draw()
-{
-    Start();
-    DrawGrid(100, 1.0f);
-    _entityRenderer.Draw();
-    _gizmosRenderer.Draw();
-    //draw particles
-    End();
-}
+    void Master3DRenderer::EndFrame()
+    {
+        EndMode3D();
+    }
 
-void hr::Master3DRenderer::RegisterGizmos(GameObject *object)
-{
-    _gizmosRenderer.RegisterObject(object);
-}
+    void Master3DRenderer::Draw()
+    {
+        BeginFrame();
+        DrawGrid(100, 1.0f);
+        _entityRenderer.Draw();
+        _gizmosRenderer.Draw();
+        //draw particles
+        EndFrame();
+    }
 
-void hr::Master3DRenderer::RegisterObject(GameObject *model)
-{
-    _entityRenderer.RegisterObject(model);
-}
+    void Master3DRenderer::RegisterGizmos(GameObject *object)
+    {
+        _gizmosRenderer.RegisterObject(object);
+    }
 
-void hr::Master3DRenderer::RegisterLight(GameObject *light)
-{
-    _entityRenderer.RegisterLight(light);
+    void Master3DRenderer::RegisterObject(GameObject *model)
+    {
+        _entityRenderer.RegisterObject(model);
+    }
+
+    void Master3DRenderer::RegisterLight(GameObject *light)
+    {
+        _entityRenderer.RegisterLight(light);
+    }
+
+    void Master3DRenderer::End()
+    {
+        _entityRenderer.End();
+        _gizmosRenderer.End();
+    }
 }

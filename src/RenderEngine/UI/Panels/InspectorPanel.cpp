@@ -23,6 +23,10 @@ namespace hr {
     {
     }
 
+    void InspectorPanel::Start()
+    {
+    }
+
     void InspectorPanel::ImGuiRender()
     {
         ImGui::Begin("Inspector", &_isOpen);
@@ -74,7 +78,6 @@ namespace hr {
                 if (entity->HasComponentId<Transform>(compId)) { ImGuiRenderComponent<Transform>(entity); continue; }
                 if (entity->HasComponentId<Light>(compId)) { ImGuiRenderComponent<Light>(entity); continue; }
                 if (entity->HasComponentId<MeshRenderer>(compId)) { ImGuiRenderComponent<MeshRenderer>(entity); continue; }
-                if (entity->HasComponentId<MainCamera3D>(compId)) { ImGuiRenderComponent<MainCamera3D>(entity); continue; }
             }
 
             if (ImGui::Button("Add Component##Button", ImVec2(-1.0f, 40.0f)))
@@ -84,7 +87,6 @@ namespace hr {
 			{
                 if (!entity->HasComponent<Light>()) { ImGuiRenderAddComponent<Light>("Light", entity); }
                 if (!entity->HasComponent<MeshRenderer>()) { ImGuiRenderAddComponent<MeshRenderer>("MeshRenderer", entity); }
-                if (!entity->HasComponent<MainCamera3D>()) { ImGuiRenderAddComponent<MainCamera3D>("MainCamera3D", entity); }
 				ImGui::EndPopup();
 			}
     
@@ -101,5 +103,10 @@ namespace hr {
 		}
 
 		ImGui::End();
+    }
+
+    void InspectorPanel::End()
+    {
+
     }
 }

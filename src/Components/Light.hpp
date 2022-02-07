@@ -10,6 +10,7 @@
 
 #include "include.hpp"
 #include "../Ecs/Component.hpp"
+#include "json.hpp"
 
 namespace hr {
     enum LightType {
@@ -41,6 +42,9 @@ namespace hr {
 
             virtual void ImGuiRender() override;
             virtual void OnDrawGizmos() override;
+
+            virtual nlohmann::json ToJson() const override;
+            virtual void FromJson(const nlohmann::json &json) override;
         protected:
         private:
             LightType _type;

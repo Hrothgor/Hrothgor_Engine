@@ -7,200 +7,194 @@
 
 #include "Engine.hpp"
 #include "../RenderEngine/DisplayManager.hpp"
+#include "../SaveLoad/SaveSystem.hpp"
+#include "../SaveLoad/LoadSystem.hpp"
 
 #include "../Components/MeshRenderer.hpp"
 #include "../Components/MainCamera3D.hpp"
 #include "../Components/Transform.hpp"
 #include "../Components/Light.hpp"
 
-hr::Engine *hr::Engine::instance = nullptr;
+namespace hr {
+    Engine *Engine::instance = nullptr;
 
-hr::Engine::Engine()
-{
-}
-
-hr::Engine::~Engine()
-{
-}
-
-void hr::Engine::LoadScene()
-{
-    GameObject *mainCamera = new GameObject();
-    mainCamera->SetName("mainCamera");
-    mainCamera->AddComponent<MainCamera3D>();
-    mainCamera->GetTransform()->SetPosition(50, 20, 50);
-
-    GameObject *lightDir = new GameObject();
-    lightDir->SetName("lightDir");
-    lightDir->AddComponent<Light>();
-
-    GameObject *dragon = new GameObject();
-    dragon->SetName("dragon");
-    dragon->AddComponent<MeshRenderer>()->Load("ressources/dragon.obj");
-
-    for (int i = 0; i < 5; i++) {
-        GameObject *bomb = new GameObject(dragon);
-        bomb->SetName("bomb" + std::to_string(i));
-        bomb->AddComponent<MeshRenderer>()->Load("ressources/bomb.obj");
-        bomb->GetTransform()->SetPosition(i * 10, 0, 0);
-    }
-}
-
-void hr::Engine::SaveScene()
-{
-    int tab = 0;
-    for (auto ent : _entities) {
-        std::cout << ent->GetName() << std::endl;
-        tab += 1;
-        std::cout << "\t" << ent->GetTransform() << std::endl;
-        for (auto comp : ent->GetComponents()) {
-            std::cout << "\t" << comp.second << std::endl;
-        }
-    }
-}
-
-void hr::Engine::Start()
-{
-    SetTraceLogLevel(TraceLogLevel::LOG_WARNING);
-    InitWindow(WIDTH, HEIGHT, "Physics Engine");
-    rlImGuiSetup(true);
-    SetConfigFlags(FLAG_MSAA_4X_HINT);
-	ToggleFullscreen();
-    InitAudioDevice();
-    
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable Keyboard Controls
-    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable; // Enable Docking 
-
-    LoadScene();
-    for (auto ent : _entities)
-        if (ent->GetParent() == nullptr)
-            ent->Start();
-}
-
-void hr::Engine::Update()
-{
-    while (!WindowShouldClose())
+    Engine::Engine()
     {
-        BeginDrawing();
+        SetTraceLogLevel(TraceLogLevel::LOG_WARNING);
+        InitWindow(WIDTH, HEIGHT, "Physics Engine");
+        rlImGuiSetup(true);
+        SetConfigFlags(FLAG_MSAA_4X_HINT);
+        ToggleFullscreen();
+        InitAudioDevice();
+        
+        ImGuiIO& io = ImGui::GetIO(); (void)io;
+        io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable Keyboard Controls
+        io.ConfigFlags |= ImGuiConfigFlags_DockingEnable; // Enable Docking
+
+        _mainCamera = new GameObject();
+        _mainCamera->SetName("mainCamera");
+        _mainCamera->AddComponent<MainCamera3D>();
+        _mainCamera->GetTransform()->SetPosition(20, 20, 50);
+
+    }
+
+    Engine::~Engine()
+    {
+    }
+
+    void Engine::Start()
+    {
+        DisplayManager::Get()->Start();
+        _mainCamera->Start();
+        for (auto ent : _entities)
+            if (ent->GetParent() == nullptr)
+                ent->Start();
+    }
+
+    void Engine::Update()
+    {
+        while (!WindowShouldClose())
         {
-            for (auto ent : _entities)
-                if (ent->GetParent() == nullptr)
-                    ent->Update();
-            for (auto ent : _entities)
-                if (ent->GetParent() == nullptr)
-                    ent->LateUpdate();
-            DisplayManager::Get()->Clear(DARKGRAY);
-            DisplayManager::Get()->Draw();
-        }
-        EndDrawing();
-        if (IsKeyPressed(KEY_A))
-            SaveScene();
-    }
-}
-
-void hr::Engine::End()
-{
-    for (auto ent : _entities)
-        if (ent->GetParent() == nullptr)
-            ent->End();
-    rlImGuiShutdown();
-    CloseAudioDevice();
-    CloseWindow();
-}
-
-hr::GameObject *hr::Engine::Find(const std::string &name)
-{
-    for (auto ent : _entities)
-        if (ent->GetName() == name)
-            return ent;
-    return nullptr;
-}
-
-hr::GameObject *hr::Engine::Find(const UUIDv4::UUID &uuid)
-{
-    for (auto ent : _entities)
-        if (ent->GetUUID() == uuid)
-            return ent;
-    return nullptr;
-}
-
-hr::GameObject *hr::Engine::Instantiate(GameObject *object, GameObject *parent)
-{
-    (void)object;
-    (void)parent;
-    // for unused parameter
-    return nullptr;
-}
-
-void hr::Engine::Destroy(GameObject *object, float t)
-{
-    (void)t;
-    // for unused parameter
-
-    object->Destroy();
-
-    // if (t > 0) {
-    //     object->Destroy();
-    // } else {
-    //     t -= GetFrameTime();
-    // }
-    // NEED THREAD !
-}
-
-std::vector<hr::GameObject *> hr::Engine::GetEntities() const
-{
-    return _entities;
-}
-
-std::vector<hr::GameObject *> hr::Engine::GetRootEntities() const
-{
-    std::vector<GameObject *> rootEntities;
-    for (auto ent : _entities) {
-        if (ent->GetParent() == nullptr)
-            rootEntities.push_back(ent);
-    }
-    return rootEntities;
-}
-
-void hr::Engine::AddEntity(GameObject *gameObject)
-{
-    _entities.push_back(gameObject);
-}
-
-void hr::Engine::RemoveEntity(GameObject *gameObject)
-{
-    _entities.erase(std::remove(_entities.begin(), _entities.end(), gameObject), _entities.end());
-}
-
-void hr::Engine::CreateEmptyGameObject()
-{
-    GameObject *gameObject = new GameObject();
-
-    int i = 0;
-    bool found = false;
-    while (!found) {
-        bool available = true;
-        for (GameObject *ent : _entities) {
-            if (ent->GetName() == "GameObject (" + std::to_string(i) + ")") {
-                available = false;
-                break;
+            BeginDrawing();
+            {
+                _mainCamera->Update();
+                for (auto ent : _entities)
+                    if (ent->GetParent() == nullptr)
+                        ent->Update();
+                _mainCamera->LateUpdate();
+                for (auto ent : _entities)
+                    if (ent->GetParent() == nullptr)
+                        ent->LateUpdate();
+                DisplayManager::Get()->Clear(DARKGRAY);
+                DisplayManager::Get()->Draw();
             }
+            EndDrawing();
+            if (IsKeyPressed(KEY_SPACE))
+                LoadSystem::LoadProject("./Projects/test1/save.json");
+            if (IsKeyPressed(KEY_ENTER))
+                SaveSystem::SaveProject();
         }
-        if (available) {
-            gameObject->SetName("GameObject (" + std::to_string(i) + ")");
-            found = true;
-        }
-        i++;
     }
-}
 
-hr::GameObject *hr::Engine::GetSelectedEntity() const
-{
-    return _selectedEntity;
-}
+    void Engine::End()
+    {
+        _mainCamera->End();
+        for (auto ent : _entities)
+            if (ent->GetParent() == nullptr)
+                ent->End();
+        DisplayManager::Get()->End();
+        rlImGuiShutdown();
+        CloseAudioDevice();
+        CloseWindow();
+    }
 
-void hr::Engine::SetSelectedEntity(GameObject *object)
-{
-    _selectedEntity = object;
+    GameObject *Engine::Find(const std::string &name)
+    {
+        for (auto ent : _entities)
+            if (ent->GetName() == name)
+                return ent;
+        return nullptr;
+    }
+
+    GameObject *Engine::Find(const UUIDv4::UUID &uuid)
+    {
+        for (auto ent : _entities)
+            if (ent->GetUUID() == uuid)
+                return ent;
+        return nullptr;
+    }
+
+    GameObject *Engine::Instantiate(GameObject *object, GameObject *parent)
+    {
+        (void)object;
+        (void)parent;
+        // for unused parameter
+        return nullptr;
+    }
+
+    void Engine::Destroy(GameObject *object, float t)
+    {
+        (void)t;
+        // for unused parameter
+
+        object->Destroy();
+
+        // if (t > 0) {
+        //     object->Destroy();
+        // } else {
+        //     t -= GetFrameTime();
+        // }
+        // NEED THREAD !
+    }
+
+    std::vector<GameObject *> Engine::GetEntities() const
+    {
+        return _entities;
+    }
+
+    std::vector<GameObject *> Engine::GetRootEntities() const
+    {
+        std::vector<GameObject *> rootEntities;
+        for (auto ent : _entities) {
+            if (ent->GetParent() == nullptr)
+                rootEntities.push_back(ent);
+        }
+        return rootEntities;
+    }
+
+    void Engine::ClearEntities()
+    {
+        for (auto ent : _entities)
+            if (ent->GetParent() == nullptr)
+                ent->End();
+        _entities.clear();
+    }
+
+    void Engine::AddEntity(GameObject *gameObject)
+    {
+        _entities.push_back(gameObject);
+    }
+
+    void Engine::RemoveEntity(GameObject *gameObject)
+    {
+        // TODO maybe call End() ?
+        _entities.erase(std::remove(_entities.begin(), _entities.end(), gameObject), _entities.end());
+    }
+
+    void Engine::CreateEmptyGameObject()
+    {
+        GameObject *gameObject = new GameObject();
+
+        int i = 0;
+        bool found = false;
+        while (!found) {
+            bool available = true;
+            for (GameObject *ent : _entities) {
+                if (ent->GetName() == "GameObject (" + std::to_string(i) + ")") {
+                    available = false;
+                    break;
+                }
+            }
+            if (available) {
+                gameObject->SetName("GameObject (" + std::to_string(i) + ")");
+                found = true;
+            }
+            i++;
+        }
+    }
+
+    GameObject *Engine::GetSelectedEntity() const
+    {
+        return _selectedEntity;
+    }
+
+    void Engine::SetSelectedEntity(GameObject *object)
+    {
+        _selectedEntity = object;
+    }
+
+    GameObject *Engine::GetMainCamera() const
+    {
+        return _mainCamera;
+    }
 }

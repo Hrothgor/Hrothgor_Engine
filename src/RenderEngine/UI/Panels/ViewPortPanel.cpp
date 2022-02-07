@@ -18,11 +18,15 @@
 namespace hr {
     ViewPortPanel::ViewPortPanel()
     {
-        _camera = Engine::Get()->FindObjectOfType<MainCamera3D>();
     }
 
     ViewPortPanel::~ViewPortPanel()
     {
+    }
+
+    void ViewPortPanel::Start()
+    {
+        _camera = Engine::Get()->GetMainCamera()->GetComponent<MainCamera3D>();
     }
 
     void ViewPortPanel::ImGuiRender()
@@ -59,7 +63,7 @@ namespace hr {
 
         Transform *transform = entity->GetTransform();
         float mat[16];
-        ImGuizmo::RecomposeMatrixFromComponents(Vector3ToFloat(transform->GetPosition()),
+        ImGuizmo::RecomposeMatrixFromComponents(Vector3ToFloat(transform->GetPositionWorld()),
                                                 Vector3ToFloat(transform->GetRotation()),
                                                 Vector3ToFloat(transform->GetScale()),
                                                 mat);
@@ -78,5 +82,9 @@ namespace hr {
             transform->SetRotation(rotation[0], rotation[1], rotation[2]);
             transform->SetScale(scale[0], scale[1], scale[2]);
         }
+    }
+
+    void ViewPortPanel::End()
+    {
     }
 }

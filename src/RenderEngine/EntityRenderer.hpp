@@ -21,8 +21,11 @@ namespace hr {
             ~EntityRenderer();
 
             void Start();
-            void Draw();
             void End();
+
+            void BeginFrame();
+            void Draw();
+            void EndFrame();
 
             void RegisterLight(GameObject *light);
             void RegisterObject(GameObject *model);

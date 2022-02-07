@@ -7,16 +7,26 @@
 
 #include "Template.hpp"
 
-hr::Template::Template(GameObject *gameObject)
-    : Component(gameObject)
-{
-    _name = "Template";
-}
+namespace hr {
+    Template::Template(GameObject *gameObject)
+        : Component(gameObject)
+    {
+        _name = "Template";
+    }
 
-hr::Template::~Template()
-{
-}
+    Template::~Template()
+    {
+    }
 
-void hr::Template::Update()
-{
+    nlohmann::json Template::ToJson() const
+    {
+        nlohmann::json json;
+
+        return json;
+    }
+
+    void Template::FromJson(const nlohmann::json &json)
+    {
+        (void)json;
+    }
 }

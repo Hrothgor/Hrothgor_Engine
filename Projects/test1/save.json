@@ -1,0 +1,221 @@
+{
+    "entities": [
+        {
+            "components": [
+                [
+                    "Light",
+                    {
+                        "color": [
+                            0,
+                            255,
+                            43,
+                            255
+                        ],
+                        "intensity": 1.0
+                    }
+                ]
+            ],
+            "name": "lightDir",
+            "transform": {  
+                "position": [
+                    0.0,
+                    17.535137176513672,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "uuid": "5bb6577c-bbc6-4409-89b0-b93e0deb611c"
+        },
+        {
+            "childs": [
+                {
+                    "components": [
+                        [
+                            "MeshRenderer",
+                            {
+                                "modelPath": "ressources/bomb.obj",
+                                "texturePath": ""
+                            }
+                        ]
+                    ],
+                    "name": "bomb0",
+                    "transform": {
+                        "position": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotation": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "uuid": "ce7c6234-f508-447d-b230-f65e7f33a773"
+                },
+                {
+                    "components": [
+                        [
+                            "MeshRenderer",
+                            {
+                                "modelPath": "ressources/bomb.obj",
+                                "texturePath": ""
+                            }
+                        ]
+                    ],
+                    "name": "bomb1",
+                    "transform": {
+                        "position": [
+                            10.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotation": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "uuid": "e3948883-1ce1-47ec-aabd-62cbcdf28599"
+                },
+                {
+                    "components": [
+                        [
+                            "MeshRenderer",
+                            {
+                                "modelPath": "ressources/bomb.obj",
+                                "texturePath": ""
+                            }
+                        ]
+                    ],
+                    "name": "bomb2",
+                    "transform": {
+                        "position": [
+                            20.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotation": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "uuid": "b78c2c1b-1594-485f-94d9-90a886b4bf03"
+                },
+                {
+                    "components": [
+                        [
+                            "MeshRenderer",
+                            {
+                                "modelPath": "ressources/bomb.obj",
+                                "texturePath": ""
+                            }
+                        ]
+                    ],
+                    "name": "bomb3",
+                    "transform": {
+                        "position": [
+                            30.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotation": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "uuid": "203a3719-1772-4b7a-af6b-52e01ecca133"
+                },
+                {
+                    "components": [
+                        [
+                            "MeshRenderer",
+                            {
+                                "modelPath": "ressources/bomb.obj",
+                                "texturePath": ""
+                            }
+                        ]
+                    ],
+                    "name": "bomb4",
+                    "transform": {
+                        "position": [
+                            40.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotation": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "uuid": "a9d64cd4-d5af-4800-a51e-814f8dfaa702"
+                }
+            ],
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "modelPath": "ressources/dragon.obj",
+                        "texturePath": ""
+                    }
+                ]
+            ],
+            "name": "dragon",
+            "transform": {
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "uuid": "c2c0efed-302c-424d-aa92-cf0d2d8d5c54"
+        }
+    ]
+}

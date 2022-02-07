@@ -17,9 +17,6 @@ namespace hr {
             Engine();
             ~Engine();
             
-            void LoadScene();
-            void SaveScene();
-
             void Start();
             void Update();
             void End();
@@ -41,13 +38,17 @@ namespace hr {
 
             std::vector<GameObject *> GetEntities() const;
             std::vector<GameObject *> GetRootEntities() const;
+            void ClearEntities();
             void AddEntity(GameObject *object);
             void RemoveEntity(GameObject *object);
             void CreateEmptyGameObject();
 
-            GameObject *GetSelectedEntity(void) const;
+            GameObject *GetSelectedEntity() const;
             void SetSelectedEntity(GameObject *object);
+
+            GameObject *GetMainCamera() const;
         private:
+            GameObject *_mainCamera;
             std::vector<GameObject *> _entities;
             GameObject *_selectedEntity = nullptr;
 

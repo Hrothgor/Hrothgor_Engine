@@ -28,6 +28,7 @@ namespace hr {
             void SetName(const std::string &name);
 
             UUIDv4::UUID GetUUID() const;
+            void SetUUID(const std::string &str);
 
             bool IsActive() const;
             void SetActive(bool);

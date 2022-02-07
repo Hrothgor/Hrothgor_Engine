@@ -6,50 +6,62 @@
 */
 
 #include "DisplayManager.hpp"
+#include "Master3DRenderer.hpp"
 
-hr::DisplayManager *hr::DisplayManager::instance = nullptr;
+namespace hr {
+    DisplayManager *DisplayManager::instance = nullptr;
 
-hr::DisplayManager::DisplayManager()
-{
-    _renderTexture = LoadRenderTexture(GetScreenWidth(), GetScreenHeight());
-}
-
-hr::DisplayManager::~DisplayManager()
-{
-}
-
-void hr::DisplayManager::Clear(Color color)
-{
-    ClearBackground(color);
-}
-
-void hr::DisplayManager::Draw()
-{
-    if (IsWindowResized()) {
-        UnloadRenderTexture(_renderTexture);
+    DisplayManager::DisplayManager()
+    {
         _renderTexture = LoadRenderTexture(GetScreenWidth(), GetScreenHeight());
     }
 
-    BeginTextureMode(_renderTexture);
-    ClearBackground(DARKBLUE);
+    DisplayManager::~DisplayManager()
+    {
+    }
 
-    Master3DRenderer::Get()->Draw();
-    Master2DRenderer::Get()->Draw();
+    void DisplayManager::Start()
+    {
+        Master3DRenderer::Get()->Start();
+        _imGuiLayer.Start();
+    }
 
-    EndTextureMode();
+    void DisplayManager::Clear(Color color)
+    {
+        ClearBackground(color);
+    }
 
-    _imGuiLayer.Start();
-    _imGuiLayer.Draw();
-    _imGuiLayer.End();
+    void DisplayManager::Draw()
+    {
+        if (IsWindowResized()) {
+            UnloadRenderTexture(_renderTexture);
+            _renderTexture = LoadRenderTexture(GetScreenWidth(), GetScreenHeight());
+        }
 
-}
+        BeginTextureMode(_renderTexture);
+        ClearBackground(DARKBLUE);
+        Master3DRenderer::Get()->Draw();
+        DrawText(std::to_string(GetFPS()).c_str(), 0, 0, 50, RED);
+        EndTextureMode();
 
-RenderTexture hr::DisplayManager::GetRenderTexture() const
-{
-    return _renderTexture;
-}
+        _imGuiLayer.Draw();
 
-Texture *hr::DisplayManager::GetFrameBufferTexture()
-{
-    return &(_renderTexture.texture);
+    }
+
+    RenderTexture DisplayManager::GetRenderTexture() const
+    {
+        return _renderTexture;
+    }
+
+    Texture *DisplayManager::GetFrameBufferTexture()
+    {
+        return &(_renderTexture.texture);
+    }
+
+    void DisplayManager::End()
+    {
+        Master3DRenderer::Get()->End();
+        _imGuiLayer.End();
+        UnloadRenderTexture(_renderTexture);
+    }
 }

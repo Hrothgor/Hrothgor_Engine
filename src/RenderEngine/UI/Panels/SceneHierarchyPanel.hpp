@@ -19,7 +19,9 @@ namespace hr {
             SceneHierarchyPanel();
             ~SceneHierarchyPanel();
 
+            virtual void Start() override;
             virtual void ImGuiRender() override;
+            virtual void End() override;
 
             void EntityDraw(GameObject *parent);
         protected:

@@ -10,7 +10,7 @@
 
 #include "include.hpp"
 #include "../Ecs/Component.hpp"
-
+#include "json.hpp"
 
 namespace hr {
     class Template : public Component {
@@ -18,8 +18,16 @@ namespace hr {
             Template(GameObject *gameObject);
             ~Template();
 
-            virtual void Update() override;
+            void Start() override {};
+            void Update() override {};
+            void LateUpdate() override {};
+            void End() override {};
 
+            void ImGuiRender() {};
+            void OnDrawGizmos() {};
+
+            virtual nlohmann::json ToJson() const override;
+            virtual void FromJson(const nlohmann::json &json) override;
         protected:
         private:
     };

@@ -9,37 +9,44 @@
 
 static UUIDv4::UUIDGenerator<std::mt19937_64> uuidGenerator;
 
-hr::Object::Object()
-{
-    _uuid = uuidGenerator.getUUID();
-}
+namespace hr {
+    Object::Object()
+    {
+        _uuid = uuidGenerator.getUUID();
+    }
 
-hr::Object::~Object()
-{
+    Object::~Object()
+    {
 
-}
+    }
 
-std::string hr::Object::GetName() const
-{
-    return _name;
-}
+    std::string Object::GetName() const
+    {
+        return _name;
+    }
 
-void hr::Object::SetName(const std::string &name)
-{
-    _name = name;
-}
+    void Object::SetName(const std::string &name)
+    {
+        _name = name;
+    }
 
-UUIDv4::UUID hr::Object::GetUUID() const
-{
-    return _uuid;
-}
+    UUIDv4::UUID Object::GetUUID() const
+    {
+        return _uuid;
+    }
 
-bool hr::Object::IsActive() const
-{
-    return _active;
-}
+    void Object::SetUUID(const std::string &str)
+    {
+        _uuid = UUIDv4::UUID::fromStrFactory(str);
+    }
 
-void hr::Object::SetActive(bool active)
-{
-    _active = active;
+    bool Object::IsActive() const
+    {
+        return _active;
+    }
+
+    void Object::SetActive(bool active)
+    {
+        _active = active;
+    }
 }

@@ -53,6 +53,7 @@ target_include_directories(physics_engine
         ${PROJECT_ROOT}/Externals/
         ${PROJECT_ROOT}/Externals/rlImGui
         ${PROJECT_ROOT}/Externals/ImGuizmo
+        ${PROJECT_ROOT}/Externals/nlohmann
         ${IMGUI_DIR}
 )
 

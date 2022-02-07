@@ -16,8 +16,10 @@ namespace hr {
             ImGuiPanel();
             ~ImGuiPanel();
 
+            virtual void Start() = 0;
             virtual void ImGuiRender() = 0;
-            
+            virtual void End() = 0;
+
             void SetOpen(bool isOpen);
             bool IsOpen();
 

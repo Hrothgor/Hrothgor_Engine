@@ -22,8 +22,11 @@ namespace hr {
             ~Master3DRenderer();
 
             void Start();
-            void Draw();
             void End();
+
+            void BeginFrame();
+            void Draw();
+            void EndFrame();
 
             void RegisterGizmos(GameObject *model);
             void RegisterObject(GameObject *model);
