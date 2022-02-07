@@ -25,10 +25,7 @@ namespace hr {
 
     void InspectorPanel::ImGuiRender()
     {
-        ImGui::SetNextWindowPos(ImVec2(WIDTH - 450, 0));
-        ImGui::SetNextWindowSize(ImVec2(450, HEIGHT));
-        ImGui::Begin("Inspector", &_isOpen, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse);
-        ImGui::SetWindowFontScale(1.2);
+        ImGui::Begin("Inspector", &_isOpen);
 
         GameObject *entity = nullptr;
 		if ((entity = Engine::Get()->GetSelectedEntity()))

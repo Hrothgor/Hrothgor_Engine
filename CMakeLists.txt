@@ -34,18 +34,25 @@ target_include_directories(imgui PUBLIC ${IMGUI_DIR})
 file(GLOB_RECURSE SRC_FILES "src/*.cpp")
 
 set(RLIMGUI_SRC
-    ${PROJECT_ROOT}/rlImGui/rlImGui.cpp
+    ${PROJECT_ROOT}/Externals/rlImGui/rlImGui.cpp
+)
+
+set(IMGUIZMO_SRC
+    ${PROJECT_ROOT}/Externals/ImGuizmo/ImGuizmo.cpp
 )
 
 add_executable(physics_engine
     ${SRC_FILES}
     ${RLIMGUI_SRC}
+    ${IMGUIZMO_SRC}
 )
 
 target_include_directories(physics_engine
     PRIVATE
-        ${PROJECT_ROOT}/include/
-        ${PROJECT_ROOT}/rlImGui/
+        ${PROJECT_ROOT}/src/
+        ${PROJECT_ROOT}/Externals/
+        ${PROJECT_ROOT}/Externals/rlImGui
+        ${PROJECT_ROOT}/Externals/ImGuizmo
         ${IMGUI_DIR}
 )
 

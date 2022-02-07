@@ -6,13 +6,14 @@
 */
 
 #include "MainCamera3D.hpp"
+#include "Transform.hpp"
 
 hr::MainCamera3D::MainCamera3D(GameObject *gameObject)
     : Component(gameObject)
 {
     _name = "MainCamera3D";
     _camera = { 0 };
-    _camera.position = {50, 20, 50};
+    _camera.position = {0, 0, 0};
     _camera.target = { 0.0, 0.0, 0.0 };
     _camera.up = { 0.0, 1.0, 0.0 };
     _camera.fovy = 70;
@@ -26,6 +27,9 @@ hr::MainCamera3D::~MainCamera3D()
 
 void hr::MainCamera3D::Update()
 {
+    Transform *transform = GetTransform();
+    _camera.position = transform->GetPosition();
+
     UpdateCamera(&_camera);
 }
 

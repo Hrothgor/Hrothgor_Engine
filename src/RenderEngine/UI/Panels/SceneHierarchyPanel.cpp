@@ -20,10 +20,7 @@ namespace hr {
 
     void SceneHierarchyPanel::ImGuiRender()
     {
-        ImGui::SetNextWindowPos(ImVec2(0, 0));
-        ImGui::SetNextWindowSize(ImVec2(250, HEIGHT));
-        ImGui::Begin("Scene Hierarchy", &_isOpen, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse);
-        ImGui::SetWindowFontScale(1.2);
+        ImGui::Begin("Scene Hierarchy", &_isOpen);
 
         EntityDraw(nullptr);
         

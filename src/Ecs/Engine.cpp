@@ -28,6 +28,7 @@ void hr::Engine::LoadScene()
     GameObject *mainCamera = new GameObject();
     mainCamera->SetName("mainCamera");
     mainCamera->AddComponent<MainCamera3D>();
+    mainCamera->GetTransform()->SetPosition(50, 20, 50);
 
     GameObject *lightDir = new GameObject();
     lightDir->SetName("lightDir");
@@ -45,6 +46,19 @@ void hr::Engine::LoadScene()
     }
 }
 
+void hr::Engine::SaveScene()
+{
+    int tab = 0;
+    for (auto ent : _entities) {
+        std::cout << ent->GetName() << std::endl;
+        tab += 1;
+        std::cout << "\t" << ent->GetTransform() << std::endl;
+        for (auto comp : ent->GetComponents()) {
+            std::cout << "\t" << comp.second << std::endl;
+        }
+    }
+}
+
 void hr::Engine::Start()
 {
     SetTraceLogLevel(TraceLogLevel::LOG_WARNING);
@@ -53,6 +67,10 @@ void hr::Engine::Start()
     SetConfigFlags(FLAG_MSAA_4X_HINT);
 	ToggleFullscreen();
     InitAudioDevice();
+    
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable Keyboard Controls
+    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable; // Enable Docking 
 
     LoadScene();
     for (auto ent : _entities)
@@ -76,6 +94,8 @@ void hr::Engine::Update()
             DisplayManager::Get()->Draw();
         }
         EndDrawing();
+        if (IsKeyPressed(KEY_A))
+            SaveScene();
     }
 }
 

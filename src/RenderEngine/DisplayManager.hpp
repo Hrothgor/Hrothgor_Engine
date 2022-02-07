@@ -11,7 +11,7 @@
 #include "include.hpp"
 #include "Master3DRenderer.hpp"
 #include "Master2DRenderer.hpp"
-#include "ImGuiLayer.hpp"
+#include "UI/ImGuiLayer.hpp"
 
 namespace hr {
     class DisplayManager {

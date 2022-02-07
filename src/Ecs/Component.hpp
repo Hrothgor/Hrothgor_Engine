@@ -29,9 +29,17 @@ namespace hr {
             virtual void ImGuiRender() {};
             virtual void OnDrawGizmos() {};
 
+
             GameObject *GetGameObject() const;
             Transform *GetTransform() const;
+
+            friend std::ostream& operator<<(std::ostream& os, Component const& data)
+            {
+                data.print(os);
+                return os;
+            }
         protected:
+            virtual void print(std::ostream& os) const;
         private:
             GameObject *_gameObject = nullptr;
             Transform *_transform = nullptr;

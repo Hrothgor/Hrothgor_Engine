@@ -28,3 +28,8 @@ hr::Transform *hr::Component::GetTransform() const
 {
     return _transform;
 }
+
+void hr::Component::print(std::ostream &os) const
+{
+    os << "Component: " << _name << std::endl;
+}

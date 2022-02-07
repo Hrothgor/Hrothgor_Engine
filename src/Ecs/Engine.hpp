@@ -16,8 +16,9 @@ namespace hr {
         public:
             Engine();
             ~Engine();
-
+            
             void LoadScene();
+            void SaveScene();
 
             void Start();
             void Update();
