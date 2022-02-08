@@ -94,6 +94,15 @@ namespace hr {
 
     void Light::ImGuiRender()
     {
+        std::vector<std::string> enumNames = {"Directional", "Point"};
+        UIElement::EnumField("Type", [this](){return GetType();}, [this](int val){SetType((LightType)val);}, enumNames);
+        switch (_type) {
+            case DIRECTIONAL:
+                break;
+            case POINT:
+                UIElement::FloatField("Range", [this](){return GetRange();}, [this](int val){SetRange(val);}, 1, 0, 5000);
+                break;
+        }
         UIElement::ColorField("Color", [this](){return GetColor();}, [this](Color col){SetColor(col);});
         UIElement::SliderFloatField("Intensity", [this](){return GetIntensity();}, [this](float val){SetIntensity(val);}, 0, 2);
     }
@@ -101,16 +110,26 @@ namespace hr {
     void Light::OnDrawGizmos()
     {
         Transform *transform = GetTransform();
-        float len = 5;
-        DrawCylinderWiresEx(transform->GetPositionWorld(), Vector3Add(GetTransform()->GetPositionWorld(), 
-                            Vector3Multiply(_front, {len, len, len})), 1, 2,
+
+        switch (_type) {
+            case DIRECTIONAL:
+                DrawCylinderWiresEx(transform->GetPositionWorld(), Vector3Add(GetTransform()->GetPositionWorld(), 
+                            Vector3Multiply(_front, {5, 5, 5})), 1, 2,
                             8, YELLOW);
+                break;
+            case POINT:
+                DrawSphereWires(transform->GetPositionWorld(), _range,
+                            10, 10, YELLOW);
+                break;
+        }
     }
 
     nlohmann::json Light::ToJson() const
     {
         nlohmann::json json;
 
+        json["type"] = (int)_type;
+        json["range"] = _range;
         json["color"] = {_color.r, _color.g, _color.b, _color.a};
         json["intensity"] = _intensity;
 
@@ -119,6 +138,8 @@ namespace hr {
 
     void Light::FromJson(const nlohmann::json &json)
     {
+        _type = (LightType)json["type"].get<int>();
+        _range = json["range"].get<float>();
         _color = {json["color"][0].get<unsigned char>(), json["color"][1].get<unsigned char>(), json["color"][2].get<unsigned char>(), json["color"][3].get<unsigned char>()};
         _intensity = json["intensity"].get<float>();
     }

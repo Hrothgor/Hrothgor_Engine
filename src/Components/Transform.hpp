@@ -33,6 +33,7 @@ namespace hr {
             Vector3 GetPositionWorld() const;
             void SetPosition(Vector3 pos);
             void SetPosition(float x, float y, float z);
+            void SetPositionFromWorld(float x, float y, float z);
             Vector3 GetRotation() const;
             Vector3 GetRotationRadian() const;
             Quaternion GetRotationQuaternion() const;

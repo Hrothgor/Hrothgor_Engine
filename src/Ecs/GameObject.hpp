@@ -115,7 +115,6 @@ namespace hr {
             void RemoveChild(GameObject *child);
 
             void DetachFromParent();
-            void SetParent(GameObject *parent);
 
             void Destroy();
         protected:
@@ -126,6 +125,7 @@ namespace hr {
             Transform *_transform = nullptr;
 
             bool ParentIsChild(GameObject *parent);
+            void SetParent(GameObject *parent);
     };
 }
 

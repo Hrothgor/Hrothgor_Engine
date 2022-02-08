@@ -78,7 +78,7 @@ namespace hr {
 
             ImGuizmo::DecomposeMatrixToComponents(mat, translation, rotation, scale);
 
-            transform->SetPosition(translation[0], translation[1], translation[2]);
+            transform->SetPositionFromWorld(translation[0], translation[1], translation[2]);
             transform->SetRotation(rotation[0], rotation[1], rotation[2]);
             transform->SetScale(scale[0], scale[1], scale[2]);
         }

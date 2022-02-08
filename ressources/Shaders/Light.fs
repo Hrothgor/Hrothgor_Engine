@@ -56,7 +56,7 @@ void main()
         if (lights[i].enabled == 1)
         {
             vec3 light = vec3(0.0);
-            float attenuation = 1.0;
+            float intensity = lights[i].intensity;
 
             if (lights[i].type == LIGHT_DIRECTIONAL)
             {
@@ -65,17 +65,19 @@ void main()
 
             if (lights[i].type == LIGHT_POINT)
             {
-                // float distance = lights[i].position - fragPosition;
+                float dist = abs(distance(lights[i].position, fragPosition));
                 light = normalize(lights[i].position - fragPosition);
-                // attenuation = 1.0 / (1.0 + range + (range * range));
+                float attenuation = max(lights[i].range - dist, 0);
+                attenuation /= lights[i].range;
+                intensity *= attenuation;
             }
 
             float NdotL = max(dot(normal, light), 0.0);
-            lightDot += lights[i].color.rgb * NdotL * lights[i].intensity * attenuation;
+            lightDot += lights[i].color.rgb * NdotL * intensity;
 
             float specCo = 0.0;
             if (NdotL > 0.0) specCo = pow(max(0.0, dot(viewD, reflect(-(light), normal))), 16.0); // 16 refers to shine
-            specular += specCo * lights[i].intensity * attenuation;
+            specular += specCo * intensity;
         }
     }
 

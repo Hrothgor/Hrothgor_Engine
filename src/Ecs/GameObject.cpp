@@ -38,7 +38,8 @@ namespace hr {
 
     void GameObject::Update()
     {
-        Master3DRenderer::Get()->RegisterGizmos(this);
+        if (Engine::Get()->GetSelectedEntity() == this)
+            Master3DRenderer::Get()->RegisterGizmos(this);
         if (!IsActive())
             return;
         for (auto [type, comp] : _components)
@@ -68,9 +69,9 @@ namespace hr {
         for (auto [type, comp] : _components)
             if (comp->IsActive())
                 comp->OnDrawGizmos();
-        for (GameObject *child : _childs)
-            if (child->IsActive())
-                child->OnDrawGizmos();
+        // for (GameObject *child : _childs)
+        //     if (child->IsActive())
+        //         child->OnDrawGizmos();
     }
 
 
@@ -113,6 +114,7 @@ namespace hr {
 
     void GameObject::AddChild(GameObject *child)
     {
+        child->SetParent(this);
         _childs.push_back(child);
     }
 
@@ -140,8 +142,6 @@ namespace hr {
             return;
         DetachFromParent();
         _parent = parent;
-        if (_parent)
-            _parent->AddChild(this);
     }
 
     bool GameObject::ParentIsChild(GameObject *parent)

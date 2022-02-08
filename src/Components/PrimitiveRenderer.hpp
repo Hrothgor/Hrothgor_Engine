@@ -13,7 +13,7 @@
 #include "json.hpp"
 
 namespace hr {
-    enum PrimitiveMesh {
+    enum PrimitiveMeshType {
         CUBE = 0,
         SPHERE,
         PLANE,
@@ -30,9 +30,9 @@ namespace hr {
             void End() override {};
 
             Model GetModel() const;
-            void SetModel(PrimitiveMesh mesh);
+            void SetModel(PrimitiveMeshType mesh);
 
-            PrimitiveMesh GetType() const;
+            PrimitiveMeshType GetType() const;
 
             float GetCubeWidth() const;
             void SetCubeWidth(float width);
@@ -62,7 +62,7 @@ namespace hr {
             virtual void FromJson(const nlohmann::json &json) override;
         protected:
         private:
-            PrimitiveMesh _type;
+            PrimitiveMeshType _type;
 
             Model _model = {0};
 

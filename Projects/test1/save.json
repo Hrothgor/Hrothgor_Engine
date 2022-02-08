@@ -11,20 +11,22 @@
                             43,
                             255
                         ],
-                        "intensity": 1.0
+                        "intensity": 1.0,
+                        "range": 10.0,
+                        "type": 0
                     }
                 ]
             ],
             "name": "lightDir",
-            "transform": {  
+            "transform": {
                 "position": [
                     0.0,
                     17.535137176513672,
                     0.0
                 ],
                 "rotation": [
-                    0.0,
-                    -0.0,
+                    -45.0,
+                    8.0,
                     0.0
                 ],
                 "scale": [
@@ -200,13 +202,13 @@
             "name": "dragon",
             "transform": {
                 "position": [
-                    0.0,
-                    0.0,
-                    0.0
+                    -10.518034934997559,
+                    -9.651713480707258e-05,
+                    7.097678184509277
                 ],
                 "rotation": [
                     0.0,
-                    0.0,
+                    -0.0,
                     0.0
                 ],
                 "scale": [
@@ -216,6 +218,207 @@
                 ]
             },
             "uuid": "c2c0efed-302c-424d-aa92-cf0d2d8d5c54"
+        },
+        {
+            "components": [
+                [
+                    "PrimitiveRenderer",
+                    {
+                        "cube": {
+                            "height": 11.0,
+                            "length": 18.0,
+                            "width": 12.0
+                        },
+                        "plane": {
+                            "length": 1.0,
+                            "resolution": 5,
+                            "width": 1.0
+                        },
+                        "sphere": {
+                            "radius": 1.0,
+                            "rings": 8,
+                            "slices": 8
+                        },
+                        "type": 0
+                    }
+                ]
+            ],
+            "name": "GameObject (0)",
+            "transform": {
+                "position": [
+                    25.703020095825195,
+                    18.912384033203125,
+                    -17.84551239013672
+                ],
+                "rotation": [
+                    0.0,
+                    18.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "uuid": "ac10a77f-afc4-42f3-a8c5-4d1e2c359f93"
+        },
+        {
+            "components": [
+                [
+                    "PrimitiveRenderer",
+                    {
+                        "cube": {
+                            "height": 1.0,
+                            "length": 1.0,
+                            "width": 1.0
+                        },
+                        "plane": {
+                            "length": 1.0,
+                            "resolution": 5,
+                            "width": 1.0
+                        },
+                        "sphere": {
+                            "radius": 6.0,
+                            "rings": 28,
+                            "slices": 40
+                        },
+                        "type": 1
+                    }
+                ]
+            ],
+            "name": "GameObject (1)",
+            "transform": {
+                "position": [
+                    -18.92986297607422,
+                    20.332733154296875,
+                    -0.5608753561973572
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "uuid": "f5e682b8-e191-45c3-8b2f-53b6a8a8fcc0"
+        },
+        {
+            "components": [
+                [
+                    "PrimitiveRenderer",
+                    {
+                        "cube": {
+                            "height": 1.0,
+                            "length": 1.0,
+                            "width": 1.0
+                        },
+                        "plane": {
+                            "length": 58.0,
+                            "resolution": 5,
+                            "width": 71.0
+                        },
+                        "sphere": {
+                            "radius": 1.0,
+                            "rings": 8,
+                            "slices": 8
+                        },
+                        "type": 2
+                    }
+                ]
+            ],
+            "name": "GameObject (2)",
+            "transform": {
+                "position": [
+                    -18.519487380981445,
+                    0.06617716699838638,
+                    13.221745491027832
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "uuid": "a4bc9946-7759-48cc-988d-b49c0d82ab24"
+        },
+        {
+            "childs": [
+                {
+                    "components": [
+                        [
+                            "Light",
+                            {
+                                "color": [
+                                    255,
+                                    0,
+                                    0,
+                                    255
+                                ],
+                                "intensity": 2.0,
+                                "range": 39.0,
+                                "type": 1
+                            }
+                        ]
+                    ],
+                    "name": "light",
+                    "transform": {
+                        "position": [
+                            0.0,
+                            18.042034149169922,
+                            0.0
+                        ],
+                        "rotation": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "uuid": "5bdeb1a9-e395-4e0d-8250-0543f33424e2"
+                }
+            ],
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "modelPath": "ressources/lampadaire.obj",
+                        "texturePath": ""
+                    }
+                ]
+            ],
+            "name": "lampadaire",
+            "transform": {
+                "position": [
+                    -27.37249755859375,
+                    1.0,
+                    18.905733108520508
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "uuid": "41702f6c-8958-43a3-bb81-c3faa08fdfc4"
         }
     ]
 }

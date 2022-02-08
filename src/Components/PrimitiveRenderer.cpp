@@ -35,12 +35,12 @@ namespace hr {
         return _model;
     }
 
-    PrimitiveMesh PrimitiveRenderer::GetType() const
+    PrimitiveMeshType PrimitiveRenderer::GetType() const
     {
         return _type;
     }
 
-    void PrimitiveRenderer::SetModel(PrimitiveMesh type)
+    void PrimitiveRenderer::SetModel(PrimitiveMeshType type)
     {
         _type = type;
         if (_model.meshCount > 0)
@@ -168,8 +168,8 @@ namespace hr {
 
     void PrimitiveRenderer::ImGuiRender()
     {
-        std::vector<std::string> meshNames = {"Cube", "Sphere", "Plane"};
-        UIElement::EnumField("Primitive", [this](){return GetType();}, [this](int val){SetModel((PrimitiveMesh)val);}, meshNames);
+        std::vector<std::string> enumNames = {"Cube", "Sphere", "Plane"};
+        UIElement::EnumField("Primitive", [this](){return GetType();}, [this](int val){SetModel((PrimitiveMeshType)val);}, enumNames);
         switch (_type) {
             case CUBE:
                 UIElement::FloatField("Cube Width", [this](){return GetCubeWidth();}, [this](float val){SetCubeWidth(val);});
@@ -193,11 +193,32 @@ namespace hr {
     {
         nlohmann::json json;
 
+        json["type"] = (int)_type;
+        json["cube"]["width"] = _cubeWidth;
+        json["cube"]["height"] = _cubeHeight;
+        json["cube"]["length"] = _cubeLength;
+        json["sphere"]["radius"] = _sphereRadius;
+        json["sphere"]["rings"] = _sphereRings;
+        json["sphere"]["slices"] = _sphereSlices;
+        json["plane"]["width"] = _planeWidth;
+        json["plane"]["length"] = _planeLength;
+        json["plane"]["resolution"] = _planeResolution;
+
         return json;
     }
 
     void PrimitiveRenderer::FromJson(const nlohmann::json &json)
     {
-        (void)json;
+        _type = (PrimitiveMeshType)json["type"].get<int>();
+        _cubeWidth = json["cube"]["width"].get<float>();
+        _cubeHeight = json["cube"]["height"].get<float>();
+        _cubeLength = json["cube"]["length"].get<float>();
+        _sphereRadius = json["sphere"]["radius"].get<float>();
+        _sphereRings = json["sphere"]["rings"].get<int>();
+        _sphereSlices = json["sphere"]["slices"].get<int>();
+        _planeWidth = json["plane"]["width"].get<float>();
+        _planeLength = json["plane"]["length"].get<float>();
+        _planeResolution = json["plane"]["resolution"].get<int>();
+        SetModel(_type);
     }
 }

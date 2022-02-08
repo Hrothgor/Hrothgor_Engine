@@ -71,6 +71,14 @@ namespace hr {
         _position = {x, y, z};
     }
 
+    void Transform::SetPositionFromWorld(float x, float y, float z)
+    {
+        Vector3 parentWorldPos = Vector3Zero();
+        if (GetGameObject()->GetParent())
+            parentWorldPos = GetGameObject()->GetParent()->GetTransform()->GetPositionWorld();
+        _position = Vector3Subtract({x, y, z}, parentWorldPos);
+    }
+
     Vector3 Transform::GetRotation() const
     {
         return _rotation;

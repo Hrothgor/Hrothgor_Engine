@@ -90,7 +90,7 @@ namespace hr {
 				{
                     GameObject *cpy = static_cast<GameObject *>(payload->Data);
 					GameObject *ent = Engine::Get()->Find(cpy->GetUUID());
-                    ent->SetParent(entity);
+                    entity->AddChild(ent);
 				}
 				ImGui::EndDragDropTarget();
 			}
