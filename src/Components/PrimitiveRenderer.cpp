@@ -178,13 +178,13 @@ namespace hr {
                 break;
             case SPHERE:
                 UIElement::FloatField("Sphere Radius", [this](){return GetSphereRadius();}, [this](float val){SetSphereRadius(val);});
-                UIElement::IntField("Sphere Rings", [this](){return GetSphereRings();}, [this](int val){SetSphereRings(val);});
-                UIElement::IntField("Sphere Slices", [this](){return GetSphereSlices();}, [this](int val){SetSphereSlices(val);});
+                UIElement::IntField("Sphere Rings", [this](){return GetSphereRings();}, [this](int val){SetSphereRings(val);}, 1, 4, 30);
+                UIElement::IntField("Sphere Slices", [this](){return GetSphereSlices();}, [this](int val){SetSphereSlices(val);}, 1, 4, 100);
                 break;
             case PLANE:
                 UIElement::FloatField("Plane Width", [this](){return GetPlaneWidth();}, [this](float val){SetPlaneWidth(val);});
                 UIElement::FloatField("Plane Length", [this](){return GetPlaneLength();}, [this](float val){SetPlaneLength(val);});
-                UIElement::IntField("Plane Resolution", [this](){return GetPlaneResolution();}, [this](int val){SetPlaneResolution(val);});
+                UIElement::IntField("Plane Resolution", [this](){return GetPlaneResolution();}, [this](int val){SetPlaneResolution(val);}, 1, 1, 1000);
                 break;
         }
     }

@@ -71,7 +71,7 @@ namespace hr {
 		EndField();
     }
 
-    void UIElement::IntField(const std::string &label, std::function<int()> getter, std::function<void(int)> setter, float speed, float min, float max, const char* format)
+    void UIElement::IntField(const std::string &label, std::function<int()> getter, std::function<void(int)> setter, float speed, int min, int max, const char* format)
     {
         StartField(label);
 

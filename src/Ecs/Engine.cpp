@@ -35,7 +35,6 @@ namespace hr {
         _mainCamera->SetName("mainCamera");
         _mainCamera->AddComponent<MainCamera3D>();
         _mainCamera->GetTransform()->SetPosition(20, 20, 50);
-
     }
 
     Engine::~Engine()
@@ -44,6 +43,7 @@ namespace hr {
 
     void Engine::Start()
     {
+        SetSelectedEntity(nullptr);
         DisplayManager::Get()->Start();
         _mainCamera->Start();
         for (auto ent : _entities)
