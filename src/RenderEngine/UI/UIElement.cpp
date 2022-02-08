@@ -50,6 +50,39 @@ namespace hr {
 		EndField();
     }
 
+    void UIElement::EnumField(const std::string &label, std::function<int()> getter, std::function<void(int)> setter, std::vector<std::string> list)
+    {
+        StartField(label);
+
+        int value = getter();
+
+        if (ImGui::BeginCombo("", list[value].c_str())) {
+            for (unsigned int n = 0; n < list.size(); n++)
+            {
+                bool is_selected = (value == (int)n);
+                if (ImGui::Selectable(list[n].c_str(), is_selected))
+                    setter(n);
+                if (is_selected)
+                    ImGui::SetItemDefaultFocus();
+            }
+            ImGui::EndCombo();
+        }
+        
+		EndField();
+    }
+
+    void UIElement::IntField(const std::string &label, std::function<int()> getter, std::function<void(int)> setter, float speed, float min, float max, const char* format)
+    {
+        StartField(label);
+
+        int value = getter();
+
+		if (ImGui::DragScalarN("", ImGuiDataType_S32, &value, 1, speed, &min, &max, format))
+            setter(value);
+
+		EndField();
+    }
+
     void UIElement::FloatField(const std::string &label, std::function<float()> getter, std::function<void(float)> setter, float speed, float min, float max, const char* format)
     {
         StartField(label);

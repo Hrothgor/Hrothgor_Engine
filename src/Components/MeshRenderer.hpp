@@ -37,7 +37,7 @@ namespace hr {
             virtual void FromJson(const nlohmann::json &json) override;
         protected:
         private:
-            Model _model = {};
+            Model _model = {0};
             Texture2D _texture = {0};
 
             std::string _modelPath;

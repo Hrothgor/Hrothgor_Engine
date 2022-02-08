@@ -181,6 +181,7 @@ namespace hr {
             }
             i++;
         }
+        AddEntity(gameObject);
     }
 
     GameObject *Engine::GetSelectedEntity() const
