@@ -17,7 +17,7 @@ namespace hr {
         _camera.position = {0, 0, 0};
         _camera.target = { 0.0, 0.0, 0.0 };
         _camera.up = { 0.0, 1.0, 0.0 };
-        _camera.fovy = 70;
+        _camera.fovy = 60;
         _camera.projection = CAMERA_PERSPECTIVE;
         // SetCameraMode(_camera, CAMERA_FIRST_PERSON);
     }

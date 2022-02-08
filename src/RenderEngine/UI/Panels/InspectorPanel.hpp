@@ -19,6 +19,7 @@ namespace hr {
             ~InspectorPanel();
                 
             virtual void Start() override;
+            virtual void OnEvent() override {};
             virtual void ImGuiRender() override;
             virtual void End() override;
 
@@ -79,7 +80,9 @@ namespace hr {
 
                 ImGui::SetNextItemOpen(true, ImGuiCond_Once);
                 if (ImGui::CollapsingHeader(comp->GetName().c_str())) {
+                    ImGui::PushID(("##componentUI" + std::string(typeid(Comp).name())).c_str());
                     comp->ImGuiRender();
+                    ImGui::PopID();
                     ImGui::Separator();
                 }
             }

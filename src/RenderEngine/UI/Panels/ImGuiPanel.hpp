@@ -17,6 +17,7 @@ namespace hr {
             ~ImGuiPanel();
 
             virtual void Start() = 0;
+            virtual void OnEvent() = 0;
             virtual void ImGuiRender() = 0;
             virtual void End() = 0;
 

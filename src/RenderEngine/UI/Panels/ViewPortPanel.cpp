@@ -18,6 +18,7 @@
 namespace hr {
     ViewPortPanel::ViewPortPanel()
     {
+        _gizmoType = ImGuizmo::OPERATION::TRANSLATE;
     }
 
     ViewPortPanel::~ViewPortPanel()
@@ -27,6 +28,22 @@ namespace hr {
     void ViewPortPanel::Start()
     {
         _camera = Engine::Get()->GetMainCamera()->GetComponent<MainCamera3D>();
+    }
+
+    void ViewPortPanel::OnEvent()
+    {
+        _snap = false;
+        bool control = IsKeyDown(KEY_LEFT_CONTROL) || IsKeyDown(KEY_RIGHT_CONTROL);
+        // bool shift = IsKeyDown(KEY_LEFT_SHIFT) || IsKeyDown(KEY_RIGHT_SHIFT);
+
+        if (control)
+            _snap = true;
+        if (IsKeyPressed(KEY_Q) && !IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+            _gizmoType = ImGuizmo::OPERATION::TRANSLATE;
+        if (IsKeyPressed(KEY_W) && !IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+            _gizmoType = ImGuizmo::OPERATION::ROTATE;
+        if (IsKeyPressed(KEY_E) && !IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+            _gizmoType = ImGuizmo::OPERATION::SCALE;
     }
 
     void ViewPortPanel::ImGuiRender()
@@ -45,7 +62,7 @@ namespace hr {
     {
         GameObject *entity = nullptr;
 
-		if (!(entity = Engine::Get()->GetSelectedEntity()))
+		if (!(entity = Engine::Get()->GetSelectedEntity()) || _gizmoType == -1)
             return;
 
         ImGuizmo::SetOrthographic(false);
@@ -55,11 +72,8 @@ namespace hr {
         float windowHeight = (float)ImGui::GetWindowHeight();
         ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);
 
-        Matrix cameraProjection = MatrixPerspective(_camera->GetCamera3D().fovy * DEG2RAD, windowWidth / windowHeight, RL_CULL_DISTANCE_NEAR, 5000.0f);
-        // Matrix cameraProjection = rlGetMatrixProjection();
+        Matrix cameraProjection = MatrixPerspective(_camera->GetCamera3D().fovy * DEG2RAD, windowWidth / windowHeight, RL_CULL_DISTANCE_NEAR, 5000.0);
         Matrix cameraView = GetCameraMatrix(_camera->GetCamera3D());
-        // Matrix cameraView = MatrixLookAt(_camera->GetCamera3D().position, _camera->GetCamera3D().target, _camera->GetCamera3D().up);
-        // cameraView = MatrixInvert(cameraView);
 
         Transform *transform = entity->GetTransform();
         float mat[16];
@@ -68,8 +82,16 @@ namespace hr {
                                                 Vector3ToFloat(transform->GetScale()),
                                                 mat);
 
+        // Snapping
+        float snapValue = 0.5;
+        if (_gizmoType == ImGuizmo::OPERATION::ROTATE)
+            snapValue = 45;
+        
+        float snapValues[3] = {snapValue, snapValue, snapValue};
+
         ImGuizmo::Manipulate(MatrixToFloat(cameraView), MatrixToFloat(cameraProjection), 
-            ImGuizmo::TRANSLATE, ImGuizmo::LOCAL, mat);
+            (ImGuizmo::OPERATION)_gizmoType, ImGuizmo::LOCAL, mat,
+            nullptr, _snap ? snapValues : nullptr);
         
         if (ImGuizmo::IsUsing()) {
             float translation[3];

@@ -29,9 +29,6 @@ namespace hr {
         protected:
         private:
             std::vector<ImGuiPanel *> _panels;
-            // SceneHierarchyPanel _sceneHierarchyPanel;
-            // InspectorPanel _inspectorPanel;
-            // ViewPortPanel _viewPortPanel;
     };
 }
 

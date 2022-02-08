@@ -12,6 +12,7 @@
 #include "../../../Components/Transform.hpp"
 #include "../../../Components/Light.hpp"
 #include "../../../Components/MeshRenderer.hpp"
+#include "../../../Components/PrimitiveCollider.hpp"
 #include "../../../Components/PrimitiveRenderer.hpp"
 #include "../../../Components/MainCamera3D.hpp"
 
@@ -79,6 +80,7 @@ namespace hr {
                 if (entity->HasComponentId<Transform>(compId)) { ImGuiRenderComponent<Transform>(entity); continue; }
                 if (entity->HasComponentId<Light>(compId)) { ImGuiRenderComponent<Light>(entity); continue; }
                 if (entity->HasComponentId<MeshRenderer>(compId)) { ImGuiRenderComponent<MeshRenderer>(entity); continue; }
+                if (entity->HasComponentId<PrimitiveCollider>(compId)) { ImGuiRenderComponent<PrimitiveCollider>(entity); continue; }
                 if (entity->HasComponentId<PrimitiveRenderer>(compId)) { ImGuiRenderComponent<PrimitiveRenderer>(entity); continue; }
             }
 
@@ -89,6 +91,7 @@ namespace hr {
 			{
                 if (!entity->HasComponent<Light>()) { ImGuiRenderAddComponent<Light>("Light", entity); }
                 if (!entity->HasComponent<MeshRenderer>()) { ImGuiRenderAddComponent<MeshRenderer>("MeshRenderer", entity); }
+                if (!entity->HasComponent<PrimitiveCollider>()) { ImGuiRenderAddComponent<PrimitiveCollider>("PrimitiveCollider", entity); }
                 if (!entity->HasComponent<PrimitiveRenderer>()) { ImGuiRenderAddComponent<PrimitiveRenderer>("PrimitiveRenderer", entity); }
 				ImGui::EndPopup();
 			}

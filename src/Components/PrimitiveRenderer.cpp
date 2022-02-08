@@ -8,6 +8,8 @@
 #include "PrimitiveRenderer.hpp"
 #include "../RenderEngine/UI/UIElement.hpp"
 #include "../RenderEngine/Master3DRenderer.hpp"
+#include "PrimitiveCollider.hpp"
+#include "../Ecs/GameObject.hpp"
 
 namespace hr {
     PrimitiveRenderer::PrimitiveRenderer(GameObject *gameObject)
@@ -15,7 +17,16 @@ namespace hr {
     {
         _name = "PrimitiveRenderer";
 
-        _type = CUBE;
+        PrimitiveCollider *primitiveCollider = GetGameObject()->TryGetComponent<PrimitiveCollider>();
+        if (primitiveCollider) {
+            _type = primitiveCollider->GetType();
+            _cubeWidth = primitiveCollider->GetCubeWidth() - 0.1;
+            _cubeHeight = primitiveCollider->GetCubeHeight() - 0.1;
+            _cubeLength = primitiveCollider->GetCubeLength() - 0.1;
+            _sphereRadius = primitiveCollider->GetSphereRadius() - 0.1;
+        } else {
+            _type = CUBE;
+        }
         SetModel(_type);
     }
 

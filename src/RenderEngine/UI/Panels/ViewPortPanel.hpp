@@ -20,6 +20,7 @@ namespace hr {
             ~ViewPortPanel();
             
             virtual void Start() override;
+            virtual void OnEvent() override;
             virtual void ImGuiRender() override;
             virtual void End() override;
 
@@ -27,6 +28,8 @@ namespace hr {
         protected:
         private:
             MainCamera3D *_camera;
+            int _gizmoType;
+            bool _snap;
     };
 }
 

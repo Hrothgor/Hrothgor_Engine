@@ -20,6 +20,7 @@ namespace hr {
             ~SceneHierarchyPanel();
 
             virtual void Start() override;
+            virtual void OnEvent() override {};
             virtual void ImGuiRender() override;
             virtual void End() override;
 

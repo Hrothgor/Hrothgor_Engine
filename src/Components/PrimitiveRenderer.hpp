@@ -30,7 +30,7 @@ namespace hr {
             void End() override {};
 
             Model GetModel() const;
-            void SetModel(PrimitiveMeshType mesh);
+            void SetModel(PrimitiveMeshType type);
 
             PrimitiveMeshType GetType() const;
 
