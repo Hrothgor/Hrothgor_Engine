@@ -33,6 +33,10 @@ namespace hr {
     {
         ImGui::Begin("Inspector", &_isOpen);
 
+        bool isFocus = ImGui::IsWindowFocused();
+        bool isHover = ImGui::IsWindowHovered();
+        ActiveEvent(!isFocus && !isHover);
+
         GameObject *entity = nullptr;
 		if ((entity = Engine::Get()->GetSelectedEntity()))
 		{

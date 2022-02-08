@@ -38,18 +38,25 @@ namespace hr {
 
         if (control)
             _snap = true;
-        if (IsKeyPressed(KEY_Q) && !IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+        if (IsKeyPressed(KEY_ONE) && !IsMouseButtonDown(MOUSE_BUTTON_LEFT))
             _gizmoType = ImGuizmo::OPERATION::TRANSLATE;
-        if (IsKeyPressed(KEY_W) && !IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+        if (IsKeyPressed(KEY_TWO) && !IsMouseButtonDown(MOUSE_BUTTON_LEFT))
             _gizmoType = ImGuizmo::OPERATION::ROTATE;
-        if (IsKeyPressed(KEY_E) && !IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+        if (IsKeyPressed(KEY_THREE) && !IsMouseButtonDown(MOUSE_BUTTON_LEFT))
             _gizmoType = ImGuizmo::OPERATION::SCALE;
+
+        Engine::Get()->GetMainCamera()->GetComponent<MainCamera3D>()->UpdateCameraMovement();
     }
 
     void ViewPortPanel::ImGuiRender()
     {
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2 {0, 0});
         if (ImGui::Begin("Viewport", &_isOpen, ImGuiWindowFlags_NoScrollbar)) {
+
+            bool isFocus = ImGui::IsWindowFocused();
+            bool isHover = ImGui::IsWindowHovered();
+            ActiveEvent(isFocus && isHover);
+
             ImVec2 size = ImGui::GetContentRegionAvail();
             ImGui::Image((ImTextureID)DisplayManager::Get()->GetFrameBufferTexture(), size, ImVec2 {0, 1}, ImVec2 {1, 0});
             DrawGuizmo();

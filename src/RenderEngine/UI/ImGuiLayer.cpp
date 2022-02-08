@@ -110,9 +110,9 @@ namespace hr {
 		// ImGui::PopStyleVar();
 
 
-        for (auto &panel : _panels) {
-            panel->OnEvent();
-        }
+        for (auto &panel : _panels)
+            if (panel->IsEvent())
+                panel->OnEvent();
         for (auto &panel : _panels)
             panel->ImGuiRender();
 

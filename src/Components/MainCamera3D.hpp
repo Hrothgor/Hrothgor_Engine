@@ -20,6 +20,8 @@ namespace hr {
 
             virtual void Update() override;
 
+            void UpdateCameraMovement();
+
             Camera3D GetCamera3D() const;
 
             virtual nlohmann::json ToJson() const override;

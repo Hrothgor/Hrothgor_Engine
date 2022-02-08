@@ -21,12 +21,16 @@ namespace hr {
             virtual void ImGuiRender() = 0;
             virtual void End() = 0;
 
+            void ActiveEvent(bool val);
+            bool IsEvent() const;
+
             void SetOpen(bool isOpen);
             bool IsOpen();
 
         protected:
             bool _isOpen = true;
         private:
+            bool _isEvent = false;
     };
 }
 

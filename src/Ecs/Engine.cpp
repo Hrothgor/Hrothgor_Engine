@@ -35,6 +35,7 @@ namespace hr {
         _mainCamera->SetName("mainCamera");
         _mainCamera->AddComponent<MainCamera3D>();
         _mainCamera->GetTransform()->SetPosition(20, 20, 50);
+        _mainCamera->GetTransform()->SetRotation(-110, -20, 0);
     }
 
     Engine::~Engine()

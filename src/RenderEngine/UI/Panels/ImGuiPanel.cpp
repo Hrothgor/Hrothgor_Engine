@@ -16,6 +16,16 @@ namespace hr {
     {
     }
 
+    void ImGuiPanel::ActiveEvent(bool val)
+    {
+        _isEvent = val;
+    }
+
+    bool ImGuiPanel::IsEvent() const
+    {
+        return _isEvent;
+    }
+
     void ImGuiPanel::SetOpen(bool isOpen)
     {
         _isOpen = isOpen;

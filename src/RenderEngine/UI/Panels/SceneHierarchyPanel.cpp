@@ -26,6 +26,11 @@ namespace hr {
     {
         ImGui::Begin("Scene Hierarchy", &_isOpen);
 
+        bool isFocus = ImGui::IsWindowFocused();
+        bool isHover = ImGui::IsWindowHovered();
+        ActiveEvent(!isFocus && !isHover);
+
+
         EntityDraw(nullptr);
         
         ImGui::BeginChild("Blank Space");
