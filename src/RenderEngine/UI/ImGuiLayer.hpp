@@ -21,6 +21,7 @@ namespace hr {
             void End();
 
             void BeginFrame();
+            void Event();
             void DrawDockSpace();
             void Draw();
             void EndFrame();

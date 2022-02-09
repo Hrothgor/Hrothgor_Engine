@@ -28,6 +28,7 @@ namespace hr {
     {
         if (!IsActive())
             return;
+        _transform->Start();
         for (auto [type, comp] : _components)
             if (comp->IsActive())
                 comp->Start();
@@ -38,10 +39,11 @@ namespace hr {
 
     void GameObject::Update()
     {
-        if (Engine::Get()->GetSelectedEntity() == this)
-            Master3DRenderer::Get()->RegisterGizmos(this);
         if (!IsActive())
             return;
+        if (Engine::Get()->GetSelectedEntity() == this)
+            Master3DRenderer::Get()->RegisterGizmos(this);
+        _transform->Update();
         for (auto [type, comp] : _components)
             if (comp->IsActive())
                 comp->Update();
@@ -54,6 +56,7 @@ namespace hr {
     {
         if (!IsActive())
             return;
+        _transform->LateUpdate();
         for (auto [type, comp] : _components)
             if (comp->IsActive())
                 comp->LateUpdate();
@@ -66,6 +69,7 @@ namespace hr {
     {
         if (!IsActive())
             return;
+        _transform->OnDrawGizmos();
         for (auto [type, comp] : _components)
             if (comp->IsActive())
                 comp->OnDrawGizmos();
@@ -79,6 +83,7 @@ namespace hr {
     {
         if (!IsActive())
             return;
+        _transform->End();
         for (auto [type, comp] : _components)
             if (comp->IsActive())
                 comp->End();

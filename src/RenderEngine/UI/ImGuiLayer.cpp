@@ -10,6 +10,10 @@
 #include "Panels/SceneHierarchyPanel.hpp"
 #include "Panels/InspectorPanel.hpp"
 #include "Panels/ViewPortPanel.hpp"
+#include "../../Ecs/Engine.hpp"
+
+#include "../../SaveLoad/LoadSystem.hpp"
+#include "../../SaveLoad/SaveSystem.hpp"
 
 namespace hr {
     ImGuiLayer::ImGuiLayer()
@@ -33,6 +37,21 @@ namespace hr {
     {
         rlImGuiBegin();
         ImGuizmo::BeginFrame();
+    }
+
+    void ImGuiLayer::Event()
+    {
+        bool control = IsKeyDown(KEY_LEFT_CONTROL) || IsKeyDown(KEY_RIGHT_CONTROL);
+        bool shift = IsKeyDown(KEY_LEFT_SHIFT) || IsKeyDown(KEY_RIGHT_SHIFT);
+        
+        if (control && shift && IsKeyPressed(KEY_N)) {
+            LoadSystem::CreateNewProject("test2");
+            LoadSystem::LoadProject("test2");
+        }
+        if (control && shift && IsKeyPressed(KEY_O))
+            LoadSystem::LoadProject("test1");
+        if (control && IsKeyPressed(KEY_S))
+            SaveSystem::SaveProject(Engine::Get()->GetProjectName());
     }
 
     void ImGuiLayer::DrawDockSpace()
@@ -74,40 +93,39 @@ namespace hr {
 
         DrawDockSpace();
 
-        // ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0);
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0);
 
-		// ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0);
-		// if (ImGui::BeginMainMenuBar())
-		// {
-		// 	if (ImGui::BeginMenu("File"))
-		// 	{
-		// 		if (ImGui::MenuItem("New Project", "Ctrl+Shift+N"))
-		// 			// m_IsProjectManagerOpen = true;
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0);
+		if (ImGui::BeginMainMenuBar())
+		{
+			if (ImGui::BeginMenu("File"))
+			{
+				if (ImGui::MenuItem("New Project", "Ctrl+Shift+N")) {
+                    LoadSystem::CreateNewProject("test2");
+                    LoadSystem::LoadProject("test2");
+                }
 
-		// 		if (ImGui::MenuItem("Open Project", "Ctrl+Shift+O"))
-		// 			// m_IsProjectManagerOpen = true;
+				if (ImGui::MenuItem("Open Project", "Ctrl+Shift+O"))
+                    LoadSystem::LoadProject("test1");
 
-		// 		ImGui::Separator();
+				ImGui::Separator();
 
-		// 		if (ImGui::MenuItem("Save Scene", "Ctrl+S"))
-		// 		{
-		// 			// SceneSerializer sceneSerializer(m_SceneContext->PrimaryScene);
-		// 			// sceneSerializer.Serialize(m_EditingProject->GetAssetsDirectoryPath() + static_cast<String>(m_SceneContext->PrimaryScene->GetPath()));
-		// 		}
+				if (ImGui::MenuItem("Save Scene", "Ctrl+S"))
+                    SaveSystem::SaveProject(Engine::Get()->GetProjectName());
 
-		// 		ImGui::Separator();
+				ImGui::Separator();
 
-		// 		if (ImGui::MenuItem("Quit Editor", "Alt+F4"))
-		// 			exit(0);
+				if (ImGui::MenuItem("Quit Editor", "Alt+F4"))
+					Engine::Get()->SetRunning(false);
 
-		// 		ImGui::EndMenu();
-		// 	}
+				ImGui::EndMenu();
+			}
 
-		// 	ImGui::EndMainMenuBar();
-		// }
-		// ImGui::PopStyleVar();
+			ImGui::EndMainMenuBar();
+		}
+		ImGui::PopStyleVar();
 
-		// ImGui::PopStyleVar();
+		ImGui::PopStyleVar();
 
 
         for (auto &panel : _panels)

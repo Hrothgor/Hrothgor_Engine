@@ -26,9 +26,13 @@ namespace hr {
     {
         ImGui::Begin("Scene Hierarchy", &_isOpen);
 
+        if (Engine::Get()->GetProjectName() == "") {
+            ImGui::TextUnformatted("No project loaded !");
+            ImGui::End();
+            return;
+        }
         bool isFocus = ImGui::IsWindowFocused();
-        bool isHover = ImGui::IsWindowHovered();
-        ActiveEvent(!isFocus && !isHover);
+        ActiveEvent(!isFocus);
 
 
         EntityDraw(nullptr);

@@ -32,13 +32,7 @@ namespace hr {
         Transform *transform = GetTransform();
         _camera.position = transform->GetPositionWorld();
 
-        Vector3 rotation = GetTransform()->GetRotation();
-        Vector3 front;
-        front.x = cos(DEG2RAD * rotation.x) * cos(DEG2RAD * rotation.y);
-        front.y = sin(DEG2RAD * rotation.y);
-        front.z = sin(DEG2RAD * rotation.x) * cos(DEG2RAD * rotation.y);
-        front = Vector3Normalize(front);
-        _camera.target = Vector3Add(_camera.position, front);
+        _camera.target = Vector3Add(_camera.position, transform->GetFront());
 
         UpdateCamera(&_camera);
     }
@@ -50,19 +44,18 @@ namespace hr {
         if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
             Vector2 mouseDelta = GetMouseDelta();
             Vector3 rotation = transform->GetRotation();
-            rotation.x -= mouseDelta.x * GetFrameTime() * 20;
-            rotation.y += mouseDelta.y * GetFrameTime() * 20;
+            rotation.y -= mouseDelta.x * GetFrameTime() * _turnSpeed;
+            rotation.z -= mouseDelta.y * GetFrameTime() * _turnSpeed;
             transform->SetRotation(rotation);
         }
 
+        float currentSpeed = 0;
         if (IsKeyDown(KEY_W))
-            transform->Translate({0, 0, -20 * GetFrameTime()});
-        if (IsKeyDown(KEY_A))
-            transform->Translate({-20 * GetFrameTime(), 0, 0});
+            currentSpeed = _speed;
         if (IsKeyDown(KEY_S))
-            transform->Translate({0, 0, 20 * GetFrameTime()});
-        if (IsKeyDown(KEY_D))
-            transform->Translate({20 * GetFrameTime(), 0, 0});
+            currentSpeed = -_speed;
+        float dist = currentSpeed * GetFrameTime();
+        transform->Translate(Vector3Multiply(transform->GetFront(), {dist, dist, dist}));
     }
 
     Camera3D MainCamera3D::GetCamera3D() const

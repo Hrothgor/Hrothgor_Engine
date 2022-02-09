@@ -39,11 +39,17 @@ namespace hr {
         return gameObject;
     }
 
-    void LoadSystem::LoadProject(const std::string &fileName)
+    void LoadSystem::LoadProject(const std::string &name)
     {
-        std::ifstream file(fileName);
-        if (!file.is_open())
-            throw std::runtime_error("File not found");
+        if (!std::filesystem::exists("./Projects/" + name))
+            return;
+        Engine::Get()->SetProjectName(name);
+        if (!std::filesystem::exists("./Projects/" + name + "/save.json")) {
+            Engine::Get()->ClearEntities();
+            Engine::Get()->Start();
+            return;
+        }
+        std::ifstream file("./Projects/" + name + "/save.json");
 
         nlohmann::json json;
         file >> json;
@@ -56,7 +62,14 @@ namespace hr {
         Engine::Get()->Start();
     }
 
-    void LoadSystem::NewProject()
+    void LoadSystem::CreateNewProject(const std::string &name)
     {
+        if (std::filesystem::exists("./Projects/" + name)) {
+            LoadProject(name);
+            return;
+        }
+        std::filesystem::create_directory("./Projects/" + name);
+        std::filesystem::create_directory("./Projects/" + name + "/Assets");
+        Engine::Get()->SetProjectName(name);
     }
 }

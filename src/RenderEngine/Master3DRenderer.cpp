@@ -42,7 +42,6 @@ namespace hr {
     void Master3DRenderer::Draw()
     {
         BeginFrame();
-        DrawGrid(100, 1.0f);
         _entityRenderer.Draw();
         _gizmosRenderer.Draw();
         //draw particles

@@ -18,7 +18,6 @@ namespace hr {
         _name = "Light";
         _type = DIRECTIONAL;
         _target = Vector3Zero();
-        _front = Vector3Zero();
         _range = 10.0;
         _color = WHITE;
         _intensity = 1;
@@ -30,14 +29,7 @@ namespace hr {
 
     void Light::Update()
     {
-        Vector3 rotation = GetTransform()->GetRotation();
-
-        _front.x = cos(DEG2RAD * rotation.x) * cos(DEG2RAD * rotation.y);
-        _front.y = sin(DEG2RAD * rotation.y);
-        _front.z = sin(DEG2RAD * rotation.x) * cos(DEG2RAD * rotation.y);
-        _front = Vector3Normalize(_front);
-
-        _target = Vector3Add(GetTransform()->GetPositionWorld(), _front);
+        _target = Vector3Add(GetTransform()->GetPositionWorld(), GetTransform()->GetFront());
 
         Master3DRenderer::Get()->RegisterLight(GetGameObject());
     }
@@ -113,8 +105,8 @@ namespace hr {
 
         switch (_type) {
             case DIRECTIONAL:
-                DrawCylinderWiresEx(transform->GetPositionWorld(), Vector3Add(GetTransform()->GetPositionWorld(), 
-                            Vector3Multiply(_front, {5, 5, 5})), 1, 2,
+                DrawCylinderWiresEx(transform->GetPositionWorld(), Vector3Add(GetTransform()->GetPositionWorld(), Vector3Multiply(transform->GetFront(), {5, 5, 5})),
+                            1, 2,
                             8, YELLOW);
                 break;
             case POINT:

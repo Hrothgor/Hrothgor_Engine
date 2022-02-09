@@ -29,6 +29,8 @@ namespace hr {
         protected:
         private:
             Camera3D _camera;
+            float _speed = 20;
+            float _turnSpeed = 40;
     };
 }
 

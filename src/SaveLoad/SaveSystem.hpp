@@ -16,7 +16,7 @@ namespace hr {
 
     class SaveSystem {
         public:
-            static void SaveProject();
+            static void SaveProject(const std::string &name);
             static nlohmann::json SaveEntity(GameObject *entity);
         protected:
         private:

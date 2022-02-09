@@ -23,6 +23,8 @@ namespace hr {
             Transform(GameObject *gameObject);
             ~Transform();
 
+            virtual void Update() override;
+
             void Translate(Vector3 vec);
             void Rotate(Vector3 vec);
             void Rotate(float x, float y, float z);
@@ -44,6 +46,7 @@ namespace hr {
             Vector3 GetScale() const;
             void SetScale(Vector3 scale);
             void SetScale(float x, float y, float z);
+            Vector3 GetFront() const;
 
             static Quaternion EulerToQuaternion(Vector3 euler);
 
@@ -56,6 +59,7 @@ namespace hr {
             Vector3 _position;
             Vector3 _rotation;
             Vector3 _scale;
+            Vector3 _front;
     };
 }
 

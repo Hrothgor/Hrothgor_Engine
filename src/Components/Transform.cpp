@@ -18,10 +18,19 @@ namespace hr {
         _position = Vector3Zero();
         _rotation = Vector3Zero();
         _scale = Vector3One();
+        _front = Vector3Zero();
     }
 
     Transform::~Transform()
     {
+    }
+
+    void Transform::Update()
+    {
+        _front.x = cos(DEG2RAD * _rotation.y) * cos(DEG2RAD * _rotation.z);
+        _front.y = cos(DEG2RAD * _rotation.y) * sin(DEG2RAD * _rotation.z);
+        _front.z = sin(DEG2RAD * _rotation.y);
+        _front = Vector3Normalize(_front);
     }
 
     void Transform::Translate(Vector3 vec)
@@ -130,6 +139,11 @@ namespace hr {
     void Transform::SetScale(float x, float y, float z)
     {
         _scale = {x, y, z};
+    }
+
+    Vector3 Transform::GetFront() const
+    {
+        return _front;
     }
 
     Quaternion Transform::EulerToQuaternion(Vector3 euler)

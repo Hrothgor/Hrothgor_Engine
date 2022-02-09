@@ -33,9 +33,14 @@ namespace hr {
     {
         ImGui::Begin("Inspector", &_isOpen);
 
+        if (Engine::Get()->GetProjectName() == "") {
+            ImGui::TextUnformatted("No project loaded !");
+            ImGui::End();
+            return;
+        }
+
         bool isFocus = ImGui::IsWindowFocused();
-        bool isHover = ImGui::IsWindowHovered();
-        ActiveEvent(!isFocus && !isHover);
+        ActiveEvent(!isFocus);
 
         GameObject *entity = nullptr;
 		if ((entity = Engine::Get()->GetSelectedEntity()))
@@ -109,7 +114,7 @@ namespace hr {
 		}
 		else
 		{
-			ImGui::TextUnformatted("Please select some thing to edit!");
+			ImGui::TextUnformatted("Please select some thing to edit !");
 		}
 
 		ImGui::End();

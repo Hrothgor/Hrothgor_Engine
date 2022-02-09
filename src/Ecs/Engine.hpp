@@ -47,10 +47,19 @@ namespace hr {
             void SetSelectedEntity(GameObject *object);
 
             GameObject *GetMainCamera() const;
+
+            std::string GetProjectName() const;
+            void SetProjectName(const std::string &projectName);
+
+            void SetRunning(bool running);
         private:
             GameObject *_mainCamera;
             std::vector<GameObject *> _entities;
             GameObject *_selectedEntity = nullptr;
+
+            std::string _projectName = "";
+
+            bool _running = true;
 
         protected:
             static Engine *instance;

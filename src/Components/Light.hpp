@@ -49,7 +49,6 @@ namespace hr {
         private:
             LightType _type;
             Vector3 _target;
-            Vector3 _front;
             float _range;
             Color _color;
             float _intensity;

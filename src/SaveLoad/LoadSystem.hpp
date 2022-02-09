@@ -16,9 +16,9 @@ namespace hr {
 
     class LoadSystem {
         public:
-            static void LoadProject(const std::string &fileName);
+            static void LoadProject(const std::string &name);
             static GameObject *LoadEntity(const nlohmann::json &json);
-            static void NewProject();
+            static void CreateNewProject(const std::string &name);
         protected:
         private:
     };

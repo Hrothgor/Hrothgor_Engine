@@ -21,9 +21,8 @@ namespace hr {
     Engine::Engine()
     {
         SetTraceLogLevel(TraceLogLevel::LOG_WARNING);
-        InitWindow(WIDTH, HEIGHT, "Physics Engine");
+        InitWindow(0, 0, "Physics Engine");
         rlImGuiSetup(true);
-        SetConfigFlags(FLAG_MSAA_4X_HINT);
         ToggleFullscreen();
         InitAudioDevice();
         
@@ -35,7 +34,7 @@ namespace hr {
         _mainCamera->SetName("mainCamera");
         _mainCamera->AddComponent<MainCamera3D>();
         _mainCamera->GetTransform()->SetPosition(20, 20, 50);
-        _mainCamera->GetTransform()->SetRotation(-110, -20, 0);
+        _mainCamera->GetTransform()->SetRotation(0, -110, 0);
     }
 
     Engine::~Engine()
@@ -54,7 +53,7 @@ namespace hr {
 
     void Engine::Update()
     {
-        while (!WindowShouldClose())
+        while (!WindowShouldClose() && _running)
         {
             BeginDrawing();
             {
@@ -70,10 +69,6 @@ namespace hr {
                 DisplayManager::Get()->Draw();
             }
             EndDrawing();
-            if (IsKeyPressed(KEY_SPACE))
-                LoadSystem::LoadProject("./Projects/test1/save.json");
-            if (IsKeyPressed(KEY_ENTER))
-                SaveSystem::SaveProject();
         }
     }
 
@@ -110,6 +105,7 @@ namespace hr {
         (void)object;
         (void)parent;
         // for unused parameter
+        // TODO
         return nullptr;
     }
 
@@ -125,7 +121,7 @@ namespace hr {
         // } else {
         //     t -= GetFrameTime();
         // }
-        // NEED THREAD !
+        // TODO NEED THREAD !
     }
 
     std::vector<GameObject *> Engine::GetEntities() const
@@ -198,5 +194,20 @@ namespace hr {
     GameObject *Engine::GetMainCamera() const
     {
         return _mainCamera;
+    }
+
+    std::string Engine::GetProjectName() const
+    {
+        return _projectName;
+    }
+
+    void Engine::SetProjectName(const std::string &projectName)
+    {
+        _projectName = projectName;
+    }
+    
+    void Engine::SetRunning(bool running)
+    {
+        _running = running;
     }
 }

@@ -26,10 +26,11 @@ namespace hr {
         return json;
     }
 
-    void SaveSystem::SaveProject()
+    void SaveSystem::SaveProject(const std::string &name)
     {
-        std::string projectRoot = "./Projects/test1";
-        std::ofstream file(projectRoot + "/save.json", std::ios::trunc);
+        if (Engine::Get()->GetProjectName() == "")
+            return;
+        std::ofstream file("./Projects/" + name + "/save.json", std::ios::trunc);
 
         std::vector<GameObject *> _entities = Engine::Get()->GetRootEntities();
     
@@ -41,7 +42,5 @@ namespace hr {
 
         file.close();
     }
-
-
 }
 

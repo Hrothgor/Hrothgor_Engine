@@ -1,0 +1,25 @@
+{
+    "entities": [
+        {
+            "name": "GameObject (0)",
+            "transform": {
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "uuid": "459140f8-35e2-4cb4-8610-4ed3cefd3e53"
+        }
+    ]
+}

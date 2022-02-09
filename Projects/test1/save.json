@@ -25,12 +25,12 @@
                     0.0
                 ],
                 "rotation": [
-                    -45.0,
-                    8.0,
-                    0.0
+                    -8.073188781738281,
+                    -4.427210330963135,
+                    -18.494062423706055
                 ],
                 "scale": [
-                    1.0,
+                    0.9999606609344482,
                     1.0,
                     1.0
                 ]
@@ -308,50 +308,6 @@
             "uuid": "f5e682b8-e191-45c3-8b2f-53b6a8a8fcc0"
         },
         {
-            "components": [
-                [
-                    "PrimitiveRenderer",
-                    {
-                        "cube": {
-                            "height": 1.0,
-                            "length": 1.0,
-                            "width": 1.0
-                        },
-                        "plane": {
-                            "length": 58.0,
-                            "resolution": 5,
-                            "width": 71.0
-                        },
-                        "sphere": {
-                            "radius": 1.0,
-                            "rings": 8,
-                            "slices": 8
-                        },
-                        "type": 2
-                    }
-                ]
-            ],
-            "name": "GameObject (2)",
-            "transform": {
-                "position": [
-                    -18.519487380981445,
-                    0.06617716699838638,
-                    13.221745491027832
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "uuid": "a4bc9946-7759-48cc-988d-b49c0d82ab24"
-        },
-        {
             "childs": [
                 {
                     "components": [
@@ -403,9 +359,9 @@
             "name": "lampadaire",
             "transform": {
                 "position": [
-                    -27.37249755859375,
-                    1.0,
-                    18.905733108520508
+                    -25.674983978271484,
+                    0.13352862000465393,
+                    11.81028938293457
                 ],
                 "rotation": [
                     0.0,
@@ -419,6 +375,50 @@
                 ]
             },
             "uuid": "41702f6c-8958-43a3-bb81-c3faa08fdfc4"
+        },
+        {
+            "components": [
+                [
+                    "PrimitiveRenderer",
+                    {
+                        "cube": {
+                            "height": 1.0,
+                            "length": 1.0,
+                            "width": 1.0
+                        },
+                        "plane": {
+                            "length": 166.0,
+                            "resolution": 4,
+                            "width": 149.0
+                        },
+                        "sphere": {
+                            "radius": 1.0,
+                            "rings": 8,
+                            "slices": 8
+                        },
+                        "type": 2
+                    }
+                ]
+            ],
+            "name": "Ground",
+            "transform": {
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "uuid": "fe71361e-de0a-4517-b382-ea516258f499"
         }
     ]
 }
