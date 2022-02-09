@@ -2,11 +2,11 @@
 ** EPITECH PROJECT, 2022
 ** Physics_engine
 ** File description:
-** PrimitiveRenderer
+** MeshFilter
 */
 
-#ifndef PRIMITIVERENDERER_HPP_
-#define PRIMITIVERENDERER_HPP_
+#ifndef MESHFILTER_HPP_
+#define MESHFILTER_HPP_
 
 #include "include.hpp"
 #include "../Ecs/Component.hpp"
@@ -17,12 +17,13 @@ namespace hr {
         CUBE = 0,
         SPHERE,
         PLANE,
+        MESH,
     };
 
-    class PrimitiveRenderer : public Component {
+    class MeshFilter : public Component {
         public:
-            PrimitiveRenderer(GameObject *gameObject);
-            ~PrimitiveRenderer();
+            MeshFilter(GameObject *gameObject);
+            ~MeshFilter();
 
             void Start() override {};
             void Update() override;
@@ -55,6 +56,9 @@ namespace hr {
             int GetPlaneResolution() const;
             void SetPlaneResolution(int resolution);
 
+            std::string GetMeshPath() const;
+            void LoadMeshFromPath(const std::string &path);
+
             void ImGuiRender();
             void OnDrawGizmos() {};
 
@@ -78,7 +82,9 @@ namespace hr {
             float _planeWidth = 1;
             float _planeLength = 1;
             int _planeResolution = 5;
+            // for mesh
+            std::string _meshPath;
     };
 }
 
-#endif /*  PRIMITIVERENDERER_HPP_ */
+#endif /*  MESHFILTER_HPP_ */

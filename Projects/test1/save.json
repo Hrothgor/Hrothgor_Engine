@@ -1,80 +1,36 @@
 {
     "entities": [
         {
-            "components": [
-                [
-                    "Light",
-                    {
-                        "color": [
-                            0,
-                            15,
-                            255,
-                            255
-                        ],
-                        "intensity": 1.0,
-                        "range": 10.0,
-                        "type": 0
-                    }
-                ]
-            ],
-            "name": "lightDir",
-            "transform": {
-                "position": [
-                    0.0,
-                    17.535137176513672,
-                    0.0
-                ],
-                "rotation": [
-                    -8.073188781738281,
-                    -4.427210330963135,
-                    -18.494062423706055
-                ],
-                "scale": [
-                    0.9999606609344482,
-                    1.0,
-                    1.0
-                ]
-            },
-            "uuid": "5bb6577c-bbc6-4409-89b0-b93e0deb611c"
-        },
-        {
             "childs": [
                 {
                     "components": [
                         [
-                            "MeshRenderer",
+                            "MeshFilter",
                             {
-                                "modelPath": "ressources/bomb.obj",
-                                "texturePath": ""
+                                "cube": {
+                                    "height": 1.0,
+                                    "length": 1.0,
+                                    "width": 1.0
+                                },
+                                "mesh": {
+                                    "path": "ressources/bomb.obj"
+                                },
+                                "plane": {
+                                    "length": 1.0,
+                                    "resolution": 5,
+                                    "width": 1.0
+                                },
+                                "sphere": {
+                                    "radius": 1.0,
+                                    "rings": 8,
+                                    "slices": 8
+                                },
+                                "type": 3
                             }
-                        ]
-                    ],
-                    "name": "bomb0",
-                    "transform": {
-                        "position": [
-                            0.0,
-                            0.0,
-                            0.0
                         ],
-                        "rotation": [
-                            0.0,
-                            0.0,
-                            0.0
-                        ],
-                        "scale": [
-                            1.0,
-                            1.0,
-                            1.0
-                        ]
-                    },
-                    "uuid": "ce7c6234-f508-447d-b230-f65e7f33a773"
-                },
-                {
-                    "components": [
                         [
                             "MeshRenderer",
                             {
-                                "modelPath": "ressources/bomb.obj",
                                 "texturePath": ""
                             }
                         ]
@@ -97,14 +53,37 @@
                             1.0
                         ]
                     },
-                    "uuid": "e3948883-1ce1-47ec-aabd-62cbcdf28599"
+                    "uuid": "0b2408f0-4c48-437d-b76c-a4b584dc6031"
                 },
                 {
                     "components": [
                         [
+                            "MeshFilter",
+                            {
+                                "cube": {
+                                    "height": 1.0,
+                                    "length": 1.0,
+                                    "width": 1.0
+                                },
+                                "mesh": {
+                                    "path": "ressources/bomb.obj"
+                                },
+                                "plane": {
+                                    "length": 1.0,
+                                    "resolution": 5,
+                                    "width": 1.0
+                                },
+                                "sphere": {
+                                    "radius": 1.0,
+                                    "rings": 8,
+                                    "slices": 8
+                                },
+                                "type": 3
+                            }
+                        ],
+                        [
                             "MeshRenderer",
                             {
-                                "modelPath": "ressources/bomb.obj",
                                 "texturePath": ""
                             }
                         ]
@@ -127,14 +106,37 @@
                             1.0
                         ]
                     },
-                    "uuid": "b78c2c1b-1594-485f-94d9-90a886b4bf03"
+                    "uuid": "c34a0c6f-8544-4f54-bba8-15b06d85dde2"
                 },
                 {
                     "components": [
                         [
+                            "MeshFilter",
+                            {
+                                "cube": {
+                                    "height": 1.0,
+                                    "length": 1.0,
+                                    "width": 1.0
+                                },
+                                "mesh": {
+                                    "path": "ressources/bomb.obj"
+                                },
+                                "plane": {
+                                    "length": 1.0,
+                                    "resolution": 5,
+                                    "width": 1.0
+                                },
+                                "sphere": {
+                                    "radius": 1.0,
+                                    "rings": 8,
+                                    "slices": 8
+                                },
+                                "type": 3
+                            }
+                        ],
+                        [
                             "MeshRenderer",
                             {
-                                "modelPath": "ressources/bomb.obj",
                                 "texturePath": ""
                             }
                         ]
@@ -157,14 +159,37 @@
                             1.0
                         ]
                     },
-                    "uuid": "203a3719-1772-4b7a-af6b-52e01ecca133"
+                    "uuid": "df139fd8-f6b7-4ace-824c-a0025a56b5ba"
                 },
                 {
                     "components": [
                         [
+                            "MeshFilter",
+                            {
+                                "cube": {
+                                    "height": 1.0,
+                                    "length": 1.0,
+                                    "width": 1.0
+                                },
+                                "mesh": {
+                                    "path": "ressources/bomb.obj"
+                                },
+                                "plane": {
+                                    "length": 1.0,
+                                    "resolution": 5,
+                                    "width": 1.0
+                                },
+                                "sphere": {
+                                    "radius": 1.0,
+                                    "rings": 8,
+                                    "slices": 8
+                                },
+                                "type": 3
+                            }
+                        ],
+                        [
                             "MeshRenderer",
                             {
-                                "modelPath": "ressources/bomb.obj",
                                 "texturePath": ""
                             }
                         ]
@@ -187,14 +212,37 @@
                             1.0
                         ]
                     },
-                    "uuid": "a9d64cd4-d5af-4800-a51e-814f8dfaa702"
+                    "uuid": "bb7a271f-a532-4a3d-abc5-37057eecc83c"
                 }
             ],
             "components": [
                 [
+                    "MeshFilter",
+                    {
+                        "cube": {
+                            "height": 1.0,
+                            "length": 1.0,
+                            "width": 1.0
+                        },
+                        "mesh": {
+                            "path": "ressources/dragon.obj"
+                        },
+                        "plane": {
+                            "length": 1.0,
+                            "resolution": 5,
+                            "width": 1.0
+                        },
+                        "sphere": {
+                            "radius": 1.0,
+                            "rings": 8,
+                            "slices": 8
+                        },
+                        "type": 3
+                    }
+                ],
+                [
                     "MeshRenderer",
                     {
-                        "modelPath": "ressources/dragon.obj",
                         "texturePath": ""
                     }
                 ]
@@ -202,13 +250,13 @@
             "name": "dragon",
             "transform": {
                 "position": [
-                    -10.518034934997559,
-                    -9.651713480707258e-05,
-                    7.097678184509277
+                    0.0,
+                    0.0,
+                    0.0
                 ],
                 "rotation": [
                     0.0,
-                    -0.0,
+                    0.0,
                     0.0
                 ],
                 "scale": [
@@ -217,179 +265,62 @@
                     1.0
                 ]
             },
-            "uuid": "c2c0efed-302c-424d-aa92-cf0d2d8d5c54"
+            "uuid": "aa9615e5-813d-4907-8bcc-ada1714edb70"
         },
         {
             "components": [
                 [
-                    "PrimitiveRenderer",
+                    "Light",
                     {
-                        "cube": {
-                            "height": 11.0,
-                            "length": 18.0,
-                            "width": 12.0
-                        },
-                        "plane": {
-                            "length": 1.0,
-                            "resolution": 5,
-                            "width": 1.0
-                        },
-                        "sphere": {
-                            "radius": 1.0,
-                            "rings": 8,
-                            "slices": 8
-                        },
+                        "color": [
+                            0,
+                            85,
+                            182,
+                            255
+                        ],
+                        "intensity": 1.0,
+                        "range": 10.0,
                         "type": 0
                     }
                 ]
             ],
-            "name": "GameObject (0)",
+            "name": "lightDir",
             "transform": {
                 "position": [
-                    25.703020095825195,
-                    18.912384033203125,
-                    -17.84551239013672
+                    0.0,
+                    19.173154830932617,
+                    0.0
                 ],
                 "rotation": [
-                    0.0,
-                    18.0,
-                    0.0
+                    -11.643448829650879,
+                    -0.2900462746620178,
+                    -9.374263763427734
                 ],
                 "scale": [
                     1.0,
-                    1.0,
+                    0.9999997615814209,
                     1.0
                 ]
             },
-            "uuid": "ac10a77f-afc4-42f3-a8c5-4d1e2c359f93"
+            "uuid": "33f6fe74-1642-4bdd-80df-54bf9fa3c8ad"
         },
         {
             "components": [
                 [
-                    "PrimitiveRenderer",
+                    "MeshFilter",
                     {
                         "cube": {
                             "height": 1.0,
                             "length": 1.0,
                             "width": 1.0
                         },
-                        "plane": {
-                            "length": 1.0,
-                            "resolution": 5,
-                            "width": 1.0
-                        },
-                        "sphere": {
-                            "radius": 6.0,
-                            "rings": 28,
-                            "slices": 40
-                        },
-                        "type": 1
-                    }
-                ]
-            ],
-            "name": "GameObject (1)",
-            "transform": {
-                "position": [
-                    -18.92986297607422,
-                    20.332733154296875,
-                    -0.5608753561973572
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "uuid": "f5e682b8-e191-45c3-8b2f-53b6a8a8fcc0"
-        },
-        {
-            "childs": [
-                {
-                    "components": [
-                        [
-                            "Light",
-                            {
-                                "color": [
-                                    255,
-                                    0,
-                                    0,
-                                    255
-                                ],
-                                "intensity": 2.0,
-                                "range": 39.0,
-                                "type": 1
-                            }
-                        ]
-                    ],
-                    "name": "light",
-                    "transform": {
-                        "position": [
-                            0.0,
-                            18.042034149169922,
-                            0.0
-                        ],
-                        "rotation": [
-                            0.0,
-                            -0.0,
-                            0.0
-                        ],
-                        "scale": [
-                            1.0,
-                            1.0,
-                            1.0
-                        ]
-                    },
-                    "uuid": "5bdeb1a9-e395-4e0d-8250-0543f33424e2"
-                }
-            ],
-            "components": [
-                [
-                    "MeshRenderer",
-                    {
-                        "modelPath": "ressources/lampadaire.obj",
-                        "texturePath": ""
-                    }
-                ]
-            ],
-            "name": "lampadaire",
-            "transform": {
-                "position": [
-                    -25.674983978271484,
-                    0.13352862000465393,
-                    11.81028938293457
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "uuid": "41702f6c-8958-43a3-bb81-c3faa08fdfc4"
-        },
-        {
-            "components": [
-                [
-                    "PrimitiveRenderer",
-                    {
-                        "cube": {
-                            "height": 1.0,
-                            "length": 1.0,
-                            "width": 1.0
+                        "mesh": {
+                            "path": ""
                         },
                         "plane": {
-                            "length": 166.0,
-                            "resolution": 4,
-                            "width": 149.0
+                            "length": 115.0,
+                            "resolution": 12,
+                            "width": 109.0
                         },
                         "sphere": {
                             "radius": 1.0,
@@ -397,6 +328,26 @@
                             "slices": 8
                         },
                         "type": 2
+                    }
+                ],
+                [
+                    "PrimitiveCollider",
+                    {
+                        "cube": {
+                            "height": 0.5,
+                            "length": 115.0999984741211,
+                            "width": 109.0999984741211
+                        },
+                        "sphere": {
+                            "radius": 1.100000023841858
+                        },
+                        "type": 0
+                    }
+                ],
+                [
+                    "MeshRenderer",
+                    {
+                        "texturePath": ""
                     }
                 ]
             ],
@@ -418,7 +369,233 @@
                     1.0
                 ]
             },
-            "uuid": "fe71361e-de0a-4517-b382-ea516258f499"
+            "uuid": "074bc669-20d4-4730-8562-2094ba1dc7f4"
+        },
+        {
+            "components": [
+                [
+                    "MeshFilter",
+                    {
+                        "cube": {
+                            "height": 1.0,
+                            "length": 1.0,
+                            "width": 1.0
+                        },
+                        "mesh": {
+                            "path": ""
+                        },
+                        "plane": {
+                            "length": 1.0,
+                            "resolution": 5,
+                            "width": 1.0
+                        },
+                        "sphere": {
+                            "radius": 9.0,
+                            "rings": 30,
+                            "slices": 100
+                        },
+                        "type": 1
+                    }
+                ],
+                [
+                    "PrimitiveCollider",
+                    {
+                        "cube": {
+                            "height": 1.100000023841858,
+                            "length": 1.100000023841858,
+                            "width": 1.100000023841858
+                        },
+                        "sphere": {
+                            "radius": 9.100000381469727
+                        },
+                        "type": 1
+                    }
+                ],
+                [
+                    "MeshRenderer",
+                    {
+                        "texturePath": ""
+                    }
+                ]
+            ],
+            "name": "Sphere",
+            "transform": {
+                "position": [
+                    -10.200236320495605,
+                    24.42578125,
+                    3.9314184188842773
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "uuid": "6bbcc305-ee03-4b1d-8c98-3b86c49bc8f2"
+        },
+        {
+            "components": [
+                [
+                    "MeshFilter",
+                    {
+                        "cube": {
+                            "height": 15.0,
+                            "length": 15.0,
+                            "width": 15.0
+                        },
+                        "mesh": {
+                            "path": ""
+                        },
+                        "plane": {
+                            "length": 1.0,
+                            "resolution": 5,
+                            "width": 1.0
+                        },
+                        "sphere": {
+                            "radius": 1.0,
+                            "rings": 8,
+                            "slices": 8
+                        },
+                        "type": 0
+                    }
+                ],
+                [
+                    "PrimitiveCollider",
+                    {
+                        "cube": {
+                            "height": 15.100000381469727,
+                            "length": 15.100000381469727,
+                            "width": 15.100000381469727
+                        },
+                        "sphere": {
+                            "radius": 1.100000023841858
+                        },
+                        "type": 0
+                    }
+                ],
+                [
+                    "MeshRenderer",
+                    {
+                        "texturePath": ""
+                    }
+                ]
+            ],
+            "name": "Cube",
+            "transform": {
+                "position": [
+                    23.861608505249023,
+                    25.10873031616211,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    48.39131546020508,
+                    0.0
+                ],
+                "scale": [
+                    0.9999999403953552,
+                    1.0,
+                    0.9999997615814209
+                ]
+            },
+            "uuid": "820c5402-21ee-4d64-a53c-2c73e24d8a2c"
+        },
+        {
+            "childs": [
+                {
+                    "components": [
+                        [
+                            "Light",
+                            {
+                                "color": [
+                                    255,
+                                    0,
+                                    0,
+                                    255
+                                ],
+                                "intensity": 2.0,
+                                "range": 36.0,
+                                "type": 1
+                            }
+                        ]
+                    ],
+                    "name": "light",
+                    "transform": {
+                        "position": [
+                            0.0,
+                            18.261137008666992,
+                            0.0
+                        ],
+                        "rotation": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "uuid": "41ef2ee8-8efc-46da-ac07-e42e721f19a2"
+                }
+            ],
+            "components": [
+                [
+                    "MeshFilter",
+                    {
+                        "cube": {
+                            "height": 1.0,
+                            "length": 1.0,
+                            "width": 1.0
+                        },
+                        "mesh": {
+                            "path": "ressources/lampadaire.obj"
+                        },
+                        "plane": {
+                            "length": 1.0,
+                            "resolution": 5,
+                            "width": 1.0
+                        },
+                        "sphere": {
+                            "radius": 1.0,
+                            "rings": 8,
+                            "slices": 8
+                        },
+                        "type": 3
+                    }
+                ],
+                [
+                    "MeshRenderer",
+                    {
+                        "texturePath": ""
+                    }
+                ]
+            ],
+            "name": "Lampadaire",
+            "transform": {
+                "position": [
+                    -15.947005271911621,
+                    -2.635274904605467e-05,
+                    24.268539428710938
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "uuid": "e2fa15f8-23dd-43fd-bd4e-125ecd84d8f8"
         }
     ]
 }

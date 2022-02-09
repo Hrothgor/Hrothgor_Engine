@@ -20,15 +20,11 @@ namespace hr {
 
             virtual void Update() override;
 
-            void Load(const std::string &path, const std::string &texturePath = "");
-
             void LoadModelFromPath(const std::string &path);
             void LoadTextureFromPath(const std::string &path);
 
-            Model GetModel() const;
             Texture2D GetTexture() const;
 
-            std::string GetModelPath() const;
             std::string GetTexturePath() const;
 
             virtual void ImGuiRender() override;
@@ -37,10 +33,8 @@ namespace hr {
             virtual void FromJson(const nlohmann::json &json) override;
         protected:
         private:
-            Model _model = {0};
             Texture2D _texture = {0};
 
-            std::string _modelPath;
             std::string _texturePath;
     };
 }

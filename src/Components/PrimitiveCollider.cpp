@@ -8,7 +8,6 @@
 #include "PrimitiveCollider.hpp"
 #include "../RenderEngine/UI/UIElement.hpp"
 #include "Transform.hpp"
-#include "PrimitiveRenderer.hpp"
 #include "../Ecs/GameObject.hpp"
 
 namespace hr {
@@ -17,19 +16,21 @@ namespace hr {
     {
         _name = "PrimitiveCollider";
 
-        PrimitiveRenderer *primitiveRenderer = GetGameObject()->TryGetComponent<PrimitiveRenderer>();
-        if (primitiveRenderer) {
-            _type = primitiveRenderer->GetType();
-            _cubeWidth = primitiveRenderer->GetCubeWidth() + 0.1;
-            _cubeHeight = primitiveRenderer->GetCubeHeight() + 0.1;
-            _cubeLength = primitiveRenderer->GetCubeLength() + 0.1;
-            _sphereRadius = primitiveRenderer->GetSphereRadius() + 0.1;
+        MeshFilter *meshFilter = GetGameObject()->TryGetComponent<MeshFilter>();
+        if (meshFilter) {
+            _type = meshFilter->GetType();
+            _cubeWidth = meshFilter->GetCubeWidth() + 0.1;
+            _cubeHeight = meshFilter->GetCubeHeight() + 0.1;
+            _cubeLength = meshFilter->GetCubeLength() + 0.1;
+            _sphereRadius = meshFilter->GetSphereRadius() + 0.1;
             if (_type == PLANE) {
                 _type = CUBE;
-                _cubeWidth = primitiveRenderer->GetPlaneWidth() + 0.1;
+                _cubeWidth = meshFilter->GetPlaneWidth() + 0.1;
                 _cubeHeight = 0.5;
-                _cubeLength = primitiveRenderer->GetPlaneLength() + 0.1;
+                _cubeLength = meshFilter->GetPlaneLength() + 0.1;
             }
+            if (_type == MESH)
+                _type = CUBE;
         } else {
             _type = CUBE;
         }
@@ -65,6 +66,8 @@ namespace hr {
                 _mesh = GenMeshSphere(_sphereRadius, 10, 10);
                 break;
             case PLANE:
+                break;
+            case MESH:
                 break;
         }
     }
@@ -132,6 +135,8 @@ namespace hr {
                 break;
             case PLANE:
                 break;
+            case MESH:
+                break;
         }
     }
 
@@ -154,6 +159,8 @@ namespace hr {
                             10, 10, GREEN);
                 break;
             case PLANE:
+                break;
+            case MESH:
                 break;
         }
     }

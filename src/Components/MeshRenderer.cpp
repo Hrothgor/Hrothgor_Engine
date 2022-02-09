@@ -8,6 +8,8 @@
 #include "MeshRenderer.hpp"
 #include "../RenderEngine/UI/UIElement.hpp"
 #include "../RenderEngine/Master3DRenderer.hpp"
+#include "../Ecs/GameObject.hpp"
+#include "MeshFilter.hpp"
 
 static inline bool ends_with(std::string const &value, std::string const &ending)
 {
@@ -26,41 +28,15 @@ namespace hr {
     {
         if (_texture.id != 0)
             UnloadTexture(_texture);
-        if (_model.meshCount > 0)
-            UnloadModel(_model);
     }
 
     void MeshRenderer::Update()
     {
-        Master3DRenderer::Get()->RegisterObject(GetGameObject());
-    }
-
-    void MeshRenderer::Load(const std::string &path, const std::string &texturePath)
-    {
-        if (std::filesystem::exists(path) && ends_with(path, ".obj")) {
-            if (_model.meshCount > 0)
-                UnloadModel(_model);
-            _model = LoadModel(path.c_str());
-            _modelPath = path;
-            if (texturePath != "" && std::filesystem::exists(texturePath) && ends_with(texturePath, ".png")) {
-                if (_texture.id != 0)
-                    UnloadTexture(_texture);
-                _texture = LoadTexture(texturePath.c_str());
-                _texturePath = texturePath;
-                _model.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = _texture;
-            }
-        }
-    }
-
-    void MeshRenderer::LoadModelFromPath(const std::string &path)
-    {
-        if (std::filesystem::exists(path) && ends_with(path, ".obj")) {
-            if (_model.meshCount > 0)
-                UnloadModel(_model);
-            _model = LoadModel(path.c_str());
-            _modelPath = path;
-            if (_texture.id != 0)
-                _model.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = _texture;
+        MeshFilter *meshFilter = GetGameObject()->TryGetComponent<MeshFilter>();
+        if (meshFilter) {
+            if (meshFilter->GetModel().meshCount > 0 && _texture.id != 0)
+                meshFilter->GetModel().materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = _texture;
+            Master3DRenderer::Get()->RegisterObject(GetGameObject());
         }
     }
 
@@ -71,24 +47,12 @@ namespace hr {
                 UnloadTexture(_texture);
             _texture = LoadTexture(path.c_str());
             _texturePath = path;
-            if (_model.meshCount > 0)
-                _model.materials[0].maps[MATERIAL_MAP_DIFFUSE].texture = _texture;
         }
-    }
-
-    Model MeshRenderer::GetModel() const
-    {
-        return _model;
     }
 
     Texture2D MeshRenderer::GetTexture() const
     {
         return _texture;
-    }
-
-    std::string MeshRenderer::GetModelPath() const
-    {
-        return _modelPath;
     }
 
     std::string MeshRenderer::GetTexturePath() const
@@ -98,15 +62,13 @@ namespace hr {
 
     void MeshRenderer::ImGuiRender()
     {
-        UIElement::StringField("Model", [this](){return GetModelPath();}, [this](const std::string &str){LoadModelFromPath(str);});
-        UIElement::StringField("Texture", [this](){return GetTexturePath();}, [this](const std::string &str){LoadModelFromPath(str);});
+        UIElement::StringField("Texture", [this](){return GetTexturePath();}, [this](const std::string &str){LoadTextureFromPath(str);});
     }
 
     nlohmann::json MeshRenderer::ToJson() const
     {
         nlohmann::json json;
 
-        json["modelPath"] = _modelPath;
         json["texturePath"] = _texturePath;
 
         return json;
@@ -114,10 +76,8 @@ namespace hr {
 
     void MeshRenderer::FromJson(const nlohmann::json &json)
     {
-        _modelPath = json["modelPath"].get<std::string>();
         _texturePath = json["texturePath"].get<std::string>();
 
-        LoadModelFromPath(_modelPath);
         LoadTextureFromPath(_texturePath);
     }
 }

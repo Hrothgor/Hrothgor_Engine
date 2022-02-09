@@ -11,7 +11,7 @@
 
 #include "../Components/Transform.hpp"
 #include "../Components/MeshRenderer.hpp"
-#include "../Components/PrimitiveRenderer.hpp"
+#include "../Components/MeshFilter.hpp"
 #include "../Components/Light.hpp"
 #include "../Components/MainCamera3D.hpp"
 
@@ -40,17 +40,11 @@ namespace hr {
         BeginFrame();
         for (GameObject *object : _objects) {
             Transform *transform = object->GetTransform();
-            MeshRenderer *meshRenderer = object->TryGetComponent<MeshRenderer>();
-            PrimitiveRenderer *primitiveRenderer = object->TryGetComponent<PrimitiveRenderer>();
+            // MeshRenderer *meshRenderer = object->GetComponent<MeshRenderer>();
+            MeshFilter *meshFilter = object->GetComponent<MeshFilter>();
 
-            Model model;
-            if (meshRenderer)
-                model = meshRenderer->GetModel();
-            else if (primitiveRenderer)
-                model = primitiveRenderer->GetModel();
-                
+            Model model = meshFilter->GetModel();
             AxisAngle axisAngle = transform->GetRotationAxisAngle();
-
             for (int i = 0; i < model.materialCount; i++)
                 model.materials[i].shader = _lightShader.GetShader();
             DrawModelEx(model, transform->GetPositionWorld(), axisAngle.axis, axisAngle.angle, transform->GetScale(), WHITE);

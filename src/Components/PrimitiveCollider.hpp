@@ -11,7 +11,7 @@
 #include "include.hpp"
 #include "../Ecs/Component.hpp"
 #include "json.hpp"
-#include "PrimitiveRenderer.hpp"
+#include "MeshFilter.hpp"
 
 namespace hr {
     class PrimitiveCollider : public Component {

@@ -2,56 +2,51 @@
 ** EPITECH PROJECT, 2022
 ** Physics_engine
 ** File description:
-** PrimitiveRenderer
+** MeshFilter
 */
 
-#include "PrimitiveRenderer.hpp"
+#include "MeshFilter.hpp"
 #include "../RenderEngine/UI/UIElement.hpp"
 #include "../RenderEngine/Master3DRenderer.hpp"
-#include "PrimitiveCollider.hpp"
 #include "../Ecs/GameObject.hpp"
 
+static inline bool ends_with(std::string const &value, std::string const &ending)
+{
+    if (ending.size() > value.size()) return false;
+    return std::equal(ending.rbegin(), ending.rend(), value.rbegin());
+}
+
 namespace hr {
-    PrimitiveRenderer::PrimitiveRenderer(GameObject *gameObject)
+    MeshFilter::MeshFilter(GameObject *gameObject)
         : Component(gameObject)
     {
-        _name = "PrimitiveRenderer";
+        _name = "MeshFilter";
 
-        PrimitiveCollider *primitiveCollider = GetGameObject()->TryGetComponent<PrimitiveCollider>();
-        if (primitiveCollider) {
-            _type = primitiveCollider->GetType();
-            _cubeWidth = primitiveCollider->GetCubeWidth() - 0.1;
-            _cubeHeight = primitiveCollider->GetCubeHeight() - 0.1;
-            _cubeLength = primitiveCollider->GetCubeLength() - 0.1;
-            _sphereRadius = primitiveCollider->GetSphereRadius() - 0.1;
-        } else {
-            _type = CUBE;
-        }
+        _type = CUBE;
         SetModel(_type);
     }
 
-    PrimitiveRenderer::~PrimitiveRenderer()
+    MeshFilter::~MeshFilter()
     {
         if (_model.meshCount > 0)
             UnloadModel(_model);
     }
 
-    void PrimitiveRenderer::Update()
+    void MeshFilter::Update()
     {
-        Master3DRenderer::Get()->RegisterObject(GetGameObject());
     }
 
-    Model PrimitiveRenderer::GetModel() const 
+    Model MeshFilter::GetModel() const 
     {
         return _model;
     }
 
-    PrimitiveMeshType PrimitiveRenderer::GetType() const
+    PrimitiveMeshType MeshFilter::GetType() const
     {
         return _type;
     }
 
-    void PrimitiveRenderer::SetModel(PrimitiveMeshType type)
+    void MeshFilter::SetModel(PrimitiveMeshType type)
     {
         _type = type;
         if (_model.meshCount > 0)
@@ -66,120 +61,137 @@ namespace hr {
             case PLANE:
                 _model = LoadModelFromMesh(GenMeshPlane(_planeWidth, _planeLength, _planeResolution, _planeResolution));
                 break;
+            case MESH:
+                _model = LoadModel(_meshPath.c_str());
+                break;
         }
     }
 
-    float PrimitiveRenderer::GetCubeWidth() const
+    float MeshFilter::GetCubeWidth() const
     {
         return _cubeWidth;
     }
 
-    void PrimitiveRenderer::SetCubeWidth(float width)
+    void MeshFilter::SetCubeWidth(float width)
     {
         _cubeWidth = width;
         if (_type == CUBE)
             SetModel(_type);
     }
 
-    float PrimitiveRenderer::GetCubeHeight() const
+    float MeshFilter::GetCubeHeight() const
     {
         return _cubeHeight;
     }
 
-    void PrimitiveRenderer::SetCubeHeight(float height)
+    void MeshFilter::SetCubeHeight(float height)
     {
         _cubeHeight = height;
         if (_type == CUBE)
             SetModel(_type);
     }
 
-    float PrimitiveRenderer::GetCubeLength() const
+    float MeshFilter::GetCubeLength() const
     {
         return _cubeLength;
     }
 
-    void PrimitiveRenderer::SetCubeLength(float length)
+    void MeshFilter::SetCubeLength(float length)
     {
         _cubeLength = length;
         if (_type == CUBE)
             SetModel(_type);
     }
 
-    float PrimitiveRenderer::GetSphereRadius() const
+    float MeshFilter::GetSphereRadius() const
     {
         return _sphereRadius;
     }
 
-    void PrimitiveRenderer::SetSphereRadius(float radius)
+    void MeshFilter::SetSphereRadius(float radius)
     {
         _sphereRadius = radius;
         if (_type == SPHERE)
             SetModel(_type);
     }
 
-    int PrimitiveRenderer::GetSphereRings() const
+    int MeshFilter::GetSphereRings() const
     {
         return _sphereRings;
     }
 
-    void PrimitiveRenderer::SetSphereRings(int rings)
+    void MeshFilter::SetSphereRings(int rings)
     {
         _sphereRings = rings;
         if (_type == SPHERE)
             SetModel(_type);
     }
 
-    int PrimitiveRenderer::GetSphereSlices() const
+    int MeshFilter::GetSphereSlices() const
     {
         return _sphereSlices;
     }
 
-    void PrimitiveRenderer::SetSphereSlices(int slices)
+    void MeshFilter::SetSphereSlices(int slices)
     {
         _sphereSlices = slices;
         if (_type == SPHERE)
             SetModel(_type);
     }
 
-    float PrimitiveRenderer::GetPlaneWidth() const
+    float MeshFilter::GetPlaneWidth() const
     {
         return _planeWidth;
     }
 
-    void PrimitiveRenderer::SetPlaneWidth(float width)
+    void MeshFilter::SetPlaneWidth(float width)
     {
         _planeWidth = width;
         if (_type == PLANE)
             SetModel(_type);
     }
 
-    float PrimitiveRenderer::GetPlaneLength() const
+    float MeshFilter::GetPlaneLength() const
     {
         return _planeLength;
     }
 
-    void PrimitiveRenderer::SetPlaneLength(float length)
+    void MeshFilter::SetPlaneLength(float length)
     {
         _planeLength = length;
         if (_type == PLANE)
             SetModel(_type);
     }
 
-    int PrimitiveRenderer::GetPlaneResolution() const
+    int MeshFilter::GetPlaneResolution() const
     {
         return _planeResolution;
     }
 
-    void PrimitiveRenderer::SetPlaneResolution(int resolution)
+    void MeshFilter::SetPlaneResolution(int resolution)
     {
         _planeResolution = resolution;
         if (_type == PLANE)
             SetModel(_type);
     }
 
-    void PrimitiveRenderer::ImGuiRender()
+    std::string MeshFilter::GetMeshPath() const
     {
-        std::vector<std::string> enumNames = {"Cube", "Sphere", "Plane"};
+        return _meshPath;
+    }
+
+    void MeshFilter::LoadMeshFromPath(const std::string &path)
+    {
+        if (std::filesystem::exists(path) && ends_with(path, ".obj")) {
+            _meshPath = path;
+            if (_type == MESH)
+                SetModel(_type);
+        }
+    }
+
+    void MeshFilter::ImGuiRender()
+    {
+        std::vector<std::string> enumNames = {"Cube", "Sphere", "Plane", "Mesh"};
         UIElement::EnumField("Primitive", [this](){return GetType();}, [this](int val){SetModel((PrimitiveMeshType)val);}, enumNames);
         switch (_type) {
             case CUBE:
@@ -197,10 +209,13 @@ namespace hr {
                 UIElement::FloatField("Plane Length", [this](){return GetPlaneLength();}, [this](float val){SetPlaneLength(val);});
                 UIElement::IntField("Plane Resolution", [this](){return GetPlaneResolution();}, [this](int val){SetPlaneResolution(val);}, 1, 1, 1000);
                 break;
+            case MESH:
+                UIElement::StringField("Model", [this](){return GetMeshPath();}, [this](const std::string &str){LoadMeshFromPath(str);});
+                break;
         }
     }
 
-    nlohmann::json PrimitiveRenderer::ToJson() const
+    nlohmann::json MeshFilter::ToJson() const
     {
         nlohmann::json json;
 
@@ -214,11 +229,12 @@ namespace hr {
         json["plane"]["width"] = _planeWidth;
         json["plane"]["length"] = _planeLength;
         json["plane"]["resolution"] = _planeResolution;
+        json["mesh"]["path"] = _meshPath;
 
         return json;
     }
 
-    void PrimitiveRenderer::FromJson(const nlohmann::json &json)
+    void MeshFilter::FromJson(const nlohmann::json &json)
     {
         _type = (PrimitiveMeshType)json["type"].get<int>();
         _cubeWidth = json["cube"]["width"].get<float>();
@@ -230,6 +246,7 @@ namespace hr {
         _planeWidth = json["plane"]["width"].get<float>();
         _planeLength = json["plane"]["length"].get<float>();
         _planeResolution = json["plane"]["resolution"].get<int>();
+        _meshPath = json["mesh"]["path"].get<std::string>();
         SetModel(_type);
     }
 }

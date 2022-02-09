@@ -12,7 +12,7 @@
 #include "../Components/Light.hpp"
 #include "../Components/MainCamera3D.hpp"
 #include "../Components/PrimitiveCollider.hpp"
-#include "../Components/PrimitiveRenderer.hpp"
+#include "../Components/MeshFilter.hpp"
 #include "../Components/MeshRenderer.hpp"
 #include "../Components/Transform.hpp"
 
@@ -30,7 +30,7 @@ namespace hr {
                 if (name == "MeshRenderer") gameObject->AddComponent<MeshRenderer>()->FromJson(comp[1]);
                 else if (name == "Light") gameObject->AddComponent<Light>()->FromJson(comp[1]);
                 else if (name == "PrimitiveCollider") gameObject->AddComponent<PrimitiveCollider>()->FromJson(comp[1]);
-                else if (name == "PrimitiveRenderer") gameObject->AddComponent<PrimitiveRenderer>()->FromJson(comp[1]);
+                else if (name == "MeshFilter") gameObject->AddComponent<MeshFilter>()->FromJson(comp[1]);
             }
         if (json.contains("childs"))
             for (auto &jsonChild : json["childs"])
