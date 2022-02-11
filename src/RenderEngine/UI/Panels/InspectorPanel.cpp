@@ -105,7 +105,6 @@ namespace hr {
 				ImGui::EndPopup();
 			}
     
-
 			if (wannaDestroy)
 			{
 				Engine::Get()->SetSelectedEntity(nullptr);

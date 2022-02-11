@@ -10,6 +10,7 @@
 #include "Panels/SceneHierarchyPanel.hpp"
 #include "Panels/InspectorPanel.hpp"
 #include "Panels/ViewPortPanel.hpp"
+#include "Panels/AssetsPanel.hpp"
 #include "../../Ecs/Engine.hpp"
 
 #include "../../SaveLoad/LoadSystem.hpp"
@@ -21,6 +22,7 @@ namespace hr {
         _panels.push_back(new SceneHierarchyPanel());
         _panels.push_back(new InspectorPanel());
         _panels.push_back(new ViewPortPanel());
+        _panels.push_back(new AssetsPanel());
     }
 
     ImGuiLayer::~ImGuiLayer()
@@ -63,8 +65,8 @@ namespace hr {
         ImGui::SetNextWindowPos(viewport->WorkPos);
         ImGui::SetNextWindowSize(viewport->WorkSize);
         ImGui::SetNextWindowViewport(viewport->ID);
-        ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
-        ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0);
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0);
         window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
         window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
 
@@ -80,7 +82,7 @@ namespace hr {
         if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
         {
             ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
-            ImGui::DockSpace(dockspace_id, ImVec2(0.0f, 0.0f), dockspace_flags);
+            ImGui::DockSpace(dockspace_id, ImVec2(0.0, 0.0), dockspace_flags);
         }
         ImGui::End();
     }
@@ -92,8 +94,6 @@ namespace hr {
         ImGuiSetStyle();
 
         DrawDockSpace();
-
-        ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0);
 
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0);
 		if (ImGui::BeginMainMenuBar())
@@ -124,9 +124,6 @@ namespace hr {
 			ImGui::EndMainMenuBar();
 		}
 		ImGui::PopStyleVar();
-
-		ImGui::PopStyleVar();
-
 
         for (auto &panel : _panels)
             if (panel->IsEvent())

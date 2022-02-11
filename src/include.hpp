@@ -33,6 +33,7 @@
 #include "raymath.h"
 #include "rlgl.h"
 #include "imgui.h"
+#include "imgui_internal.h"
 #include "rlImGui.h"
 
 #endif /* !INCLUDE_HPP_ */
