@@ -9,12 +9,8 @@
 #include "../RenderEngine/UI/UIElement.hpp"
 #include "../RenderEngine/Master3DRenderer.hpp"
 #include "../Ecs/GameObject.hpp"
-
-static inline bool ends_with(std::string const &value, std::string const &ending)
-{
-    if (ending.size() > value.size()) return false;
-    return std::equal(ending.rbegin(), ending.rend(), value.rbegin());
-}
+#include "../Tools/String.hpp"
+#include "../RenderEngine/AssetsManager.hpp"
 
 namespace hr {
     MeshFilter::MeshFilter(GameObject *gameObject)
@@ -62,7 +58,7 @@ namespace hr {
                 _model = LoadModelFromMesh(GenMeshPlane(_planeWidth, _planeLength, _planeResolution, _planeResolution));
                 break;
             case MESH:
-                _model = LoadModel(_meshPath.c_str());
+                _model = AssetsManager::Get()->EngineModelGet(_meshPath);
                 break;
         }
     }
@@ -182,7 +178,7 @@ namespace hr {
 
     void MeshFilter::LoadMeshFromPath(const std::string &path)
     {
-        if (std::filesystem::exists(path) && ends_with(path, ".obj")) {
+        if (AssetsManager::Get()->EngineModelContains(path)) {
             _meshPath = path;
             if (_type == MESH)
                 SetModel(_type);

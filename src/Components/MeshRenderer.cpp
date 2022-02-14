@@ -10,12 +10,8 @@
 #include "../RenderEngine/Master3DRenderer.hpp"
 #include "../Ecs/GameObject.hpp"
 #include "MeshFilter.hpp"
-
-static inline bool ends_with(std::string const &value, std::string const &ending)
-{
-    if (ending.size() > value.size()) return false;
-    return std::equal(ending.rbegin(), ending.rend(), value.rbegin());
-}
+#include "../Tools/String.hpp"
+#include "../RenderEngine/AssetsManager.hpp"
 
 namespace hr {
     MeshRenderer::MeshRenderer(GameObject *gameObject)
@@ -42,11 +38,11 @@ namespace hr {
 
     void MeshRenderer::LoadTextureFromPath(const std::string &path)
     {
-        if (std::filesystem::exists(path) && ends_with(path, ".png")) {
+        if (AssetsManager::Get()->EngineTextureContains(path)) {
             if (_texture.id != 0)
                 UnloadTexture(_texture);
-            _texture = LoadTexture(path.c_str());
             _texturePath = path;
+            _texture = AssetsManager::Get()->EngineTextureGet(path);
         }
     }
 

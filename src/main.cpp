@@ -7,6 +7,7 @@
 
 #include "include.hpp"
 #include "Ecs/Engine.hpp"
+#include "RenderEngine/AssetsManager.hpp"
 
 int main(void)
 {
@@ -14,6 +15,7 @@ int main(void)
 
     try {
         hr::Engine::Get()->Start();
+        hr::AssetsManager::Get()->Start();
         hr::Engine::Get()->Update();
     }
     catch (const std::exception& e)

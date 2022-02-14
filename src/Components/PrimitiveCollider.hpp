@@ -29,6 +29,9 @@ namespace hr {
 
             PrimitiveMeshType GetType() const;
 
+            void SetOffset(Vector3 offset);
+            Vector3 GetOffset() const;
+
             float GetCubeWidth() const;
             void SetCubeWidth(float width);
             float GetCubeHeight() const;
@@ -50,6 +53,8 @@ namespace hr {
 
             Mesh _mesh = {0};
 
+            // offset
+            Vector3 _offset = {0};
             // for Cube
             float _cubeWidth = 1;
             float _cubeHeight = 1;

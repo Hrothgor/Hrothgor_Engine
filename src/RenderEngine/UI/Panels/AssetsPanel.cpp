@@ -38,7 +38,7 @@ namespace hr {
 
         ImGuiTreeNodeFlags rootNodeFlags = (ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_SpanFullWidth);
 
-        std::string projectPath = "./Projects/" + Engine::Get()->GetProjectName() + "/";
+        std::string projectPath = "Projects/" + Engine::Get()->GetProjectName() + "/";
 
 		if (_selectedDir == projectPath + "Assets")
 			rootNodeFlags |= ImGuiTreeNodeFlags_Selected;

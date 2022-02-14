@@ -72,6 +72,16 @@ namespace hr {
         }
     }
 
+    void PrimitiveCollider::SetOffset(Vector3 offset)
+    {
+        _offset = offset;
+    }
+
+    Vector3 PrimitiveCollider::GetOffset() const
+    {
+        return _offset;
+    }
+
     float PrimitiveCollider::GetCubeWidth() const
     {
         return _cubeWidth;
@@ -124,6 +134,7 @@ namespace hr {
     {
         std::vector<std::string> enumNames = {"Cube", "Sphere"};
         UIElement::EnumField("Primitive", [this](){return GetType();}, [this](int val){SetMesh((PrimitiveMeshType)val);}, enumNames);
+        UIElement::Vector3Field("Offset", [this](){return GetOffset();}, [this](Vector3 vec){SetOffset(vec);});
         switch (_type) {
             case CUBE:
                 UIElement::FloatField("Cube Width", [this](){return GetCubeWidth();}, [this](float val){SetCubeWidth(val);});
@@ -143,19 +154,20 @@ namespace hr {
     void PrimitiveCollider::OnDrawGizmos()
     {
         Transform *transform = GetTransform();
+        Vector3 pos = Vector3Add(transform->GetPositionWorld(), _offset);
         AxisAngle axisAngle = transform->GetRotationAxisAngle();
 
         switch (_type) {
             case CUBE:
                 rlPushMatrix();
-                rlTranslatef(transform->GetPositionWorld().x, transform->GetPositionWorld().y, transform->GetPositionWorld().z);
+                rlTranslatef(pos.x, pos.y, pos.z);
                 rlRotatef(axisAngle.angle, axisAngle.axis.x, axisAngle.axis.y, axisAngle.axis.z);
-                rlTranslatef(-transform->GetPositionWorld().x, -transform->GetPositionWorld().y, -transform->GetPositionWorld().z);
-                DrawCubeWires(transform->GetPositionWorld(), _cubeWidth, _cubeHeight, _cubeLength, GREEN);
+                rlTranslatef(-pos.x, -pos.y, -pos.z);
+                DrawCubeWires(pos, _cubeWidth, _cubeHeight, _cubeLength, GREEN);
                 rlPopMatrix();
                 break;
             case SPHERE:
-                DrawSphereWires(transform->GetPositionWorld(), _sphereRadius,
+                DrawSphereWires(pos, _sphereRadius,
                             10, 10, GREEN);
                 break;
             case PLANE:
@@ -170,6 +182,7 @@ namespace hr {
         nlohmann::json json;
 
         json["type"] = (int)_type;
+        json["offset"] = {_offset.x, _offset.y, _offset.z};
         json["cube"]["width"] = _cubeWidth;
         json["cube"]["height"] = _cubeHeight;
         json["cube"]["length"] = _cubeLength;
@@ -181,6 +194,7 @@ namespace hr {
     void PrimitiveCollider::FromJson(const nlohmann::json &json)
     {
         _type = (PrimitiveMeshType)json["type"].get<int>();
+        _offset = {json["offset"][0].get<float>(), json["offset"][1].get<float>(), json["offset"][2].get<float>()};
         _cubeWidth = json["cube"]["width"].get<float>();
         _cubeHeight = json["cube"]["height"].get<float>();
         _cubeLength = json["cube"]["length"].get<float>();

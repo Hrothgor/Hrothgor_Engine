@@ -7,6 +7,7 @@
 
 #include "LoadSystem.hpp"
 #include "../Ecs/Engine.hpp"
+#include "../RenderEngine/AssetsManager.hpp"
 #include "../Ecs/GameObject.hpp"
 
 #include "../Components/Light.hpp"
@@ -41,15 +42,16 @@ namespace hr {
 
     void LoadSystem::LoadProject(const std::string &name)
     {
-        if (!std::filesystem::exists("./Projects/" + name))
+        if (!std::filesystem::exists("Projects/" + name))
             return;
         Engine::Get()->SetProjectName(name);
-        if (!std::filesystem::exists("./Projects/" + name + "/save.json")) {
+        AssetsManager::Get()->LoadProject("Projects/" + name + "/Assets/");
+        if (!std::filesystem::exists("Projects/" + name + "/save.json")) {
             Engine::Get()->ClearEntities();
             Engine::Get()->Start();
             return;
         }
-        std::ifstream file("./Projects/" + name + "/save.json");
+        std::ifstream file("Projects/" + name + "/save.json");
 
         nlohmann::json json;
         file >> json;
@@ -64,12 +66,12 @@ namespace hr {
 
     void LoadSystem::CreateNewProject(const std::string &name)
     {
-        if (std::filesystem::exists("./Projects/" + name)) {
+        if (std::filesystem::exists("Projects/" + name)) {
             LoadProject(name);
             return;
         }
-        std::filesystem::create_directory("./Projects/" + name);
-        std::filesystem::create_directory("./Projects/" + name + "/Assets");
+        std::filesystem::create_directory("Projects/" + name);
+        std::filesystem::create_directory("Projects/" + name + "/Assets");
         Engine::Get()->SetProjectName(name);
     }
 }
