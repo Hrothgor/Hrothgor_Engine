@@ -135,4 +135,15 @@ namespace hr {
         _color = {json["color"][0].get<unsigned char>(), json["color"][1].get<unsigned char>(), json["color"][2].get<unsigned char>(), json["color"][3].get<unsigned char>()};
         _intensity = json["intensity"].get<float>();
     }
+
+    Component *Light::Clone(GameObject *gameObject)
+    {
+        Light *ret = new Light(gameObject);
+        ret->SetType(_type);
+        ret->SetTarget(_target);
+        ret->SetRange(_range);
+        ret->SetColor(_color);
+        ret->SetIntensity(_intensity);
+        return ret;
+    }
 }

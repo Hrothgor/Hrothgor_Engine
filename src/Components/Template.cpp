@@ -29,4 +29,10 @@ namespace hr {
     {
         (void)json;
     }
+
+    Component *Template::Clone(GameObject *gameObject)
+    {
+        Template *ret = new Template(gameObject);
+        return ret;
+    }
 }

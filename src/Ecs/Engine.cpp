@@ -55,12 +55,20 @@ namespace hr {
     {
         while (!WindowShouldClose() && _running)
         {
+            if (IsKeyPressed(KEY_SPACE))
+                SetSimulating(!_simulating);
             BeginDrawing();
             {
                 _mainCamera->Update();
                 for (auto ent : _entities)
                     if (ent->GetParent() == nullptr)
                         ent->Update();
+                if (_simulating) {
+                    _mainCamera->UpdateOnSimulation();
+                    for (auto ent : _entities)
+                        if (ent->GetParent() == nullptr)
+                            ent->UpdateOnSimulation();
+                }
                 _mainCamera->LateUpdate();
                 for (auto ent : _entities)
                     if (ent->GetParent() == nullptr)
@@ -209,5 +217,27 @@ namespace hr {
     void Engine::SetRunning(bool running)
     {
         _running = running;
+    }
+
+    void Engine::SetSimulating(bool simulating)
+    {
+        if (_simulating == simulating)
+            return;
+        _simulating = simulating;
+        if (_simulating) {
+            std::vector<GameObject *> rootEntities = GetRootEntities();
+            for (auto ent : rootEntities) {
+                GameObject *newEnt = ent->Clone();
+                for (auto child : ent->GetChilds()) {
+                    GameObject *newChild = child->Clone();
+                    newEnt->AddChild(newChild);
+                    _savedEntities.push_back(newChild);
+                }
+                _savedEntities.push_back(newEnt);
+            }
+        } else {
+            _entities = _savedEntities;
+            _savedEntities.clear();
+        }
     }
 }

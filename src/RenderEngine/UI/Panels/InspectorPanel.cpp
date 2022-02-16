@@ -15,6 +15,7 @@
 #include "../../../Components/PrimitiveCollider.hpp"
 #include "../../../Components/MeshFilter.hpp"
 #include "../../../Components/MainCamera3D.hpp"
+#include "../../../Components/RigidBody.hpp"
 
 namespace hr {
     InspectorPanel::InspectorPanel()
@@ -91,6 +92,7 @@ namespace hr {
                 if (entity->HasComponentId<MeshRenderer>(compId)) { ImGuiRenderComponent<MeshRenderer>(entity); continue; }
                 if (entity->HasComponentId<PrimitiveCollider>(compId)) { ImGuiRenderComponent<PrimitiveCollider>(entity); continue; }
                 if (entity->HasComponentId<MeshFilter>(compId)) { ImGuiRenderComponent<MeshFilter>(entity); continue; }
+                if (entity->HasComponentId<RigidBody>(compId)) { ImGuiRenderComponent<RigidBody>(entity); continue; }
             }
 
             if (ImGui::Button("Add Component##Button", ImVec2(-1.0f, 40.0f)))
@@ -102,6 +104,7 @@ namespace hr {
                 if (!entity->HasComponent<MeshRenderer>()) { ImGuiRenderAddComponent<MeshRenderer>("MeshRenderer", entity); }
                 if (!entity->HasComponent<PrimitiveCollider>()) { ImGuiRenderAddComponent<PrimitiveCollider>("PrimitiveCollider", entity); }
                 if (!entity->HasComponent<MeshFilter>()) { ImGuiRenderAddComponent<MeshFilter>("MeshFilter", entity); }
+                if (!entity->HasComponent<RigidBody>()) { ImGuiRenderAddComponent<RigidBody>("RigidBody", entity); }
 				ImGui::EndPopup();
 			}
     

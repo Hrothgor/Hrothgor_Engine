@@ -31,6 +31,8 @@ namespace hr {
 
             virtual nlohmann::json ToJson() const override;
             virtual void FromJson(const nlohmann::json &json) override;
+
+            virtual Component *Clone(GameObject *gameObject) override;
         protected:
         private:
             Texture2D _texture = {0};

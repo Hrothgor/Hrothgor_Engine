@@ -16,6 +16,7 @@
 #include "../Components/MeshFilter.hpp"
 #include "../Components/MeshRenderer.hpp"
 #include "../Components/Transform.hpp"
+#include "../Components/RigidBody.hpp"
 
 namespace hr {
     GameObject *LoadSystem::LoadEntity(const nlohmann::json &json)
@@ -32,6 +33,7 @@ namespace hr {
                 else if (name == "Light") gameObject->AddComponent<Light>()->FromJson(comp[1]);
                 else if (name == "PrimitiveCollider") gameObject->AddComponent<PrimitiveCollider>()->FromJson(comp[1]);
                 else if (name == "MeshFilter") gameObject->AddComponent<MeshFilter>()->FromJson(comp[1]);
+                else if (name == "RigidBody") gameObject->AddComponent<RigidBody>()->FromJson(comp[1]);
             }
         if (json.contains("childs"))
             for (auto &jsonChild : json["childs"])

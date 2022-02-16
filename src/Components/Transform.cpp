@@ -192,4 +192,13 @@ namespace hr {
         _rotation = {json["rotation"][0].get<float>(), json["rotation"][1].get<float>(), json["rotation"][2].get<float>()};
         _scale = {json["scale"][0], json["scale"][1], json["scale"][2]};
     }
+
+    Component *Transform::Clone(GameObject *gameObject)
+    {
+        Transform *ret = new Transform(gameObject);
+        ret->SetPosition(_position);
+        ret->SetRotation(_rotation);
+        ret->SetScale(_scale);
+        return ret;
+    }
 }

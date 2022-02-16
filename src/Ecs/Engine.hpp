@@ -52,6 +52,7 @@ namespace hr {
             void SetProjectName(const std::string &projectName);
 
             void SetRunning(bool running);
+            void SetSimulating(bool simulating);
         private:
             GameObject *_mainCamera;
             std::vector<GameObject *> _entities;
@@ -61,6 +62,8 @@ namespace hr {
 
             bool _running = true;
 
+            bool _simulating = false;
+            std::vector<GameObject *> _savedEntities;
         protected:
             static Engine *instance;
         public:

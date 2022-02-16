@@ -63,6 +63,21 @@ namespace hr {
         return _camera;
     }
 
+    void MainCamera3D::SetCamera3D(const Camera3D &camera3D)
+    {
+        _camera = camera3D;
+    }
+
+    void MainCamera3D::SetSpeed(float speed)
+    {
+        _speed = speed;
+    }
+
+    void MainCamera3D::SetTurnSpeed(float turnSpeed)
+    {
+        _turnSpeed = turnSpeed;
+    }
+
     nlohmann::json MainCamera3D::ToJson() const
     {
         nlohmann::json json;
@@ -73,5 +88,14 @@ namespace hr {
     void MainCamera3D::FromJson(const nlohmann::json &json)
     {
         (void)json;
+    }
+
+    Component *MainCamera3D::Clone(GameObject *gameObject)
+    {
+        MainCamera3D *ret = new MainCamera3D(gameObject);
+        ret->SetCamera3D(_camera);
+        ret->SetSpeed(_speed);
+        ret->SetTurnSpeed(_turnSpeed);
+        return ret;
     }
 }

@@ -21,6 +21,7 @@ namespace hr {
             virtual void Start() = 0;
             virtual void Update() = 0;
             virtual void LateUpdate() = 0;
+            virtual void UpdateOnSimulation() = 0;
             virtual void OnDrawGizmos() = 0;
             virtual void End() = 0;
             
@@ -32,7 +33,6 @@ namespace hr {
 
             bool IsActive() const;
             void SetActive(bool);
-        
         protected:
             std::string _name = "";
             bool _active = true;

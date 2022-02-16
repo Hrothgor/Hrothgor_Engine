@@ -25,6 +25,7 @@ namespace hr {
             virtual void Start() override {};
             virtual void Update() override {};
             virtual void LateUpdate() override {};
+            virtual void UpdateOnSimulation() override {};
             virtual void End() override {};
 
             virtual void ImGuiRender() {};
@@ -35,6 +36,8 @@ namespace hr {
 
             GameObject *GetGameObject() const;
             Transform *GetTransform() const;
+
+            virtual Component *Clone(GameObject *gameObject) = 0;
         protected:
         private:
             GameObject *_gameObject = nullptr;

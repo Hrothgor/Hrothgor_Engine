@@ -201,4 +201,16 @@ namespace hr {
         _sphereRadius = json["sphere"]["radius"].get<float>();
         SetMesh(_type);
     }
+
+    Component *PrimitiveCollider::Clone(GameObject *gameObject)
+    {
+        PrimitiveCollider *ret = new PrimitiveCollider(gameObject);
+        ret->SetOffset(_offset);
+        ret->SetCubeWidth(_cubeWidth);
+        ret->SetCubeHeight(_cubeHeight);
+        ret->SetCubeLength(_cubeLength);
+        ret->SetSphereRadius(_sphereRadius);
+        ret->SetMesh(_type);
+        return ret;
+    }
 }

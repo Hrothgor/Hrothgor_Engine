@@ -76,4 +76,11 @@ namespace hr {
 
         LoadTextureFromPath(_texturePath);
     }
+
+    Component *MeshRenderer::Clone(GameObject *gameObject)
+    {
+        MeshRenderer *ret = new MeshRenderer(gameObject);
+        ret->LoadTextureFromPath(_texturePath);
+        return ret;
+    }
 }

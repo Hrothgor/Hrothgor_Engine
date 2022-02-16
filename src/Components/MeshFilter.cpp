@@ -245,4 +245,21 @@ namespace hr {
         _meshPath = json["mesh"]["path"].get<std::string>();
         SetModel(_type);
     }
+
+    Component *MeshFilter::Clone(GameObject *gameObject)
+    {
+        MeshFilter *ret = new MeshFilter(gameObject);
+        ret->SetCubeWidth(_cubeWidth);
+        ret->SetCubeHeight(_cubeHeight);
+        ret->SetCubeLength(_cubeLength);
+        ret->SetSphereRadius(_sphereRadius);
+        ret->SetSphereRings(_sphereRings);
+        ret->SetSphereSlices(_sphereSlices);
+        ret->SetPlaneWidth(_planeWidth);
+        ret->SetPlaneLength(_planeLength);
+        ret->SetPlaneResolution(_planeResolution);
+        ret->LoadMeshFromPath(_meshPath);
+        ret->SetModel(_type);
+        return ret;
+    }
 }

@@ -102,10 +102,12 @@ namespace hr {
             virtual void Start() override;
             virtual void Update() override;
             virtual void LateUpdate() override;
+            virtual void UpdateOnSimulation() override;
             virtual void OnDrawGizmos() override;
             virtual void End() override;
 
             Transform *GetTransform() const;
+            void SetTransform(Transform *transform);
             GameObject *GetParent() const;
             std::vector<GameObject *> GetChilds() const;
             std::vector<std::pair<std::type_index, Component *>> GetComponents() const;
@@ -117,6 +119,8 @@ namespace hr {
             void DetachFromParent();
 
             void Destroy();
+
+            GameObject *Clone();
         protected:
         private:
             GameObject *_parent = nullptr;
@@ -124,8 +128,9 @@ namespace hr {
             std::vector<std::pair<std::type_index, Component *>> _components;
             Transform *_transform = nullptr;
 
-            bool ParentIsChild(GameObject *parent);
             void SetParent(GameObject *parent);
+            void SetChilds(std::vector<GameObject *> childs);
+            bool ParentIsChild(GameObject *parent);
     };
 }
 

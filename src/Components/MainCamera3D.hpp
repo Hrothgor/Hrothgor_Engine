@@ -24,8 +24,14 @@ namespace hr {
 
             Camera3D GetCamera3D() const;
 
+            void SetCamera3D(const Camera3D &camera3D);
+            void SetSpeed(float speed);
+            void SetTurnSpeed(float turnSpeed);
+
             virtual nlohmann::json ToJson() const override;
             virtual void FromJson(const nlohmann::json &json) override;
+
+            virtual Component *Clone(GameObject *gameObject) override;
         protected:
         private:
             Camera3D _camera;

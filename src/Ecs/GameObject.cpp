@@ -65,6 +65,19 @@ namespace hr {
                 child->LateUpdate();
     }
 
+    void GameObject::UpdateOnSimulation()
+    {
+        if (!IsActive())
+            return;
+        _transform->UpdateOnSimulation();
+        for (auto [type, comp] : _components)
+            if (comp->IsActive())
+                comp->UpdateOnSimulation();
+        for (GameObject *child : _childs)
+            if (child->IsActive())
+                child->UpdateOnSimulation();
+    }
+
     void GameObject::OnDrawGizmos()
     {
         if (!IsActive())
@@ -105,6 +118,11 @@ namespace hr {
     Transform *GameObject::GetTransform() const
     {
         return _transform;
+    }
+
+    void GameObject::SetTransform(Transform *transform)
+    {
+        _transform = transform;
     }
 
     std::vector<std::pair<std::type_index, Component *>> GameObject::GetComponents() const
@@ -149,6 +167,11 @@ namespace hr {
         _parent = parent;
     }
 
+    void GameObject::SetChilds(std::vector<GameObject *> childs)
+    {
+        _childs = childs;
+    }
+
     bool GameObject::ParentIsChild(GameObject *parent)
     {
         for (GameObject *child : _childs) {
@@ -169,5 +192,20 @@ namespace hr {
             child->Destroy();
 
         Engine::Get()->RemoveEntity(this);
+    }
+
+    GameObject *GameObject::Clone()
+    {
+        GameObject *clone = new GameObject(_parent);
+        clone->SetName(GetName());
+        clone->SetActive(IsActive());
+        clone->SetUUID(GetUUID().str());
+
+        std::vector<std::pair<std::type_index, Component *>> components;
+        for (auto [type, comp] : _components)
+            components.push_back({type, comp->Clone(clone)});
+        clone->SetComponents(components);
+        clone->SetTransform(static_cast<Transform *>(_transform->Clone(clone)));
+        return clone;
     }
 }
