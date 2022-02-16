@@ -107,7 +107,6 @@ namespace hr {
             virtual void End() override;
 
             Transform *GetTransform() const;
-            void SetTransform(Transform *transform);
             GameObject *GetParent() const;
             std::vector<GameObject *> GetChilds() const;
             std::vector<std::pair<std::type_index, Component *>> GetComponents() const;

@@ -120,11 +120,6 @@ namespace hr {
         return _transform;
     }
 
-    void GameObject::SetTransform(Transform *transform)
-    {
-        _transform = transform;
-    }
-
     std::vector<std::pair<std::type_index, Component *>> GameObject::GetComponents() const
     {
         return _components;
@@ -205,7 +200,9 @@ namespace hr {
         for (auto [type, comp] : _components)
             components.push_back({type, comp->Clone(clone)});
         clone->SetComponents(components);
-        clone->SetTransform(static_cast<Transform *>(_transform->Clone(clone)));
+        clone->GetTransform()->SetPosition(GetTransform()->GetPosition());
+        clone->GetTransform()->SetRotation(GetTransform()->GetRotation());
+        clone->GetTransform()->SetScale(GetTransform()->GetScale());
         return clone;
     }
 }

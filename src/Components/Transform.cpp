@@ -196,9 +196,6 @@ namespace hr {
     Component *Transform::Clone(GameObject *gameObject)
     {
         Transform *ret = new Transform(gameObject);
-        ret->SetPosition(_position);
-        ret->SetRotation(_rotation);
-        ret->SetScale(_scale);
         return ret;
     }
 }
