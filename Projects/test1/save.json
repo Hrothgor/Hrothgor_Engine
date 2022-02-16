@@ -331,28 +331,22 @@
                     }
                 ],
                 [
-                    "PrimitiveCollider",
+                    "MeshRenderer",
                     {
-                        "cube": {
-                            "height": 0.5,
-                            "length": 115.0999984741211,
-                            "width": 109.0999984741211
-                        },
+                        "texturePath": ""
+                    }
+                ],
+                [
+                    "BoxCollider",
+                    {
+                        "height": 0.5,
+                        "length": 115.0,
                         "offset": [
                             0.0,
                             0.0,
                             0.0
                         ],
-                        "sphere": {
-                            "radius": 1.100000023841858
-                        },
-                        "type": 0
-                    }
-                ],
-                [
-                    "MeshRenderer",
-                    {
-                        "texturePath": ""
+                        "width": 109.0
                     }
                 ]
             ],
@@ -403,25 +397,6 @@
                     }
                 ],
                 [
-                    "PrimitiveCollider",
-                    {
-                        "cube": {
-                            "height": 1.100000023841858,
-                            "length": 1.100000023841858,
-                            "width": 1.100000023841858
-                        },
-                        "offset": [
-                            0.0,
-                            0.0,
-                            0.0
-                        ],
-                        "sphere": {
-                            "radius": 9.100000381469727
-                        },
-                        "type": 1
-                    }
-                ],
-                [
                     "MeshRenderer",
                     {
                         "texturePath": "ressources/image.png"
@@ -432,6 +407,17 @@
                     {
                         "mass": 1.0,
                         "useGravity": true
+                    }
+                ],
+                [
+                    "SphereCollider",
+                    {
+                        "offset": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "radius": 9.100000381469727
                     }
                 ]
             ],
@@ -482,42 +468,36 @@
                     }
                 ],
                 [
-                    "PrimitiveCollider",
+                    "MeshRenderer",
                     {
-                        "cube": {
-                            "height": 15.100000381469727,
-                            "length": 15.100000381469727,
-                            "width": 15.100000381469727
-                        },
+                        "texturePath": "ressources/image.png"
+                    }
+                ],
+                [
+                    "BoxCollider",
+                    {
+                        "height": 15.100000381469727,
+                        "length": 15.100000381469727,
                         "offset": [
                             0.0,
                             0.0,
                             0.0
                         ],
-                        "sphere": {
-                            "radius": 1.100000023841858
-                        },
-                        "type": 0
-                    }
-                ],
-                [
-                    "MeshRenderer",
-                    {
-                        "texturePath": "ressources/image.png"
+                        "width": 15.100000381469727
                     }
                 ]
             ],
             "name": "Cube",
             "transform": {
                 "position": [
-                    23.861608505249023,
-                    25.10873031616211,
-                    0.0
+                    38.98000717163086,
+                    25.1087703704834,
+                    -13.377791404724121
                 ],
                 "rotation": [
                     0.0,
                     48.39131546020508,
-                    180.0
+                    -179.99989318847656
                 ],
                 "scale": [
                     0.9999999403953552,

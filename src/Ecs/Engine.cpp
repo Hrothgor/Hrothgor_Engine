@@ -7,6 +7,7 @@
 
 #include "Engine.hpp"
 #include "../RenderEngine/DisplayManager.hpp"
+#include "../PhysicsEngine/PhysicsWorld.hpp"
 #include "../SaveLoad/SaveSystem.hpp"
 #include "../SaveLoad/LoadSystem.hpp"
 
@@ -63,16 +64,17 @@ namespace hr {
                 for (auto ent : _entities)
                     if (ent->GetParent() == nullptr)
                         ent->Update();
+                _mainCamera->LateUpdate();
+                for (auto ent : _entities)
+                    if (ent->GetParent() == nullptr)
+                        ent->LateUpdate();
                 if (_simulating) {
                     _mainCamera->UpdateOnSimulation();
                     for (auto ent : _entities)
                         if (ent->GetParent() == nullptr)
                             ent->UpdateOnSimulation();
+                    PhysicsWorld::Get()->Update();
                 }
-                _mainCamera->LateUpdate();
-                for (auto ent : _entities)
-                    if (ent->GetParent() == nullptr)
-                        ent->LateUpdate();
                 DisplayManager::Get()->Clear(DARKGRAY);
                 DisplayManager::Get()->Draw();
             }
@@ -236,6 +238,7 @@ namespace hr {
                 _savedEntities.push_back(newEnt);
             }
         } else {
+            SetSelectedEntity(nullptr);
             _entities = _savedEntities;
             _savedEntities.clear();
         }

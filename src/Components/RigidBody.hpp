@@ -29,6 +29,14 @@ namespace hr {
             bool GetUseGravity() const;
             void SetUseGravity(bool useGravity);
 
+            Vector3 GetForce() const;
+            void SetForce(Vector3 force);
+            void AddForce(Vector3 force);
+
+            Vector3 GetVelocity() const;
+            void SetVelocity(Vector3 velocity);
+            void AddVelocity(Vector3 velocity);
+
             void ImGuiRender();
             void OnDrawGizmos() {};
 
@@ -38,6 +46,9 @@ namespace hr {
             virtual Component *Clone(GameObject *gameObject) override;
         protected:
         private:
+            Vector3 _velocity;
+            Vector3 _force;
+
             float _mass = 1;
             bool _useGravity = true;
     };

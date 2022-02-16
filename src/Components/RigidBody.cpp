@@ -10,12 +10,15 @@
 #include "ImGuizmo.h"
 #include "Transform.hpp"
 #include "../Ecs/GameObject.hpp"
+#include "../PhysicsEngine/PhysicsWorld.hpp"
 
 namespace hr {
     RigidBody::RigidBody(GameObject *gameObject)
         : Component(gameObject)
     {
         _name = "RigidBody";
+        _velocity = Vector3Zero();
+        _force = Vector3Zero();
     }
 
     RigidBody::~RigidBody()
@@ -24,13 +27,7 @@ namespace hr {
 
     void RigidBody::UpdateOnSimulation()
     {
-        Transform *transform = GetTransform();
-        transform->Translate({0, -9.8f * _mass * GetFrameTime(), 0});
-        // if (_isKinematic)
-        //     return;
-        // _velocity = Vector3Add(_velocity, _acceleration);
-        // _position = Vector3Add(_position, _velocity);
-        // _acceleration = Vector3Zero();
+        PhysicsWorld::Get()->RegisterObject(GetGameObject());
     }
 
     float RigidBody::GetMass() const
@@ -51,6 +48,36 @@ namespace hr {
     void RigidBody::SetUseGravity(bool useGravity)
     {
         _useGravity = useGravity;
+    }
+
+    Vector3 RigidBody::GetForce() const
+    {
+        return _force;
+    }
+
+    void RigidBody::SetForce(Vector3 force)
+    {
+        _force = force;
+    }
+
+    void RigidBody::AddForce(Vector3 force)
+    {
+        _force = Vector3Add(_force, force);
+    }
+
+    Vector3 RigidBody::GetVelocity() const
+    {
+        return _velocity;
+    }
+
+    void RigidBody::SetVelocity(Vector3 velocity)
+    {
+        _velocity = velocity;
+    }
+
+    void RigidBody::AddVelocity(Vector3 velocity)
+    {
+        _velocity = Vector3Add(_velocity, velocity);
     }
 
     void RigidBody::ImGuiRender()

@@ -12,7 +12,8 @@
 
 #include "../Components/Light.hpp"
 #include "../Components/MainCamera3D.hpp"
-#include "../Components/PrimitiveCollider.hpp"
+#include "../Components/Collider/BoxCollider.hpp"
+#include "../Components/Collider/SphereCollider.hpp"
 #include "../Components/MeshFilter.hpp"
 #include "../Components/MeshRenderer.hpp"
 #include "../Components/Transform.hpp"
@@ -31,7 +32,8 @@ namespace hr {
                 std::string name = comp[0].get<std::string>();
                 if (name == "MeshRenderer") gameObject->AddComponent<MeshRenderer>()->FromJson(comp[1]);
                 else if (name == "Light") gameObject->AddComponent<Light>()->FromJson(comp[1]);
-                else if (name == "PrimitiveCollider") gameObject->AddComponent<PrimitiveCollider>()->FromJson(comp[1]);
+                else if (name == "BoxCollider") gameObject->AddComponent<BoxCollider>()->FromJson(comp[1]);
+                else if (name == "SphereCollider") gameObject->AddComponent<SphereCollider>()->FromJson(comp[1]);
                 else if (name == "MeshFilter") gameObject->AddComponent<MeshFilter>()->FromJson(comp[1]);
                 else if (name == "RigidBody") gameObject->AddComponent<RigidBody>()->FromJson(comp[1]);
             }

@@ -12,7 +12,8 @@
 #include "../../../Components/Transform.hpp"
 #include "../../../Components/Light.hpp"
 #include "../../../Components/MeshRenderer.hpp"
-#include "../../../Components/PrimitiveCollider.hpp"
+#include "../../../Components/Collider/BoxCollider.hpp"
+#include "../../../Components/Collider/SphereCollider.hpp"
 #include "../../../Components/MeshFilter.hpp"
 #include "../../../Components/MainCamera3D.hpp"
 #include "../../../Components/RigidBody.hpp"
@@ -90,7 +91,8 @@ namespace hr {
                 if (entity->HasComponentId<Transform>(compId)) { ImGuiRenderComponent<Transform>(entity); continue; }
                 if (entity->HasComponentId<Light>(compId)) { ImGuiRenderComponent<Light>(entity); continue; }
                 if (entity->HasComponentId<MeshRenderer>(compId)) { ImGuiRenderComponent<MeshRenderer>(entity); continue; }
-                if (entity->HasComponentId<PrimitiveCollider>(compId)) { ImGuiRenderComponent<PrimitiveCollider>(entity); continue; }
+                if (entity->HasComponentId<BoxCollider>(compId)) { ImGuiRenderComponent<BoxCollider>(entity); continue; }
+                if (entity->HasComponentId<SphereCollider>(compId)) { ImGuiRenderComponent<SphereCollider>(entity); continue; }
                 if (entity->HasComponentId<MeshFilter>(compId)) { ImGuiRenderComponent<MeshFilter>(entity); continue; }
                 if (entity->HasComponentId<RigidBody>(compId)) { ImGuiRenderComponent<RigidBody>(entity); continue; }
             }
@@ -102,7 +104,8 @@ namespace hr {
 			{
                 if (!entity->HasComponent<Light>()) { ImGuiRenderAddComponent<Light>("Light", entity); }
                 if (!entity->HasComponent<MeshRenderer>()) { ImGuiRenderAddComponent<MeshRenderer>("MeshRenderer", entity); }
-                if (!entity->HasComponent<PrimitiveCollider>()) { ImGuiRenderAddComponent<PrimitiveCollider>("PrimitiveCollider", entity); }
+                if (!entity->HasComponent<BoxCollider>()) { ImGuiRenderAddComponent<BoxCollider>("BoxCollider", entity); }
+                if (!entity->HasComponent<SphereCollider>()) { ImGuiRenderAddComponent<SphereCollider>("SphereCollider", entity); }
                 if (!entity->HasComponent<MeshFilter>()) { ImGuiRenderAddComponent<MeshFilter>("MeshFilter", entity); }
                 if (!entity->HasComponent<RigidBody>()) { ImGuiRenderAddComponent<RigidBody>("RigidBody", entity); }
 				ImGui::EndPopup();
