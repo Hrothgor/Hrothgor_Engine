@@ -37,6 +37,9 @@ namespace hr {
             void SetVelocity(Vector3 velocity);
             void AddVelocity(Vector3 velocity);
 
+            bool GetIsDynamic() const;
+            void SetIsDynamic(bool isDynamic);
+
             void ImGuiRender();
             void OnDrawGizmos() {};
 
@@ -51,6 +54,8 @@ namespace hr {
 
             float _mass = 1;
             bool _useGravity = true;
+
+            bool _isDynamic = true;
     };
 }
 

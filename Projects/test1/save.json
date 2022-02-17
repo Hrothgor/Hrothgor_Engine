@@ -405,8 +405,10 @@
                 [
                     "RigidBody",
                     {
+                        "isDynamic": true,
+                        "isKinematic": true,
                         "mass": 1.0,
-                        "useGravity": true
+                        "useGravity": false
                     }
                 ],
                 [
@@ -598,6 +600,79 @@
                 ]
             },
             "uuid": "e2fa15f8-23dd-43fd-bd4e-125ecd84d8f8"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "texturePath": ""
+                    }
+                ],
+                [
+                    "MeshFilter",
+                    {
+                        "cube": {
+                            "height": 1.0,
+                            "length": 1.0,
+                            "width": 1.0
+                        },
+                        "mesh": {
+                            "path": ""
+                        },
+                        "plane": {
+                            "length": 1.0,
+                            "resolution": 5,
+                            "width": 1.0
+                        },
+                        "sphere": {
+                            "radius": 8.0,
+                            "rings": 30,
+                            "slices": 73
+                        },
+                        "type": 1
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "isKinematic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ],
+                [
+                    "SphereCollider",
+                    {
+                        "offset": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "radius": 8.100000381469727
+                    }
+                ]
+            ],
+            "name": "GameObject (0)",
+            "transform": {
+                "position": [
+                    -2.165966749191284,
+                    42.4518928527832,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "uuid": "9264b3eb-5ff4-4827-8b9c-36e6bd18630a"
         }
     ]
 }

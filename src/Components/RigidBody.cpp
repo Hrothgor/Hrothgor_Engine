@@ -80,10 +80,21 @@ namespace hr {
         _velocity = Vector3Add(_velocity, velocity);
     }
 
+    bool RigidBody::GetIsDynamic() const
+    {
+        return _isDynamic;
+    }
+
+    void RigidBody::SetIsDynamic(bool isDynamic)
+    {
+        _isDynamic = isDynamic;
+    }
+
     void RigidBody::ImGuiRender()
     {
         UIElement::FloatField("Mass", [this](){return GetMass();}, [this](float val){SetMass(val);});
         UIElement::CheckBox("Use Gravity", [this](){return GetUseGravity();}, [this](bool val){SetUseGravity(val);});
+        UIElement::CheckBox("Is Dynamic", [this](){return GetIsDynamic();}, [this](bool val){SetIsDynamic(val);});
     }
 
     nlohmann::json RigidBody::ToJson() const
@@ -92,6 +103,7 @@ namespace hr {
 
         json["mass"] = _mass;
         json["useGravity"] = _useGravity;
+        json["isDynamic"] = _isDynamic;
 
         return json;
     }
@@ -100,6 +112,7 @@ namespace hr {
     {
         _mass = json["mass"].get<float>();
         _useGravity = json["useGravity"].get<bool>();
+        _isDynamic = json["isDynamic"].get<bool>();
     }
 
     Component *RigidBody::Clone(GameObject *gameObject)
@@ -107,6 +120,7 @@ namespace hr {
         RigidBody *ret = new RigidBody(gameObject);
         ret->SetMass(_mass);
         ret->SetUseGravity(_useGravity);
+        ret->SetIsDynamic(_isDynamic);
         return ret;
     }
 }

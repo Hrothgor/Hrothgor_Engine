@@ -24,11 +24,6 @@ namespace hr {
                 const BoxCollider *b, const Transform *bTransform
             );
 
-            static CollisionPoints FindBoxSphereCollisionPoints(
-                const BoxCollider *a, const Transform *aTransform,
-                const SphereCollider *b, const Transform *bTransform
-            );
-
             static CollisionPoints FindBoxBoxCollisionPoints(
                 const BoxCollider *a, const Transform *aTransform,
                 const BoxCollider *b, const Transform *bTransform

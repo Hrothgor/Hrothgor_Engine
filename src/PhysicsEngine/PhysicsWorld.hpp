@@ -11,8 +11,10 @@
 #include "include.hpp"
 
 namespace hr {
+    struct Collision;
     class Collider;
     class GameObject;
+    class Solver;
 
     class PhysicsWorld {
         public:
@@ -25,10 +27,12 @@ namespace hr {
             Collider *TryGetCollider(GameObject *gameObject);
 
             void RegisterObject(GameObject *model);
+            void AddSolver(Solver *solver);
 
         protected:
         private:
             std::vector<GameObject *> _objects;
+            std::vector<Solver *> _solvers;
             Vector3 _gravity = {0, -9.81, 0};
 
         protected:

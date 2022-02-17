@@ -15,8 +15,8 @@ namespace hr {
         const SphereCollider *a, const Transform *aTransform,
         const SphereCollider *b, const Transform *bTransform)
     {
-        Vector3 A = Vector3Add(aTransform->GetPosition(), a->GetOffset());
-        Vector3 B = Vector3Add(bTransform->GetPosition(), b->GetOffset());
+        Vector3 A = Vector3Add(aTransform->GetPositionWorld(), a->GetOffset());
+        Vector3 B = Vector3Add(bTransform->GetPositionWorld(), b->GetOffset());
 
         Vector3 AtoB = Vector3Subtract(B, A);
         Vector3 BtoA = Vector3Subtract(A, B);
@@ -28,7 +28,7 @@ namespace hr {
         return {
             Vector3Add(A, Vector3Scale(Vector3Normalize(AtoB), a->GetSphereRadius())),
             Vector3Add(B, Vector3Scale(Vector3Normalize(BtoA), b->GetSphereRadius())),
-            Vector3Normalize(AtoB),
+            Vector3Normalize(BtoA),
             Vector3Length(AtoB),
             true
         };
@@ -45,13 +45,6 @@ namespace hr {
         (void)b;
         (void)bTransform;
         return ret;
-    }
-
-    CollisionPoints PhysicsAlgo::FindBoxSphereCollisionPoints(
-        const BoxCollider *a, const Transform *aTransform,
-        const SphereCollider *b, const Transform *bTransform)
-    {
-        return FindSphereBoxCollisionPoints(b, bTransform, a, aTransform);
     }
 
     CollisionPoints PhysicsAlgo::FindBoxBoxCollisionPoints(
