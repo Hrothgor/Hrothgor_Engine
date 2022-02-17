@@ -5,6 +5,13 @@
 ** SmoothPositionSolver
 */
 
+/*
+** EPITECH PROJECT, 2022
+** Physics_engine
+** File description:
+** SmoothPositionSolver
+*/
+
 #include "SmoothPositionSolver.hpp"
 #include "../../Ecs/GameObject.hpp"
 #include "../../Components/Transform.hpp"
@@ -27,8 +34,8 @@ namespace hr {
             RigidBody *aBody = collision.objectA->GetComponent<RigidBody>();
             RigidBody *bBody = collision.objectB->GetComponent<RigidBody>();
 
-			float aInvMass = aBody->GetIsDynamic() ? 1 / aBody->GetMass() : 0.0;
-			float bInvMass = bBody->GetIsDynamic() ? 1 / bBody->GetMass() : 0.0;
+			float aInvMass = aBody->GetIsDynamic() ? aBody->GetInvMass() : 0.0;
+			float bInvMass = bBody->GetIsDynamic() ? bBody->GetInvMass() : 0.0;
 
 			const float percent = 0.8f;
 			const float slop = 0.01f;

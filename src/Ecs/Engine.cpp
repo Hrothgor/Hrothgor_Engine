@@ -58,6 +58,8 @@ namespace hr {
         {
             if (IsKeyPressed(KEY_SPACE))
                 SetSimulating(!_simulating);
+            if (IsKeyDown(KEY_LEFT_CONTROL) && IsKeyPressed(KEY_D) && _selectedEntity)
+                Instantiate(_selectedEntity);
             BeginDrawing();
             {
                 _mainCamera->Update();
@@ -112,11 +114,15 @@ namespace hr {
 
     GameObject *Engine::Instantiate(GameObject *object, GameObject *parent)
     {
-        (void)object;
         (void)parent;
-        // for unused parameter
-        // TODO
-        return nullptr;
+        GameObject *newEnt = object->Clone();
+        for (auto child : object->GetChilds()) {
+            GameObject *newChild = child->Clone();
+            newEnt->AddChild(newChild);
+            _savedEntities.push_back(newChild);
+        }
+        _entities.push_back(newEnt);
+        return newEnt;
     }
 
     void Engine::Destroy(GameObject *object, float t)

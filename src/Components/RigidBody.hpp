@@ -25,6 +25,7 @@ namespace hr {
             void End() override {};
 
             float GetMass() const;
+            float GetInvMass() const;
             void SetMass(float mass);
             bool GetUseGravity() const;
             void SetUseGravity(bool useGravity);
@@ -36,6 +37,10 @@ namespace hr {
             Vector3 GetVelocity() const;
             void SetVelocity(Vector3 velocity);
             void AddVelocity(Vector3 velocity);
+
+            Vector3 GetAngularVelocity() const;
+            void SetAngularVelocity(Vector3 angularVelocity);
+            void AddAngularVelocity(Vector3 angularVelocity);
 
             bool GetIsDynamic() const;
             void SetIsDynamic(bool isDynamic);
@@ -50,6 +55,7 @@ namespace hr {
         protected:
         private:
             Vector3 _velocity;
+            Vector3 _angularVelocity;
             Vector3 _force;
 
             float _mass = 1;

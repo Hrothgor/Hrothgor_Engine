@@ -18,6 +18,7 @@ namespace hr {
     {
         _name = "RigidBody";
         _velocity = Vector3Zero();
+        _angularVelocity = Vector3Zero();
         _force = Vector3Zero();
     }
 
@@ -33,6 +34,11 @@ namespace hr {
     float RigidBody::GetMass() const
     {
         return _mass;
+    }
+    
+    float RigidBody::GetInvMass() const
+    {
+        return 1 / _mass;
     }
 
     void RigidBody::SetMass(float mass)
@@ -77,7 +83,22 @@ namespace hr {
 
     void RigidBody::AddVelocity(Vector3 velocity)
     {
-        _velocity = Vector3Add(_velocity, velocity);
+        _velocity = Vector3Add(_velocity, Vector3Scale(velocity, GetInvMass()));
+    }
+
+    Vector3 RigidBody::GetAngularVelocity() const
+    {
+        return _angularVelocity;
+    }
+
+    void RigidBody::SetAngularVelocity(Vector3 angularVelocity)
+    {
+        _angularVelocity = angularVelocity;
+    }
+
+    void RigidBody::AddAngularVelocity(Vector3 angularVelocity)
+    {
+        _angularVelocity = Vector3Add(_angularVelocity, Vector3Multiply(Vector3One(), angularVelocity)); // TODO InertiaTensor
     }
 
     bool RigidBody::GetIsDynamic() const

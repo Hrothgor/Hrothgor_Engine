@@ -14,6 +14,7 @@
 #include "../Components/Collider/BoxCollider.hpp"
 
 #include "Solver/SmoothPositionSolver.hpp"
+#include "Solver/ImpulseSolver.hpp"
 
 namespace hr {
     PhysicsWorld *PhysicsWorld::instance = nullptr;
@@ -21,6 +22,7 @@ namespace hr {
     PhysicsWorld::PhysicsWorld()
     {
         AddSolver(new SmoothPositionSolver());
+        AddSolver(new ImpulseSolver());
     }
 
     PhysicsWorld::~PhysicsWorld()
@@ -38,9 +40,9 @@ namespace hr {
             if (rb->GetUseGravity())
                 rb->AddForce(Vector3Scale(_gravity, rb->GetMass()));
 
-            rb->AddVelocity(
-                Vector3Scale({rb->GetForce().x / rb->GetMass(), rb->GetForce().y / rb->GetMass(), rb->GetForce().z / rb->GetMass()}, GetFrameTime())
-            );
+            rb->AddVelocity(Vector3Scale(rb->GetForce(), GetFrameTime()));
+
+            tr->Rotate(Vector3Scale(rb->GetAngularVelocity(), GetFrameTime()));
             tr->Translate(Vector3Scale(rb->GetVelocity(), GetFrameTime()));
 
             rb->SetForce(Vector3Zero());
