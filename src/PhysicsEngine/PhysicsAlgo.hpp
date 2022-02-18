@@ -28,6 +28,9 @@ namespace hr {
                 const BoxCollider *a, const Transform *aTransform,
                 const BoxCollider *b, const Transform *bTransform
             );
+
+        private:
+            static Vector3 ClosestPoint(const BoxCollider *box, const Vector3 point);
     };
 }
 

@@ -8,6 +8,7 @@
 #include "Master3DRenderer.hpp"
 #include "../Ecs/GameObject.hpp"
 #include "../Ecs/Engine.hpp"
+#include "../PhysicsEngine/PhysicsWorld.hpp"
 
 #include "../Components/MainCamera3D.hpp"
 
@@ -42,6 +43,7 @@ namespace hr {
     void Master3DRenderer::Draw()
     {
         BeginFrame();
+        PhysicsWorld::Get()->Update();
         _entityRenderer.Draw();
         _gizmosRenderer.Draw();
         //draw particles

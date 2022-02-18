@@ -28,7 +28,7 @@ namespace hr {
 
     CollisionPoints BoxCollider::TestCollision(const Transform *transform, const SphereCollider *sphere, const Transform *sphereTransform) const
     {
-        return PhysicsAlgo::FindSphereBoxCollisionPoints(sphere, transform, this, sphereTransform);
+        return PhysicsAlgo::FindSphereBoxCollisionPoints(sphere, sphereTransform, this, transform);
     }
 
     CollisionPoints BoxCollider::TestCollision(const Transform *transform, const BoxCollider *box, const Transform *boxTransform) const

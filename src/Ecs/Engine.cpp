@@ -75,7 +75,7 @@ namespace hr {
                     for (auto ent : _entities)
                         if (ent->GetParent() == nullptr)
                             ent->UpdateOnSimulation();
-                    PhysicsWorld::Get()->Update();
+                    // PhysicsWorld::Get()->Update();
                 }
                 DisplayManager::Get()->Clear(DARKGRAY);
                 DisplayManager::Get()->Draw();

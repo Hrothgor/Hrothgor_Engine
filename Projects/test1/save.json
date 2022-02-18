@@ -406,7 +406,6 @@
                     "RigidBody",
                     {
                         "isDynamic": true,
-                        "isKinematic": true,
                         "mass": 1.0,
                         "useGravity": false
                     }
@@ -486,6 +485,14 @@
                             0.0
                         ],
                         "width": 15.100000381469727
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": false
                     }
                 ]
             ],
@@ -637,7 +644,6 @@
                     "RigidBody",
                     {
                         "isDynamic": true,
-                        "isKinematic": true,
                         "mass": 1.0,
                         "useGravity": true
                     }

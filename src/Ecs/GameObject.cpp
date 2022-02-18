@@ -196,13 +196,13 @@ namespace hr {
         clone->SetActive(IsActive());
         clone->SetUUID(GetUUID().str());
 
+        clone->GetTransform()->SetPosition(GetTransform()->GetPosition());
+        clone->GetTransform()->SetRotation(GetTransform()->GetRotation());
+        clone->GetTransform()->SetScale(GetTransform()->GetScale());
         std::vector<std::pair<std::type_index, Component *>> components;
         for (auto [type, comp] : _components)
             components.push_back({type, comp->Clone(clone)});
         clone->SetComponents(components);
-        clone->GetTransform()->SetPosition(GetTransform()->GetPosition());
-        clone->GetTransform()->SetRotation(GetTransform()->GetRotation());
-        clone->GetTransform()->SetScale(GetTransform()->GetScale());
         return clone;
     }
 }
