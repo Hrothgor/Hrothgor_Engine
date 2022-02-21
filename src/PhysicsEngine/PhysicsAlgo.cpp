@@ -106,12 +106,10 @@ namespace hr {
         const BoxCollider *a, const Transform *aTransform,
         const BoxCollider *b, const Transform *bTransform)
     {
-        CollisionPoints ret;
-
         (void)a;
         (void)aTransform;
         (void)b;
         (void)bTransform;
-        return ret;
+        return {Vector3Zero(), Vector3Zero(), Vector3Zero(), 0, false};
     }
 }

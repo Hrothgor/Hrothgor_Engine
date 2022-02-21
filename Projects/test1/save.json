@@ -348,6 +348,14 @@
                         ],
                         "width": 109.0
                     }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": false,
+                        "mass": 1.0,
+                        "useGravity": false
+                    }
                 ]
             ],
             "name": "Ground",
@@ -663,9 +671,81 @@
             "name": "GameObject (0)",
             "transform": {
                 "position": [
-                    -2.165966749191284,
-                    42.4518928527832,
+                    -14.24800968170166,
+                    44.15787124633789,
+                    3.715895414352417
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
                     0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "uuid": "9264b3eb-5ff4-4827-8b9c-36e6bd18630a"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "texturePath": ""
+                    }
+                ],
+                [
+                    "MeshFilter",
+                    {
+                        "cube": {
+                            "height": 1.0,
+                            "length": 1.0,
+                            "width": 1.0
+                        },
+                        "mesh": {
+                            "path": ""
+                        },
+                        "plane": {
+                            "length": 1.0,
+                            "resolution": 5,
+                            "width": 1.0
+                        },
+                        "sphere": {
+                            "radius": 8.0,
+                            "rings": 30,
+                            "slices": 73
+                        },
+                        "type": 1
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ],
+                [
+                    "SphereCollider",
+                    {
+                        "offset": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "radius": 8.100000381469727
+                    }
+                ]
+            ],
+            "name": "GameObject (0)",
+            "transform": {
+                "position": [
+                    32.193111419677734,
+                    41.86855697631836,
+                    -12.735968589782715
                 ],
                 "rotation": [
                     0.0,

@@ -67,12 +67,19 @@ namespace hr {
 
             if (aBody->GetIsDynamic()) {
                 aBody->AddVelocity(Vector3Scale(fullImpulse, -1));
-                aBody->AddAngularVelocity(Vector3CrossProduct(collision.points.A, fullImpulse));
+
+                Vector3 centerOfMass = aBody->GetTransform()->GetPositionWorld();
+                Vector3 torque = Vector3CrossProduct(Vector3Subtract(collision.points.A, centerOfMass), fullImpulse);
+                aBody->AddAngularVelocity(torque);
+                // aBody->AddAngularVelocity(Vector3CrossProduct(collision.points.A, fullImpulse));
             }
 
             if (bBody->GetIsDynamic()) {
                 bBody->AddVelocity(fullImpulse);
-                bBody->AddAngularVelocity(Vector3CrossProduct(collision.points.B, Vector3Scale(fullImpulse, -1)));
+                Vector3 centerOfMass = bBody->GetTransform()->GetPositionWorld();
+                Vector3 torque = Vector3CrossProduct(Vector3Subtract(collision.points.B, centerOfMass), fullImpulse);
+                bBody->AddAngularVelocity(torque);
+                // bBody->AddAngularVelocity(Vector3CrossProduct(collision.points.B, Vector3Scale(fullImpulse, -1)));
             }
             
             // friction to add
