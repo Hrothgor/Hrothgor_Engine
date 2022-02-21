@@ -26,9 +26,8 @@ namespace hr {
 
             float GetMass() const;
             float GetInvMass() const;
+            Matrix GetInvTensor() const;
             void SetMass(float mass);
-            bool GetUseGravity() const;
-            void SetUseGravity(bool useGravity);
 
             Vector3 GetForce() const;
             void SetForce(Vector3 force);
@@ -42,8 +41,15 @@ namespace hr {
             void SetAngularVelocity(Vector3 angularVelocity);
             void AddAngularVelocity(Vector3 angularVelocity);
 
+            bool GetUseGravity() const;
+            void SetUseGravity(bool useGravity);
             bool GetIsDynamic() const;
             void SetIsDynamic(bool isDynamic);
+
+            float GetStaticFriction() const;
+            void SetStaticFriction(float staticFriction);
+            float GetDynamicFriction() const;
+            void SetDynamicFriction(float dynamicFriction);
 
             void ImGuiRender();
             void OnDrawGizmos() {};
@@ -60,8 +66,10 @@ namespace hr {
 
             float _mass = 1;
             bool _useGravity = true;
-
             bool _isDynamic = true;
+
+            float _staticFriction = 0.5;
+            float _dynamicFriction = 0.3;
     };
 }
 

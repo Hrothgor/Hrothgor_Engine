@@ -39,8 +39,8 @@ namespace hr {
 
             void SetOffset(Vector3 offset);
             Vector3 GetOffset() const;
-            float GetSphereRadius() const;
-            void SetSphereRadius(float radius);
+            float GetRadius() const;
+            void SetRadius(float radius);
 
             void ImGuiRender();
             void OnDrawGizmos();
@@ -52,7 +52,7 @@ namespace hr {
         protected:
         private:
             Vector3 _offset = {0};
-            float _sphereRadius = 1;
+            float _radius = 1;
 
         protected:
         private:

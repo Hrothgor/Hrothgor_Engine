@@ -46,20 +46,20 @@ namespace hr {
         return _offset;
     }
 
-    float SphereCollider::GetSphereRadius() const
+    float SphereCollider::GetRadius() const
     {
-        return _sphereRadius;
+        return _radius;
     }
 
-    void SphereCollider::SetSphereRadius(float radius)
+    void SphereCollider::SetRadius(float radius)
     {
-        _sphereRadius = radius;
+        _radius = radius;
     }
 
     void SphereCollider::ImGuiRender()
     {
         UIElement::Vector3Field("Offset", [this](){return GetOffset();}, [this](Vector3 vec){SetOffset(vec);});
-        UIElement::FloatField("Sphere Radius", [this](){return GetSphereRadius();}, [this](float val){SetSphereRadius(val);});
+        UIElement::FloatField("Sphere Radius", [this](){return GetRadius();}, [this](float val){SetRadius(val);});
     }
 
     void SphereCollider::OnDrawGizmos()
@@ -67,7 +67,7 @@ namespace hr {
         Transform *transform = GetTransform();
         Vector3 pos = Vector3Add(transform->GetPositionWorld(), _offset);
 
-        DrawSphereWires(pos, _sphereRadius,
+        DrawSphereWires(pos, _radius,
             10, 10, GREEN);
     }
 
@@ -76,7 +76,7 @@ namespace hr {
         nlohmann::json json;
 
         json["offset"] = {_offset.x, _offset.y, _offset.z};
-        json["radius"] = _sphereRadius;
+        json["radius"] = _radius;
 
         return json;
     }
@@ -84,14 +84,14 @@ namespace hr {
     void SphereCollider::FromJson(const nlohmann::json &json)
     {
         _offset = {json["offset"][0].get<float>(), json["offset"][1].get<float>(), json["offset"][2].get<float>()};
-        _sphereRadius = json["radius"].get<float>();
+        _radius = json["radius"].get<float>();
     }
 
     Component *SphereCollider::Clone(GameObject *gameObject)
     {
         SphereCollider *ret = new SphereCollider(gameObject);
         ret->SetOffset(_offset);
-        ret->SetSphereRadius(_sphereRadius);
+        ret->SetRadius(_radius);
         return ret;
     }
 }

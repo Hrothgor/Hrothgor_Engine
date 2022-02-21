@@ -46,42 +46,47 @@ namespace hr {
         return _offset;
     }
 
-    float BoxCollider::GetCubeWidth() const
+    Vector3 BoxCollider::GetSize() const
     {
-        return _cubeWidth;
+        return {_width, _height, _length};
     }
 
-    void BoxCollider::SetCubeWidth(float width)
+    float BoxCollider::GetWidth() const
     {
-        _cubeWidth = width;
+        return _width;
     }
 
-    float BoxCollider::GetCubeHeight() const
+    void BoxCollider::SetWidth(float width)
     {
-        return _cubeHeight;
+        _width = width;
     }
 
-    void BoxCollider::SetCubeHeight(float height)
+    float BoxCollider::GetHeight() const
     {
-        _cubeHeight = height;
+        return _height;
     }
 
-    float BoxCollider::GetCubeLength() const
+    void BoxCollider::SetHeight(float height)
     {
-        return _cubeLength;
+        _height = height;
     }
 
-    void BoxCollider::SetCubeLength(float length)
+    float BoxCollider::GetLength() const
     {
-        _cubeLength = length;
+        return _length;
+    }
+
+    void BoxCollider::SetLength(float length)
+    {
+        _length = length;
     }
 
     void BoxCollider::ImGuiRender()
     {
         UIElement::Vector3Field("Offset", [this](){return GetOffset();}, [this](Vector3 vec){SetOffset(vec);});
-        UIElement::FloatField("Cube Width", [this](){return GetCubeWidth();}, [this](float val){SetCubeWidth(val);});
-        UIElement::FloatField("Cube Height", [this](){return GetCubeHeight();}, [this](float val){SetCubeHeight(val);});
-        UIElement::FloatField("Cube Length", [this](){return GetCubeLength();}, [this](float val){SetCubeLength(val);});
+        UIElement::FloatField("Cube Width", [this](){return GetWidth();}, [this](float val){SetWidth(val);});
+        UIElement::FloatField("Cube Height", [this](){return GetHeight();}, [this](float val){SetHeight(val);});
+        UIElement::FloatField("Cube Length", [this](){return GetLength();}, [this](float val){SetLength(val);});
     }
 
     void BoxCollider::OnDrawGizmos()
@@ -94,7 +99,7 @@ namespace hr {
         rlTranslatef(pos.x, pos.y, pos.z);
         rlRotatef(axisAngle.angle, axisAngle.axis.x, axisAngle.axis.y, axisAngle.axis.z);
         rlTranslatef(-pos.x, -pos.y, -pos.z);
-        DrawCubeWires(pos, _cubeWidth, _cubeHeight, _cubeLength, GREEN);
+        DrawCubeWires(pos, _width, _height, _length, GREEN);
         rlPopMatrix();
     }
 
@@ -103,9 +108,9 @@ namespace hr {
         nlohmann::json json;
 
         json["offset"] = {_offset.x, _offset.y, _offset.z};
-        json["width"] = _cubeWidth;
-        json["height"] = _cubeHeight;
-        json["length"] = _cubeLength;
+        json["width"] = _width;
+        json["height"] = _height;
+        json["length"] = _length;
 
         return json;
     }
@@ -113,18 +118,18 @@ namespace hr {
     void BoxCollider::FromJson(const nlohmann::json &json)
     {
         _offset = {json["offset"][0].get<float>(), json["offset"][1].get<float>(), json["offset"][2].get<float>()};
-        _cubeWidth = json["width"].get<float>();
-        _cubeHeight = json["height"].get<float>();
-        _cubeLength = json["length"].get<float>();
+        _width = json["width"].get<float>();
+        _height = json["height"].get<float>();
+        _length = json["length"].get<float>();
     }
 
     Component *BoxCollider::Clone(GameObject *gameObject)
     {
         BoxCollider *ret = new BoxCollider(gameObject);
         ret->SetOffset(_offset);
-        ret->SetCubeWidth(_cubeWidth);
-        ret->SetCubeHeight(_cubeHeight);
-        ret->SetCubeLength(_cubeLength);
+        ret->SetWidth(_width);
+        ret->SetHeight(_height);
+        ret->SetLength(_length);
         return ret;
     }
 }

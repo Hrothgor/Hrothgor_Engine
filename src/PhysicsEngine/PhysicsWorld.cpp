@@ -21,8 +21,8 @@ namespace hr {
 
     PhysicsWorld::PhysicsWorld()
     {
-        AddSolver(new SmoothPositionSolver());
         AddSolver(new ImpulseSolver());
+        AddSolver(new SmoothPositionSolver());
     }
 
     PhysicsWorld::~PhysicsWorld()
@@ -42,7 +42,7 @@ namespace hr {
 
             rb->AddVelocity(Vector3Scale(rb->GetForce(), GetFrameTime()));
 
-            tr->Rotate(Vector3Scale(rb->GetAngularVelocity(), GetFrameTime()));
+            tr->Rotate(rb->GetAngularVelocity()); // TODO : check if it's the right way to do it, i dont mult by delta time cause i mult by invTensor
             tr->Translate(Vector3Scale(rb->GetVelocity(), GetFrameTime()));
 
             rb->SetForce(Vector3Zero());

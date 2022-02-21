@@ -40,13 +40,13 @@ namespace hr {
             void SetOffset(Vector3 offset);
             Vector3 GetOffset() const;
 
-            Vector3 GetCubeSize() const;
-            float GetCubeWidth() const;
-            void SetCubeWidth(float width);
-            float GetCubeHeight() const;
-            void SetCubeHeight(float height);
-            float GetCubeLength() const;
-            void SetCubeLength(float length);
+            Vector3 GetSize() const;
+            float GetWidth() const;
+            void SetWidth(float width);
+            float GetHeight() const;
+            void SetHeight(float height);
+            float GetLength() const;
+            void SetLength(float length);
 
             void ImGuiRender();
             void OnDrawGizmos();
@@ -58,9 +58,9 @@ namespace hr {
         protected:
         private:
             Vector3 _offset = {0};
-            float _cubeWidth = 1;
-            float _cubeHeight = 1;
-            float _cubeLength = 1;
+            float _width = 1;
+            float _height = 1;
+            float _length = 1;
     };
 }
 

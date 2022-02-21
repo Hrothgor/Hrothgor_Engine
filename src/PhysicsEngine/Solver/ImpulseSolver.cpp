@@ -76,17 +76,51 @@ namespace hr {
 
             if (bBody->GetIsDynamic()) {
                 bBody->AddVelocity(fullImpulse);
+
                 Vector3 centerOfMass = bBody->GetTransform()->GetPositionWorld();
                 Vector3 torque = Vector3CrossProduct(Vector3Subtract(collision.points.B, centerOfMass), fullImpulse);
                 bBody->AddAngularVelocity(torque);
                 // bBody->AddAngularVelocity(Vector3CrossProduct(collision.points.B, Vector3Scale(fullImpulse, -1)));
             }
             
-            // friction to add
-            // aVel = aBody->GetIsDynamic() ? aBody->GetVelocity() : Vector3Zero();
-            // bVel = bBody->GetIsDynamic() ? bBody->GetVelocity() : Vector3Zero();
-            // rVel = Vector3Subtract(bVel, aVel);
-            // impulseForce = Vector3DotProduct(rVel, collision.points.Normal);
+            // friction
+
+
+            aVel = aBody->GetIsDynamic() ? aBody->GetVelocity() : Vector3Zero();
+            bVel = bBody->GetIsDynamic() ? bBody->GetVelocity() : Vector3Zero();
+            rVel = Vector3Subtract(bVel, aVel);
+            impulseForce = Vector3DotProduct(rVel, collision.points.Normal);
+
+            Vector3 tangent = Vector3Subtract(rVel, Vector3Scale(collision.points.Normal, impulseForce));
+
+
+            if (Vector3Length(tangent) > 0.0001) { // safe normalize
+				tangent = Vector3Normalize(tangent);
+			}
+
+            float fVel = Vector3DotProduct(tangent, collision.points.Normal);
+
+            float aSF = aBody ? aBody->GetStaticFriction()  : 0;
+			float bSF = bBody ? bBody->GetStaticFriction()  : 0;
+			float aDF = aBody ? aBody->GetDynamicFriction() : 0;
+			float bDF = bBody ? bBody->GetDynamicFriction() : 0;
+            float mu = Vector2Length({aSF, bSF});
+
+            float f = -fVel / (aInvMass + bInvMass);
+
+            Vector3 friction;
+            if (abs(f) < j * mu) {
+				friction = Vector3Scale(tangent, f);
+			} else {
+                mu = Vector2Length({aDF, bDF});
+                friction = Vector3Scale(tangent, -j * mu);
+			}
+
+			if (aBody->GetIsDynamic())
+				aBody->AddVelocity(Vector3Scale(friction, -1));
+
+			if (bBody->GetIsDynamic())
+				bBody->AddVelocity(friction);
         }
     }
 }

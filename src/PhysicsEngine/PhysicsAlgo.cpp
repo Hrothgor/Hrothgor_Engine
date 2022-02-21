@@ -24,7 +24,7 @@ namespace hr {
         Matrix rotationMatrix = MatrixRotateXYZ({DEG2RAD * rotation.x, DEG2RAD * rotation.y, DEG2RAD * rotation.z});
         float16 rotationMatrixPtr = MatrixToFloatV(rotationMatrix);
 
-        float size[3] = {box->GetCubeWidth() / 2, box->GetCubeHeight() / 2, box->GetCubeLength() / 2};
+        float size[3] = {box->GetWidth() / 2, box->GetHeight() / 2, box->GetLength() / 2};
         for (int i = 0; i < 3; i++) {
             Vector3 axis = {rotationMatrixPtr.v[i], rotationMatrixPtr.v[i + 4], rotationMatrixPtr.v[i + 8]};
             axis = Vector3Normalize(axis);
@@ -51,13 +51,13 @@ namespace hr {
         Vector3 AtoB = Vector3Subtract(B, A);
         Vector3 BtoA = Vector3Subtract(A, B);
 
-        if (Vector3Length(AtoB) > 2 * a->GetSphereRadius()
-        || Vector3Length(BtoA) > 2 * b->GetSphereRadius())
+        if (Vector3Length(AtoB) > 2 * a->GetRadius()
+        || Vector3Length(BtoA) > 2 * b->GetRadius())
             return {Vector3Zero(), Vector3Zero(), Vector3Zero(), 0, false};
 
         return {
-            Vector3Add(A, Vector3Scale(Vector3Normalize(AtoB), a->GetSphereRadius())),
-            Vector3Add(B, Vector3Scale(Vector3Normalize(BtoA), b->GetSphereRadius())),
+            Vector3Add(A, Vector3Scale(Vector3Normalize(AtoB), a->GetRadius())),
+            Vector3Add(B, Vector3Scale(Vector3Normalize(BtoA), b->GetRadius())),
             Vector3Normalize(BtoA),
             Vector3Length(AtoB),
             true
@@ -68,15 +68,24 @@ namespace hr {
         const SphereCollider *a, const Transform *aTransform,
         const BoxCollider *b, const Transform *bTransform)
     {
-        Vector3 closestPoint = ClosestPoint(b, aTransform->GetPositionWorld());
+        // TODO STILL BUGGY
+        Vector3 A = Vector3Add(aTransform->GetPositionWorld(), a->GetOffset());
+        Vector3 B = Vector3Add(bTransform->GetPositionWorld(), b->GetOffset());
+        Vector3 closestPoint = ClosestPoint(b, A);
 
-        Vector3 CPtoA = Vector3Subtract(closestPoint, aTransform->GetPositionWorld());
+        Vector3 CPtoA = Vector3Subtract(closestPoint, A);
         float distanceSqA = Vector3LengthSqr(CPtoA);
-        if (distanceSqA > a->GetSphereRadius() * a->GetSphereRadius()) {
+        Vector3 n = Vector3Normalize(Vector3Subtract(A, closestPoint));
+
+        DrawSphere(closestPoint, 2, RED);
+        Vector3 outpoint = Vector3Subtract(A, Vector3Scale(n, a->GetRadius()));
+        DrawSphere(outpoint, 2, RED);
+        
+        if (distanceSqA > a->GetRadius() * a->GetRadius()) {
             return {Vector3Zero(), Vector3Zero(), Vector3Zero(), 0, false};
         }
 
-        Vector3 CPtoB = Vector3Subtract(closestPoint, bTransform->GetPositionWorld());
+        Vector3 CPtoB = Vector3Subtract(closestPoint, B);
         float distanceSqB = Vector3LengthSqr(CPtoB);
         Vector3 normal; 
         if (CMP(distanceSqA, 0.0)) {
@@ -86,10 +95,10 @@ namespace hr {
         	normal = Vector3Normalize(CPtoB);
         }
         else {
-        	normal = Vector3Normalize(Vector3Subtract(aTransform->GetPositionWorld(), closestPoint));
+        	normal = Vector3Normalize(Vector3Subtract(A, closestPoint));
         }
 
-        Vector3 outsidePoint = Vector3Subtract(aTransform->GetPositionWorld(), Vector3Scale(normal, a->GetSphereRadius()));
+        Vector3 outsidePoint = Vector3Subtract(A, Vector3Scale(normal, a->GetRadius()));
 
         float distance = Vector3Length(Vector3Subtract(closestPoint, outsidePoint));
 
