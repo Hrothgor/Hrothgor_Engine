@@ -22,8 +22,6 @@ namespace hr {
 
     MeshRenderer::~MeshRenderer()
     {
-        if (_texture.id != 0)
-            UnloadTexture(_texture);
     }
 
     void MeshRenderer::Update()
@@ -39,8 +37,6 @@ namespace hr {
     void MeshRenderer::LoadTextureFromPath(const std::string &path)
     {
         if (AssetsManager::Get()->TextureContains(path)) {
-            if (_texture.id != 0)
-                UnloadTexture(_texture);
             _texturePath = path;
             _texture = AssetsManager::Get()->GetTexture(path);
         }
@@ -58,7 +54,7 @@ namespace hr {
 
     void MeshRenderer::ImGuiRender()
     {
-        UIElement::StringField("Texture", [this](){return GetTexturePath();}, [this](const std::string &str){LoadTextureFromPath(str);});
+        UIElement::TextureField("Texture", [this](){return GetTexturePath();}, [this](const std::string &str){LoadTextureFromPath(str);});
     }
 
     nlohmann::json MeshRenderer::ToJson() const

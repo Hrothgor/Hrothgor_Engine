@@ -149,4 +149,50 @@ namespace hr {
 
 		EndField();
     }
+
+    void UIElement::ModelField(const std::string &label, std::function<std::string()> getter, std::function<void(std::string)> setter)
+    {
+        StartField(label);
+
+        std::string path = getter();
+        char buf[100]{};
+        std::memcpy(buf, path.data(), path.size());
+
+		ImGui::InputText("", buf, IM_ARRAYSIZE(buf), ImGuiInputTextFlags_ReadOnly);
+
+        if (ImGui::BeginDragDropTarget())
+        {
+            if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("MODEL_PAYLOAD"))
+            {
+                char *path = static_cast<char *>(payload->Data);
+                setter(std::string(path));
+            }
+            ImGui::EndDragDropTarget();
+        }
+
+		EndField();
+    }
+
+    void UIElement::TextureField(const std::string &label, std::function<std::string()> getter, std::function<void(std::string)> setter)
+    {
+        StartField(label);
+
+        std::string path = getter();
+        char buf[100]{};
+        std::memcpy(buf, path.data(), path.size());
+
+		ImGui::InputText("", buf, IM_ARRAYSIZE(buf), ImGuiInputTextFlags_ReadOnly);
+
+        if (ImGui::BeginDragDropTarget())
+        {
+            if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("TEXTURE_PAYLOAD"))
+            {
+                char *path = static_cast<char *>(payload->Data);
+                setter(std::string(path));
+            }
+            ImGui::EndDragDropTarget();
+        }
+
+		EndField();
+    }
 }

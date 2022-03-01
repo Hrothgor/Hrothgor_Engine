@@ -27,6 +27,9 @@ namespace hr {
             static void ColorField(const std::string &label, std::function<Color()> getter, std::function<void(Color)> setter);
 
             static void StringField(const std::string &label, std::function<std::string()> getter, std::function<void(std::string)> setter);
+
+            static void ModelField(const std::string &label, std::function<std::string()> getter, std::function<void(std::string)> setter);
+            static void TextureField(const std::string &label, std::function<std::string()> getter, std::function<void(std::string)> setter);
         protected:
         private:
             static void StartField(const std::string &label);

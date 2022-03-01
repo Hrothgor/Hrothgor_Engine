@@ -17,6 +17,10 @@ namespace hr {
 
     AssetsManager::~AssetsManager()
     {
+        for (auto [path, model] : _models)
+            UnloadModel(model);
+        for (auto [path, texture] : _textures)
+            UnloadTexture(texture);
     }
 
     void AssetsManager::Start()

@@ -59,7 +59,7 @@ namespace hr {
         }
 
         //////////////////////////////////////////////////////
-		// Thumbnail //////////////////////////////////////////
+		// Thumbnail /////////////////////////////////////////
 		//////////////////////////////////////////////////////
 
         static bool firstCall = true;
@@ -203,6 +203,38 @@ namespace hr {
             ImGui::BeginTooltip();
             ImGui::TextUnformatted(String::NameByPath(path).c_str());
             ImGui::EndTooltip();
+        }
+
+        //////////////////////////////////////////////////////
+		// DragPayload ///////////////////////////////////////
+		//////////////////////////////////////////////////////
+
+        // I drag and drop the path (str), but I could drag and drop the model or texture directly
+
+        if (String::EndWith(path, ".png")) {
+            ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 10.0f, 10.0f });
+            if (ImGui::BeginDragDropSource())
+            {
+                ImGui::SetDragDropPayload("TEXTURE_PAYLOAD", path.c_str(), path.size());
+
+                ImGui::TextUnformatted(String::NameByPath(path).c_str());
+                ImGui::Image((ImTextureID)icon, { 128, 128 });
+
+                ImGui::EndDragDropSource();
+            }
+            ImGui::PopStyleVar();
+        } else if (String::EndWith(path, ".obj")) {
+            ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 10.0f, 10.0f });
+            if (ImGui::BeginDragDropSource())
+            {
+                ImGui::SetDragDropPayload("MODEL_PAYLOAD", path.c_str(), path.size());
+
+                ImGui::TextUnformatted(String::NameByPath(path).c_str());
+                ImGui::Image((ImTextureID)icon, { 128, 128 });
+
+                ImGui::EndDragDropSource();
+            }
+            ImGui::PopStyleVar();
         }
 
         //////////////////////////////////////////////////////

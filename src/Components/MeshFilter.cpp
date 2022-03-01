@@ -24,8 +24,6 @@ namespace hr {
 
     MeshFilter::~MeshFilter()
     {
-        if (_model.meshCount > 0)
-            UnloadModel(_model);
     }
 
     void MeshFilter::Update()
@@ -45,8 +43,6 @@ namespace hr {
     void MeshFilter::SetModel(PrimitiveMeshType type)
     {
         _type = type;
-        if (_model.meshCount > 0)
-            UnloadModel(_model);
         switch (type) {
             case CUBE:
                 _model = LoadModelFromMesh(GenMeshCube(_cubeWidth, _cubeHeight, _cubeLength));
@@ -206,7 +202,7 @@ namespace hr {
                 UIElement::IntField("Plane Resolution", [this](){return GetPlaneResolution();}, [this](int val){SetPlaneResolution(val);}, 1, 1, 1000);
                 break;
             case MESH:
-                UIElement::StringField("Model", [this](){return GetMeshPath();}, [this](const std::string &str){LoadMeshFromPath(str);});
+                UIElement::ModelField("Model", [this](){return GetMeshPath();}, [this](const std::string &str){LoadMeshFromPath(str);});
                 break;
         }
     }
