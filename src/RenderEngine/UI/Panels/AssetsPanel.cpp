@@ -7,6 +7,8 @@
 
 #include "AssetsPanel.hpp"
 #include "../../../Ecs/Engine.hpp"
+#include "../../AssetsManager.hpp"
+#include "../../../Tools/String.hpp"
 
 namespace hr {
     AssetsPanel::AssetsPanel()
@@ -19,6 +21,7 @@ namespace hr {
 
     void AssetsPanel::Start()
     {
+        _selectedDir = "";
     }
 
     void AssetsPanel::ImGuiRender()
@@ -38,24 +41,79 @@ namespace hr {
 
         ImGuiTreeNodeFlags rootNodeFlags = (ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_SpanFullWidth);
 
-        std::string projectPath = "Projects/" + Engine::Get()->GetProjectName() + "/";
+        std::string projectPath = "Engine";
 
-		if (_selectedDir == projectPath + "Assets")
+		if (_selectedDir == projectPath)
 			rootNodeFlags |= ImGuiTreeNodeFlags_Selected;
 
         ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, { 0.0f, 0.0f });
-        bool nodeIsOpen = ImGui::TreeNodeEx("##AssetsRootTreeNode", rootNodeFlags, "Assets");
+        bool nodeIsOpen = ImGui::TreeNodeEx("##EngineRootTreeNode", rootNodeFlags, "Engine");
         ImGui::PopStyleVar();
 
         if (ImGui::IsItemClicked())
-			_selectedDir = projectPath + "Assets";
+			_selectedDir = projectPath;
 
         if (nodeIsOpen) {
-            DirectoryDraw(projectPath + "Assets");
+            DirectoryDraw(projectPath);
             ImGui::TreePop();
         }
 
-        ThumbnailsDraw();
+        //////////////////////////////////////////////////////
+		// Thumbnail //////////////////////////////////////////
+		//////////////////////////////////////////////////////
+
+        static bool firstCall = true;
+
+        if (firstCall)
+        {
+            ImGui::SetColumnWidth(0, 250.0f);
+            firstCall = false;
+        }
+        if (_selectedDir != "") {
+            ImGui::NextColumn();
+
+            ImGui::PushItemWidth(-1);
+            ImGui::Spacing();
+            {
+                int tSize = _thumbnailSize;
+                if (ImGui::SliderInt("##Thumbnail Size", &tSize, 50, 248, "Thumbnail Size : %dpx"))
+                    _thumbnailSize = tSize;
+            }
+            ImGui::PopItemWidth();
+
+            if (_selectedDir != "")
+			{
+				if (ImGui::ArrowButton("AssetThumbnailUpFolderButton", ImGuiDir_Up))
+				{
+					std::string parentPath = _selectedDir;
+					parentPath = parentPath.substr(0, parentPath.find_last_of('/'));
+					if (parentPath.empty())
+						parentPath = "Engine";
+                    _selectedDir = parentPath;
+				}
+
+				ImGui::SameLine();
+				ImGui::TextUnformatted(_selectedDir.c_str());
+			}
+
+            ImGui::BeginChild("##ThumbnailView", { 0, 0 }, false, ImGuiWindowFlags_AlwaysUseWindowPadding);
+
+            std::vector<std::string> selectionFolder = GetDirNames(_selectedDir, false);
+
+            uint32_t count = selectionFolder.size();
+            uint32_t n = 0;
+            if (count > 0)
+            {
+                for (const auto& assetPath : selectionFolder)
+                {
+                    ImGui::PushID(n);
+                    ThumbnailDraw(assetPath, n + 1 == count);
+                    ImGui::PopID();
+                    n++;
+                }
+            }
+            ImGui::EndChild();
+        }
 
         ImGui::Columns(1);
 		ImGui::End();
@@ -63,10 +121,10 @@ namespace hr {
 
     void AssetsPanel::DirectoryDraw(const std::string &path)
     {
-        std::vector<std::string> dirList = GetDirNames(path);
+        std::vector<std::string> dirList = GetDirNames(path, true);
 
         for (std::string dir : dirList) {
-            bool entityIsParent = GetDirNames(dir).size();
+            bool entityIsParent = GetDirNames(dir, true).size();
             ImGuiTreeNodeFlags nodeFlags = ImGuiTreeNodeFlags_AllowItemOverlap;
 
 			if (_selectedDir == dir)
@@ -94,35 +152,128 @@ namespace hr {
         }
     }
 
-    std::vector<std::string> AssetsPanel::GetDirNames(const std::string &path)
+    std::vector<std::string> AssetsPanel::GetDirNames(const std::string &path, bool onlyDir)
     {
         std::vector<std::string> dirList;
         
         for (const auto &entry : std::filesystem::directory_iterator(path))
-            if (std::filesystem::is_directory(entry.symlink_status()))
+            if (onlyDir) {
+                if (std::filesystem::is_directory(entry.symlink_status()))
+                    dirList.push_back(entry.path().string());
+            } else {
                 dirList.push_back(entry.path().string());
+            }
         return dirList;
     }
 
-    void AssetsPanel::ThumbnailsDraw()
+    void AssetsPanel::ThumbnailDraw(const std::string &path, bool last)
     {
-        static bool firstCall = true;
+        ImVec2 thumbnailSize{ (float)_thumbnailSize, (float)_thumbnailSize };
 
-        if (firstCall)
-        {
-            ImGui::SetColumnWidth(0, 250.0f);
-            firstCall = false;
+        // Texture2D icon = LoadTexture("Engine/Ressources/Icons/file-icon.png");
+        Texture2D *icon = nullptr;
+        if (std::filesystem::is_directory(path)) {
+            icon = AssetsManager::Get()->GetTextureAddr("Engine/Ressources/Icons/folder.png");
+        } else if (String::EndWith(path, ".obj")) {
+            icon = AssetsManager::Get()->GetTextureAddr("Engine/Ressources/Icons/file-obj.png");
+        } else if (String::EndWith(path, ".png")) {
+            icon = AssetsManager::Get()->GetTextureAddr(path);
+        } else {
+            icon = AssetsManager::Get()->GetTextureAddr("Engine/Ressources/Icons/file.png");
         }
-        ImGui::NextColumn();
 
-        ImGui::PushItemWidth(-1);
-        ImGui::Spacing();
-        {
-            int tSize = _thumbnailSize;
-            if (ImGui::SliderInt("##Thumbnail Size", &tSize, 50, 248, "Thumbnail Size : %dpx"))
-                _thumbnailSize = tSize;
+        ImGui::PushStyleColor(ImGuiCol_Button,        { 0.2f, 0.2f, 0.2f, 0.2f });
+		ImGui::PushStyleColor(ImGuiCol_ButtonHovered, { 0.2f, 0.2f, 0.2f, 0.5f });
+		ImGui::PushStyleColor(ImGuiCol_ButtonActive,  { 0.2f, 0.2f, 0.2f, 0.7f });
+
+        if (icon) {
+            ImGui::ImageButton((ImTextureID)icon, thumbnailSize);
+        } else {
+            ImGui::Button("", thumbnailSize);
         }
-        ImGui::PopItemWidth();
+        ImGui::PopStyleColor(3);
+
+        if (ImGui::IsItemClicked() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
+		{
+            if (std::filesystem::is_directory(path))
+                _selectedDir = path;
+		}
+
+        if (ImGui::IsItemHovered()) {
+            ImGui::BeginTooltip();
+            ImGui::TextUnformatted(String::NameByPath(path).c_str());
+            ImGui::EndTooltip();
+        }
+
+        //////////////////////////////////////////////////////
+		// Text //////////////////////////////////////////////
+		//////////////////////////////////////////////////////
+
+		ImDrawList& windowDrawList = *ImGui::GetWindowDrawList();
+
+		ImVec2 rectMin = ImGui::GetItemRectMin();
+		ImVec2 rectSize = ImGui::GetItemRectSize();
+		ImVec2 textSize = ImGui::CalcTextSize(String::NameByPath(path).c_str());
+
+		static Vector2 padding{ 5, 5 };
+		static int marginTop = 15;
+
+		if (textSize.x + padding.x * 2 <= rectSize.x) // Enough space
+		{
+			/*
+			<----------> = rectSize.x
+			rectMin
+			||
+			\/
+			*___________
+			|    O     | /\
+			|  --|--   | ||	                             // Closer look to the text
+			|    |     | || = rectSize.y                 __________
+			|   / \    | ||                              |        | => padding.y
+			|__________| \/     \/                       | Player |
+			                    || = marginTop           |________| => padding.y
+			  |Player|          /\                       ||      ||
+			                                             \/      \/
+			  <------> = textSize.x                  padding.x   padding.x
+			| |
+			<-> = (rectSize.x - textSize.x) / 2
+			*/
+
+			float rectMin_x = rectMin.x - padding.x + (rectSize.x - textSize.x) / 2;
+			float rectMin_y = rectMin.y + rectSize.y + marginTop;
+
+			float rectMax_x = rectMin_x + textSize.x + padding.x * 2;
+			float rectMax_y = rectMin_y + textSize.y + padding.y * 2;
+
+			windowDrawList.AddRectFilled({ rectMin_x, rectMin_y }, { rectMax_x, rectMax_y }, ImColor(20, 20, 20), 5);
+			windowDrawList.AddText({ rectMin_x + padding.x, rectMin_y + padding.y }, ImColor(1.0f, 1.0f, 1.0f), String::NameByPath(path).c_str());
+		}
+		else // Tight => use ellipsis
+		{
+			float rectMin_y = rectMin.y + rectSize.y + marginTop;
+
+			float rectMax_x = rectMin.x + rectSize.x;
+			float rectMax_y = rectMin_y + textSize.y + padding.y * 2;
+
+			windowDrawList.AddRectFilled({ rectMin.x, rectMin_y }, { rectMax_x, rectMax_y }, ImColor(20, 20, 20), 5);
+
+			rectMax_x -= padding.x;
+			rectMax_y -= padding.y;
+
+			ImGui::RenderTextEllipsis(&windowDrawList, { rectMin.x + padding.x, rectMin_y + padding.y }, { rectMax_x, rectMax_y }, rectMax_x, rectMax_x, String::NameByPath(path).c_str(), nullptr, &textSize);
+		}
+        
+        //////////////////////////////////////////////////////
+		// Wrapping //////////////////////////////////////////
+		//////////////////////////////////////////////////////
+
+		float nextBtn = ImGui::GetItemRectMax().x + ImGui::GetStyle().ItemSpacing.x + rectSize.x;
+		float rightMost = ImGui::GetWindowPos().x + ImGui::GetWindowContentRegionMax().x;
+
+		if (!last && nextBtn < rightMost)
+			ImGui::SameLine();
+		else
+			ImGui::Dummy({ 0, 50 });
     }
 
     void AssetsPanel::End()

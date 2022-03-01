@@ -58,7 +58,7 @@ namespace hr {
                 _model = LoadModelFromMesh(GenMeshPlane(_planeWidth, _planeLength, _planeResolution, _planeResolution));
                 break;
             case MESH:
-                _model = AssetsManager::Get()->EngineModelGet(_meshPath);
+                _model = AssetsManager::Get()->GetModel(_meshPath);
                 break;
         }
     }
@@ -178,7 +178,7 @@ namespace hr {
 
     void MeshFilter::LoadMeshFromPath(const std::string &path)
     {
-        if (AssetsManager::Get()->EngineModelContains(path)) {
+        if (AssetsManager::Get()->ModelContains(path)) {
             _meshPath = path;
             if (_type == MESH)
                 SetModel(_type);

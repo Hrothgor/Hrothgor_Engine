@@ -30,7 +30,7 @@ namespace hr {
     {
         if (Engine::Get()->GetProjectName() == "")
             return;
-        std::ofstream file("Projects/" + name + "/save.json", std::ios::trunc);
+        std::ofstream file("Engine/Scenes/" + name + ".scn", std::ios::trunc);
 
         std::vector<GameObject *> _entities = Engine::Get()->GetRootEntities();
     

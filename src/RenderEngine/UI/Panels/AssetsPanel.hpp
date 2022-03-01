@@ -23,8 +23,8 @@ namespace hr {
             virtual void End() override;
 
             void DirectoryDraw(const std::string &path);
-            std::vector<std::string> GetDirNames(const std::string &path);
-            void ThumbnailsDraw();
+            std::vector<std::string> GetDirNames(const std::string &path, bool onlyDir);
+            void ThumbnailDraw(const std::string &path, bool last);
         protected:
         private:
             std::string _selectedDir = "";

@@ -14,4 +14,13 @@ namespace hr
         if (ending.size() > value.size()) return false;
         return std::equal(ending.rbegin(), ending.rend(), value.rbegin());
     }
+
+    std::string String::NameByPath(std::string const &path)
+    {
+        std::string name = path;
+        size_t pos = name.find_last_of("/\\");
+        if (pos != std::string::npos)
+            name = name.substr(pos + 1);
+        return name;
+    }
 }

@@ -38,11 +38,11 @@ namespace hr {
 
     void MeshRenderer::LoadTextureFromPath(const std::string &path)
     {
-        if (AssetsManager::Get()->EngineTextureContains(path)) {
+        if (AssetsManager::Get()->TextureContains(path)) {
             if (_texture.id != 0)
                 UnloadTexture(_texture);
             _texturePath = path;
-            _texture = AssetsManager::Get()->EngineTextureGet(path);
+            _texture = AssetsManager::Get()->GetTexture(path);
         }
     }
 

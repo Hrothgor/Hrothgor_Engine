@@ -46,16 +46,15 @@ namespace hr {
 
     void LoadSystem::LoadProject(const std::string &name)
     {
-        if (!std::filesystem::exists("Projects/" + name))
+        if (!std::filesystem::exists("Engine/Scenes/" + name + ".scn"))
             return;
         Engine::Get()->SetProjectName(name);
-        AssetsManager::Get()->LoadProject("Projects/" + name + "/Assets/");
-        if (!std::filesystem::exists("Projects/" + name + "/save.json")) {
+        if (!std::filesystem::exists("Engine/Scenes/" + name + ".scn")) {
             Engine::Get()->ClearEntities();
             Engine::Get()->Start();
             return;
         }
-        std::ifstream file("Projects/" + name + "/save.json");
+        std::ifstream file("Engine/Scenes/" + name + ".scn");
 
         nlohmann::json json;
         file >> json;
@@ -70,12 +69,10 @@ namespace hr {
 
     void LoadSystem::CreateNewProject(const std::string &name)
     {
-        if (std::filesystem::exists("Projects/" + name)) {
+        if (std::filesystem::exists("Engine/Scenes/" + name)) {
             LoadProject(name);
             return;
         }
-        std::filesystem::create_directory("Projects/" + name);
-        std::filesystem::create_directory("Projects/" + name + "/Assets");
         Engine::Get()->SetProjectName(name);
     }
 }

@@ -21,6 +21,7 @@ namespace hr {
     class String {
         public:
             static bool EndWith(std::string const &value, std::string const &ending);
+            static std::string NameByPath(std::string const &path);
         protected:
         private:
     };

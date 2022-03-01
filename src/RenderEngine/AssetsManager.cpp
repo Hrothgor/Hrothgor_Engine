@@ -21,87 +21,53 @@ namespace hr {
 
     void AssetsManager::Start()
     {
-        for (const auto &entry : std::filesystem::directory_iterator("ressources")) {
+        for (const auto &entry : std::filesystem::directory_iterator("Engine/Ressources")) {
             if (String::EndWith(entry.path(), ".obj"))
-                _engineModels[entry.path()] = LoadModel(entry.path().c_str());
+                _models[entry.path()] = LoadModel(entry.path().c_str());
             if (String::EndWith(entry.path(), ".png"))
-                _engineTextures[entry.path()] = LoadTexture(entry.path().c_str());
+                _textures[entry.path()] = LoadTexture(entry.path().c_str());
+        }
+
+        for (const auto &entry : std::filesystem::directory_iterator("Engine/Ressources/Icons")) {
+            if (String::EndWith(entry.path(), ".obj"))
+                _models[entry.path()] = LoadModel(entry.path().c_str());
+            if (String::EndWith(entry.path(), ".png"))
+                _textures[entry.path()] = LoadTexture(entry.path().c_str());
         }
     }
 
-    void AssetsManager::LoadProject(const std::string &path)
-    {
-        for (auto [key, model] : _projectModels)
-            UnloadModel(model);
-        for (auto [key, texture] : _projectTextures)
-            UnloadTexture(texture);
-        _projectModels.clear();
-        _projectTextures.clear();
-        for (const auto &entry : std::filesystem::directory_iterator(path)) {
-            if (String::EndWith(entry.path(), ".obj"))
-                _projectModels[entry.path()] = LoadModel(entry.path().c_str());
-            if (String::EndWith(entry.path(), ".png"))
-                _projectTextures[entry.path()] = LoadTexture(entry.path().c_str());
-        }
-    }
-
-    // std::map<std::string, Texture> AssetsManager::GetEngineTexture() const
+    // std::map<std::string, Texture> AssetsManager::GetTextures() const
     // {
-    //     return _engineTextures;
+    //     return _textures;
     // }
 
-    // std::map<std::string, Model> AssetsManager::GetEngineModel() const
+    // std::map<std::string, Model> AssetsManager::GetModels() const
     // {
-    //     return _engineModels;
+    //     return _models;
     // }
 
-    bool AssetsManager::EngineTextureContains(const std::string &key) const
+    bool AssetsManager::TextureContains(const std::string &key) const
     {
-        return _engineTextures.contains(key);
+        return _textures.contains(key);
     }
 
-    bool AssetsManager::EngineModelContains(const std::string &key) const
+    bool AssetsManager::ModelContains(const std::string &key) const
     {
-        return _engineModels.contains(key);
+        return _models.contains(key);
     }
 
-    Texture2D AssetsManager::EngineTextureGet(const std::string &key)
+    Texture2D AssetsManager::GetTexture(const std::string &key)
     {
-        return _engineTextures[key];
+        return _textures[key];
     }
 
-    Model AssetsManager::EngineModelGet(const std::string &key)
+    Texture2D *AssetsManager::GetTextureAddr(const std::string &key)
     {
-        return _engineModels[key];
+        return &(_textures[key]);
     }
 
-    // std::map<std::string, Texture> AssetsManager::GetProjectTexture() const
-    // {
-    //     return _projectTextures;
-    // }
-
-    // std::map<std::string, Model> AssetsManager::GetProjectModel() const
-    // {
-    //     return _projectModels;
-    // }
-
-    bool AssetsManager::ProjectTextureContains(const std::string &key) const
+    Model AssetsManager::GetModel(const std::string &key)
     {
-        return _projectTextures.contains(key);
-    }
-
-    bool AssetsManager::ProjectModelContains(const std::string &key) const
-    {
-        return _projectModels.contains(key);
-    }
-
-    Texture2D AssetsManager::ProjectTextureGet(const std::string &key)
-    {
-        return _projectTextures[key];
-    }
-
-    Model AssetsManager::ProjectModelGet(const std::string &key)
-    {
-        return _projectModels[key];
+        return _models[key];
     }
 }

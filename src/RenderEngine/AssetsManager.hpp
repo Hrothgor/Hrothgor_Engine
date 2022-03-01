@@ -17,29 +17,19 @@ namespace hr {
             ~AssetsManager();
 
             void Start();
-            void LoadProject(const std::string &path);
 
-            // std::map<std::string, Texture> GetEngineTexture() const;
-            // std::map<std::string, Model> GetEngineModel() const;
-            bool EngineTextureContains(const std::string &key) const;
-            bool EngineModelContains(const std::string &key) const;
-            Texture2D EngineTextureGet(const std::string &key);
-            Model EngineModelGet(const std::string &key);
-
-            // std::map<std::string, Texture> GetProjectTexture() const;
-            // std::map<std::string, Model> GetProjectModel() const;
-            bool ProjectTextureContains(const std::string &key) const;
-            bool ProjectModelContains(const std::string &key) const;
-            Texture2D ProjectTextureGet(const std::string &key);
-            Model ProjectModelGet(const std::string &key);
+            // std::map<std::string, Texture> GetTextures() const;
+            // std::map<std::string, Model> GetModels() const;
+            bool TextureContains(const std::string &key) const;
+            bool ModelContains(const std::string &key) const;
+            Texture2D GetTexture(const std::string &key);
+            Texture2D *GetTextureAddr(const std::string &key);
+            Model GetModel(const std::string &key);
 
         protected:
         private:
-            std::map<std::string, Texture2D> _engineTextures;
-            std::map<std::string, Model> _engineModels;
-
-            std::map<std::string, Texture2D> _projectTextures;
-            std::map<std::string, Model> _projectModels;          
+            std::map<std::string, Texture2D> _textures;
+            std::map<std::string, Model> _models;
 
         protected:
             static AssetsManager *instance;

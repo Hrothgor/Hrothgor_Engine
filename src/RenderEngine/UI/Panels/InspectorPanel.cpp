@@ -18,6 +18,8 @@
 #include "../../../Components/MainCamera3D.hpp"
 #include "../../../Components/RigidBody.hpp"
 
+#include "../../../Components/SphereSender.hpp"
+
 namespace hr {
     InspectorPanel::InspectorPanel()
     {
@@ -95,6 +97,7 @@ namespace hr {
                 if (entity->HasComponentId<SphereCollider>(compId)) { ImGuiRenderComponent<SphereCollider>(entity); continue; }
                 if (entity->HasComponentId<MeshFilter>(compId)) { ImGuiRenderComponent<MeshFilter>(entity); continue; }
                 if (entity->HasComponentId<RigidBody>(compId)) { ImGuiRenderComponent<RigidBody>(entity); continue; }
+                if (entity->HasComponentId<SphereSender>(compId)) { ImGuiRenderComponent<SphereSender>(entity); continue; }
             }
 
             if (ImGui::Button("Add Component##Button", ImVec2(-1.0f, 40.0f)))
@@ -108,6 +111,7 @@ namespace hr {
                 if (!entity->HasComponent<SphereCollider>()) { ImGuiRenderAddComponent<SphereCollider>("SphereCollider", entity); }
                 if (!entity->HasComponent<MeshFilter>()) { ImGuiRenderAddComponent<MeshFilter>("MeshFilter", entity); }
                 if (!entity->HasComponent<RigidBody>()) { ImGuiRenderAddComponent<RigidBody>("RigidBody", entity); }
+                if (!entity->HasComponent<SphereSender>()) { ImGuiRenderAddComponent<SphereSender>("SphereSender", entity); }
 				ImGui::EndPopup();
 			}
     

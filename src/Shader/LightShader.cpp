@@ -12,7 +12,7 @@
 
 namespace hr {
     LightShader::LightShader()
-        : DefaultShader("ressources/Shaders/Light.vs", "ressources/Shaders/Light.fs")
+        : DefaultShader("Engine/Ressources/Shaders/Light.vs", "Engine/Ressources/Shaders/Light.fs")
         , _locations(MAX_LIGHTS)
     {
         for (int i = 0; i < MAX_LIGHTS; i++)
