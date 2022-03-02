@@ -56,10 +56,12 @@ namespace hr {
     {
         while (!WindowShouldClose() && _running)
         {
+            // TODO Remove this
             if (IsKeyPressed(KEY_SPACE))
                 SetSimulating(!_simulating);
             if (IsKeyDown(KEY_LEFT_CONTROL) && IsKeyPressed(KEY_D) && _selectedEntity)
                 Instantiate(_selectedEntity);
+            //
             BeginDrawing();
             {
                 _mainCamera->Update();

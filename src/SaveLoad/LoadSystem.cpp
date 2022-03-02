@@ -14,7 +14,6 @@
 #include "../Components/MainCamera3D.hpp"
 #include "../Components/Collider/BoxCollider.hpp"
 #include "../Components/Collider/SphereCollider.hpp"
-#include "../Components/MeshFilter.hpp"
 #include "../Components/MeshRenderer.hpp"
 #include "../Components/Transform.hpp"
 #include "../Components/RigidBody.hpp"
@@ -34,7 +33,6 @@ namespace hr {
                 else if (name == "Light") gameObject->AddComponent<Light>()->FromJson(comp[1]);
                 else if (name == "BoxCollider") gameObject->AddComponent<BoxCollider>()->FromJson(comp[1]);
                 else if (name == "SphereCollider") gameObject->AddComponent<SphereCollider>()->FromJson(comp[1]);
-                else if (name == "MeshFilter") gameObject->AddComponent<MeshFilter>()->FromJson(comp[1]);
                 else if (name == "RigidBody") gameObject->AddComponent<RigidBody>()->FromJson(comp[1]);
             }
         if (json.contains("childs"))
@@ -46,8 +44,8 @@ namespace hr {
 
     void LoadSystem::LoadProject(const std::string &name)
     {
-        if (!std::filesystem::exists("Engine/Scenes/" + name + ".scn"))
-            return;
+        // if (!std::filesystem::exists("Engine/Scenes/" + name + ".scn"))
+        //     return;
         Engine::Get()->SetProjectName(name);
         if (!std::filesystem::exists("Engine/Scenes/" + name + ".scn")) {
             Engine::Get()->ClearEntities();
@@ -65,14 +63,5 @@ namespace hr {
             Engine::Get()->AddEntity(LoadEntity(jsonEntity));
         
         Engine::Get()->Start();
-    }
-
-    void LoadSystem::CreateNewProject(const std::string &name)
-    {
-        if (std::filesystem::exists("Engine/Scenes/" + name)) {
-            LoadProject(name);
-            return;
-        }
-        Engine::Get()->SetProjectName(name);
     }
 }

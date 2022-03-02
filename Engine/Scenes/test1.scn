@@ -5,32 +5,15 @@
                 {
                     "components": [
                         [
-                            "MeshFilter",
-                            {
-                                "cube": {
-                                    "height": 1.0,
-                                    "length": 1.0,
-                                    "width": 1.0
-                                },
-                                "mesh": {
-                                    "path": "Engine/Ressources/bomb.obj"
-                                },
-                                "plane": {
-                                    "length": 1.0,
-                                    "resolution": 5,
-                                    "width": 1.0
-                                },
-                                "sphere": {
-                                    "radius": 1.0,
-                                    "rings": 8,
-                                    "slices": 8
-                                },
-                                "type": 3
-                            }
-                        ],
-                        [
                             "MeshRenderer",
                             {
+                                "color": [
+                                    255,
+                                    255,
+                                    255,
+                                    255
+                                ],
+                                "meshPath": "Engine/Ressources/bomb.obj",
                                 "texturePath": ""
                             }
                         ]
@@ -58,32 +41,15 @@
                 {
                     "components": [
                         [
-                            "MeshFilter",
-                            {
-                                "cube": {
-                                    "height": 1.0,
-                                    "length": 1.0,
-                                    "width": 1.0
-                                },
-                                "mesh": {
-                                    "path": "Engine/Ressources/bomb.obj"
-                                },
-                                "plane": {
-                                    "length": 1.0,
-                                    "resolution": 5,
-                                    "width": 1.0
-                                },
-                                "sphere": {
-                                    "radius": 1.0,
-                                    "rings": 8,
-                                    "slices": 8
-                                },
-                                "type": 3
-                            }
-                        ],
-                        [
                             "MeshRenderer",
                             {
+                                "color": [
+                                    255,
+                                    255,
+                                    255,
+                                    255
+                                ],
+                                "meshPath": "Engine/Ressources/bomb.obj",
                                 "texturePath": ""
                             }
                         ]
@@ -111,32 +77,15 @@
                 {
                     "components": [
                         [
-                            "MeshFilter",
-                            {
-                                "cube": {
-                                    "height": 1.0,
-                                    "length": 1.0,
-                                    "width": 1.0
-                                },
-                                "mesh": {
-                                    "path": "Engine/Ressources/bomb.obj"
-                                },
-                                "plane": {
-                                    "length": 1.0,
-                                    "resolution": 5,
-                                    "width": 1.0
-                                },
-                                "sphere": {
-                                    "radius": 1.0,
-                                    "rings": 8,
-                                    "slices": 8
-                                },
-                                "type": 3
-                            }
-                        ],
-                        [
                             "MeshRenderer",
                             {
+                                "color": [
+                                    255,
+                                    255,
+                                    255,
+                                    255
+                                ],
+                                "meshPath": "Engine/Ressources/bomb.obj",
                                 "texturePath": ""
                             }
                         ]
@@ -164,32 +113,15 @@
                 {
                     "components": [
                         [
-                            "MeshFilter",
-                            {
-                                "cube": {
-                                    "height": 1.0,
-                                    "length": 1.0,
-                                    "width": 1.0
-                                },
-                                "mesh": {
-                                    "path": "Engine/Ressources/bomb.obj"
-                                },
-                                "plane": {
-                                    "length": 1.0,
-                                    "resolution": 5,
-                                    "width": 1.0
-                                },
-                                "sphere": {
-                                    "radius": 1.0,
-                                    "rings": 8,
-                                    "slices": 8
-                                },
-                                "type": 3
-                            }
-                        ],
-                        [
                             "MeshRenderer",
                             {
+                                "color": [
+                                    255,
+                                    255,
+                                    255,
+                                    255
+                                ],
+                                "meshPath": "Engine/Ressources/bomb.obj",
                                 "texturePath": ""
                             }
                         ]
@@ -217,32 +149,15 @@
             ],
             "components": [
                 [
-                    "MeshFilter",
-                    {
-                        "cube": {
-                            "height": 1.0,
-                            "length": 1.0,
-                            "width": 1.0
-                        },
-                        "mesh": {
-                            "path": "Engine/Ressources/dragon.obj"
-                        },
-                        "plane": {
-                            "length": 1.0,
-                            "resolution": 5,
-                            "width": 1.0
-                        },
-                        "sphere": {
-                            "radius": 17.0,
-                            "rings": 30,
-                            "slices": 100
-                        },
-                        "type": 3
-                    }
-                ],
-                [
                     "MeshRenderer",
                     {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "meshPath": "Engine/Ressources/dragon.obj",
                         "texturePath": ""
                     }
                 ]
@@ -307,46 +222,29 @@
         {
             "components": [
                 [
-                    "MeshFilter",
-                    {
-                        "cube": {
-                            "height": 1.0,
-                            "length": 1.0,
-                            "width": 1.0
-                        },
-                        "mesh": {
-                            "path": ""
-                        },
-                        "plane": {
-                            "length": 115.0,
-                            "resolution": 12,
-                            "width": 109.0
-                        },
-                        "sphere": {
-                            "radius": 1.0,
-                            "rings": 8,
-                            "slices": 8
-                        },
-                        "type": 2
-                    }
-                ],
-                [
                     "MeshRenderer",
                     {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "meshPath": "Engine/Ressources/cube.obj",
                         "texturePath": ""
                     }
                 ],
                 [
                     "BoxCollider",
                     {
-                        "height": 0.5,
-                        "length": 115.0,
+                        "height": 1.0,
+                        "length": 1.0,
                         "offset": [
                             0.0,
                             0.0,
                             0.0
                         ],
-                        "width": 109.0
+                        "width": 1.0
                     }
                 ],
                 [
@@ -371,9 +269,9 @@
                     0.0
                 ],
                 "scale": [
-                    1.0,
-                    1.0,
-                    1.0
+                    54.5,
+                    0.23000000417232513,
+                    57.5
                 ]
             },
             "uuid": "074bc669-20d4-4730-8562-2094ba1dc7f4"
@@ -381,32 +279,15 @@
         {
             "components": [
                 [
-                    "MeshFilter",
-                    {
-                        "cube": {
-                            "height": 1.0,
-                            "length": 1.0,
-                            "width": 1.0
-                        },
-                        "mesh": {
-                            "path": ""
-                        },
-                        "plane": {
-                            "length": 1.0,
-                            "resolution": 5,
-                            "width": 1.0
-                        },
-                        "sphere": {
-                            "radius": 9.0,
-                            "rings": 30,
-                            "slices": 100
-                        },
-                        "type": 1
-                    }
-                ],
-                [
                     "MeshRenderer",
                     {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "meshPath": "Engine/Ressources/sphere.obj",
                         "texturePath": "Engine/Ressources/image.png"
                     }
                 ],
@@ -443,9 +324,9 @@
                     -179.99935913085938
                 ],
                 "scale": [
-                    1.0,
-                    1.0,
-                    1.0
+                    9.0,
+                    9.0,
+                    9.0
                 ]
             },
             "uuid": "6bbcc305-ee03-4b1d-8c98-3b86c49bc8f2"
@@ -453,46 +334,29 @@
         {
             "components": [
                 [
-                    "MeshFilter",
-                    {
-                        "cube": {
-                            "height": 15.0,
-                            "length": 15.0,
-                            "width": 15.0
-                        },
-                        "mesh": {
-                            "path": ""
-                        },
-                        "plane": {
-                            "length": 1.0,
-                            "resolution": 5,
-                            "width": 1.0
-                        },
-                        "sphere": {
-                            "radius": 1.0,
-                            "rings": 8,
-                            "slices": 8
-                        },
-                        "type": 0
-                    }
-                ],
-                [
                     "MeshRenderer",
                     {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "meshPath": "Engine/Ressources/cube.obj",
                         "texturePath": "Engine/Ressources/image.png"
                     }
                 ],
                 [
                     "BoxCollider",
                     {
-                        "height": 15.100000381469727,
-                        "length": 15.100000381469727,
+                        "height": 1.0,
+                        "length": 1.0,
                         "offset": [
                             0.0,
                             0.0,
                             0.0
                         ],
-                        "width": 15.100000381469727
+                        "width": 1.0
                     }
                 ],
                 [
@@ -517,9 +381,9 @@
                     -179.99989318847656
                 ],
                 "scale": [
-                    0.9999999403953552,
-                    1.0,
-                    0.9999997615814209
+                    7.5,
+                    7.5,
+                    7.5
                 ]
             },
             "uuid": "820c5402-21ee-4d64-a53c-2c73e24d8a2c"
@@ -566,32 +430,15 @@
             ],
             "components": [
                 [
-                    "MeshFilter",
-                    {
-                        "cube": {
-                            "height": 1.0,
-                            "length": 1.0,
-                            "width": 1.0
-                        },
-                        "mesh": {
-                            "path": "Engine/Ressources/lampadaire.obj"
-                        },
-                        "plane": {
-                            "length": 1.0,
-                            "resolution": 5,
-                            "width": 1.0
-                        },
-                        "sphere": {
-                            "radius": 1.0,
-                            "rings": 8,
-                            "slices": 8
-                        },
-                        "type": 3
-                    }
-                ],
-                [
                     "MeshRenderer",
                     {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "meshPath": "Engine/Ressources/lampadaire.obj",
                         "texturePath": ""
                     }
                 ]
@@ -621,31 +468,14 @@
                 [
                     "MeshRenderer",
                     {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "meshPath": "Engine/Ressources/sphere.obj",
                         "texturePath": ""
-                    }
-                ],
-                [
-                    "MeshFilter",
-                    {
-                        "cube": {
-                            "height": 1.0,
-                            "length": 1.0,
-                            "width": 1.0
-                        },
-                        "mesh": {
-                            "path": ""
-                        },
-                        "plane": {
-                            "length": 1.0,
-                            "resolution": 5,
-                            "width": 1.0
-                        },
-                        "sphere": {
-                            "radius": 8.0,
-                            "rings": 30,
-                            "slices": 73
-                        },
-                        "type": 1
                     }
                 ],
                 [
@@ -681,9 +511,9 @@
                     0.0
                 ],
                 "scale": [
-                    1.0,
-                    1.0,
-                    1.0
+                    8.0,
+                    8.0,
+                    8.0
                 ]
             },
             "uuid": "9264b3eb-5ff4-4827-8b9c-36e6bd18630a"
@@ -693,31 +523,14 @@
                 [
                     "MeshRenderer",
                     {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "meshPath": "Engine/Ressources/sphere.obj",
                         "texturePath": ""
-                    }
-                ],
-                [
-                    "MeshFilter",
-                    {
-                        "cube": {
-                            "height": 1.0,
-                            "length": 1.0,
-                            "width": 1.0
-                        },
-                        "mesh": {
-                            "path": ""
-                        },
-                        "plane": {
-                            "length": 1.0,
-                            "resolution": 5,
-                            "width": 1.0
-                        },
-                        "sphere": {
-                            "radius": 8.0,
-                            "rings": 30,
-                            "slices": 73
-                        },
-                        "type": 1
                     }
                 ],
                 [
@@ -753,9 +566,9 @@
                     0.0
                 ],
                 "scale": [
-                    1.0,
-                    1.0,
-                    1.0
+                    8.0,
+                    8.0,
+                    8.0
                 ]
             },
             "uuid": "9264b3eb-5ff4-4827-8b9c-36e6bd18630a"

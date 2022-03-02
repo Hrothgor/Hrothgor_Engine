@@ -46,10 +46,8 @@ namespace hr {
         bool control = IsKeyDown(KEY_LEFT_CONTROL) || IsKeyDown(KEY_RIGHT_CONTROL);
         bool shift = IsKeyDown(KEY_LEFT_SHIFT) || IsKeyDown(KEY_RIGHT_SHIFT);
         
-        if (control && shift && IsKeyPressed(KEY_N)) {
-            LoadSystem::CreateNewProject("test2");
+        if (control && shift && IsKeyPressed(KEY_N))
             LoadSystem::LoadProject("test2");
-        }
         if (control && shift && IsKeyPressed(KEY_O))
             LoadSystem::LoadProject("test1");
         if (control && IsKeyPressed(KEY_S))
@@ -95,15 +93,24 @@ namespace hr {
 
         DrawDockSpace();
 
+        // ImGui::Begin("test");
+        // if (ImGui::Button("Test"))
+        //     ImGui::OpenPopup("Test?");
+        // if (ImGui::BeginPopupModal("Test?", NULL, ImGuiWindowFlags_AlwaysAutoResize))
+        // {
+        //     ImGui::Text("Hello world!");
+        //     if (ImGui::Button("OK", ImVec2(120, 0))) { ImGui::CloseCurrentPopup(); }
+        //     ImGui::EndPopup();
+        // }
+        // ImGui::End();
+
 		ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0);
 		if (ImGui::BeginMainMenuBar())
 		{
 			if (ImGui::BeginMenu("File"))
 			{
-				if (ImGui::MenuItem("New Project", "Ctrl+Shift+N")) {
-                    LoadSystem::CreateNewProject("test2");
+				if (ImGui::MenuItem("New Project", "Ctrl+Shift+N"))
                     LoadSystem::LoadProject("test2");
-                }
 
 				if (ImGui::MenuItem("Open Project", "Ctrl+Shift+O"))
                     LoadSystem::LoadProject("test1");

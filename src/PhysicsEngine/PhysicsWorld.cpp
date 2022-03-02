@@ -42,6 +42,7 @@ namespace hr {
 
             rb->AddVelocity(Vector3Scale(rb->GetForce(), GetFrameTime()));
 
+            // std::cout << "angular velocity: " << rb->GetAngularVelocity().x << " " << rb->GetAngularVelocity().y << " " << rb->GetAngularVelocity().z << std::endl;
             tr->Rotate(rb->GetAngularVelocity()); // TODO : check if it's the right way to do it, i dont mult by delta time cause i mult by invTensor
             tr->Translate(Vector3Scale(rb->GetVelocity(), GetFrameTime()));
 

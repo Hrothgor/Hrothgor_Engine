@@ -18,7 +18,6 @@ namespace hr {
         public:
             static void LoadProject(const std::string &name);
             static GameObject *LoadEntity(const nlohmann::json &json);
-            static void CreateNewProject(const std::string &name);
         protected:
         private:
     };

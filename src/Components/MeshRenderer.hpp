@@ -20,12 +20,16 @@ namespace hr {
 
             virtual void Update() override;
 
-            void LoadModelFromPath(const std::string &path);
+            Texture2D GetTexture() const;
+            std::string GetTexturePath() const;
             void LoadTextureFromPath(const std::string &path);
 
-            Texture2D GetTexture() const;
+            Model GetModel() const;
+            std::string GetMeshPath() const;
+            void LoadMeshFromPath(const std::string &path);
 
-            std::string GetTexturePath() const;
+            void SetColor(const Color &color);
+            Color GetColor() const;
 
             virtual void ImGuiRender() override;
 
@@ -35,9 +39,13 @@ namespace hr {
             virtual Component *Clone(GameObject *gameObject) override;
         protected:
         private:
+            Model _model = {0};
+            std::string _meshPath;
+            
             Texture2D _texture = {0};
-
             std::string _texturePath;
+
+            Color _color = WHITE;
     };
 }
 

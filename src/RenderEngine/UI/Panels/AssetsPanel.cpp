@@ -176,6 +176,8 @@ namespace hr {
             icon = AssetsManager::Get()->GetTextureAddr("Engine/Ressources/Icons/folder.png");
         } else if (String::EndWith(path, ".obj")) {
             icon = AssetsManager::Get()->GetTextureAddr("Engine/Ressources/Icons/file-obj.png");
+        } else if (String::EndWith(path, ".scn")) {
+            icon = AssetsManager::Get()->GetTextureAddr("Engine/Ressources/Icons/scene.png");
         } else if (String::EndWith(path, ".png")) {
             icon = AssetsManager::Get()->GetTextureAddr(path);
         } else {
@@ -211,23 +213,17 @@ namespace hr {
 
         // I drag and drop the path (str), but I could drag and drop the model or texture directly
 
-        if (String::EndWith(path, ".png")) {
+        if (String::EndWith(path, ".png") || String::EndWith(path, ".obj") || String::EndWith(path, ".scn")) {
             ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 10.0f, 10.0f });
             if (ImGui::BeginDragDropSource())
             {
-                ImGui::SetDragDropPayload("TEXTURE_PAYLOAD", path.c_str(), path.size());
-
-                ImGui::TextUnformatted(String::NameByPath(path).c_str());
-                ImGui::Image((ImTextureID)icon, { 128, 128 });
-
-                ImGui::EndDragDropSource();
-            }
-            ImGui::PopStyleVar();
-        } else if (String::EndWith(path, ".obj")) {
-            ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 10.0f, 10.0f });
-            if (ImGui::BeginDragDropSource())
-            {
-                ImGui::SetDragDropPayload("MODEL_PAYLOAD", path.c_str(), path.size());
+                if (String::EndWith(path, ".png")) {
+                    ImGui::SetDragDropPayload("TEXTURE_PAYLOAD", path.c_str(), path.size());
+                } else if (String::EndWith(path, ".obj")) {
+                    ImGui::SetDragDropPayload("MODEL_PAYLOAD", path.c_str(), path.size());
+                } else if (String::EndWith(path, ".scn")) {
+                    ImGui::SetDragDropPayload("SCENE_PAYLOAD", path.c_str(), path.size());
+                }
 
                 ImGui::TextUnformatted(String::NameByPath(path).c_str());
                 ImGui::Image((ImTextureID)icon, { 128, 128 });

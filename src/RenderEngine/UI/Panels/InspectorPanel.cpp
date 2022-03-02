@@ -14,7 +14,6 @@
 #include "../../../Components/MeshRenderer.hpp"
 #include "../../../Components/Collider/BoxCollider.hpp"
 #include "../../../Components/Collider/SphereCollider.hpp"
-#include "../../../Components/MeshFilter.hpp"
 #include "../../../Components/MainCamera3D.hpp"
 #include "../../../Components/RigidBody.hpp"
 
@@ -95,7 +94,6 @@ namespace hr {
                 if (entity->HasComponentId<MeshRenderer>(compId)) { ImGuiRenderComponent<MeshRenderer>(entity); continue; }
                 if (entity->HasComponentId<BoxCollider>(compId)) { ImGuiRenderComponent<BoxCollider>(entity); continue; }
                 if (entity->HasComponentId<SphereCollider>(compId)) { ImGuiRenderComponent<SphereCollider>(entity); continue; }
-                if (entity->HasComponentId<MeshFilter>(compId)) { ImGuiRenderComponent<MeshFilter>(entity); continue; }
                 if (entity->HasComponentId<RigidBody>(compId)) { ImGuiRenderComponent<RigidBody>(entity); continue; }
                 if (entity->HasComponentId<SphereSender>(compId)) { ImGuiRenderComponent<SphereSender>(entity); continue; }
             }
@@ -109,7 +107,6 @@ namespace hr {
                 if (!entity->HasComponent<MeshRenderer>()) { ImGuiRenderAddComponent<MeshRenderer>("MeshRenderer", entity); }
                 if (!entity->HasComponent<BoxCollider>()) { ImGuiRenderAddComponent<BoxCollider>("BoxCollider", entity); }
                 if (!entity->HasComponent<SphereCollider>()) { ImGuiRenderAddComponent<SphereCollider>("SphereCollider", entity); }
-                if (!entity->HasComponent<MeshFilter>()) { ImGuiRenderAddComponent<MeshFilter>("MeshFilter", entity); }
                 if (!entity->HasComponent<RigidBody>()) { ImGuiRenderAddComponent<RigidBody>("RigidBody", entity); }
                 if (!entity->HasComponent<SphereSender>()) { ImGuiRenderAddComponent<SphereSender>("SphereSender", entity); }
 				ImGui::EndPopup();

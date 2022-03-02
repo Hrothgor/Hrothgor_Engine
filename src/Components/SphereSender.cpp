@@ -8,8 +8,8 @@
 #include "SphereSender.hpp"
 #include "../Ecs/GameObject.hpp"
 #include "Collider/SphereCollider.hpp"
-#include "MeshFilter.hpp"
 #include "MeshRenderer.hpp"
+#include "Transform.hpp"
 #include "RigidBody.hpp"
 #include "../Ecs/Engine.hpp"
 
@@ -29,14 +29,9 @@ namespace hr {
         if (IsKeyPressed(KEY_K)) {
             GameObject *sphere = new GameObject(GetGameObject());
             sphere->AddComponent<SphereCollider>()->SetRadius(6.1);
-            sphere->AddComponent<MeshFilter>();
-            MeshFilter *mf = sphere->GetComponent<MeshFilter>();
-            mf->SetModel(SPHERE);
-            mf->SetSphereRings(20);
-            mf->SetSphereSlices(50);
-            mf->SetSphereRadius(6);
-            sphere->AddComponent<MeshRenderer>();
-            sphere->AddComponent<RigidBody>()->SetVelocity({rand() % 20 - 10, 20, rand() % 20 - 10});
+            sphere->AddComponent<MeshRenderer>()->LoadMeshFromPath("Engine/Ressources/sphere.obj");
+            sphere->GetTransform()->SetScale((Vector3){6, 6, 6});
+            sphere->AddComponent<RigidBody>()->SetVelocity({(float)(rand() % 20 - 10), 20.0, (float)(rand() % 20 - 10)});
             Engine::Get()->Instantiate(sphere);
         }
     }

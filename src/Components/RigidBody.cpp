@@ -70,7 +70,7 @@ namespace hr {
             iz = r2 * _mass * fraction;
             iw = 1.0;
         } else if (_mass != 0 && boxCollider) {
-            Vector3 size = Vector3Scale(boxCollider->GetSize(), 2);
+            Vector3 size = Vector3Scale(boxCollider->GetSize(), 4);
             float fraction = (1.0 / 12.0);
 
             float x2 = size.x * size.x;

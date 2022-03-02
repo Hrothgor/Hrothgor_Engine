@@ -24,7 +24,7 @@ namespace hr {
         Matrix rotationMatrix = MatrixRotateXYZ({DEG2RAD * rotation.x, DEG2RAD * rotation.y, DEG2RAD * rotation.z});
         float16 rotationMatrixPtr = MatrixToFloatV(rotationMatrix);
 
-        float size[3] = {box->GetWidth() / 2, box->GetHeight() / 2, box->GetLength() / 2};
+        float size[3] = {box->GetSize().x, box->GetSize().y, box->GetSize().z};
         for (int i = 0; i < 3; i++) {
             Vector3 axis = {rotationMatrixPtr.v[i], rotationMatrixPtr.v[i + 4], rotationMatrixPtr.v[i + 8]};
             axis = Vector3Normalize(axis);
@@ -75,12 +75,6 @@ namespace hr {
 
         Vector3 CPtoA = Vector3Subtract(closestPoint, A);
         float distanceSqA = Vector3LengthSqr(CPtoA);
-        Vector3 n = Vector3Normalize(Vector3Subtract(A, closestPoint));
-
-        DrawSphere(closestPoint, 2, RED);
-        Vector3 outpoint = Vector3Subtract(A, Vector3Scale(n, a->GetRadius()));
-        DrawSphere(outpoint, 2, RED);
-        
         if (distanceSqA > a->GetRadius() * a->GetRadius()) {
             return {Vector3Zero(), Vector3Zero(), Vector3Zero(), 0, false};
         }

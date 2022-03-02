@@ -11,7 +11,6 @@
 
 #include "../Components/Transform.hpp"
 #include "../Components/MeshRenderer.hpp"
-#include "../Components/MeshFilter.hpp"
 #include "../Components/Light.hpp"
 #include "../Components/MainCamera3D.hpp"
 
@@ -40,14 +39,18 @@ namespace hr {
         BeginFrame();
         for (GameObject *object : _objects) {
             Transform *transform = object->GetTransform();
-            // MeshRenderer *meshRenderer = object->GetComponent<MeshRenderer>();
-            MeshFilter *meshFilter = object->GetComponent<MeshFilter>();
+            MeshRenderer *meshRenderer = object->GetComponent<MeshRenderer>();
 
-            Model model = meshFilter->GetModel();
+            Model model = meshRenderer->GetModel();
+            Texture texture = meshRenderer->GetTexture();
             AxisAngle axisAngle = transform->GetRotationAxisAngle();
             for (int i = 0; i < model.materialCount; i++)
                 model.materials[i].shader = _lightShader.GetShader();
-            DrawModelEx(model, transform->GetPositionWorld(), axisAngle.axis, axisAngle.angle, transform->GetScale(), WHITE);
+            if (model.meshCount > 0 && texture.id != 0)
+                SetMaterialTexture(&(model.materials[0]), MATERIAL_MAP_DIFFUSE, texture);
+            else
+                SetMaterialTexture(&(model.materials[0]), MATERIAL_MAP_DIFFUSE, (Texture2D){ rlGetTextureIdDefault(), 1, 1, 1, PIXELFORMAT_UNCOMPRESSED_R8G8B8A8 });
+            DrawModelEx(model, transform->GetPositionWorld(), axisAngle.axis, axisAngle.angle, transform->GetScaleWorld(), meshRenderer->GetColor());
         }
         EndFrame();
     }

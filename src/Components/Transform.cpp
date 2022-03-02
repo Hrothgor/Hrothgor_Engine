@@ -131,6 +131,13 @@ namespace hr {
         return _scale;
     }
 
+    Vector3 Transform::GetScaleWorld() const
+    {
+        if (GetGameObject()->GetParent())
+            return Vector3Multiply(GetGameObject()->GetParent()->GetTransform()->GetScaleWorld(), _scale);
+        return _scale;
+    }
+
     void Transform::SetScale(Vector3 scale)
     {
         _scale = scale;
@@ -139,6 +146,14 @@ namespace hr {
     void Transform::SetScale(float x, float y, float z)
     {
         _scale = {x, y, z};
+    }
+
+    void Transform::SetScaleFromWorld(float x, float y, float z)
+    {
+        Vector3 parentWorldScale = Vector3One();
+        if (GetGameObject()->GetParent())
+            parentWorldScale = GetGameObject()->GetParent()->GetTransform()->GetScaleWorld();
+        _scale = {x / parentWorldScale.x, y / parentWorldScale.y, z / parentWorldScale.z};
     }
 
     Vector3 Transform::GetFront() const

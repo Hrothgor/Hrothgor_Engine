@@ -48,7 +48,7 @@ namespace hr {
 
     Vector3 BoxCollider::GetSize() const
     {
-        return {_width, _height, _length};
+        return {_width * GetTransform()->GetScaleWorld().x, _height * GetTransform()->GetScaleWorld().y, _length * GetTransform()->GetScaleWorld().z};
     }
 
     float BoxCollider::GetWidth() const
@@ -99,7 +99,7 @@ namespace hr {
         rlTranslatef(pos.x, pos.y, pos.z);
         rlRotatef(axisAngle.angle, axisAngle.axis.x, axisAngle.axis.y, axisAngle.axis.z);
         rlTranslatef(-pos.x, -pos.y, -pos.z);
-        DrawCubeWires(pos, _width, _height, _length, GREEN);
+        DrawCubeWires(pos, GetSize().x * 2, GetSize().y * 2, _length * GetSize().z * 2, GREEN);
         rlPopMatrix();
     }
 

@@ -11,9 +11,12 @@
 #include "../../DisplayManager.hpp"
 #include "../../../Ecs/Engine.hpp"
 #include "../../../Ecs/GameObject.hpp"
+#include "../../../SaveLoad/LoadSystem.hpp"
 
 #include "../../../Components/MainCamera3D.hpp"
 #include "../../../Components/Transform.hpp"
+
+#include "../../../Tools/String.hpp"
 
 namespace hr {
     ViewPortPanel::ViewPortPanel()
@@ -65,6 +68,18 @@ namespace hr {
             ImVec2 size = ImGui::GetContentRegionAvail();
             ImGui::Image((ImTextureID)DisplayManager::Get()->GetFrameBufferTexture(), size, ImVec2 {0, 1}, ImVec2 {1, 0});
             DrawGuizmo();
+
+            if (ImGui::BeginDragDropTarget())
+            {
+                if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("SCENE_PAYLOAD"))
+                {
+                    char *path = static_cast<char *>(payload->Data);
+                    std::string name = String::NameByPath(path);
+                    name = name.substr(0, name.find("."));
+                    LoadSystem::LoadProject(name);
+                }
+                ImGui::EndDragDropTarget();
+            }
             ImGui::End();
         }
         ImGui::PopStyleVar();
@@ -91,7 +106,7 @@ namespace hr {
         float mat[16];
         ImGuizmo::RecomposeMatrixFromComponents(Vector3ToFloat(transform->GetPositionWorld()),
                                                 Vector3ToFloat(transform->GetRotation()),
-                                                Vector3ToFloat(transform->GetScale()),
+                                                Vector3ToFloat(transform->GetScaleWorld()),
                                                 mat);
 
         // Snapping
@@ -114,7 +129,7 @@ namespace hr {
 
             transform->SetPositionFromWorld(translation[0], translation[1], translation[2]);
             transform->SetRotation(rotation[0], rotation[1], rotation[2]);
-            transform->SetScale(scale[0], scale[1], scale[2]);
+            transform->SetScaleFromWorld(scale[0], scale[1], scale[2]);
         }
     }
 
