@@ -46,9 +46,9 @@ namespace hr {
             AxisAngle axisAngle = transform->GetRotationAxisAngle();
             for (int i = 0; i < model.materialCount; i++)
                 model.materials[i].shader = _lightShader.GetShader();
-            if (model.meshCount > 0 && texture.id != 0)
+            if (model.materialCount > 0 && texture.id != 0)
                 SetMaterialTexture(&(model.materials[0]), MATERIAL_MAP_DIFFUSE, texture);
-            else
+            else if (model.materialCount > 0)
                 SetMaterialTexture(&(model.materials[0]), MATERIAL_MAP_DIFFUSE, (Texture2D){ rlGetTextureIdDefault(), 1, 1, 1, PIXELFORMAT_UNCOMPRESSED_R8G8B8A8 });
             DrawModelEx(model, transform->GetPositionWorld(), axisAngle.axis, axisAngle.angle, transform->GetScaleWorld(), meshRenderer->GetColor());
         }

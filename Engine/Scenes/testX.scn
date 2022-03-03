@@ -1,0 +1,40 @@
+{
+    "entities": [
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "meshPath": "Engine/Ressources/cube.obj",
+                        "texturePath": ""
+                    }
+                ]
+            ],
+            "name": "GameObject (0)",
+            "transform": {
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    21.59788703918457,
+                    0.21563084423542023,
+                    25.5085391998291
+                ]
+            },
+            "uuid": "89642034-a70a-4942-8bb4-2ad5f939c688"
+        }
+    ]
+}

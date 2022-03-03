@@ -55,18 +55,15 @@ namespace hr {
     {
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2 {0, 0});
         if (ImGui::Begin("Viewport", &_isOpen, ImGuiWindowFlags_NoScrollbar)) {
-
-            if (Engine::Get()->GetProjectName() == "") {
-                ImGui::TextUnformatted("No project loaded !");
-                ImGui::End();
-                ImGui::PopStyleVar();
-                return;
-            }
-            bool isFocus = ImGui::IsWindowFocused();
+            bool isFocus = ImGui::IsWindowFocused() || ImGui::IsWindowHovered();
             ActiveEvent(isFocus);
 
             ImVec2 size = ImGui::GetContentRegionAvail();
-            ImGui::Image((ImTextureID)DisplayManager::Get()->GetFrameBufferTexture(), size, ImVec2 {0, 1}, ImVec2 {1, 0});
+            if (Engine::Get()->GetProjectName() == "") {
+                ImGui::Image((ImTextureID)0, size, ImVec2 {0, 1}, ImVec2 {1, 0}, ImVec4 {0, 0, 0, 1});
+            } else {
+                ImGui::Image((ImTextureID)DisplayManager::Get()->GetFrameBufferTexture(), size, ImVec2 {0, 1}, ImVec2 {1, 0});
+            }
             DrawGuizmo();
 
             if (ImGui::BeginDragDropTarget())
@@ -92,8 +89,6 @@ namespace hr {
 		if (!(entity = Engine::Get()->GetSelectedEntity()) || _gizmoType == -1)
             return;
 
-        ImGuizmo::SetOrthographic(false);
-        ImGuizmo::AllowAxisFlip(false);
         ImGuizmo::SetDrawlist();
         float windowWidth = (float)ImGui::GetWindowWidth();
         float windowHeight = (float)ImGui::GetWindowHeight();
@@ -118,7 +113,7 @@ namespace hr {
 
         ImGuizmo::Manipulate(MatrixToFloat(cameraView), MatrixToFloat(cameraProjection), 
             (ImGuizmo::OPERATION)_gizmoType, ImGuizmo::LOCAL, mat,
-            nullptr, _snap ? snapValues : nullptr);
+            MatrixToFloat(MatrixIdentity()), _snap ? snapValues : nullptr);
         
         if (ImGuizmo::IsUsing()) {
             float translation[3];

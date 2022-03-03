@@ -246,6 +246,8 @@ static void rlImGuiTriangleVert(ImDrawVert& idx_vert)
 
 static void rlImGuiRenderTriangles(unsigned int count, int indexStart, const ImVector<ImDrawIdx>& indexBuffer, const ImVector<ImDrawVert>& vertBuffer, void* texturePtr)
 {
+    if (count < 3)
+        return;
     Texture* texture = (Texture*)texturePtr;
 
     unsigned int textureId = (texture == nullptr) ? 0 : texture->id;
@@ -303,8 +305,8 @@ static void rlRenderData(ImDrawData* data)
                 continue;
             }
 
-            rlImGuiRenderTriangles(cmd.ElemCount, idxOffset, commandList->IdxBuffer, commandList->VtxBuffer, cmd.TextureId);
-            idxOffset += cmd.ElemCount;
+            rlImGuiRenderTriangles(cmd.ElemCount, idxOffset + cmd.IdxOffset, commandList->IdxBuffer, commandList->VtxBuffer, cmd.TextureId);
+            // idxOffset += cmd.ElemCount;
 
             rlDrawRenderBatchActive();
         }

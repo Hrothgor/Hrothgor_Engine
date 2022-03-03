@@ -1,0 +1,77 @@
+{
+    "entities": [
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "meshPath": "Engine/Ressources/lampadaire.obj",
+                        "texturePath": "Engine/Ressources/image.png"
+                    }
+                ]
+            ],
+            "name": "GameObject (0)",
+            "transform": {
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "uuid": "2a6166ad-c05a-4098-8df2-b236cde10ad9"
+        },
+        {
+            "components": [
+                [
+                    "Light",
+                    {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "intensity": 2.0,
+                        "range": 10.0,
+                        "type": 0
+                    }
+                ]
+            ],
+            "name": "GameObject (1)",
+            "transform": {
+                "position": [
+                    -21.386493682861328,
+                    19.280956268310547,
+                    7.784691333770752
+                ],
+                "rotation": [
+                    -0.005389920901507139,
+                    -84.2583999633789,
+                    -34.35324478149414
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "uuid": "55860329-ce52-49ef-b3b0-cf168f90c89a"
+        }
+    ]
+}

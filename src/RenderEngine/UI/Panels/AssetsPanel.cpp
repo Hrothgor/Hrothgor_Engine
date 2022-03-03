@@ -21,25 +21,19 @@ namespace hr {
 
     void AssetsPanel::Start()
     {
-        _selectedDir = "";
+        _selectedDir = "Engine";
     }
 
     void AssetsPanel::ImGuiRender()
     {
         ImGui::Begin("Assets", &_isOpen);
 
-        if (Engine::Get()->GetProjectName() == "") {
-            ImGui::TextUnformatted("No project loaded !");
-            ImGui::End();
-            return;
-        }
-
         bool isFocus = ImGui::IsWindowFocused();
         ActiveEvent(!isFocus);
 
         ImGui::Columns(2);
 
-        ImGuiTreeNodeFlags rootNodeFlags = (ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_SpanFullWidth);
+        ImGuiTreeNodeFlags rootNodeFlags = (ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick | ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_SpanFullWidth | ImGuiTreeNodeFlags_DefaultOpen);
 
         std::string projectPath = "Engine";
 
@@ -218,11 +212,11 @@ namespace hr {
             if (ImGui::BeginDragDropSource())
             {
                 if (String::EndWith(path, ".png")) {
-                    ImGui::SetDragDropPayload("TEXTURE_PAYLOAD", path.c_str(), path.size());
+                    ImGui::SetDragDropPayload("TEXTURE_PAYLOAD", path.c_str(), path.size() + 1);
                 } else if (String::EndWith(path, ".obj")) {
-                    ImGui::SetDragDropPayload("MODEL_PAYLOAD", path.c_str(), path.size());
+                    ImGui::SetDragDropPayload("MODEL_PAYLOAD", path.c_str(), path.size() + 1);
                 } else if (String::EndWith(path, ".scn")) {
-                    ImGui::SetDragDropPayload("SCENE_PAYLOAD", path.c_str(), path.size());
+                    ImGui::SetDragDropPayload("SCENE_PAYLOAD", path.c_str(), path.size() + 1);
                 }
 
                 ImGui::TextUnformatted(String::NameByPath(path).c_str());
