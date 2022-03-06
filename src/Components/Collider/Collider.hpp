@@ -23,6 +23,7 @@ namespace hr {
         Vector3 Normal;
         float Depth;
         bool HasCollision;
+        bool Swap = false;
     };
 
     struct Collision {

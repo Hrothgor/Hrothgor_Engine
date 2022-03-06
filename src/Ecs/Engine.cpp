@@ -47,7 +47,8 @@ namespace hr {
         SetSelectedEntity(nullptr);
         DisplayManager::Get()->Start();
         _mainCamera->Start();
-        for (auto ent : _entities)
+        std::vector<GameObject *> cpy = _entities;
+        for (auto ent : cpy)
             if (ent->GetParent() == nullptr)
                 ent->Start();
     }
@@ -64,20 +65,29 @@ namespace hr {
             //
             BeginDrawing();
             {
-                _mainCamera->Update();
-                for (auto ent : _entities)
-                    if (ent->GetParent() == nullptr)
-                        ent->Update();
-                _mainCamera->LateUpdate();
-                for (auto ent : _entities)
-                    if (ent->GetParent() == nullptr)
-                        ent->LateUpdate();
-                if (_simulating) {
-                    _mainCamera->UpdateOnSimulation();
-                    for (auto ent : _entities)
+                {
+                    _mainCamera->Update();
+                    std::vector<GameObject *> cpy = _entities;
+                    for (auto ent : cpy)
                         if (ent->GetParent() == nullptr)
-                            ent->UpdateOnSimulation();
-                    PhysicsWorld::Get()->Update();
+                                ent->Update();
+                }
+                {
+                    _mainCamera->LateUpdate();
+                    std::vector<GameObject *> cpy = _entities;
+                    for (auto ent : cpy)
+                        if (ent->GetParent() == nullptr)
+                            ent->LateUpdate();
+                }
+                {
+                    if (_simulating) {
+                        _mainCamera->UpdateOnSimulation();
+                        std::vector<GameObject *> cpy = _entities;
+                        for (auto ent : cpy)
+                            if (ent->GetParent() == nullptr)
+                                ent->UpdateOnSimulation();
+                        PhysicsWorld::Get()->Update();
+                    }
                 }
                 DisplayManager::Get()->Clear(DARKGRAY);
                 DisplayManager::Get()->Draw();
@@ -174,29 +184,6 @@ namespace hr {
     {
         // TODO maybe call End() ?
         _entities.erase(std::remove(_entities.begin(), _entities.end(), gameObject), _entities.end());
-    }
-
-    void Engine::CreateEmptyGameObject()
-    {
-        GameObject *gameObject = new GameObject();
-
-        int i = 0;
-        bool found = false;
-        while (!found) {
-            bool available = true;
-            for (GameObject *ent : _entities) {
-                if (ent->GetName() == "GameObject (" + std::to_string(i) + ")") {
-                    available = false;
-                    break;
-                }
-            }
-            if (available) {
-                gameObject->SetName("GameObject (" + std::to_string(i) + ")");
-                found = true;
-            }
-            i++;
-        }
-        AddEntity(gameObject);
     }
 
     GameObject *Engine::GetSelectedEntity() const

@@ -16,7 +16,7 @@ namespace hr {
         : Component(gameObject)
     {
         _name = "Light";
-        _type = DIRECTIONAL;
+        _type = POINT;
         _target = Vector3Zero();
         _range = 10.0;
         _color = WHITE;

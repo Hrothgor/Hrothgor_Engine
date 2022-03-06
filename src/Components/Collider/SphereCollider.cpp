@@ -33,7 +33,9 @@ namespace hr {
 
     CollisionPoints SphereCollider::TestCollision(const Transform *transform, const BoxCollider *box, const Transform *boxTransform) const
     {
-        return PhysicsAlgo::FindSphereBoxCollisionPoints(this, transform, box, boxTransform);
+        CollisionPoints points = PhysicsAlgo::FindSphereBoxCollisionPoints(this, transform, box, boxTransform);
+        points.Swap = true;
+        return points; 
     }
 
     void SphereCollider::SetOffset(Vector3 offset)

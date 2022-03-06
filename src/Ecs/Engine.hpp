@@ -41,7 +41,6 @@ namespace hr {
             void ClearEntities();
             void AddEntity(GameObject *object);
             void RemoveEntity(GameObject *object);
-            void CreateEmptyGameObject();
 
             GameObject *GetSelectedEntity() const;
             void SetSelectedEntity(GameObject *object);

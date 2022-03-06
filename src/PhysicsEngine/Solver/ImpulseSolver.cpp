@@ -70,6 +70,7 @@ namespace hr {
 
                 Vector3 centerOfMass = aBody->GetTransform()->GetPositionWorld();
                 Vector3 torque = Vector3CrossProduct(Vector3Subtract(collision.points.A, centerOfMass), fullImpulse);
+                aBody->SetAngularVelocity(Vector3Zero());
                 aBody->AddAngularVelocity(torque);
                 // aBody->AddAngularVelocity(Vector3CrossProduct(collision.points.A, fullImpulse));
             }
@@ -79,6 +80,7 @@ namespace hr {
 
                 Vector3 centerOfMass = bBody->GetTransform()->GetPositionWorld();
                 Vector3 torque = Vector3CrossProduct(Vector3Subtract(collision.points.B, centerOfMass), fullImpulse);
+                bBody->SetAngularVelocity(Vector3Zero());
                 bBody->AddAngularVelocity(torque);
                 // bBody->AddAngularVelocity(Vector3CrossProduct(collision.points.B, Vector3Scale(fullImpulse, -1)));
             }

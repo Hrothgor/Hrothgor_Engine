@@ -90,6 +90,7 @@ namespace hr {
             return;
 
         ImGuizmo::SetDrawlist();
+        ImGuizmo::AllowAxisFlip(false);
         float windowWidth = (float)ImGui::GetWindowWidth();
         float windowHeight = (float)ImGui::GetWindowHeight();
         ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, windowWidth, windowHeight);

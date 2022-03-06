@@ -8,6 +8,7 @@
 #include "SceneHierarchyPanel.hpp"
 #include "../../../Ecs/Engine.hpp"
 #include "../../../Ecs/GameObject.hpp"
+#include "../../../Ecs/CreatePrimitive.hpp"
 
 namespace hr {
     SceneHierarchyPanel::SceneHierarchyPanel()
@@ -44,8 +45,20 @@ namespace hr {
             ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2{ 5.0f, 5.0f });
             if (ImGui::BeginPopupContextWindow("_SCENE_HIERARCHY_CONTEXTMENU"))
             {
+                GameObject *selected = Engine::Get()->GetSelectedEntity();
                 if (ImGui::MenuItem("Create Empty Entity"))
-                    Engine::Get()->CreateEmptyGameObject();
+                    selected = Engine::Get()->Instantiate(CreatePrimitive::CreateEmpty(nullptr));
+                ImGui::Separator();
+                if (ImGui::MenuItem("Create Light"))
+                    selected =  Engine::Get()->Instantiate(CreatePrimitive::CreateLight(nullptr));
+                ImGui::Separator();
+                if (ImGui::MenuItem("Create Sphere"))
+                    selected = Engine::Get()->Instantiate(CreatePrimitive::CreateSphere(nullptr));
+                if (ImGui::MenuItem("Create Box"))
+                    selected = Engine::Get()->Instantiate(CreatePrimitive::CreateBox(nullptr));
+                if (ImGui::MenuItem("Create Mesh"))
+                    selected = Engine::Get()->Instantiate(CreatePrimitive::CreateMesh(nullptr));
+                Engine::Get()->SetSelectedEntity(selected);
                 ImGui::EndPopup();
             }
             ImGui::PopStyleVar();
