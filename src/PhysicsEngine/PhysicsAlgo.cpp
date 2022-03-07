@@ -41,9 +41,7 @@ namespace hr {
         const SphereCollider *a, const Transform *aTransform,
         const BoxCollider *b, const Transform *bTransform)
     {
-        // TODO STILL BUGGY
         Vector3 A = Vector3Add(aTransform->GetPositionWorld(), a->GetOffset());
-        Vector3 B = Vector3Add(bTransform->GetPositionWorld(), b->GetOffset());
         Vector3 closestPoint = ClosestPoint(b, A);
 
         Vector3 CPtoA = Vector3Subtract(closestPoint, A);
@@ -51,22 +49,9 @@ namespace hr {
         if (distanceSqA > a->GetRadius() * a->GetRadius()) {
             return {Vector3Zero(), Vector3Zero(), Vector3Zero(), 0, false};
         }
-
-        Vector3 CPtoB = Vector3Subtract(closestPoint, B);
-        float distanceSqB = Vector3LengthSqr(CPtoB);
-        Vector3 normal; 
-        if (CMP(distanceSqA, 0.0)) {
-        	if (CMP(distanceSqB, 0.0)) {
-                return {Vector3Zero(), Vector3Zero(), Vector3Zero(), 0, false};
-        	}
-        	normal = Vector3Normalize(CPtoB);
-        }
-        else {
-        	normal = Vector3Normalize(Vector3Subtract(A, closestPoint));
-        }
-
+        
+        Vector3 normal = Vector3Normalize(Vector3Subtract(A, closestPoint));
         Vector3 outsidePoint = Vector3Subtract(A, Vector3Scale(normal, a->GetRadius()));
-
         float distance = Vector3Length(Vector3Subtract(closestPoint, outsidePoint));
 
         return {
@@ -82,10 +67,6 @@ namespace hr {
         const BoxCollider *a, const Transform *aTransform,
         const BoxCollider *b, const Transform *bTransform)
     {
-        std::vector<float> normals;
-        for (auto normal : normals) {
-            
-        }
         // foreach normal in allNormals
         // {
         // 	//projection might be a for loop over one model’s vertices simply getting max and min value of dot(vertex, normal)
@@ -190,15 +171,11 @@ namespace hr {
         Vector3 result = transform->GetPositionWorld();
         Vector3 dir = Vector3Subtract(point, result);
 
-
-        Vector3 rotation = transform->GetRotation();
-        Matrix rotationMatrix = MatrixRotateXYZ({DEG2RAD * rotation.x, DEG2RAD * rotation.y, DEG2RAD * rotation.z});
-        float16 rotationMatrixPtr = MatrixToFloatV(rotationMatrix);
+        std::vector<Vector3> localAxis = transform->GetLocalAxis();
 
         float size[3] = {box->GetSize().x, box->GetSize().y, box->GetSize().z};
         for (int i = 0; i < 3; i++) {
-            Vector3 axis = {rotationMatrixPtr.v[i], rotationMatrixPtr.v[i + 4], rotationMatrixPtr.v[i + 8]};
-            axis = Vector3Normalize(axis);
+            Vector3 axis = Vector3Normalize(localAxis[i]);
 
             float distance = Vector3DotProduct(dir, axis);
 

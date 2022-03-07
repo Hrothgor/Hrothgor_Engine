@@ -7,6 +7,7 @@
 
 #include "DisplayManager.hpp"
 #include "Master3DRenderer.hpp"
+#include "../PhysicsEngine/PhysicsWorld.hpp"
 
 namespace hr {
     DisplayManager *DisplayManager::instance = nullptr;
@@ -41,6 +42,7 @@ namespace hr {
         BeginTextureMode(_renderTexture);
         ClearBackground(DARKBLUE);
         Master3DRenderer::Get()->Draw();
+        PhysicsWorld::Get()->Update();
         DrawText(std::to_string(GetFPS()).c_str(), 0, 0, 50, RED);
         EndTextureMode();
 

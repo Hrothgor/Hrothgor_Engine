@@ -49,6 +49,7 @@ namespace hr {
             void SetScale(float x, float y, float z);
             void SetScaleFromWorld(float x, float y, float z);
             Vector3 GetFront() const;
+            std::vector<Vector3> GetLocalAxis() const;
 
             static Quaternion EulerToQuaternion(Vector3 euler);
 

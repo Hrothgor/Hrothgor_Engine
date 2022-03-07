@@ -24,7 +24,7 @@ namespace hr {
     {
     }
 
-    void SphereSender::Update()
+    void SphereSender::UpdateOnSimulation()
     {
         if (IsKeyPressed(KEY_K)) {
             GameObject *sphere = new GameObject(GetGameObject());

@@ -86,7 +86,7 @@ namespace hr {
                         for (auto ent : cpy)
                             if (ent->GetParent() == nullptr)
                                 ent->UpdateOnSimulation();
-                        PhysicsWorld::Get()->Update();
+                        // PhysicsWorld::Get()->Update();
                     }
                 }
                 DisplayManager::Get()->Clear(DARKGRAY);

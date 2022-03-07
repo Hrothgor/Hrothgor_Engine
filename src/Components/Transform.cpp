@@ -161,6 +161,18 @@ namespace hr {
         return _front;
     }
 
+    std::vector<Vector3> Transform::GetLocalAxis() const
+    {
+        std::vector<Vector3> ret;
+        Quaternion q = EulerToQuaternion(_rotation);
+
+        ret.push_back(Vector3RotateByQuaternion(Vector3{1, 0, 0}, q));
+        ret.push_back(Vector3RotateByQuaternion(Vector3{0, 1, 0}, q));
+        ret.push_back(Vector3RotateByQuaternion(Vector3{0, 0, 1}, q));
+        return ret;
+    }
+
+
     Quaternion Transform::EulerToQuaternion(Vector3 euler)
     {
         float yaw = euler.z * DEG2RAD;

@@ -18,11 +18,7 @@ namespace hr {
             SphereSender(GameObject *gameObject);
             ~SphereSender();
 
-            void Start() override {};
-            void Update() override;
-            void LateUpdate() override {};
-            void UpdateOnSimulation() override {};
-            void End() override {};
+            void UpdateOnSimulation() override;
 
             void ImGuiRender() {};
             void OnDrawGizmos() {};
