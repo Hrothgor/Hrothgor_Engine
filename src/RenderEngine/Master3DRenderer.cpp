@@ -11,8 +11,6 @@
 
 #include "../Components/MainCamera3D.hpp"
 
-#include "../PhysicsEngine/PhysicsWorld.hpp"
-
 namespace hr {
     Master3DRenderer *Master3DRenderer::instance = nullptr;
 
@@ -47,7 +45,6 @@ namespace hr {
         _entityRenderer.Draw();
         _gizmosRenderer.Draw();
         //draw particles
-        PhysicsWorld::Get()->Update();
         EndFrame();
     }
 

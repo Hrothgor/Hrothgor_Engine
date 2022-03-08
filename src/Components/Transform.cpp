@@ -48,15 +48,15 @@ namespace hr {
         _rotation = Vector3Add(_rotation, (Vector3){x, y, z});
     }
 
-    // Matrix Transform::GetTransformMatrix() const
-    // {
-    //     AxisAngle rot = GetRotationAxisAngle();
-    //     Matrix rotation = MatrixRotate(rot.axis, rot.angle);
-    //     Matrix scale = MatrixScale(_scale.x, _scale.y, _scale.z);
-    //     Matrix translate = MatrixTranslate(_position.x, _position.y, _position.z);
+    Matrix Transform::GetTransformMatrix() const
+    {
+        AxisAngle rot = GetRotationAxisAngle();
+        Matrix rotation = MatrixRotate(rot.axis, rot.angle);
+        Matrix scale = MatrixScale(_scale.x, _scale.y, _scale.z);
+        Matrix translate = MatrixTranslate(_position.x, _position.y, _position.z);
 
-    //     return MatrixMultiply(MatrixMultiply(translate, rotation), scale);
-    // }
+        return MatrixMultiply(MatrixMultiply(translate, rotation), scale);
+    }
 
     Vector3 Transform::GetPosition() const
     {

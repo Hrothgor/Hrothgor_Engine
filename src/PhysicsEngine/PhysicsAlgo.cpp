@@ -42,6 +42,7 @@ namespace hr {
         const BoxCollider *b, const Transform *bTransform)
     {
         Vector3 A = Vector3Add(aTransform->GetPositionWorld(), a->GetOffset());
+        Vector3 B = Vector3Add(bTransform->GetPositionWorld(), b->GetOffset());
         Vector3 closestPoint = ClosestPoint(b, A);
 
         Vector3 CPtoA = Vector3Subtract(closestPoint, A);
@@ -49,8 +50,20 @@ namespace hr {
         if (distanceSqA > a->GetRadius() * a->GetRadius()) {
             return {Vector3Zero(), Vector3Zero(), Vector3Zero(), 0, false};
         }
-        
-        Vector3 normal = Vector3Normalize(Vector3Subtract(A, closestPoint));
+
+        Vector3 CPtoB = Vector3Subtract(closestPoint, B);
+        float distanceSqB = Vector3LengthSqr(CPtoB);
+        Vector3 normal; 
+        if (CMP(distanceSqA, 0.0)) {
+        	if (CMP(distanceSqB, 0.0)) {
+                return {Vector3Zero(), Vector3Zero(), Vector3Zero(), 0, false};
+        	}
+        	normal = Vector3Normalize(CPtoB);
+        }
+        else {
+        	normal = Vector3Normalize(Vector3Subtract(A, closestPoint));
+        }
+
         Vector3 outsidePoint = Vector3Subtract(A, Vector3Scale(normal, a->GetRadius()));
         float distance = Vector3Length(Vector3Subtract(closestPoint, outsidePoint));
 

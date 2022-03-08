@@ -11,7 +11,7 @@
 #include "../../DisplayManager.hpp"
 #include "../../../Ecs/Engine.hpp"
 #include "../../../Ecs/GameObject.hpp"
-#include "../../../SaveLoad/LoadSystem.hpp"
+#include "../../../Tools/SaveLoad/LoadSystem.hpp"
 
 #include "../../../Components/MainCamera3D.hpp"
 #include "../../../Components/Transform.hpp"
@@ -113,7 +113,7 @@ namespace hr {
         float snapValues[3] = {snapValue, snapValue, snapValue};
 
         ImGuizmo::Manipulate(MatrixToFloat(cameraView), MatrixToFloat(cameraProjection), 
-            (ImGuizmo::OPERATION)_gizmoType, ImGuizmo::LOCAL, mat,
+            (ImGuizmo::OPERATION)_gizmoType, ImGuizmo::WORLD, mat,
             MatrixToFloat(MatrixIdentity()), _snap ? snapValues : nullptr);
         
         if (ImGuizmo::IsUsing()) {

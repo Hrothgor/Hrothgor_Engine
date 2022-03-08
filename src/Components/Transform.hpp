@@ -29,7 +29,7 @@ namespace hr {
             void Rotate(Vector3 vec);
             void Rotate(float x, float y, float z);
 
-            // Matrix GetTransformMatrix() const;
+            Matrix GetTransformMatrix() const;
 
             Vector3 GetPosition() const;
             Vector3 GetPositionWorld() const;

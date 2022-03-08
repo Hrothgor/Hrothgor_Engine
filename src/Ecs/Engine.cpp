@@ -8,8 +8,8 @@
 #include "Engine.hpp"
 #include "../RenderEngine/DisplayManager.hpp"
 #include "../PhysicsEngine/PhysicsWorld.hpp"
-#include "../SaveLoad/SaveSystem.hpp"
-#include "../SaveLoad/LoadSystem.hpp"
+#include "../Tools/SaveLoad/SaveSystem.hpp"
+#include "../Tools/SaveLoad/LoadSystem.hpp"
 
 #include "../Components/MeshRenderer.hpp"
 #include "../Components/MainCamera3D.hpp"
@@ -86,7 +86,7 @@ namespace hr {
                         for (auto ent : cpy)
                             if (ent->GetParent() == nullptr)
                                 ent->UpdateOnSimulation();
-                        // PhysicsWorld::Get()->Update();
+                        PhysicsWorld::Get()->Update();
                     }
                 }
                 DisplayManager::Get()->Clear(DARKGRAY);
@@ -222,6 +222,7 @@ namespace hr {
             return;
         _simulating = simulating;
         if (_simulating) {
+            SetSelectedEntity(nullptr);
             std::vector<GameObject *> rootEntities = GetRootEntities();
             for (auto ent : rootEntities) {
                 GameObject *newEnt = ent->Clone();
