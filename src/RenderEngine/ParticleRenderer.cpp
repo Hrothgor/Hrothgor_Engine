@@ -50,6 +50,7 @@ namespace hr {
             Matrix transform = particle->GetTransform().GetTransformMatrix();
             transform = MatrixMultiply(particle->GetBillboardMatrix(), transform);
             DrawMesh(particle->GetMesh(), material, transform);
+            RL_FREE(material.maps);
         }
         EndFrame();
     }

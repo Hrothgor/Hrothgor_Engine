@@ -206,7 +206,7 @@ namespace hr {
         _rotation = json["rotation"].get<float>();
         _startColor = {json["startColor"][0].get<unsigned char>(), json["startColor"][1].get<unsigned char>(), json["startColor"][2].get<unsigned char>(), json["startColor"][3].get<unsigned char>()};
         _texturePath = json["texturePath"].get<std::string>();
-        // _maxParticle = json["maxParticle"].get<int>();
+        _maxParticle = json["maxParticle"].get<int>();
 
         LoadTextureFromPath(_texturePath);
     }
