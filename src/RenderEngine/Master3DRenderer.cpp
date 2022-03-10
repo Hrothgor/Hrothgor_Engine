@@ -26,6 +26,7 @@ namespace hr {
     {
         _camera = Engine::Get()->GetMainCamera()->GetComponent<MainCamera3D>();
         _entityRenderer.Start();
+        _particleRenderer.Start();
         _gizmosRenderer.Start();
     }
 
@@ -43,8 +44,8 @@ namespace hr {
     {
         BeginFrame();
         _entityRenderer.Draw();
+        _particleRenderer.Draw();
         _gizmosRenderer.Draw();
-        //draw particles
         EndFrame();
     }
 
@@ -63,9 +64,15 @@ namespace hr {
         _entityRenderer.RegisterLight(light);
     }
 
+    void Master3DRenderer::RegisterParticle(Particle *particles)
+    {
+        _particleRenderer.RegisterParticle(particles);
+    }
+
     void Master3DRenderer::End()
     {
         _entityRenderer.End();
+        _particleRenderer.End();
         _gizmosRenderer.End();
     }
 }

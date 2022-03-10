@@ -10,6 +10,7 @@
 
 #include "include.hpp"
 #include "EntityRenderer.hpp"
+#include "ParticleRenderer.hpp"
 #include "GizmosRenderer.hpp"
 
 namespace hr {
@@ -31,12 +32,13 @@ namespace hr {
             void RegisterGizmos(GameObject *model);
             void RegisterObject(GameObject *model);
             void RegisterLight(GameObject *light);
-            // void Register(Particle *particles);
+            void RegisterParticle(Particle *particles);
 
         protected:
         private:
             MainCamera3D *_camera;
             EntityRenderer _entityRenderer;
+            ParticleRenderer _particleRenderer;
             GizmosRenderer _gizmosRenderer;
 
         protected:

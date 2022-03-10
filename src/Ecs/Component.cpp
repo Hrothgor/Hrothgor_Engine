@@ -12,7 +12,8 @@ namespace hr {
     Component::Component(GameObject *gameObject)
         : _gameObject(gameObject)
     {
-        _transform = _gameObject->GetTransform();
+        if (_gameObject)
+            _transform = _gameObject->GetTransform();
         _name = "Component";
     }
 

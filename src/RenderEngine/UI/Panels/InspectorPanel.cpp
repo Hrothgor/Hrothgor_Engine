@@ -16,6 +16,7 @@
 #include "../../../Components/Collider/SphereCollider.hpp"
 #include "../../../Components/MainCamera3D.hpp"
 #include "../../../Components/RigidBody.hpp"
+#include "../../../Components/Particles/ParticleSystem.hpp"
 
 #include "../../../Components/SphereSender.hpp"
 
@@ -95,6 +96,7 @@ namespace hr {
                 if (entity->HasComponentId<BoxCollider>(compId)) { ImGuiRenderComponent<BoxCollider>(entity); continue; }
                 if (entity->HasComponentId<SphereCollider>(compId)) { ImGuiRenderComponent<SphereCollider>(entity); continue; }
                 if (entity->HasComponentId<RigidBody>(compId)) { ImGuiRenderComponent<RigidBody>(entity); continue; }
+                if (entity->HasComponentId<ParticleSystem>(compId)) { ImGuiRenderComponent<ParticleSystem>(entity); continue; }
                 if (entity->HasComponentId<SphereSender>(compId)) { ImGuiRenderComponent<SphereSender>(entity); continue; }
             }
 
@@ -108,6 +110,7 @@ namespace hr {
                 if (!entity->HasComponent<BoxCollider>()) { ImGuiRenderAddComponent<BoxCollider>("BoxCollider", entity); }
                 if (!entity->HasComponent<SphereCollider>()) { ImGuiRenderAddComponent<SphereCollider>("SphereCollider", entity); }
                 if (!entity->HasComponent<RigidBody>()) { ImGuiRenderAddComponent<RigidBody>("RigidBody", entity); }
+                if (!entity->HasComponent<ParticleSystem>()) { ImGuiRenderAddComponent<ParticleSystem>("ParticleSystem", entity); }
                 if (!entity->HasComponent<SphereSender>()) { ImGuiRenderAddComponent<SphereSender>("SphereSender", entity); }
 				ImGui::EndPopup();
 			}

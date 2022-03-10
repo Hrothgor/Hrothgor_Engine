@@ -12,16 +12,9 @@
 #include "include.hpp"
 
 namespace hr {
-    class GenMesh {
-        public:
-            GenMesh();
-            ~GenMesh();
-
-            static Mesh GenMeshSquare(float size);
-
-        protected:
-        private:
-    };
+    namespace GenMesh {
+        Mesh GenMeshSquare(float size);
+    }
 }
 
 #endif /* !GENMESH_HPP_ */

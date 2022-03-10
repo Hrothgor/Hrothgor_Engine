@@ -1,0 +1,194 @@
+/*
+** EPITECH PROJECT, 2022
+** Physics_engine
+** File description:
+** ParticleSystem
+*/
+
+#include "ParticleSystem.hpp"
+#include "../../RenderEngine/Master3DRenderer.hpp"
+#include "../../RenderEngine/UI/UIElement.hpp"
+#include "../../RenderEngine/AssetsManager.hpp"
+
+#include "../Transform.hpp"
+#include "Particle.hpp"
+
+namespace hr {
+    ParticleSystem::ParticleSystem(GameObject *gameObject)
+        : Component(gameObject)
+    {
+        _name = "ParticleSystem";
+        _pps = 10;
+        _velocity = {0, 10, 0};
+        _gravityModifier = 0.5;
+        _lifeLength = 5.0;
+        _scale = 1.0;
+        _rotation = 0.0;
+        _startColor = WHITE;
+    }
+
+    ParticleSystem::~ParticleSystem()
+    {
+    }
+
+    void ParticleSystem::Update()
+    {
+        _particlesToCreate += _pps * GetFrameTime();
+        if (_particlesToCreate < 1)
+            return;
+        int count = floor(_particlesToCreate);
+        _particlesToCreate -= count;
+        for (int i = 0; i < count ; i++) {
+            Transform transform(nullptr);
+            transform.SetPosition(GetTransform()->GetPositionWorld());
+            transform.SetScale({_scale, _scale, _scale});
+            Master3DRenderer::Get()->RegisterParticle(
+                new Particle(transform, _velocity, _gravityModifier, _lifeLength, _texture, _startColor)
+                );
+        }
+    }
+
+    int ParticleSystem::GetPPS() const
+    {
+        return _pps;
+    }
+
+    void ParticleSystem::SetPPS(int pps)
+    {
+        _pps = pps;
+    }
+
+    Vector3 ParticleSystem::GetVelocity() const
+    {
+        return _velocity;
+    }
+
+    void ParticleSystem::SetVelocity(Vector3 velocity)
+    {
+        _velocity = velocity;
+    }
+
+    float ParticleSystem::GetGravityModifier() const
+    {
+        return _gravityModifier;
+    }
+
+    void ParticleSystem::SetGravityModifier(float gravityModifier)
+    {
+        _gravityModifier = gravityModifier;
+    }
+
+    float ParticleSystem::GetLifeLength() const
+    {
+        return _lifeLength;
+    }
+
+    void ParticleSystem::SetLifeLength(float lifeLength)
+    {
+        _lifeLength = lifeLength;
+    }
+
+    float ParticleSystem::GetScale() const
+    {
+        return _scale;
+    }
+
+    void ParticleSystem::SetScale(float scale)
+    {
+        _scale = scale;
+    }
+
+    float ParticleSystem::GetRotation() const
+    {
+        return _rotation;
+    }
+
+    void ParticleSystem::SetRotation(float rotation)
+    {
+        _rotation = rotation;
+    }
+
+    Color ParticleSystem::GetStartColor() const
+    {
+        return _startColor;
+    }
+
+    void ParticleSystem::SetStartColor(Color startColor)
+    {
+        _startColor = startColor;
+    }
+
+    void ParticleSystem::LoadTextureFromPath(const std::string &path)
+    {
+        if (AssetsManager::Get()->TextureContains(path)) {
+            _texturePath = path;
+            _texture = AssetsManager::Get()->GetTexture(path);
+        }
+    }
+
+    Texture2D ParticleSystem::GetTexture() const
+    {
+        return _texture;
+    }
+
+    std::string ParticleSystem::GetTexturePath() const
+    {
+        return _texturePath;
+    }
+
+    void ParticleSystem::ImGuiRender()
+    {
+        UIElement::IntField("Particles per second", [this](){return GetPPS();}, [this](int val){SetPPS(val);});
+        UIElement::Vector3Field("Velocity", [this](){return GetVelocity();}, [this](Vector3 val){SetVelocity(val);});
+        UIElement::FloatField("Gravity modifier", [this](){return GetGravityModifier();}, [this](float val){SetGravityModifier(val);});
+        UIElement::FloatField("Life length", [this](){return GetLifeLength();}, [this](float val){SetLifeLength(val);});
+        UIElement::FloatField("Scale", [this](){return GetScale();}, [this](float val){SetScale(val);});
+        UIElement::FloatField("Rotation", [this](){return GetRotation();}, [this](float val){SetRotation(val);});
+        UIElement::ColorField("Start color", [this](){return GetStartColor();}, [this](Color val){SetStartColor(val);});
+        UIElement::TextureField("Texture", [this](){return GetTexturePath();}, [this](const std::string &str){LoadTextureFromPath(str);});
+    }
+
+    nlohmann::json ParticleSystem::ToJson() const
+    {
+        nlohmann::json json;
+
+        json["pps"] = _pps;
+        json["velocity"] = {_velocity.x, _velocity.y, _velocity.z};
+        json["gravityModifier"] = _gravityModifier;
+        json["lifeLength"] = _lifeLength;
+        json["scale"] = _scale;
+        json["rotation"] = _rotation;
+        json["startColor"] = {_startColor.r, _startColor.g, _startColor.b, _startColor.a};
+        json["texturePath"] = _texturePath;
+
+        return json;
+    }
+
+    void ParticleSystem::FromJson(const nlohmann::json &json)
+    {
+        _pps = json["pps"].get<int>();
+        _velocity = {json["velocity"][0].get<float>(), json["velocity"][1].get<float>(), json["velocity"][2].get<float>()};
+        _gravityModifier = json["gravityModifier"].get<float>();
+        _lifeLength = json["lifeLength"].get<float>();
+        _scale = json["scale"].get<float>();
+        _rotation = json["rotation"].get<float>();
+        _startColor = {json["startColor"][0].get<unsigned char>(), json["startColor"][1].get<unsigned char>(), json["startColor"][2].get<unsigned char>(), json["startColor"][3].get<unsigned char>()};
+        _texturePath = json["texturePath"].get<std::string>();
+
+        LoadTextureFromPath(_texturePath);
+    }
+
+    Component *ParticleSystem::Clone(GameObject *gameObject)
+    {
+        ParticleSystem *ret = new ParticleSystem(gameObject);
+        ret->SetPPS(_pps);
+        ret->SetVelocity(_velocity);
+        ret->SetGravityModifier(_gravityModifier);
+        ret->SetLifeLength(_lifeLength);
+        ret->SetScale(_scale);
+        ret->SetRotation(_rotation);
+        ret->SetStartColor(_startColor);
+        ret->LoadTextureFromPath(_texturePath);
+        return ret;
+    }
+}

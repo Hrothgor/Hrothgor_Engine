@@ -8,6 +8,7 @@
 #include "Transform.hpp"
 #include "../Ecs/GameObject.hpp"
 #include "../RenderEngine/UI/UIElement.hpp"
+
 #include "ImGuizmo.h"
 
 namespace hr {
@@ -50,12 +51,31 @@ namespace hr {
 
     Matrix Transform::GetTransformMatrix() const
     {
-        AxisAngle rot = GetRotationAxisAngle();
-        Matrix rotation = MatrixRotate(rot.axis, rot.angle);
-        Matrix scale = MatrixScale(_scale.x, _scale.y, _scale.z);
-        Matrix translate = MatrixTranslate(_position.x, _position.y, _position.z);
+        float f[16];
+        ImGuizmo::RecomposeMatrixFromComponents(Vector3ToFloat(GetPositionWorld()),
+                                                Vector3ToFloat(GetRotation()),
+                                                Vector3ToFloat(GetScaleWorld()),
+                                                f);
+        
+        Matrix mat;
+        mat.m0 = f[0];
+        mat.m1 = f[1];
+        mat.m2 = f[2];
+        mat.m3 = f[3];
+        mat.m4 = f[4];
+        mat.m5 = f[5];
+        mat.m6 = f[6];
+        mat.m7 = f[7];
+        mat.m8 = f[8];
+        mat.m9 = f[9];
+        mat.m10 = f[10];
+        mat.m11 = f[11];
+        mat.m12 = f[12];
+        mat.m13 = f[13];
+        mat.m14 = f[14];
+        mat.m15 = f[15];
 
-        return MatrixMultiply(MatrixMultiply(translate, rotation), scale);
+        return mat;
     }
 
     Vector3 Transform::GetPosition() const
@@ -65,7 +85,7 @@ namespace hr {
 
     Vector3 Transform::GetPositionWorld() const
     {
-        if (GetGameObject()->GetParent())
+        if (GetGameObject() && GetGameObject()->GetParent())
             return Vector3Add(GetGameObject()->GetParent()->GetTransform()->GetPositionWorld(), _position);
         return _position;
     }
@@ -83,7 +103,7 @@ namespace hr {
     void Transform::SetPositionFromWorld(float x, float y, float z)
     {
         Vector3 parentWorldPos = Vector3Zero();
-        if (GetGameObject()->GetParent())
+        if (GetGameObject() && GetGameObject()->GetParent())
             parentWorldPos = GetGameObject()->GetParent()->GetTransform()->GetPositionWorld();
         _position = Vector3Subtract({x, y, z}, parentWorldPos);
     }
@@ -133,7 +153,7 @@ namespace hr {
 
     Vector3 Transform::GetScaleWorld() const
     {
-        if (GetGameObject()->GetParent())
+        if (GetGameObject() && GetGameObject()->GetParent())
             return Vector3Multiply(GetGameObject()->GetParent()->GetTransform()->GetScaleWorld(), _scale);
         return _scale;
     }
@@ -151,7 +171,7 @@ namespace hr {
     void Transform::SetScaleFromWorld(float x, float y, float z)
     {
         Vector3 parentWorldScale = Vector3One();
-        if (GetGameObject()->GetParent())
+        if (GetGameObject() && GetGameObject()->GetParent())
             parentWorldScale = GetGameObject()->GetParent()->GetTransform()->GetScaleWorld();
         _scale = {x / parentWorldScale.x, y / parentWorldScale.y, z / parentWorldScale.z};
     }

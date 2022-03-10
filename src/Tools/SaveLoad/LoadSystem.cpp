@@ -17,6 +17,7 @@
 #include "../../Components/MeshRenderer.hpp"
 #include "../../Components/Transform.hpp"
 #include "../../Components/RigidBody.hpp"
+#include "../../Components/Particles/ParticleSystem.hpp"
 
 namespace hr {
     GameObject *LoadSystem::LoadEntity(const nlohmann::json &json)
@@ -34,6 +35,7 @@ namespace hr {
                 else if (name == "BoxCollider") gameObject->AddComponent<BoxCollider>()->FromJson(comp[1]);
                 else if (name == "SphereCollider") gameObject->AddComponent<SphereCollider>()->FromJson(comp[1]);
                 else if (name == "RigidBody") gameObject->AddComponent<RigidBody>()->FromJson(comp[1]);
+                else if (name == "ParticleSystem") gameObject->AddComponent<ParticleSystem>()->FromJson(comp[1]);
             }
         if (json.contains("childs"))
             for (auto &jsonChild : json["childs"])

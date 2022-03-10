@@ -8,14 +8,6 @@
 #include "GenMesh.hpp"
 
 namespace hr {
-    GenMesh::GenMesh()
-    {
-    }
-
-    GenMesh::~GenMesh()
-    {
-    }
-
     Mesh GenMesh::GenMeshSquare(float size)
     {
         Mesh mesh = { 0 };
