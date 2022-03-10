@@ -47,7 +47,9 @@ namespace hr {
             Material material = LoadMaterialDefault();
             material.maps[MATERIAL_MAP_ALBEDO].texture = particle->GetTexture();
             material.maps[MATERIAL_MAP_ALBEDO].color = particle->GetStartColor();
-            DrawMesh(particle->GetMesh(), material, particle->GetTransform().GetTransformMatrix());
+            Matrix transform = particle->GetTransform().GetTransformMatrix();
+            transform = MatrixMultiply(particle->GetBillboardMatrix(), transform);
+            DrawMesh(particle->GetMesh(), material, transform);
         }
         EndFrame();
     }

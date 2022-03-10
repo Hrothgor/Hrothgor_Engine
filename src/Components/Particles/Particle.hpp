@@ -12,6 +12,8 @@
 #include "../Transform.hpp"
 
 namespace hr {
+    class ParticleSystem;
+
     enum TextureType {
         SIMPLE = 0,
         ATLAS,
@@ -19,7 +21,7 @@ namespace hr {
 
     class Particle {
         public:
-            Particle(const Transform &transform, const Vector3 &velocity, const float &gravityModifier, const float &lifeLenght, const Texture &texture, const Color &startColor);
+            Particle(ParticleSystem *parent, const Transform &transform, const Vector3 &velocity, const float &gravityModifier, const float &lifeLenght, const Texture &texture, const Color &startColor);
             ~Particle();
 
             bool Update(Camera3D camera);
@@ -37,6 +39,8 @@ namespace hr {
             Mesh GetMesh() const;
             Texture GetTexture() const;
             TextureType GetTextureType() const;
+
+            Matrix GetBillboardMatrix() const;
 
             Vector2 GetTexOffset1() const;
             Vector2 GetTexOffset2() const;
@@ -59,10 +63,14 @@ namespace hr {
             Texture _texture = {0};
             int _numberOfRows = 1;
             TextureType _textureType = SIMPLE;
+            
+            Matrix _billboardMatrix;
             // Atlas
             Vector2 _texOffset1 = {0};
             Vector2 _texOffset2 = {0};
             float _blendFactor = 0;
+
+            ParticleSystem *_parent = nullptr;
     };
 }
 

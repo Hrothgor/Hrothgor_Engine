@@ -25,6 +25,7 @@ namespace hr {
         _scale = 1.0;
         _rotation = 0.0;
         _startColor = WHITE;
+        _maxParticle = 1000;
     }
 
     ParticleSystem::~ParticleSystem()
@@ -38,12 +39,14 @@ namespace hr {
             return;
         int count = floor(_particlesToCreate);
         _particlesToCreate -= count;
-        for (int i = 0; i < count ; i++) {
+        for (int i = 0; i < count; i++) {
+            if (_count >= _maxParticle)
+                break;
             Transform transform(nullptr);
             transform.SetPosition(GetTransform()->GetPositionWorld());
             transform.SetScale({_scale, _scale, _scale});
             Master3DRenderer::Get()->RegisterParticle(
-                new Particle(transform, _velocity, _gravityModifier, _lifeLength, _texture, _startColor)
+                new Particle(this, transform, _velocity, _gravityModifier, _lifeLength, _texture, _startColor)
                 );
         }
     }
@@ -126,6 +129,33 @@ namespace hr {
         }
     }
 
+    int ParticleSystem::GetMaxParticle() const
+    {
+        return _maxParticle;
+    }
+
+    void ParticleSystem::SetMaxParticle(int maxParticle)
+    {
+        _maxParticle = maxParticle;
+    }
+
+    int ParticleSystem::GetParticleCount() const
+    {
+        return _count;
+    }
+
+    void ParticleSystem::DecreaseParticleCount()
+    {
+        if (_count > 0)
+            _count--;
+    }
+
+    void ParticleSystem::IncreaseParticleCount()
+    {
+        if (_count < _maxParticle)
+            _count++;
+    }
+
     Texture2D ParticleSystem::GetTexture() const
     {
         return _texture;
@@ -146,6 +176,7 @@ namespace hr {
         UIElement::FloatField("Rotation", [this](){return GetRotation();}, [this](float val){SetRotation(val);});
         UIElement::ColorField("Start color", [this](){return GetStartColor();}, [this](Color val){SetStartColor(val);});
         UIElement::TextureField("Texture", [this](){return GetTexturePath();}, [this](const std::string &str){LoadTextureFromPath(str);});
+        UIElement::IntField("Max particle", [this](){return GetMaxParticle();}, [this](int val){SetMaxParticle(val);});
     }
 
     nlohmann::json ParticleSystem::ToJson() const
@@ -160,6 +191,7 @@ namespace hr {
         json["rotation"] = _rotation;
         json["startColor"] = {_startColor.r, _startColor.g, _startColor.b, _startColor.a};
         json["texturePath"] = _texturePath;
+        json["maxParticle"] = _maxParticle;
 
         return json;
     }
@@ -174,6 +206,7 @@ namespace hr {
         _rotation = json["rotation"].get<float>();
         _startColor = {json["startColor"][0].get<unsigned char>(), json["startColor"][1].get<unsigned char>(), json["startColor"][2].get<unsigned char>(), json["startColor"][3].get<unsigned char>()};
         _texturePath = json["texturePath"].get<std::string>();
+        // _maxParticle = json["maxParticle"].get<int>();
 
         LoadTextureFromPath(_texturePath);
     }
@@ -189,6 +222,7 @@ namespace hr {
         ret->SetRotation(_rotation);
         ret->SetStartColor(_startColor);
         ret->LoadTextureFromPath(_texturePath);
+        ret->SetMaxParticle(_maxParticle);
         return ret;
     }
 }

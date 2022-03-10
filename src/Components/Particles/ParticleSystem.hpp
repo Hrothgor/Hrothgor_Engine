@@ -38,6 +38,12 @@ namespace hr {
             void SetRotation(float rotation);
             Color GetStartColor() const;
             void SetStartColor(Color startColor);
+            int GetMaxParticle() const;
+            void SetMaxParticle(int maxParticle);
+
+            int GetParticleCount() const;
+            void DecreaseParticleCount();
+            void IncreaseParticleCount();
 
             Texture2D GetTexture() const;
             std::string GetTexturePath() const;
@@ -59,11 +65,13 @@ namespace hr {
             float _scale;
             float _rotation;
             Color _startColor;
+            int _maxParticle;
 
             Texture2D _texture = {0};
             std::string _texturePath;
 
             float _particlesToCreate = 0;
+            int _count = 0;
     };
 }
 
