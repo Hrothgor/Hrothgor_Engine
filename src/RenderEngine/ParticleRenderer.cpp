@@ -43,15 +43,19 @@ namespace hr {
     void ParticleRenderer::Draw()
     {
         BeginFrame();
+        Material material = LoadMaterialDefault();
         for (Particle *particle : _particles) {
-            Material material = LoadMaterialDefault();
             material.maps[MATERIAL_MAP_ALBEDO].texture = particle->GetTexture();
             material.maps[MATERIAL_MAP_ALBEDO].color = particle->GetStartColor();
+            if (particle->GetTextureType() == ATLAS) {
+                material.shader = _particleShader.GetShader();
+                _particleShader.UpdateParticleLoc(particle);
+            }
             Matrix transform = particle->GetTransform().GetTransformMatrix();
             transform = MatrixMultiply(particle->GetBillboardMatrix(), transform);
             DrawMesh(particle->GetMesh(), material, transform);
-            RL_FREE(material.maps);
         }
+        RL_FREE(material.maps);
         EndFrame();
     }
 
@@ -68,7 +72,7 @@ namespace hr {
 
     void ParticleRenderer::End()
     {
-
+        UnloadShader(_particleShader.GetShader());
     }
 }
 

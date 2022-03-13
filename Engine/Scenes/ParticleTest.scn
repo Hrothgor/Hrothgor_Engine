@@ -581,6 +581,7 @@
                         "gravityModifier": 0.5,
                         "lifeLength": 5.0,
                         "maxParticle": 1000,
+                        "numberOfRows": 1,
                         "pps": 10,
                         "rotation": 0.0,
                         "scale": 1.0,
@@ -591,6 +592,7 @@
                             255
                         ],
                         "texturePath": "Engine/Ressources/default-particle.png",
+                        "textureType": 0,
                         "velocity": [
                             0.0,
                             10.0,

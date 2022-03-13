@@ -9,6 +9,7 @@
 #define PARTICLERENDERER_HPP_
 
 #include "include.hpp"
+#include "../Shader/ParticleShader.hpp"
 
 namespace hr {
     class MainCamera3D;
@@ -30,6 +31,7 @@ namespace hr {
         protected:
         private:
             std::vector<Particle *> _particles;
+            ParticleShader _particleShader;
             MainCamera3D *_camera;
     };
 }

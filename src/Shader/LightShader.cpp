@@ -75,7 +75,7 @@ namespace hr {
 
     std::vector<int> LightShader::GetLocations(int id) const
     {
-        std::vector<int> locations(LOC_COUNT, 0);
+        std::vector<int> locations(LOC_LIGHT_SHADER_COUNT, 0);
 
         locations[LOC_ENABLED] = GetShaderLocation(_shader, ("lights[" + std::to_string(id) + "].enabled").c_str());
         locations[LOC_TYPE] = GetShaderLocation(_shader, ("lights[" + std::to_string(id) + "].type").c_str());

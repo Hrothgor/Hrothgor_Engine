@@ -11,6 +11,7 @@
 #include "include.hpp"
 #include "../../Ecs/Component.hpp"
 #include "json.hpp"
+#include "Particle.hpp"
 
 namespace hr {
     class ParticleSystem : public Component {
@@ -41,6 +42,11 @@ namespace hr {
             int GetMaxParticle() const;
             void SetMaxParticle(int maxParticle);
 
+            TextureType GetTextureType() const;
+            void SetTextureType(TextureType textureType);
+            int GetNumberOfRows() const;
+            void SetNumberOfRows(int numberOfRows);
+
             int GetParticleCount() const;
             void DecreaseParticleCount();
             void IncreaseParticleCount();
@@ -59,13 +65,16 @@ namespace hr {
         protected:
         private:
             int _pps;
-            Vector3 _velocity;
-            float _gravityModifier;
-            float _lifeLength;
             float _scale;
             float _rotation;
+            Vector3 _velocity; //change to emision system
+            float _gravityModifier;
+            float _lifeLength;
             Color _startColor;
             int _maxParticle;
+
+            TextureType _textureType = SIMPLE;
+            int _numberOfRows = 1;
 
             Texture2D _texture = {0};
             std::string _texturePath;

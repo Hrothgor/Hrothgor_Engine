@@ -21,7 +21,7 @@ namespace hr {
 
     class Particle {
         public:
-            Particle(ParticleSystem *parent, const Transform &transform, const Vector3 &velocity, const float &gravityModifier, const float &lifeLenght, const Texture &texture, const Color &startColor);
+            Particle(ParticleSystem *parent);
             ~Particle();
 
             bool Update(Camera3D camera);
@@ -29,18 +29,29 @@ namespace hr {
             void UpdateTextureCoordInfo();
 
             Transform GetTransform() const;
+            void SetTransform(const Transform &transform);
             Vector3 GetVelocity() const;
+            void SetVelocity(const Vector3 &velocity);
             float GetGravityModifier() const;
-            float GetLifeLenght() const;
+            void SetGravityModifier(const float &gravityModifier);
+            float GetLifeLength() const;
+            void SetLifeLength(const float &lifeLength);
             Color GetStartColor() const;
+            void SetStartColor(const Color &startColor);
+            TextureType GetTextureType() const;
+            void SetTextureType(const TextureType &textureType);
+            int GetNumberOfRows() const;
+            void SetNumberOfRows(const int &numberOfRows);
 
             float GetDistanceToCamera() const;
 
             Mesh GetMesh() const;
             Texture GetTexture() const;
-            TextureType GetTextureType() const;
+            void SetTexture(const Texture &texture);
 
             Matrix GetBillboardMatrix() const;
+
+            float GetElapsedTime() const;
 
             Vector2 GetTexOffset1() const;
             Vector2 GetTexOffset2() const;
@@ -53,16 +64,16 @@ namespace hr {
             Transform _transform;
             Vector3 _velocity;
             float _gravityModifier;
-            float _lifeLenght;
+            float _lifeLength;
             Color _startColor;
+            TextureType _textureType = SIMPLE;
+            int _numberOfRows = 1;
 
             float _elapsedTime = 0;
             float _distanceToCamera = 0;
             
             Mesh _mesh = {0};
             Texture _texture = {0};
-            int _numberOfRows = 1;
-            TextureType _textureType = SIMPLE;
             
             Matrix _billboardMatrix;
             // Atlas

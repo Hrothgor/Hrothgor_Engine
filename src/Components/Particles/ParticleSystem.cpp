@@ -11,7 +11,6 @@
 #include "../../RenderEngine/AssetsManager.hpp"
 
 #include "../Transform.hpp"
-#include "Particle.hpp"
 
 namespace hr {
     ParticleSystem::ParticleSystem(GameObject *gameObject)
@@ -45,9 +44,16 @@ namespace hr {
             Transform transform(nullptr);
             transform.SetPosition(GetTransform()->GetPositionWorld());
             transform.SetScale({_scale, _scale, _scale});
-            Master3DRenderer::Get()->RegisterParticle(
-                new Particle(this, transform, _velocity, _gravityModifier, _lifeLength, _texture, _startColor)
-                );
+            Particle *part = new Particle(this);
+            part->SetTransform(transform);
+            part->SetVelocity(_velocity);
+            part->SetGravityModifier(_gravityModifier);
+            part->SetLifeLength(_lifeLength);
+            part->SetStartColor(_startColor);
+            part->SetTexture(_texture);
+            part->SetTextureType(_textureType);
+            part->SetNumberOfRows(_numberOfRows);
+            Master3DRenderer::Get()->RegisterParticle(part);
         }
     }
 
@@ -139,6 +145,26 @@ namespace hr {
         _maxParticle = maxParticle;
     }
 
+    TextureType ParticleSystem::GetTextureType() const
+    {
+        return _textureType;
+    }
+
+    void ParticleSystem::SetTextureType(TextureType textureType)
+    {
+        _textureType = textureType;
+    }
+
+    int ParticleSystem::GetNumberOfRows() const
+    {
+        return _numberOfRows;
+    }
+
+    void ParticleSystem::SetNumberOfRows(int numberOfRows)
+    {
+        _numberOfRows = numberOfRows;
+    }
+
     int ParticleSystem::GetParticleCount() const
     {
         return _count;
@@ -176,6 +202,15 @@ namespace hr {
         UIElement::FloatField("Rotation", [this](){return GetRotation();}, [this](float val){SetRotation(val);});
         UIElement::ColorField("Start color", [this](){return GetStartColor();}, [this](Color val){SetStartColor(val);});
         UIElement::TextureField("Texture", [this](){return GetTexturePath();}, [this](const std::string &str){LoadTextureFromPath(str);});
+        std::vector<std::string> enumNames = {"Simple", "Atlas"};
+        UIElement::EnumField("TextureType", [this](){return GetTextureType();}, [this](int val){SetTextureType((TextureType)val);}, enumNames);
+        switch (_textureType) {
+            case SIMPLE:
+                break;
+            case ATLAS:
+                UIElement::IntField("Number of rows", [this](){return GetNumberOfRows();}, [this](int val){SetNumberOfRows(val);});
+                break;
+        }
         UIElement::IntField("Max particle", [this](){return GetMaxParticle();}, [this](int val){SetMaxParticle(val);});
     }
 
@@ -192,6 +227,8 @@ namespace hr {
         json["startColor"] = {_startColor.r, _startColor.g, _startColor.b, _startColor.a};
         json["texturePath"] = _texturePath;
         json["maxParticle"] = _maxParticle;
+        json["textureType"] = _textureType;
+        json["numberOfRows"] = _numberOfRows;
 
         return json;
     }
@@ -207,6 +244,8 @@ namespace hr {
         _startColor = {json["startColor"][0].get<unsigned char>(), json["startColor"][1].get<unsigned char>(), json["startColor"][2].get<unsigned char>(), json["startColor"][3].get<unsigned char>()};
         _texturePath = json["texturePath"].get<std::string>();
         _maxParticle = json["maxParticle"].get<int>();
+        _textureType = (TextureType)json["textureType"].get<int>();
+        _numberOfRows = json["numberOfRows"].get<int>();
 
         LoadTextureFromPath(_texturePath);
     }
@@ -223,6 +262,8 @@ namespace hr {
         ret->SetStartColor(_startColor);
         ret->LoadTextureFromPath(_texturePath);
         ret->SetMaxParticle(_maxParticle);
+        ret->SetTextureType(_textureType);
+        ret->SetNumberOfRows(_numberOfRows);
         return ret;
     }
 }

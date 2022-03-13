@@ -15,7 +15,7 @@ namespace hr {
     class Light;
     class GameObject;
 
-    enum LightLoc {
+    enum LightShaderLoc {
         LOC_ENABLED = 0,
         LOC_TYPE,
         LOC_TARGET,
@@ -23,7 +23,7 @@ namespace hr {
         LOC_RANGE,
         LOC_COLOR,
         LOC_INTENSITY,
-        LOC_COUNT
+        LOC_LIGHT_SHADER_COUNT
     };
 
     class LightShader : public DefaultShader {

@@ -12,18 +12,13 @@
 namespace hr {
     static Mesh particleMesh = {0};
 
-    Particle::Particle(ParticleSystem *parent, const Transform &transform, const Vector3 &velocity, const float &gravityModifier, const float &lifeLenght, const Texture &texture, const Color &startColor)
-        : _transform(transform)
+    Particle::Particle(ParticleSystem *parent)
+        : _transform(nullptr)
     {
         _parent = parent;
         _parent->IncreaseParticleCount();
         if (particleMesh.vaoId == 0)
             particleMesh = GenMesh::GenMeshSquare(0.5);
-        _velocity = velocity;
-        _gravityModifier = gravityModifier;
-        _lifeLenght = lifeLenght;
-        _texture = texture;
-        _startColor = startColor;
         _mesh = particleMesh;
         _billboardMatrix = MatrixIdentity();
     }
@@ -37,12 +32,12 @@ namespace hr {
         if (_parent == nullptr)
             return false;
         _elapsedTime += GetFrameTime();
-        if (_elapsedTime > _lifeLenght) {
+        if (_elapsedTime > _lifeLength) {
             _parent->DecreaseParticleCount();
             return false;
         }
-        if (_textureType == ATLAS)
-            UpdateTextureCoordInfo();
+        // if (_textureType == ATLAS)
+        //     UpdateTextureCoordInfo();
         _velocity.y += -9.81 * _gravityModifier * GetFrameTime();
         _transform.Translate(Vector3Scale(_velocity, GetFrameTime()));
         _distanceToCamera = std::pow(Vector3Distance(_transform.GetPosition(), camera.position), 2);
@@ -70,7 +65,7 @@ namespace hr {
 
     void Particle::UpdateTextureCoordInfo()
     {
-        float lifeFactor = _elapsedTime / _lifeLenght;
+        float lifeFactor = _elapsedTime / _lifeLength;
         int stageCount = std::pow(_numberOfRows, 2);
         float atlasProgression = lifeFactor * stageCount;
         int index1 = floor(atlasProgression);
@@ -93,9 +88,19 @@ namespace hr {
         return _transform;
     }
 
+    void Particle::SetTransform(const Transform &transform)
+    {
+        _transform = transform;
+    }
+
     Vector3 Particle::GetVelocity() const
     {
         return _velocity;
+    }
+
+    void Particle::SetVelocity(const Vector3 &velocity)
+    {
+        _velocity = velocity;
     }
 
     float Particle::GetGravityModifier() const
@@ -103,14 +108,49 @@ namespace hr {
         return _gravityModifier;
     }
 
-    float Particle::GetLifeLenght() const
+    void Particle::SetGravityModifier(const float &gravityModifier)
     {
-        return _lifeLenght;
+        _gravityModifier = gravityModifier;
+    }
+
+    float Particle::GetLifeLength() const
+    {
+        return _lifeLength;
+    }
+
+    void Particle::SetLifeLength(const float &lifeLength)
+    {
+        _lifeLength = lifeLength;
     }
 
     Color Particle::GetStartColor() const
     {
         return _startColor;
+    }
+
+    void Particle::SetStartColor(const Color &startColor)
+    {
+        _startColor = startColor;
+    }
+
+    TextureType Particle::GetTextureType() const
+    {
+        return _textureType;
+    }
+
+    void Particle::SetTextureType(const TextureType &textureType)
+    {
+        _textureType = textureType;
+    }
+
+    int Particle::GetNumberOfRows() const
+    {
+        return _numberOfRows;
+    }
+
+    void Particle::SetNumberOfRows(const int &numberOfRows)
+    {
+        _numberOfRows = numberOfRows;
     }
 
     float Particle::GetDistanceToCamera() const
@@ -128,9 +168,9 @@ namespace hr {
         return _texture;
     }
 
-    TextureType Particle::GetTextureType() const
+    void Particle::SetTexture(const Texture &texture)
     {
-        return _textureType;
+        _texture = texture;
     }
 
     Vector2 Particle::GetTexOffset1() const
@@ -151,6 +191,11 @@ namespace hr {
     Matrix Particle::GetBillboardMatrix() const
     {
         return _billboardMatrix;
+    }
+
+    float Particle::GetElapsedTime() const
+    {
+        return _elapsedTime;
     }
 
     bool Particle::operator<(const Particle &other) const
