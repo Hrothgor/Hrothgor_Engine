@@ -194,13 +194,17 @@ namespace hr {
 
     void ParticleSystem::ImGuiRender()
     {
+        UIElement::Header("System Values");
         UIElement::IntField("Particles per second", [this](){return GetPPS();}, [this](int val){SetPPS(val);});
+        UIElement::IntField("Max particle", [this](){return GetMaxParticle();}, [this](int val){SetMaxParticle(val);});
+        UIElement::Header("Particles Values");
         UIElement::Vector3Field("Velocity", [this](){return GetVelocity();}, [this](Vector3 val){SetVelocity(val);});
         UIElement::FloatField("Gravity modifier", [this](){return GetGravityModifier();}, [this](float val){SetGravityModifier(val);});
         UIElement::FloatField("Life length", [this](){return GetLifeLength();}, [this](float val){SetLifeLength(val);});
         UIElement::FloatField("Scale", [this](){return GetScale();}, [this](float val){SetScale(val);});
         UIElement::FloatField("Rotation", [this](){return GetRotation();}, [this](float val){SetRotation(val);});
         UIElement::ColorField("Start color", [this](){return GetStartColor();}, [this](Color val){SetStartColor(val);});
+        UIElement::Header("Texture Values");
         UIElement::TextureField("Texture", [this](){return GetTexturePath();}, [this](const std::string &str){LoadTextureFromPath(str);});
         std::vector<std::string> enumNames = {"Simple", "Atlas"};
         UIElement::EnumField("TextureType", [this](){return GetTextureType();}, [this](int val){SetTextureType((TextureType)val);}, enumNames);
@@ -211,7 +215,6 @@ namespace hr {
                 UIElement::IntField("Number of rows", [this](){return GetNumberOfRows();}, [this](int val){SetNumberOfRows(val);});
                 break;
         }
-        UIElement::IntField("Max particle", [this](){return GetMaxParticle();}, [this](int val){SetMaxParticle(val);});
     }
 
     nlohmann::json ParticleSystem::ToJson() const

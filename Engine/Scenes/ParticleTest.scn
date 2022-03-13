@@ -579,10 +579,10 @@
                     "ParticleSystem",
                     {
                         "gravityModifier": 0.5,
-                        "lifeLength": 5.0,
+                        "lifeLength": 3.0,
                         "maxParticle": 1000,
-                        "numberOfRows": 1,
-                        "pps": 10,
+                        "numberOfRows": 4,
+                        "pps": 18,
                         "rotation": 0.0,
                         "scale": 1.0,
                         "startColor": [
@@ -591,11 +591,11 @@
                             255,
                             255
                         ],
-                        "texturePath": "Engine/Ressources/default-particle.png",
-                        "textureType": 0,
+                        "texturePath": "Engine/Ressources/particleAtlasBurn.png",
+                        "textureType": 1,
                         "velocity": [
-                            0.0,
-                            10.0,
+                            6.0,
+                            6.0,
                             0.0
                         ]
                     }
@@ -605,8 +605,8 @@
             "transform": {
                 "position": [
                     10.153230667114258,
-                    30.270309448242188,
-                    9.417086403118446e-05
+                    19.678953170776367,
+                    34.9954719543457
                 ],
                 "rotation": [
                     0.0,

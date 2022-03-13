@@ -29,17 +29,6 @@ namespace hr {
 
         int numberOfRows = particle->GetNumberOfRows();
         SetShaderValue(_shader, _locations[LOC_NUMBEROFROWS], &numberOfRows, SHADER_UNIFORM_INT);
-        // float texoffset1[2] = {particle->GetTexOffset1().x, particle->GetTexOffset1().y};
-        // SetShaderValue(_shader, _locations[LOC_OFFSET1], &texoffset1, SHADER_UNIFORM_VEC2);
-
-        // float texoffset2[2] = {particle->GetTexOffset2().x, particle->GetTexOffset2().y};
-        // SetShaderValue(_shader, _locations[LOC_OFFSET2], &texoffset2, SHADER_UNIFORM_VEC2);
-
-        // int numberOfRows = particle->GetNumberOfRows();
-        // SetShaderValue(_shader, _locations[LOC_NUMBEROFROWS], &numberOfRows, SHADER_UNIFORM_INT);
-
-        // float blend = particle->GetBlendFactor();
-        // SetShaderValue(_shader, _locations[LOC_BLEND], &blend, SHADER_UNIFORM_FLOAT);
     }
 
     std::vector<int> ParticleShader::GetLocations() const

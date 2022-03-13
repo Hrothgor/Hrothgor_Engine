@@ -13,6 +13,8 @@
 namespace hr {
     class UIElement {
         public:
+            static void Header(const std::string &label);
+
             static void CheckBox(const std::string &label, std::function<bool()> getter, std::function<void(bool)> setter);
 
             static void SliderFloatField(const std::string &label, std::function<float()> getter, std::function<void(float)> setter, float min = 0.0, float max = 0.0, const char* format = "%.3f", float power = 1.0);

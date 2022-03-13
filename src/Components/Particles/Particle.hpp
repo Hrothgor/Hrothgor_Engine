@@ -26,7 +26,6 @@ namespace hr {
 
             bool Update(Camera3D camera);
             void RotateTowardCamera(Camera3D camera);
-            void UpdateTextureCoordInfo();
 
             Transform GetTransform() const;
             void SetTransform(const Transform &transform);
@@ -53,10 +52,6 @@ namespace hr {
 
             float GetElapsedTime() const;
 
-            Vector2 GetTexOffset1() const;
-            Vector2 GetTexOffset2() const;
-            float GetBlendFactor() const;
-
             bool operator<(const Particle &other) const;
 
         protected:
@@ -76,10 +71,6 @@ namespace hr {
             Texture _texture = {0};
             
             Matrix _billboardMatrix;
-            // Atlas
-            Vector2 _texOffset1 = {0};
-            Vector2 _texOffset2 = {0};
-            float _blendFactor = 0;
 
             ParticleSystem *_parent = nullptr;
     };

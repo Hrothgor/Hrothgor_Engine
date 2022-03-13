@@ -26,6 +26,13 @@ namespace hr {
         ImGui::Columns();
     }
 
+    void UIElement::Header(const std::string &label)
+    {
+        ImGui::SetWindowFontScale(1.5);
+        ImGui::TextColored(ImVec4(9.0 / 255, 94.0 / 255, 149.0 / 255, 1), "%s", label.c_str());
+        ImGui::SetWindowFontScale(1);
+    }
+
     void UIElement::CheckBox(const std::string &label, std::function<bool()> getter, std::function<void(bool)> setter)
     {
         StartField(label);

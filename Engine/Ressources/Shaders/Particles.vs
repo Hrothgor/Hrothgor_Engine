@@ -7,10 +7,6 @@ in vec2 vertexTexCoord;
 // Input uniform values
 uniform mat4 mvp;
 
-// uniform vec2 texOffset1;
-// uniform vec2 texOffset2;
-// uniform int numberOfRows;
-
 uniform float elapsedTime;
 uniform float lifeLength;
 uniform int numberOfRows;

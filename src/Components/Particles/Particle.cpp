@@ -36,8 +36,6 @@ namespace hr {
             _parent->DecreaseParticleCount();
             return false;
         }
-        // if (_textureType == ATLAS)
-        //     UpdateTextureCoordInfo();
         _velocity.y += -9.81 * _gravityModifier * GetFrameTime();
         _transform.Translate(Vector3Scale(_velocity, GetFrameTime()));
         _distanceToCamera = std::pow(Vector3Distance(_transform.GetPosition(), camera.position), 2);
@@ -61,26 +59,6 @@ namespace hr {
         _billboardMatrix.m9 = viewMatrix.m6;
         _billboardMatrix.m10 = viewMatrix.m10;
         _billboardMatrix.m11 = 0;
-    }
-
-    void Particle::UpdateTextureCoordInfo()
-    {
-        float lifeFactor = _elapsedTime / _lifeLength;
-        int stageCount = std::pow(_numberOfRows, 2);
-        float atlasProgression = lifeFactor * stageCount;
-        int index1 = floor(atlasProgression);
-        int index2 = index1 < stageCount - 1 ? index1 + 1: index1;
-        _blendFactor = atlasProgression - index1;
-
-        int column1 = index1 % _numberOfRows;
-        int row1 = index1 / _numberOfRows;
-        _texOffset1.x = (float) column1 / _numberOfRows;
-        _texOffset1.y = (float) row1 / _numberOfRows;
-
-        int column2 = index2 % _numberOfRows;
-        int row2 = index2 / _numberOfRows;
-        _texOffset2.x = (float) column2 / _numberOfRows;
-        _texOffset2.y = (float) row2 / _numberOfRows;
     }
 
     Transform Particle::GetTransform() const
@@ -171,21 +149,6 @@ namespace hr {
     void Particle::SetTexture(const Texture &texture)
     {
         _texture = texture;
-    }
-
-    Vector2 Particle::GetTexOffset1() const
-    {
-        return _texOffset1;
-    }
-
-    Vector2 Particle::GetTexOffset2() const
-    {
-        return _texOffset2;
-    }
-
-    float Particle::GetBlendFactor() const
-    {
-        return _blendFactor;
     }
 
     Matrix Particle::GetBillboardMatrix() const
