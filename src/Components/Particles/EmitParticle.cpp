@@ -40,6 +40,7 @@ namespace hr {
 
         Vector3 dir = { dirX + axis.x, dirY + axis.y, dirZ + axis.z };
         dir = Vector3Transform(dir, MatrixRotateXYZ(Vector3Scale(transform.GetRotationRadian(), -1)));
+        //multiply 1 axis by -1 idk
         dir = Vector3Normalize(dir);
         return dir;
     }
