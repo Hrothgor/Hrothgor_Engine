@@ -29,6 +29,7 @@ namespace hr {
     void ParticleRenderer::BeginFrame()
     {
         rlDisableDepthMask();
+
         // BeginBlendMode(BLEND_ADDITIVE);
 
         std::vector<Particle *> particles;

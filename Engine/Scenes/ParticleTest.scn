@@ -578,13 +578,16 @@
                 [
                     "ParticleSystem",
                     {
-                        "gravityModifier": 0.5,
+                        "coneAngle": 9.800000190734863,
+                        "emissionType": 0,
+                        "gravityModifier": 0.0,
                         "lifeLength": 3.0,
                         "maxParticle": 1000,
                         "numberOfRows": 4,
-                        "pps": 18,
+                        "pps": 100,
                         "rotation": 0.0,
-                        "scale": 1.0,
+                        "scale": 0.10000000149011612,
+                        "speed": 1.0,
                         "startColor": [
                             255,
                             255,
@@ -592,31 +595,26 @@
                             255
                         ],
                         "texturePath": "Engine/Ressources/particleAtlasBurn.png",
-                        "textureType": 1,
-                        "velocity": [
-                            6.0,
-                            6.0,
-                            0.0
-                        ]
+                        "textureType": 1
                     }
                 ]
             ],
             "name": "GameObject",
             "transform": {
                 "position": [
-                    10.153230667114258,
+                    14.154623985290527,
                     19.678953170776367,
                     34.9954719543457
                 ],
                 "rotation": [
                     0.0,
-                    -0.0,
+                    0.0,
                     0.0
                 ],
                 "scale": [
-                    1.0,
-                    1.0,
-                    1.0
+                    0.9999762773513794,
+                    0.9999831914901733,
+                    0.9999748468399048
                 ]
             },
             "uuid": "06194a2f-b07c-4915-a2e5-480f9e0516ef"

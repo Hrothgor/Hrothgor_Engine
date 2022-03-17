@@ -14,6 +14,12 @@
 #include "Particle.hpp"
 
 namespace hr {
+    enum ParticleEmissionType {
+        CONE,
+        SPHERE,
+        STATIC
+    };
+
     class ParticleSystem : public Component {
         public:
             ParticleSystem(GameObject *gameObject);
@@ -27,20 +33,24 @@ namespace hr {
 
             int GetPPS() const;
             void SetPPS(int pps);
-            Vector3 GetVelocity() const;
-            void SetVelocity(Vector3 velocity);
-            float GetGravityModifier() const;
-            void SetGravityModifier(float gravityModifier);
-            float GetLifeLength() const;
-            void SetLifeLength(float lifeLength);
             float GetScale() const;
             void SetScale(float scale);
             float GetRotation() const;
             void SetRotation(float rotation);
+            float GetSpeed() const;
+            void SetSpeed(float speed);
+            float GetGravityModifier() const;
+            void SetGravityModifier(float gravityModifier);
+            float GetLifeLength() const;
+            void SetLifeLength(float lifeLength);
             Color GetStartColor() const;
             void SetStartColor(Color startColor);
             int GetMaxParticle() const;
             void SetMaxParticle(int maxParticle);
+            ParticleEmissionType GetEmissionType() const;
+            void SetEmissionType(ParticleEmissionType emissionType);
+            float GetConeAngle() const;
+            void SetConeAngle(float coneAngle);
 
             TextureType GetTextureType() const;
             void SetTextureType(TextureType textureType);
@@ -56,7 +66,7 @@ namespace hr {
             void LoadTextureFromPath(const std::string &path);
 
             void ImGuiRender();
-            void OnDrawGizmos() {};
+            void OnDrawGizmos();
 
             virtual nlohmann::json ToJson() const override;
             virtual void FromJson(const nlohmann::json &json) override;
@@ -67,11 +77,14 @@ namespace hr {
             int _pps;
             float _scale;
             float _rotation;
-            Vector3 _velocity; //change to emision system
+            float _speed;
             float _gravityModifier;
             float _lifeLength;
             Color _startColor;
             int _maxParticle;
+
+            ParticleEmissionType _emissionType;
+            float _coneAngle;
 
             TextureType _textureType = SIMPLE;
             int _numberOfRows = 1;
