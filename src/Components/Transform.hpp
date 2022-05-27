@@ -8,9 +8,9 @@
 #ifndef TRANSFORM_HPP_
 #define TRANSFORM_HPP_
 
-#include "include.hpp"
+#include "Include.hpp"
 #include "../Ecs/Component.hpp"
-#include "json.hpp"
+#include "Json.hpp"
 
 namespace hr {
     struct AxisAngle {

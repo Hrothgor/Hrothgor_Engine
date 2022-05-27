@@ -16,6 +16,8 @@
 #include "../Components/Transform.hpp"
 #include "../Components/Light.hpp"
 
+#include "../SharedLibrary/LibraryManager.hpp"
+
 namespace hr {
     Engine *Engine::instance = nullptr;
 
@@ -35,7 +37,7 @@ namespace hr {
         _mainCamera->SetName("mainCamera");
         _mainCamera->AddComponent<MainCamera3D>();
         _mainCamera->GetTransform()->SetPosition(20, 20, 50);
-        _mainCamera->GetTransform()->SetRotation(0, -110, 0);
+        _mainCamera->GetTransform()->SetRotation(0, 90, 0);
     }
 
     Engine::~Engine()
@@ -55,8 +57,13 @@ namespace hr {
 
     void Engine::Update()
     {
+        LibraryManager libraryManagerTest;
         while (!WindowShouldClose() && _running)
         {
+            // TODO Remove this
+            if (IsKeyPressed(KEY_O))
+                libraryManagerTest.LoadComponent("./Test.so")->UpdateOnSimulation();
+            //
             // TODO Remove this
             if (IsKeyPressed(KEY_SPACE))
                 SetSimulating(!_simulating);

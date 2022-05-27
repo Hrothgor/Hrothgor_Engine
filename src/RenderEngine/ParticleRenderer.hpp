@@ -8,7 +8,7 @@
 #ifndef PARTICLERENDERER_HPP_
 #define PARTICLERENDERER_HPP_
 
-#include "include.hpp"
+#include "Include.hpp"
 #include "../Shader/ParticleShader.hpp"
 
 namespace hr {

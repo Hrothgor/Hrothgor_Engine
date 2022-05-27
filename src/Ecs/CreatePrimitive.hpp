@@ -8,7 +8,7 @@
 #ifndef CREATEPRIMITIVE_HPP_
 #define CREATEPRIMITIVE_HPP_
 
-#include "include.hpp"
+#include "Include.hpp"
 
 namespace hr {
     class GameObject;

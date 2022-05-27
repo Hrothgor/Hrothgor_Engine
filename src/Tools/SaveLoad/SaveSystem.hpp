@@ -8,8 +8,8 @@
 #ifndef SAVESYSTEM_HPP_
 #define SAVESYSTEM_HPP_
 
-#include "include.hpp"
-#include "json.hpp"
+#include "Include.hpp"
+#include "Json.hpp"
 
 namespace hr {
     class GameObject;
@@ -17,7 +17,7 @@ namespace hr {
     class SaveSystem {
         public:
             static void SaveProject(const std::string &name);
-            static nlohmann::json SaveEntity(GameObject *entity);
+            static json SaveEntity(GameObject *entity);
         protected:
         private:
     };

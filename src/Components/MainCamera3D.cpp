@@ -7,7 +7,7 @@
 
 #include "MainCamera3D.hpp"
 #include "Transform.hpp"
-#include "../Ecs/GameObject.hpp"
+#include "Ecs/GameObject.hpp"
 
 namespace hr {
     MainCamera3D::MainCamera3D(GameObject *gameObject)
@@ -44,8 +44,8 @@ namespace hr {
         if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
             Vector2 mouseDelta = GetMouseDelta();
             Vector3 rotation = transform->GetRotation();
-            rotation.y -= mouseDelta.x * GetFrameTime() * _turnSpeed;
-            rotation.z -= mouseDelta.y * GetFrameTime() * _turnSpeed;
+            rotation.y += mouseDelta.x * GetFrameTime() * _turnSpeed;
+            rotation.z += mouseDelta.y * GetFrameTime() * _turnSpeed;
             transform->SetRotation(rotation);
         }
 

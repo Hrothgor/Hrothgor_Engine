@@ -6,10 +6,10 @@
 */
 
 #include "Light.hpp"
-#include "../RenderEngine/Master3DRenderer.hpp"
+#include "RenderEngine/Master3DRenderer.hpp"
 #include "Transform.hpp"
-#include "../Ecs/GameObject.hpp"
-#include "../RenderEngine/UI/UIElement.hpp"
+#include "Ecs/GameObject.hpp"
+#include "RenderEngine/UI/UIElement.hpp"
 
 namespace hr {
     Light::Light(GameObject *gameObject)

@@ -6,11 +6,11 @@
 */
 
 #include "RigidBody.hpp"
-#include "../RenderEngine/UI/UIElement.hpp"
-#include "ImGuizmo.h"
+#include "RenderEngine/UI/UIElement.hpp"
+#include "Guizmo.hpp"
 #include "Transform.hpp"
-#include "../Ecs/GameObject.hpp"
-#include "../PhysicsEngine/PhysicsWorld.hpp"
+#include "Ecs/GameObject.hpp"
+#include "PhysicsEngine/PhysicsWorld.hpp"
 
 #include "Collider/SphereCollider.hpp"
 #include "Collider/BoxCollider.hpp"

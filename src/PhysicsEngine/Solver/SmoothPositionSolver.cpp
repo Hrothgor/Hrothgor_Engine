@@ -34,8 +34,8 @@ namespace hr {
             RigidBody *aBody = collision.objectA->GetComponent<RigidBody>();
             RigidBody *bBody = collision.objectB->GetComponent<RigidBody>();
 
-			float aInvMass = aBody->GetIsDynamic() ? aBody->GetInvMass() : 0.0;
-			float bInvMass = bBody->GetIsDynamic() ? bBody->GetInvMass() : 0.0;
+			float aInvMass = aBody->GetIsDynamic() ? aBody->GetInvMass() : 1.0;
+			float bInvMass = bBody->GetIsDynamic() ? bBody->GetInvMass() : 1.0;
 
 			const float percent = 0.8f;
 			const float slop = 0.01f;
@@ -44,8 +44,8 @@ namespace hr {
             correction = Vector3Scale(correction, fmax(collision.points.Depth - slop, 0.0f));
             correction = Vector3Scale(correction, 1.0f / (aInvMass + bInvMass));
 		
-			Vector3 deltaA;
-			Vector3 deltaB;
+			Vector3 deltaA = Vector3Zero();
+			Vector3 deltaB = Vector3Zero();
 
 			if (aBody->GetIsDynamic())
 				deltaA = Vector3Scale(correction, aInvMass);

@@ -6,11 +6,11 @@
 */
 
 #include "ParticleSystem.hpp"
-#include "../../RenderEngine/Master3DRenderer.hpp"
-#include "../../RenderEngine/UI/UIElement.hpp"
-#include "../../RenderEngine/AssetsManager.hpp"
+#include "RenderEngine/Master3DRenderer.hpp"
+#include "RenderEngine/UI/UIElement.hpp"
+#include "RenderEngine/AssetsManager.hpp"
 
-#include "../Transform.hpp"
+#include "Components/Transform.hpp"
 
 #include "EmitParticle.hpp"
 

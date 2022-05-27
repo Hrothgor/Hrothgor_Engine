@@ -8,9 +8,9 @@
 #ifndef RIGIDBODY_HPP_
 #define RIGIDBODY_HPP_
 
-#include "include.hpp"
-#include "../Ecs/Component.hpp"
-#include "json.hpp"
+#include "Include.hpp"
+#include "Ecs/Component.hpp"
+#include "Json.hpp"
 
 namespace hr {
     class RigidBody : public Component {

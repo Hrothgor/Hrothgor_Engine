@@ -8,9 +8,9 @@
 #ifndef MAINCAMERA3D_HPP_
 #define MAINCAMERA3D_HPP_
 
-#include "include.hpp"
-#include "../Ecs/Component.hpp"
-#include "json.hpp"
+#include "Include.hpp"
+#include "Ecs/Component.hpp"
+#include "Json.hpp"
 
 namespace hr {
     class MainCamera3D : public Component {
@@ -35,7 +35,7 @@ namespace hr {
         protected:
         private:
             Camera3D _camera;
-            float _speed = 20;
+            float _speed = 40;
             float _turnSpeed = 40;
     };
 }

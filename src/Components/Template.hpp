@@ -8,9 +8,9 @@
 #ifndef TEMPLATE_HPP_
 #define TEMPLATE_HPP_
 
-#include "include.hpp"
-#include "../Ecs/Component.hpp"
-#include "json.hpp"
+#include "Include.hpp"
+#include "Ecs/Component.hpp"
+#include "Json.hpp"
 
 namespace hr {
     class Template : public Component {

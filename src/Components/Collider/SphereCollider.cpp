@@ -6,9 +6,9 @@
 */
 
 #include "SphereCollider.hpp"
-#include "../Transform.hpp"
-#include "../../RenderEngine/UI/UIElement.hpp"
-#include "../../PhysicsEngine/PhysicsAlgo.hpp"
+#include "Components/Transform.hpp"
+#include "RenderEngine/UI/UIElement.hpp"
+#include "PhysicsEngine/PhysicsAlgo.hpp"
 
 namespace hr {
     SphereCollider::SphereCollider(GameObject *gameObject)

@@ -15,7 +15,7 @@
 #ifndef STRING_HPP_
 #define STRING_HPP_
 
-#include "../include.hpp"
+#include "Include.hpp"
 
 namespace hr {
     class String {

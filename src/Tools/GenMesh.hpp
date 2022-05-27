@@ -5,11 +5,10 @@
 ** GenMesh
 */
 
-#pragma once
 #ifndef GENMESH_HPP_
 #define GENMESH_HPP_
 
-#include "include.hpp"
+#include "Include.hpp"
 
 namespace hr {
     namespace GenMesh {

@@ -18,7 +18,7 @@
 #include "../../../Components/RigidBody.hpp"
 #include "../../../Components/Particles/ParticleSystem.hpp"
 
-#include "../../../Components/SphereSender.hpp"
+#include "../../../Components/Custom/SphereSender.hpp"
 
 namespace hr {
     InspectorPanel::InspectorPanel()
@@ -89,7 +89,7 @@ namespace hr {
             ImGui::PopID();
 
             auto entityComponents = entity->GetComponents();
-            for (auto [compId, comp] : entityComponents) {
+            for (auto [compId, comp] : entityComponents) { // for is to keep order
                 if (entity->HasComponentId<Transform>(compId)) { ImGuiRenderComponent<Transform>(entity); continue; }
                 if (entity->HasComponentId<Light>(compId)) { ImGuiRenderComponent<Light>(entity); continue; }
                 if (entity->HasComponentId<MeshRenderer>(compId)) { ImGuiRenderComponent<MeshRenderer>(entity); continue; }

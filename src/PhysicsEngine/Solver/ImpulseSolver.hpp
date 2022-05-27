@@ -8,7 +8,7 @@
 #ifndef IMPULSESOLVER_HPP_
 #define IMPULSESOLVER_HPP_
 
-#include "include.hpp"
+#include "Include.hpp"
 #include "Solver.hpp"
 
 namespace hr {

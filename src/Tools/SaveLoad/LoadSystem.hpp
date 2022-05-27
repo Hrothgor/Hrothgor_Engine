@@ -8,8 +8,8 @@
 #ifndef LOADSYSTEM_HPP_
 #define LOADSYSTEM_HPP_
 
-#include "include.hpp"
-#include "json.hpp"
+#include "Include.hpp"
+#include "Json.hpp"
 
 namespace hr {
     class GameObject;

@@ -6,11 +6,11 @@
 */
 
 #include "MeshRenderer.hpp"
-#include "../RenderEngine/UI/UIElement.hpp"
-#include "../RenderEngine/Master3DRenderer.hpp"
-#include "../Ecs/GameObject.hpp"
-#include "../Tools/String.hpp"
-#include "../RenderEngine/AssetsManager.hpp"
+#include "RenderEngine/UI/UIElement.hpp"
+#include "RenderEngine/Master3DRenderer.hpp"
+#include "Ecs/GameObject.hpp"
+#include "Tools/String.hpp"
+#include "RenderEngine/AssetsManager.hpp"
 
 namespace hr {
     MeshRenderer::MeshRenderer(GameObject *gameObject)

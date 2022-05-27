@@ -39,8 +39,9 @@ namespace hr {
         float dirZ = ((float) rand() / (float) RAND_MAX) * (radius * 2) - radius;
 
         Vector3 dir = { dirX + axis.x, dirY + axis.y, dirZ + axis.z };
-        dir = Vector3Transform(dir, MatrixRotateXYZ(Vector3Scale(transform.GetRotationRadian(), -1)));
-        //multiply 1 axis by -1 idk
+        Vector3 rt = transform.GetRotationRadian();
+        rt = {rt.x * -1, rt.y, rt.z * -1};
+        dir = Vector3Transform(dir, MatrixRotateXYZ(rt));
         dir = Vector3Normalize(dir);
         return dir;
     }

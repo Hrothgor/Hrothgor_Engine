@@ -8,10 +8,9 @@
 #ifndef COMPONENT_HPP_
 #define COMPONENT_HPP_
 
-#pragma once
-#include "include.hpp"
+#include "Include.hpp"
 #include "Object.hpp"
-#include "json.hpp"
+#include "Json.hpp"
 
 namespace hr {
     class Transform;

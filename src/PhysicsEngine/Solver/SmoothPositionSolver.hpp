@@ -8,7 +8,7 @@
 #ifndef SMOOTHPOSITIONSOLVER_HPP_
 #define SMOOTHPOSITIONSOLVER_HPP_
 
-#include "include.hpp"
+#include "Include.hpp"
 #include "Solver.hpp"
 
 namespace hr {

@@ -8,7 +8,7 @@
 #ifndef EMITPARTICLE_HPP_
 #define EMITPARTICLE_HPP_
 
-#include "include.hpp"
+#include "Include.hpp"
 #include "ParticleSystem.hpp"
 
 namespace hr {

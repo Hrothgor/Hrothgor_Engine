@@ -30,7 +30,7 @@ namespace hr {
     {
         rlDisableDepthMask();
 
-        // BeginBlendMode(BLEND_ADDITIVE);
+        BeginBlendMode(BLEND_ADDITIVE);
 
         std::vector<Particle *> particles;
         for (auto part : _particles)
@@ -51,6 +51,8 @@ namespace hr {
             if (particle->GetTextureType() == ATLAS) {
                 material.shader = _particleShader.GetShader();
                 _particleShader.UpdateParticleLoc(particle);
+            } else {
+                material.shader.id = rlGetShaderIdDefault();
             }
             Matrix transform = particle->GetTransform().GetTransformMatrix();
             transform = MatrixMultiply(particle->GetBillboardMatrix(), transform);
@@ -62,7 +64,7 @@ namespace hr {
 
     void ParticleRenderer::EndFrame()
     {
-        // EndBlendMode();
+        EndBlendMode();
         rlEnableDepthMask();
     }
 

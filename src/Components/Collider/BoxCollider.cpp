@@ -6,9 +6,9 @@
 */
 
 #include "BoxCollider.hpp"
-#include "../Transform.hpp"
-#include "../../RenderEngine/UI/UIElement.hpp"
-#include "../../PhysicsEngine/PhysicsAlgo.hpp"
+#include "Components/Transform.hpp"
+#include "RenderEngine/UI/UIElement.hpp"
+#include "PhysicsEngine/PhysicsAlgo.hpp"
 
 namespace hr {
     BoxCollider::BoxCollider(GameObject *gameObject)

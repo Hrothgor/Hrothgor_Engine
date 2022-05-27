@@ -9,7 +9,7 @@
 #include "../Ecs/GameObject.hpp"
 #include "../RenderEngine/UI/UIElement.hpp"
 
-#include "ImGuizmo.h"
+#include "Guizmo.hpp"
 
 namespace hr {
     Transform::Transform(GameObject *gameObject)
@@ -28,9 +28,7 @@ namespace hr {
 
     void Transform::Update()
     {
-        _front.x = cos(DEG2RAD * _rotation.y) * cos(DEG2RAD * _rotation.z);
-        _front.y = cos(DEG2RAD * _rotation.y) * sin(DEG2RAD * _rotation.z);
-        _front.z = sin(DEG2RAD * _rotation.y);
+        _front = GetLocalAxis()[0];
         _front = Vector3Normalize(_front);
     }
 

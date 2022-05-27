@@ -39,7 +39,7 @@ namespace hr {
         }
 
         BeginTextureMode(_renderTexture);
-        ClearBackground(BLACK);
+        ClearBackground(DARKBLUE);
         Master3DRenderer::Get()->Draw();
         DrawText(std::to_string(GetFPS()).c_str(), 0, 0, 50, RED);
         EndTextureMode();

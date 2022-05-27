@@ -8,7 +8,7 @@
 #ifndef MASTER3DRENDERER_HPP_
 #define MASTER3DRENDERER_HPP_
 
-#include "include.hpp"
+#include "Include.hpp"
 #include "EntityRenderer.hpp"
 #include "ParticleRenderer.hpp"
 #include "GizmosRenderer.hpp"

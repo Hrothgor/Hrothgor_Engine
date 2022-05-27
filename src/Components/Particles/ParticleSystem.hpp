@@ -8,9 +8,9 @@
 #ifndef PARTICLESYSTEM_HPP_
 #define PARTICLESYSTEM_HPP_
 
-#include "include.hpp"
-#include "../../Ecs/Component.hpp"
-#include "json.hpp"
+#include "Include.hpp"
+#include "Ecs/Component.hpp"
+#include "Json.hpp"
 #include "Particle.hpp"
 
 namespace hr {

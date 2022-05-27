@@ -8,7 +8,7 @@
 #ifndef DISPLAYMANAGER_HPP_
 #define DISPLAYMANAGER_HPP_
 
-#include "include.hpp"
+#include "Include.hpp"
 #include "UI/ImGuiLayer.hpp"
 
 namespace hr {

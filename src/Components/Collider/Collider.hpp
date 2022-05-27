@@ -8,8 +8,8 @@
 #ifndef COLLIDER_HPP_
 #define COLLIDER_HPP_
 
-#include "include.hpp"
-#include "../../Ecs/Component.hpp"
+#include "Include.hpp"
+#include "Ecs/Component.hpp"
 
 namespace hr {
     class Transform;

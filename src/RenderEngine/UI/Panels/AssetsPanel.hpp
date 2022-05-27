@@ -8,7 +8,7 @@
 #ifndef ASSETSPANEL_HPP_
 #define ASSETSPANEL_HPP_
 
-#include "include.hpp"
+#include "Include.hpp"
 #include "ImGuiPanel.hpp"
 
 namespace hr {

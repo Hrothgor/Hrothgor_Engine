@@ -8,7 +8,7 @@
 #ifndef ASSETSMANAGER_HPP_
 #define ASSETSMANAGER_HPP_
 
-#include "include.hpp"
+#include "Include.hpp"
 
 namespace hr {
     class AssetsManager {

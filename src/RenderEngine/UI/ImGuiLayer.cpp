@@ -6,7 +6,7 @@
 */
 
 #include "ImGuiLayer.hpp"
-#include "ImGuizmo.h"
+#include "Guizmo.hpp"
 #include "Panels/SceneHierarchyPanel.hpp"
 #include "Panels/InspectorPanel.hpp"
 #include "Panels/ViewPortPanel.hpp"

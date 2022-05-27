@@ -6,7 +6,7 @@
 */
 
 #include "Particle.hpp"
-#include "../../Tools/GenMesh.hpp"
+#include "Tools/GenMesh.hpp"
 #include "ParticleSystem.hpp"
 
 namespace hr {

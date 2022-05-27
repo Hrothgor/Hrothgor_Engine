@@ -8,7 +8,7 @@
 #ifndef VIEWPORTPANEL_HPP_
 #define VIEWPORTPANEL_HPP_
 
-#include "include.hpp"
+#include "Include.hpp"
 #include "ImGuiPanel.hpp"
 
 namespace hr {

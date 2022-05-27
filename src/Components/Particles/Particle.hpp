@@ -8,8 +8,8 @@
 #ifndef PARTICLE_HPP_
 #define PARTICLE_HPP_
 
-#include "include.hpp"
-#include "../Transform.hpp"
+#include "Include.hpp"
+#include "Components/Transform.hpp"
 
 namespace hr {
     class ParticleSystem;

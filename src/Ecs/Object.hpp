@@ -8,9 +8,8 @@
 #ifndef OBJECT_HPP_
 #define OBJECT_HPP_
 
-#pragma once
-#include "include.hpp"
-#include "uuid_v4.h"
+#include "Include.hpp"
+#include "Externals/Uuid/uuid_v4.h"
 
 namespace hr {
     class Object {

@@ -6,7 +6,7 @@
 */
 
 #include "ViewPortPanel.hpp"
-#include "ImGuizmo.h"
+#include "Guizmo.hpp"
 
 #include "../../DisplayManager.hpp"
 #include "../../../Ecs/Engine.hpp"
@@ -16,7 +16,7 @@
 #include "../../../Components/MainCamera3D.hpp"
 #include "../../../Components/Transform.hpp"
 
-#include "../../../Tools/String.hpp"
+#include "Tools/String.hpp"
 
 namespace hr {
     ViewPortPanel::ViewPortPanel()
