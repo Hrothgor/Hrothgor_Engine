@@ -6,6 +6,7 @@
 */
 
 #include "LibraryManager.hpp"
+#include "Ecs/Engine.hpp"
 
 namespace hr {
     LibraryManager::LibraryManager()
@@ -27,7 +28,14 @@ namespace hr {
         *(void **)(&entryPoint) = LDL::sym(handle, "entryPoint");
         if (entryPoint == NULL)
             std::cout << "Unable to load library " + name + " : Invalid library" << std::endl;
+        
+        void (*linkSingleton)(void *) = NULL;
 
+        *(void **)(&linkSingleton) = LDL::sym(handle, "linkSingleton");
+        if (entryPoint == NULL)
+            std::cout << "Unable to load library " + name + " : Invalid library" << std::endl;
+
+        linkSingleton(hr::Engine::Get());
         Component *component = entryPoint();
         LDL::close(handle);
         return (component);

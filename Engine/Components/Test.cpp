@@ -21,8 +21,7 @@ namespace hr {
 
     void Test::UpdateOnSimulation()
     {
-
-        std::cout << Engine::Get()->GetMainCamera()->GetTransform()->GetPositionWorld().x << std::endl;
+        hr::Engine::Get()->SetSimulating(true);
     }
 
     nlohmann::json Test::ToJson() const
@@ -39,12 +38,17 @@ namespace hr {
 
     Component *Test::Clone(GameObject *gameObject)
     {
-        Test *ret = new Test(gameObject);
+        Test *ret = new Test(gameObject );
         return ret;
     }
 
     extern "C" Component *entryPoint()
     {
         return new Test(nullptr);
+    }
+
+    extern "C" void linkSingleton(void *test)
+    {
+        hr::Engine::Set(test);
     }
 }

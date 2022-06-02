@@ -17,4 +17,7 @@
 
 #include "RenderEngine/Master3DRenderer.hpp"
 
+#include "Tools/String.hpp"
+#include "Tools/GenMesh.hpp"
+
 #endif /* !ENGINE_HPP_ */

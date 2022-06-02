@@ -67,11 +67,14 @@ namespace hr {
             static Engine *instance;
         public:
             Engine(Engine &other) = delete;
-            void operator=(const Engine &) = delete;
+            // void operator=(const Engine &) = delete;
             static Engine *Get() {
                 if (instance == nullptr)
                     instance = new Engine();
                 return instance;
+            };
+            static void Set(void *test) {
+                instance = (Engine *)test;
             };
     };
 }

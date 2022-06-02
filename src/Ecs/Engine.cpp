@@ -62,7 +62,7 @@ namespace hr {
         {
             // TODO Remove this
             if (IsKeyPressed(KEY_O))
-                libraryManagerTest.LoadComponent("./Test.so")->UpdateOnSimulation();
+                libraryManagerTest.LoadComponent("./libcomponents.so")->UpdateOnSimulation();
             //
             // TODO Remove this
             if (IsKeyPressed(KEY_SPACE))
