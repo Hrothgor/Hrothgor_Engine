@@ -31,6 +31,10 @@ namespace hr {
 
         private:
             static Vector3 ClosestPoint(const BoxCollider *box, const Vector3 point);
+            static bool GetSeparatingPlane(
+                const Vector3& relativePos, const Vector3& Plane, 
+                const std::vector<Vector3>& aAxis, const Vector3& aSize,
+                const std::vector<Vector3>& bAxis, const Vector3& bSize);
     };
 }
 
