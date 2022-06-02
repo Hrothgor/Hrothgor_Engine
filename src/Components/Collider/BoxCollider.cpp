@@ -92,7 +92,7 @@ namespace hr {
     void BoxCollider::OnDrawGizmos()
     {
         Transform *transform = GetTransform();
-        Vector3 pos = Vector3Add(transform->GetPositionWorld(), _offset);
+        Vector3 pos = transform->GetPositionWorld() + _offset;
         AxisAngle axisAngle = transform->GetRotationAxisAngle();
 
         rlPushMatrix();

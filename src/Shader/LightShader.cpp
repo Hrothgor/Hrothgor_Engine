@@ -6,9 +6,9 @@
 */
 
 #include "LightShader.hpp"
-#include "../Components/Light.hpp"
-#include "../Components/Transform.hpp"
-#include "../Ecs/GameObject.hpp"
+#include "Components/Light.hpp"
+#include "Components/Transform.hpp"
+#include "Ecs/GameObject.hpp"
 
 namespace hr {
     LightShader::LightShader()

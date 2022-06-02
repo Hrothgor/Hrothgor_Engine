@@ -32,7 +32,7 @@ namespace hr {
         Transform *transform = GetTransform();
         _camera.position = transform->GetPositionWorld();
 
-        _camera.target = Vector3Add(_camera.position, transform->GetFront());
+        _camera.target = _camera.position + transform->GetFront();
 
         UpdateCamera(&_camera);
     }

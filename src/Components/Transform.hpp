@@ -9,7 +9,7 @@
 #define TRANSFORM_HPP_
 
 #include "Include.hpp"
-#include "../Ecs/Component.hpp"
+#include "Ecs/Component.hpp"
 #include "Json.hpp"
 
 namespace hr {

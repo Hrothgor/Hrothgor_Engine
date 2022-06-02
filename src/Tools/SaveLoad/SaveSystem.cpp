@@ -6,10 +6,10 @@
 */
 
 #include "SaveSystem.hpp"
-#include "../../Ecs/Engine.hpp"
-#include "../../Ecs/GameObject.hpp"
+#include "Ecs/Engine.hpp"
+#include "Ecs/GameObject.hpp"
 
-#include "../../Components/Transform.hpp"
+#include "Components/Transform.hpp"
 
 namespace hr {
     nlohmann::json SaveSystem::SaveEntity(GameObject *entity)

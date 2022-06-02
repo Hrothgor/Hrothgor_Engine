@@ -6,10 +6,10 @@
 */
 
 #include "Master3DRenderer.hpp"
-#include "../Ecs/GameObject.hpp"
-#include "../Ecs/Engine.hpp"
+#include "Ecs/GameObject.hpp"
+#include "Ecs/Engine.hpp"
 
-#include "../Components/MainCamera3D.hpp"
+#include "Components/MainCamera3D.hpp"
 
 namespace hr {
     Master3DRenderer *Master3DRenderer::instance = nullptr;

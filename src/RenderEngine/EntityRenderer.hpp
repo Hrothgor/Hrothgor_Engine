@@ -9,7 +9,7 @@
 #define ENTITYRENDERER_HPP_
 
 #include "Include.hpp"
-#include "../Shader/LightShader.hpp"
+#include "Shader/LightShader.hpp"
 
 namespace hr {
     class MainCamera3D;

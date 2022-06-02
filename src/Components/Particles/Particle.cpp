@@ -37,7 +37,7 @@ namespace hr {
             return false;
         }
         _velocity.y += -9.81 * _gravityModifier * GetFrameTime();
-        _transform.Translate(Vector3Scale(_velocity, GetFrameTime()));
+        _transform.Translate(_velocity * GetFrameTime());
         _distanceToCamera = std::pow(Vector3Distance(_transform.GetPosition(), camera.position), 2);
         RotateTowardCamera(camera);
         return true;

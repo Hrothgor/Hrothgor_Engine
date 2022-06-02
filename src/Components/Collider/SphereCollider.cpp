@@ -67,7 +67,7 @@ namespace hr {
     void SphereCollider::OnDrawGizmos()
     {
         Transform *transform = GetTransform();
-        Vector3 pos = Vector3Add(transform->GetPositionWorld(), _offset);
+        Vector3 pos = transform->GetPositionWorld() + _offset;
 
         DrawSphereWires(pos, _radius,
             10, 10, GREEN);

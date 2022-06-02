@@ -6,9 +6,9 @@
 */
 
 #include "PhysicsAlgo.hpp"
-#include "../../Components/Transform.hpp"
-#include "../../Components/Collider/BoxCollider.hpp"
-#include "../../Components/Collider/SphereCollider.hpp"
+#include "Components/Transform.hpp"
+#include "Components/Collider/BoxCollider.hpp"
+#include "Components/Collider/SphereCollider.hpp"
 
 namespace hr {
     CollisionPoints PhysicsAlgo::FindBoxBoxCollisionPoints(

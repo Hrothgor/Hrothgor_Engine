@@ -7,9 +7,9 @@
 
 
 #include "PhysicsAlgo.hpp"
-#include "../../Components/Transform.hpp"
-#include "../../Components/Collider/BoxCollider.hpp"
-#include "../../Components/Collider/SphereCollider.hpp"
+#include "Components/Transform.hpp"
+#include "Components/Collider/BoxCollider.hpp"
+#include "Components/Collider/SphereCollider.hpp"
 
 #define CMP(x, y) \
 	(fabsf(x - y) <= FLT_EPSILON * fmaxf(1.0f, fmaxf(fabsf(x), fabsf(y))))
@@ -18,7 +18,7 @@ namespace hr {
     Vector3 PhysicsAlgo::ClosestPoint(const BoxCollider *box, const Vector3 point) {
         Transform *transform = box->GetTransform();
         Vector3 result = transform->GetPositionWorld();
-        Vector3 dir = Vector3Subtract(point, result);
+        Vector3 dir = point - result;
 
         std::vector<Vector3> localAxis = transform->GetLocalAxis();
 
@@ -33,7 +33,7 @@ namespace hr {
             else if (distance < -size[i])
                 distance = -size[i];
 
-            result = Vector3Add(result, Vector3Scale(axis, distance));
+            result += axis * distance;
         }
         return result;
     }
@@ -42,17 +42,17 @@ namespace hr {
         const SphereCollider *a, const Transform *aTransform,
         const BoxCollider *b, const Transform *bTransform)
     {
-        Vector3 A = Vector3Add(aTransform->GetPositionWorld(), a->GetOffset());
-        Vector3 B = Vector3Add(bTransform->GetPositionWorld(), b->GetOffset());
+        Vector3 A = aTransform->GetPositionWorld() + a->GetOffset();
+        Vector3 B = bTransform->GetPositionWorld() + b->GetOffset();
         Vector3 closestPoint = ClosestPoint(b, A);
 
-        Vector3 CPtoA = Vector3Subtract(closestPoint, A);
+        Vector3 CPtoA = closestPoint - A;
         float distanceSqA = Vector3LengthSqr(CPtoA);
         if (distanceSqA > a->GetRadius() * a->GetRadius()) {
             return {Vector3Zero(), Vector3Zero(), Vector3Zero(), 0, false};
         }
 
-        Vector3 CPtoB = Vector3Subtract(closestPoint, B);
+        Vector3 CPtoB = closestPoint - B;
         float distanceSqB = Vector3LengthSqr(CPtoB);
         Vector3 normal; 
         if (CMP(distanceSqA, 0.0)) {
@@ -62,16 +62,16 @@ namespace hr {
         	normal = Vector3Normalize(CPtoB);
         }
         else {
-        	normal = Vector3Normalize(Vector3Subtract(A, closestPoint));
+        	normal = Vector3Normalize(A - closestPoint);
         }
 
-        Vector3 outsidePoint = Vector3Subtract(A, Vector3Scale(normal, a->GetRadius()));
-        float distance = Vector3Length(Vector3Subtract(closestPoint, outsidePoint));
+        Vector3 outsidePoint = A - (normal * a->GetRadius());
+        float distance = Vector3Length(closestPoint - outsidePoint);
 
         return {
             outsidePoint,
             closestPoint,
-            Vector3Scale(normal, -1),
+            normal * -1,
             distance,
             true
         };

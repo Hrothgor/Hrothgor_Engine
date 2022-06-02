@@ -6,7 +6,7 @@
 */
 
 #include "GizmosRenderer.hpp"
-#include "../Ecs/GameObject.hpp"
+#include "Ecs/GameObject.hpp"
 
 namespace hr {
     GizmosRenderer::GizmosRenderer()

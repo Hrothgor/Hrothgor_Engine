@@ -6,7 +6,7 @@
 */
 
 #include "ParticleShader.hpp"
-#include "../Components/Particles/Particle.hpp"
+#include "Components/Particles/Particle.hpp"
 
 namespace hr {
     ParticleShader::ParticleShader()

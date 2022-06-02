@@ -11,10 +11,10 @@
 #include "Panels/InspectorPanel.hpp"
 #include "Panels/ViewPortPanel.hpp"
 #include "Panels/AssetsPanel.hpp"
-#include "../../Ecs/Engine.hpp"
+#include "Ecs/Engine.hpp"
 
-#include "../../Tools/SaveLoad/LoadSystem.hpp"
-#include "../../Tools/SaveLoad/SaveSystem.hpp"
+#include "Tools/SaveLoad/LoadSystem.hpp"
+#include "Tools/SaveLoad/SaveSystem.hpp"
 
 namespace hr {
     ImGuiLayer::ImGuiLayer()

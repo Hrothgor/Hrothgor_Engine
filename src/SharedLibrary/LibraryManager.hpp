@@ -9,7 +9,7 @@
 #define LIBRARYMANAGER_HPP_
 
 #include "Include.hpp"
-#include "../Ecs/Component.hpp"
+#include "Ecs/Component.hpp"
 #include "LDL.hpp"
 
 namespace hr {

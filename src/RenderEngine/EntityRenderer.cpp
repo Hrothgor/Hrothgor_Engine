@@ -6,13 +6,13 @@
 */
 
 #include "EntityRenderer.hpp"
-#include "../Ecs/Engine.hpp"
-#include "../Ecs/GameObject.hpp"
+#include "Ecs/Engine.hpp"
+#include "Ecs/GameObject.hpp"
 
-#include "../Components/Transform.hpp"
-#include "../Components/MeshRenderer.hpp"
-#include "../Components/Light.hpp"
-#include "../Components/MainCamera3D.hpp"
+#include "Components/Transform.hpp"
+#include "Components/MeshRenderer.hpp"
+#include "Components/Light.hpp"
+#include "Components/MainCamera3D.hpp"
 
 namespace hr {
     EntityRenderer::EntityRenderer()

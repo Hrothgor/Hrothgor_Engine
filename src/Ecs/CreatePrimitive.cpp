@@ -7,12 +7,12 @@
 
 #include "CreatePrimitive.hpp"
 #include "GameObject.hpp"
-#include "../Components/Collider/SphereCollider.hpp"
-#include "../Components/Collider/BoxCollider.hpp"
-#include "../Components/RigidBody.hpp"
-#include "../Components/Transform.hpp"
-#include "../Components/MeshRenderer.hpp"
-#include "../Components/Light.hpp"
+#include "Components/Collider/SphereCollider.hpp"
+#include "Components/Collider/BoxCollider.hpp"
+#include "Components/RigidBody.hpp"
+#include "Components/Transform.hpp"
+#include "Components/MeshRenderer.hpp"
+#include "Components/Light.hpp"
 
 namespace hr {
     GameObject *CreatePrimitive::CreateEmpty(GameObject *parent)

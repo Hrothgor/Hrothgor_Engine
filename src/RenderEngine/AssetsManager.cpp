@@ -6,7 +6,7 @@
 */
 
 #include "AssetsManager.hpp"
-#include "../Tools/String.hpp"
+#include "Tools/String.hpp"
 
 namespace hr {
     AssetsManager *AssetsManager::instance = nullptr;

@@ -6,11 +6,11 @@
 */
 
 #include "ParticleRenderer.hpp"
-#include "../Ecs/Engine.hpp"
+#include "Ecs/Engine.hpp"
 
-#include "../Components/Transform.hpp"
-#include "../Components/Particles/Particle.hpp"
-#include "../Components/MainCamera3D.hpp"
+#include "Components/Transform.hpp"
+#include "Components/Particles/Particle.hpp"
+#include "Components/MainCamera3D.hpp"
 
 namespace hr {
     ParticleRenderer::ParticleRenderer()

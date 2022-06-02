@@ -6,9 +6,9 @@
 */
 
 #include "GameObject.hpp"
-#include "../Components/Transform.hpp"
+#include "Components/Transform.hpp"
 #include "Engine.hpp"
-#include "../RenderEngine/Master3DRenderer.hpp"
+#include "RenderEngine/Master3DRenderer.hpp"
 
 namespace hr {
     GameObject::GameObject(GameObject *parent)

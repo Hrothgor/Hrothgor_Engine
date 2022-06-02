@@ -70,7 +70,7 @@ namespace hr {
             iz = r2 * _mass * fraction;
             iw = 1.0;
         } else if (_mass != 0 && boxCollider) {
-            Vector3 size = Vector3Scale(boxCollider->GetSize(), 4); // TODO idk was x2 but with the scaling it's x4
+            Vector3 size = boxCollider->GetSize() * 4; // TODO idk was x2 but with the scaling it's x4
             float fraction = (1.0 / 12.0);
 
             float x2 = size.x * size.x;
@@ -117,7 +117,7 @@ namespace hr {
 
     void RigidBody::AddForce(Vector3 force)
     {
-        _force = Vector3Add(_force, force);
+        _force = _force + force;
     }
 
     Vector3 RigidBody::GetVelocity() const
@@ -132,7 +132,7 @@ namespace hr {
 
     void RigidBody::AddVelocity(Vector3 velocity)
     {
-        _velocity = Vector3Add(_velocity, Vector3Scale(velocity, GetInvMass()));
+        _velocity += velocity * GetInvMass();
     }
 
     Vector3 RigidBody::GetAngularVelocity() const
@@ -153,7 +153,7 @@ namespace hr {
         angVel.y = angularVelocity.x * invTensor.m4 + angularVelocity.y * invTensor.m5 + angularVelocity.z * invTensor.m6 + 0.0 * invTensor.m7;
         angVel.z = angularVelocity.x * invTensor.m8 + angularVelocity.y * invTensor.m6 + angularVelocity.z * invTensor.m10 + 0.0 * invTensor.m11;
         
-        _angularVelocity = Vector3Add(_angularVelocity, angVel);
+        _angularVelocity = _angularVelocity + angVel;
     }
 
     bool RigidBody::GetIsDynamic() const

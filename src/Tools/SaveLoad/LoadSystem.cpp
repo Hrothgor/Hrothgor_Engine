@@ -6,18 +6,18 @@
 */
 
 #include "LoadSystem.hpp"
-#include "../../Ecs/Engine.hpp"
-#include "../../RenderEngine/AssetsManager.hpp"
-#include "../../Ecs/GameObject.hpp"
+#include "Ecs/Engine.hpp"
+#include "RenderEngine/AssetsManager.hpp"
+#include "Ecs/GameObject.hpp"
 
-#include "../../Components/Light.hpp"
-#include "../../Components/MainCamera3D.hpp"
-#include "../../Components/Collider/BoxCollider.hpp"
-#include "../../Components/Collider/SphereCollider.hpp"
-#include "../../Components/MeshRenderer.hpp"
-#include "../../Components/Transform.hpp"
-#include "../../Components/RigidBody.hpp"
-#include "../../Components/Particles/ParticleSystem.hpp"
+#include "Components/Light.hpp"
+#include "Components/MainCamera3D.hpp"
+#include "Components/Collider/BoxCollider.hpp"
+#include "Components/Collider/SphereCollider.hpp"
+#include "Components/MeshRenderer.hpp"
+#include "Components/Transform.hpp"
+#include "Components/RigidBody.hpp"
+#include "Components/Particles/ParticleSystem.hpp"
 
 namespace hr {
     GameObject *LoadSystem::LoadEntity(const nlohmann::json &json)

@@ -6,8 +6,8 @@
 */
 
 #include "Transform.hpp"
-#include "../Ecs/GameObject.hpp"
-#include "../RenderEngine/UI/UIElement.hpp"
+#include "Ecs/GameObject.hpp"
+#include "RenderEngine/UI/UIElement.hpp"
 
 #include "Guizmo.hpp"
 
@@ -34,17 +34,17 @@ namespace hr {
 
     void Transform::Translate(Vector3 vec)
     {
-        _position = Vector3Add(_position, vec);
+        _position = _position + vec;
     }
 
     void Transform::Rotate(Vector3 vec)
     {
-        _rotation = Vector3Add(_rotation, vec);
+        _rotation = _rotation + vec;
     }
 
     void Transform::Rotate(float x, float y, float z)
     {
-        _rotation = Vector3Add(_rotation, (Vector3){x, y, z});
+        _rotation = _rotation + (Vector3){x, y, z};
     }
 
     Matrix Transform::GetTransformMatrix() const
@@ -84,7 +84,7 @@ namespace hr {
     Vector3 Transform::GetPositionWorld() const
     {
         if (GetGameObject() && GetGameObject()->GetParent())
-            return Vector3Add(GetGameObject()->GetParent()->GetTransform()->GetPositionWorld(), _position);
+            return GetGameObject()->GetParent()->GetTransform()->GetPositionWorld() + _position;
         return _position;
     }
 
@@ -103,7 +103,7 @@ namespace hr {
         Vector3 parentWorldPos = Vector3Zero();
         if (GetGameObject() && GetGameObject()->GetParent())
             parentWorldPos = GetGameObject()->GetParent()->GetTransform()->GetPositionWorld();
-        _position = Vector3Subtract({x, y, z}, parentWorldPos);
+        _position = (Vector3){x, y, z} - parentWorldPos;
     }
 
     Vector3 Transform::GetRotation() const

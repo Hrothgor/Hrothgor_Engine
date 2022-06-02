@@ -34,5 +34,6 @@
 #include "imgui.h"
 #include "imgui_internal.h"
 #include "Externals/rlImGui/rlImGui.h"
+#include "Externals/RaylibOpOverloads/RaylibOpOverloads.hpp"
 
 #endif /* !INCLUDE_HPP_ */

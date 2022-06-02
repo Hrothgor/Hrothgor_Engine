@@ -13,9 +13,9 @@
 */
 
 #include "SmoothPositionSolver.hpp"
-#include "../../Ecs/GameObject.hpp"
-#include "../../Components/Transform.hpp"
-#include "../../Components/RigidBody.hpp"
+#include "Ecs/GameObject.hpp"
+#include "Components/Transform.hpp"
+#include "Components/RigidBody.hpp"
 
 namespace hr {
     SmoothPositionSolver::SmoothPositionSolver()
@@ -40,18 +40,18 @@ namespace hr {
 			const float percent = 0.8f;
 			const float slop = 0.01f;
 
-			Vector3 correction = Vector3Scale(collision.points.Normal, percent);
-            correction = Vector3Scale(correction, fmax(collision.points.Depth - slop, 0.0f));
-            correction = Vector3Scale(correction, 1.0f / (aInvMass + bInvMass));
+			Vector3 correction = collision.points.Normal * percent;
+            correction *= fmax(collision.points.Depth - slop, 0.0f);
+            correction *= 1.0f / (aInvMass + bInvMass);
 		
 			Vector3 deltaA = Vector3Zero();
 			Vector3 deltaB = Vector3Zero();
 
 			if (aBody->GetIsDynamic())
-				deltaA = Vector3Scale(correction, aInvMass);
+				deltaA = correction * aInvMass;
 
 			if (bBody->GetIsDynamic())
-				deltaB = Vector3Scale(correction, bInvMass);
+				deltaB = correction * bInvMass;
 
 			deltas.push_back(std::make_pair(deltaA, deltaB));
 		}
@@ -61,10 +61,10 @@ namespace hr {
             RigidBody *bBody = collisions[i].objectB->GetComponent<RigidBody>();
 
 			if (aBody->GetIsDynamic())
-				collisions[i].objectA->GetTransform()->Translate(Vector3Scale(Vector3Scale(deltas[i].first, -1), GetFrameTime()));
+				collisions[i].objectA->GetTransform()->Translate((deltas[i].first * -1) * GetFrameTime());
 
 			if (bBody->GetIsDynamic())
-				collisions[i].objectB->GetTransform()->Translate(Vector3Scale(deltas[i].second, GetFrameTime()));
+				collisions[i].objectB->GetTransform()->Translate(deltas[i].second * GetFrameTime());
 		}
     }
 }

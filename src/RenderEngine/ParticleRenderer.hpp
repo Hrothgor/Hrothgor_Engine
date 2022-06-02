@@ -9,7 +9,7 @@
 #define PARTICLERENDERER_HPP_
 
 #include "Include.hpp"
-#include "../Shader/ParticleShader.hpp"
+#include "Shader/ParticleShader.hpp"
 
 namespace hr {
     class MainCamera3D;

@@ -5,13 +5,6 @@
 ** String
 */
 
-/*
-** EPITECH PROJECT, 2022
-** Physics_engine
-** File description:
-** String
-*/
-
 #ifndef STRING_HPP_
 #define STRING_HPP_
 

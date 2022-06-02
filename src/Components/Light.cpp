@@ -29,7 +29,7 @@ namespace hr {
 
     void Light::Update()
     {
-        _target = Vector3Add(GetTransform()->GetPositionWorld(), GetTransform()->GetFront());
+        _target = GetTransform()->GetPositionWorld() + GetTransform()->GetFront();
 
         Master3DRenderer::Get()->RegisterLight(GetGameObject());
     }
@@ -105,7 +105,7 @@ namespace hr {
 
         switch (_type) {
             case DIRECTIONAL:
-                DrawCylinderWiresEx(transform->GetPositionWorld(), Vector3Add(GetTransform()->GetPositionWorld(), Vector3Multiply(transform->GetFront(), {5, 5, 5})),
+                DrawCylinderWiresEx(transform->GetPositionWorld(), GetTransform()->GetPositionWorld() + Vector3Multiply(transform->GetFront(), {5, 5, 5}),
                             1, 2,
                             8, YELLOW);
                 break;

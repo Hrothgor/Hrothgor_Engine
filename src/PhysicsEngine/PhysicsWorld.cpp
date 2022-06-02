@@ -6,12 +6,12 @@
 */
 
 #include "PhysicsWorld.hpp"
-#include "../Components/RigidBody.hpp"
-#include "../Components/Transform.hpp"
-#include "../Ecs/GameObject.hpp"
-#include "../Components/Collider/Collider.hpp"
-#include "../Components/Collider/SphereCollider.hpp"
-#include "../Components/Collider/BoxCollider.hpp"
+#include "Components/RigidBody.hpp"
+#include "Components/Transform.hpp"
+#include "Ecs/GameObject.hpp"
+#include "Components/Collider/Collider.hpp"
+#include "Components/Collider/SphereCollider.hpp"
+#include "Components/Collider/BoxCollider.hpp"
 
 #include "Solver/SmoothPositionSolver.hpp"
 #include "Solver/ImpulseSolver.hpp"
@@ -38,12 +38,12 @@ namespace hr {
             RigidBody *rb = object->GetComponent<RigidBody>();
 
             if (rb->GetUseGravity())
-                rb->AddForce(Vector3Scale(_gravity, rb->GetMass()));
+                rb->AddForce(_gravity * rb->GetMass());
 
-            rb->AddVelocity(Vector3Scale(rb->GetForce(), GetFrameTime()));
+            rb->AddVelocity(rb->GetForce() * GetFrameTime());
 
             tr->Rotate(rb->GetAngularVelocity()); // TODO : check if it's the right way to do it, i dont mult by delta time cause i mult by invTensor
-            tr->Translate(Vector3Scale(rb->GetVelocity(), GetFrameTime()));
+            tr->Translate(rb->GetVelocity() * GetFrameTime());
 
             rb->SetForce(Vector3Zero());
         }

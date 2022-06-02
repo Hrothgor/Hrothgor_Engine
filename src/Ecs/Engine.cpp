@@ -6,17 +6,17 @@
 */
 
 #include "Engine.hpp"
-#include "../RenderEngine/DisplayManager.hpp"
-#include "../PhysicsEngine/PhysicsWorld.hpp"
-#include "../Tools/SaveLoad/SaveSystem.hpp"
-#include "../Tools/SaveLoad/LoadSystem.hpp"
+#include "RenderEngine/DisplayManager.hpp"
+#include "PhysicsEngine/PhysicsWorld.hpp"
+#include "Tools/SaveLoad/SaveSystem.hpp"
+#include "Tools/SaveLoad/LoadSystem.hpp"
 
-#include "../Components/MeshRenderer.hpp"
-#include "../Components/MainCamera3D.hpp"
-#include "../Components/Transform.hpp"
-#include "../Components/Light.hpp"
+#include "Components/MeshRenderer.hpp"
+#include "Components/MainCamera3D.hpp"
+#include "Components/Transform.hpp"
+#include "Components/Light.hpp"
 
-#include "../SharedLibrary/LibraryManager.hpp"
+#include "SharedLibrary/LibraryManager.hpp"
 
 namespace hr {
     Engine *Engine::instance = nullptr;

@@ -6,9 +6,9 @@
 */
 
 #include "ImpulseSolver.hpp"
-#include "../../Ecs/GameObject.hpp"
-#include "../../Components/Transform.hpp"
-#include "../../Components/RigidBody.hpp"
+#include "Ecs/GameObject.hpp"
+#include "Components/Transform.hpp"
+#include "Components/RigidBody.hpp"
 
 namespace hr {
     ImpulseSolver::ImpulseSolver()
@@ -27,7 +27,7 @@ namespace hr {
 
             Vector3 aVel = aBody->GetIsDynamic() ? aBody->GetVelocity() : Vector3Zero();
             Vector3 bVel = bBody->GetIsDynamic() ? bBody->GetVelocity() : Vector3Zero();
-            Vector3 rVel = Vector3Subtract(bVel, aVel);
+            Vector3 rVel = bVel - aVel;
             float impulseForce = Vector3DotProduct(rVel, collision.points.Normal);
 
             float aInvMass = aBody->GetIsDynamic() ? aBody->GetInvMass() : 1.0;
@@ -36,10 +36,10 @@ namespace hr {
             // Vector3 angVelocityA = Vector3CrossProduct(aBody->GetAngularVelocity(), collision.points.A);
             // Vector3 angVelocityB = Vector3CrossProduct(bBody->GetAngularVelocity(), collision.points.B);
 
-            // Vector3 fullVelocityA = Vector3Add(aBody->GetVelocity(), angVelocityA);
-            // Vector3 fullVelocityB = Vector3Add(bBody->GetVelocity(), angVelocityB);
+            // Vector3 fullVelocityA = aBody->GetVelocity() + angVelocityA;
+            // Vector3 fullVelocityB = bBody->GetVelocity() + angVelocityB;
 
-            // Vector3 contactVelocity = Vector3Subtract(fullVelocityB, fullVelocityA);
+            // Vector3 contactVelocity = fullVelocityB - fullVelocityA;
 
             // float impulseForce = Vector3DotProduct(contactVelocity, collision.points.Normal);
             if (impulseForce >= 0)
@@ -58,18 +58,18 @@ namespace hr {
             //     collision.points.B
             // ); // TODO InertiaTensor instead of Vector3One
 
-            // float angularEffect = Vector3DotProduct(Vector3Add(inertiaA, inertiaB), collision.points.Normal);
+            // float angularEffect = Vector3DotProduct(inertiaA + inertiaB, collision.points.Normal);
             // float j = (-(1 + Restitution) * impulseForce) / (aBody->GetInvMass() + bBody->GetInvMass());
 
             float j = (-(1 + e) * impulseForce) / (aInvMass + bInvMass);
 
-            Vector3 fullImpulse = Vector3Scale(collision.points.Normal, j);
+            Vector3 fullImpulse = collision.points.Normal * j;
 
             if (aBody->GetIsDynamic()) {
-                aBody->AddVelocity(Vector3Scale(fullImpulse, -1));
+                aBody->AddVelocity(fullImpulse * -1);
 
                 Vector3 centerOfMass = aBody->GetTransform()->GetPositionWorld();
-                Vector3 torque = Vector3CrossProduct(Vector3Subtract(collision.points.A, centerOfMass), fullImpulse);
+                Vector3 torque = Vector3CrossProduct(collision.points.A - centerOfMass, fullImpulse);
                 aBody->SetAngularVelocity(Vector3Zero());
                 aBody->AddAngularVelocity(torque);
                 // aBody->AddAngularVelocity(Vector3CrossProduct(collision.points.A, fullImpulse));
@@ -79,10 +79,10 @@ namespace hr {
                 bBody->AddVelocity(fullImpulse);
 
                 Vector3 centerOfMass = bBody->GetTransform()->GetPositionWorld();
-                Vector3 torque = Vector3CrossProduct(Vector3Subtract(collision.points.B, centerOfMass), fullImpulse);
+                Vector3 torque = Vector3CrossProduct(collision.points.B - centerOfMass, fullImpulse);
                 bBody->SetAngularVelocity(Vector3Zero());
                 bBody->AddAngularVelocity(torque);
-                // bBody->AddAngularVelocity(Vector3CrossProduct(collision.points.B, Vector3Scale(fullImpulse, -1)));
+                // bBody->AddAngularVelocity(Vector3CrossProduct(collision.points.B, fullImpulse * -1));
             }
             
             // friction
@@ -90,10 +90,10 @@ namespace hr {
 
             aVel = aBody->GetIsDynamic() ? aBody->GetVelocity() : Vector3Zero();
             bVel = bBody->GetIsDynamic() ? bBody->GetVelocity() : Vector3Zero();
-            rVel = Vector3Subtract(bVel, aVel);
+            rVel = bVel - aVel;
             impulseForce = Vector3DotProduct(rVel, collision.points.Normal);
 
-            Vector3 tangent = Vector3Subtract(rVel, Vector3Scale(collision.points.Normal, impulseForce));
+            Vector3 tangent = rVel - (collision.points.Normal * impulseForce);
 
 
             if (Vector3Length(tangent) > 0.0001) { // safe normalize
@@ -112,14 +112,14 @@ namespace hr {
 
             Vector3 friction;
             if (abs(f) < j * mu) {
-				friction = Vector3Scale(tangent, f);
+				friction = tangent * f;
 			} else {
                 mu = Vector2Length({aDF, bDF});
-                friction = Vector3Scale(tangent, -j * mu);
+                friction = tangent * -j * mu;
 			}
 
 			if (aBody->GetIsDynamic())
-				aBody->AddVelocity(Vector3Scale(friction, -1));
+				aBody->AddVelocity(friction * -1);
 
 			if (bBody->GetIsDynamic())
 				bBody->AddVelocity(friction);

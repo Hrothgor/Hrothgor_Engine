@@ -52,7 +52,7 @@ namespace hr {
             Particle *part = new Particle(this);
             part->SetTransform(transform);
             Vector3 dir = EmitParticle::CalcDirection(_emissionType, *GetTransform(), _coneAngle);
-            part->SetVelocity(Vector3Scale(dir, _speed));
+            part->SetVelocity(dir * _speed);
             part->SetGravityModifier(_gravityModifier);
             part->SetLifeLength(_lifeLength);
             part->SetStartColor(_startColor);
@@ -268,7 +268,7 @@ namespace hr {
                 float hypothenuse = 2;
                 float length = cos(_coneAngle * DEG2RAD) * hypothenuse;
                 float radius = sin(_coneAngle * DEG2RAD) * hypothenuse;
-                DrawCylinderWiresEx(transform->GetPositionWorld(), Vector3Add(GetTransform()->GetPositionWorld(), Vector3Multiply(transform->GetFront(), {length, length, length})),
+                DrawCylinderWiresEx(transform->GetPositionWorld(), GetTransform()->GetPositionWorld() + Vector3Multiply(transform->GetFront(), {length, length, length}),
                             0, radius,
                             8, BLUE);
                 }
