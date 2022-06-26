@@ -63,6 +63,10 @@ inline Vector3 operator+(const Vector3& a, const Vector3& b) {
 return  Vector3Add(a,b);
 }
 
+inline Vector3 operator+(const Vector3& a, const float& b) {
+return  {a.x + b, a.y + b, a.z + b};
+}
+
 inline Vector4 operator+(const Vector4& a, const Vector4& b) {
 return (Vector4){a.x+b.x, a.y+b.y, a.z+b.z, a.w+b.w};
 }
@@ -73,6 +77,11 @@ return a;
 }
 
 inline Vector3& operator+=(Vector3& a, const Vector3& b) {
+    a=a+b;
+return a;
+}
+
+inline Vector3& operator+=(Vector3& a, const float& b) {
     a=a+b;
 return a;
 }

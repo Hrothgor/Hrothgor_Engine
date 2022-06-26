@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2022
-** Physics_engine
+** Hrothgor_Engine
 ** File description:
 ** Master3DRenderer
 */
@@ -10,6 +10,8 @@
 #include "Ecs/Engine.hpp"
 
 #include "Components/MainCamera3D.hpp"
+
+#include "PhysicsEngine/PhysicsWorld.hpp"
 
 namespace hr {
     Master3DRenderer *Master3DRenderer::instance = nullptr;
@@ -46,6 +48,7 @@ namespace hr {
         _entityRenderer.Draw();
         _particleRenderer.Draw();
         _gizmosRenderer.Draw();
+        PhysicsWorld::Get()->Update();
         EndFrame();
     }
 
