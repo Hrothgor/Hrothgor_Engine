@@ -12,9 +12,12 @@
 #include "Panels/ViewPortPanel.hpp"
 #include "Panels/AssetsPanel.hpp"
 #include "Ecs/Engine.hpp"
+#include "RenderEngine/AssetsManager.hpp"
 
 #include "Tools/SaveLoad/LoadSystem.hpp"
 #include "Tools/SaveLoad/SaveSystem.hpp"
+
+#include "SharedLibrary/LibraryManager.hpp"
 
 namespace hr {
     ImGuiLayer::ImGuiLayer()
@@ -60,11 +63,9 @@ namespace hr {
 
         ImGuiWindowFlags window_flags = ImGuiWindowFlags_MenuBar | ImGuiWindowFlags_NoDocking;
         const ImGuiViewport* viewport = ImGui::GetMainViewport();
-        ImGui::SetNextWindowPos(viewport->WorkPos);
-        ImGui::SetNextWindowSize(viewport->WorkSize);
+        ImGui::SetNextWindowPos(ImVec2(viewport->WorkPos.x, viewport->WorkPos.y + toolbarSize));
+        ImGui::SetNextWindowSize(ImVec2(viewport->WorkSize.x, viewport->WorkSize.y - toolbarSize));
         ImGui::SetNextWindowViewport(viewport->ID);
-        ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0);
-        ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0);
         window_flags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
         window_flags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
 
@@ -72,9 +73,13 @@ namespace hr {
             window_flags |= ImGuiWindowFlags_NoBackground;
 
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0);
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0);
+
         ImGui::Begin("DockSpace", nullptr, window_flags);
-        ImGui::PopStyleVar();
-        ImGui::PopStyleVar(2);
+        ImGui::PopStyleVar(3);
+
+        menuBarHeight = ImGui::GetCurrentWindow()->MenuBarHeight();
 
         ImGuiIO& io = ImGui::GetIO();
         if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
@@ -82,6 +87,53 @@ namespace hr {
             ImGuiID dockspace_id = ImGui::GetID("MyDockSpace");
             ImGui::DockSpace(dockspace_id, ImVec2(0.0, 0.0), dockspace_flags);
         }
+
+        ImGui::End();
+    }
+
+    void ImGuiLayer::DrawToolBarUi()
+    {
+        ImGuiViewport* viewport = ImGui::GetMainViewport();
+        ImGui::SetNextWindowPos(ImVec2(viewport->Pos.x, viewport->Pos.y + menuBarHeight));
+        ImGui::SetNextWindowSize(ImVec2(viewport->Size.x, toolbarSize));
+        ImGui::SetNextWindowViewport(viewport->ID);
+
+        ImGuiWindowFlags window_flags = 0
+            | ImGuiWindowFlags_NoDocking 
+            | ImGuiWindowFlags_NoTitleBar 
+            | ImGuiWindowFlags_NoResize 
+            | ImGuiWindowFlags_NoMove 
+            | ImGuiWindowFlags_NoScrollbar 
+            | ImGuiWindowFlags_NoSavedSettings;
+
+        ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0);
+        ImGui::Begin("Toolbar", NULL, window_flags);
+        ImGui::PopStyleVar();
+
+        // ToolBar Buttons
+
+        ImGuiStyle& style = ImGui::GetStyle();
+        float avail = ImGui::GetContentRegionAvail().x;
+        float width = 32 +
+                      style.ItemSpacing.x + 32;
+        float off = (avail - width) * 0.5;
+        if (off > 0)
+            ImGui::SetCursorPosX(ImGui::GetCursorPosX() + off);
+
+        Texture2D *compilationIcon = AssetsManager::Get()->GetTextureAddr("Engine/Ressources/Icons/compilation-button.png");
+        // TODO Remove this
+        LibraryManager libraryManagerTest;
+        //
+        if (ImGui::ImageButton((ImTextureID)compilationIcon, ImVec2(32, 32)))
+            libraryManagerTest.LoadComponent("./libcomponents.so")->UpdateOnSimulation();
+
+        ImGui::SameLine();
+        Texture2D *playIcon = AssetsManager::Get()->GetTextureAddr("Engine/Ressources/Icons/play-button.png");
+        if (ImGui::ImageButton((ImTextureID)playIcon, ImVec2(32, 32)))
+            Engine::Get()->SetSimulating(!Engine::Get()->GetSimulating());
+
+        //
+    
         ImGui::End();
     }
 
@@ -89,7 +141,9 @@ namespace hr {
     {
         BeginFrame();
         ImGuiSetStyle();
+
         DrawDockSpace();
+        DrawToolBarUi();
 
         bool openModalNewFile = false;
         bool openModalSaveAs = false;

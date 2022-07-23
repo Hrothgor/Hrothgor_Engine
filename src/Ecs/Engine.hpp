@@ -51,6 +51,7 @@ namespace hr {
             void SetProjectName(const std::string &projectName);
 
             void SetRunning(bool running);
+            bool GetSimulating();
             void SetSimulating(bool simulating);
         private:
             GameObject *_mainCamera;

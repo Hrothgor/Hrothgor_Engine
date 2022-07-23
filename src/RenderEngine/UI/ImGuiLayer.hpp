@@ -21,15 +21,19 @@ namespace hr {
             void End();
 
             void BeginFrame();
+            void ImGuiSetStyle();
             void Event();
-            void DrawDockSpace();
-            void Draw();
             void EndFrame();
 
-            void ImGuiSetStyle();
+            void DrawDockSpace();
+            void DrawToolBarUi();
+            void Draw();
+
         protected:
         private:
             std::vector<ImGuiPanel *> _panels;
+            float menuBarHeight;
+            float toolbarSize = 50;
     };
 }
 

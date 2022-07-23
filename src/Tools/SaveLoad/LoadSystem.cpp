@@ -49,6 +49,7 @@ namespace hr {
         // if (!std::filesystem::exists("Engine/Scenes/" + name + ".scn"))
         //     return;
         Engine::Get()->SetProjectName(name);
+        Engine::Get()->SetSimulating(false);
         if (!std::filesystem::exists("Engine/Scenes/" + name + ".scn")) {
             Engine::Get()->ClearEntities();
             Engine::Get()->Start();

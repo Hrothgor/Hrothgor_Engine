@@ -6,9 +6,9 @@
 */
 
 #include "AssetsPanel.hpp"
-#include "../../../Ecs/Engine.hpp"
-#include "../../AssetsManager.hpp"
-#include "../../../Tools/String.hpp"
+#include "Ecs/Engine.hpp"
+#include "RenderEngine/AssetsManager.hpp"
+#include "Tools/String.hpp"
 
 namespace hr {
     AssetsPanel::AssetsPanel()

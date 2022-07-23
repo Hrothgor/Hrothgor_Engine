@@ -16,8 +16,6 @@
 #include "Components/Transform.hpp"
 #include "Components/Light.hpp"
 
-#include "SharedLibrary/LibraryManager.hpp"
-
 namespace hr {
     Engine *Engine::instance = nullptr;
 
@@ -36,7 +34,7 @@ namespace hr {
         _mainCamera = new GameObject();
         _mainCamera->SetName("mainCamera");
         _mainCamera->AddComponent<MainCamera3D>();
-        _mainCamera->GetTransform()->SetPosition(20, 20, 50);
+        _mainCamera->GetTransform()->SetPosition(20, 20, 100);
         _mainCamera->GetTransform()->SetRotation(0, 90, 0);
     }
 
@@ -57,16 +55,9 @@ namespace hr {
 
     void Engine::Update()
     {
-        LibraryManager libraryManagerTest;
         while (!WindowShouldClose() && _running)
         {
             // TODO Remove this
-            if (IsKeyPressed(KEY_O))
-                libraryManagerTest.LoadComponent("./libcomponents.so")->UpdateOnSimulation();
-            //
-            // TODO Remove this
-            if (IsKeyPressed(KEY_SPACE))
-                SetSimulating(!_simulating);
             if (IsKeyDown(KEY_LEFT_CONTROL) && IsKeyPressed(KEY_D) && _selectedEntity)
                 Instantiate(_selectedEntity);
             //
@@ -221,6 +212,11 @@ namespace hr {
     void Engine::SetRunning(bool running)
     {
         _running = running;
+    }
+
+    bool Engine::GetSimulating()
+    {
+        return _simulating;
     }
 
     void Engine::SetSimulating(bool simulating)

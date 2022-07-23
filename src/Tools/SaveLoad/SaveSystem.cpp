@@ -30,6 +30,8 @@ namespace hr {
     {
         if (Engine::Get()->GetProjectName() == "")
             return;
+        Engine::Get()->SetSimulating(false);
+
         std::ofstream file("Engine/Scenes/" + name + ".scn", std::ios::trunc);
 
         std::vector<GameObject *> _entities = Engine::Get()->GetRootEntities();

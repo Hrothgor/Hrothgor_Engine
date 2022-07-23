@@ -1,0 +1,577 @@
+{
+    "entities": [
+        {
+            "childs": [
+                {
+                    "components": [
+                        [
+                            "MeshRenderer",
+                            {
+                                "color": [
+                                    255,
+                                    255,
+                                    255,
+                                    255
+                                ],
+                                "meshPath": "Engine/Ressources/bomb.obj",
+                                "texturePath": ""
+                            }
+                        ]
+                    ],
+                    "name": "bomb1",
+                    "transform": {
+                        "position": [
+                            10.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotation": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "uuid": "0b2408f0-4c48-437d-b76c-a4b584dc6031"
+                },
+                {
+                    "components": [
+                        [
+                            "MeshRenderer",
+                            {
+                                "color": [
+                                    255,
+                                    255,
+                                    255,
+                                    255
+                                ],
+                                "meshPath": "Engine/Ressources/bomb.obj",
+                                "texturePath": ""
+                            }
+                        ]
+                    ],
+                    "name": "bomb2",
+                    "transform": {
+                        "position": [
+                            20.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotation": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "uuid": "c34a0c6f-8544-4f54-bba8-15b06d85dde2"
+                },
+                {
+                    "components": [
+                        [
+                            "MeshRenderer",
+                            {
+                                "color": [
+                                    255,
+                                    255,
+                                    255,
+                                    255
+                                ],
+                                "meshPath": "Engine/Ressources/bomb.obj",
+                                "texturePath": ""
+                            }
+                        ]
+                    ],
+                    "name": "bomb3",
+                    "transform": {
+                        "position": [
+                            30.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotation": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "uuid": "df139fd8-f6b7-4ace-824c-a0025a56b5ba"
+                },
+                {
+                    "components": [
+                        [
+                            "MeshRenderer",
+                            {
+                                "color": [
+                                    255,
+                                    255,
+                                    255,
+                                    255
+                                ],
+                                "meshPath": "Engine/Ressources/bomb.obj",
+                                "texturePath": ""
+                            }
+                        ]
+                    ],
+                    "name": "bomb4",
+                    "transform": {
+                        "position": [
+                            40.0,
+                            0.0,
+                            0.0
+                        ],
+                        "rotation": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "uuid": "bb7a271f-a532-4a3d-abc5-37057eecc83c"
+                }
+            ],
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "meshPath": "Engine/Ressources/dragon.obj",
+                        "texturePath": ""
+                    }
+                ]
+            ],
+            "name": "dragon",
+            "transform": {
+                "position": [
+                    7.492387771606445,
+                    1.6793216466903687,
+                    6.9507246017456055
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "uuid": "aa9615e5-813d-4907-8bcc-ada1714edb70"
+        },
+        {
+            "components": [
+                [
+                    "Light",
+                    {
+                        "color": [
+                            0,
+                            36,
+                            251,
+                            255
+                        ],
+                        "intensity": 1.0,
+                        "range": 10.0,
+                        "type": 0
+                    }
+                ]
+            ],
+            "name": "lightDir",
+            "transform": {
+                "position": [
+                    0.0,
+                    19.173154830932617,
+                    0.0
+                ],
+                "rotation": [
+                    14.530782699584961,
+                    -25.614072799682617,
+                    -15.699463844299316
+                ],
+                "scale": [
+                    0.9999940395355225,
+                    0.9999998807907104,
+                    0.9999998211860657
+                ]
+            },
+            "uuid": "33f6fe74-1642-4bdd-80df-54bf9fa3c8ad"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "meshPath": "Engine/Ressources/cube.obj",
+                        "texturePath": ""
+                    }
+                ],
+                [
+                    "BoxCollider",
+                    {
+                        "height": 1.0,
+                        "length": 1.0,
+                        "offset": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "width": 1.0
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": false,
+                        "mass": 1.0,
+                        "useGravity": false
+                    }
+                ]
+            ],
+            "name": "Ground",
+            "transform": {
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    54.5,
+                    0.23000000417232513,
+                    57.5
+                ]
+            },
+            "uuid": "074bc669-20d4-4730-8562-2094ba1dc7f4"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "meshPath": "Engine/Ressources/sphere.obj",
+                        "texturePath": "Engine/Ressources/image.png"
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": false
+                    }
+                ],
+                [
+                    "SphereCollider",
+                    {
+                        "offset": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "radius": 9.100000381469727
+                    }
+                ]
+            ],
+            "name": "Sphere",
+            "transform": {
+                "position": [
+                    21.00267791748047,
+                    9.318116188049316,
+                    22.90224266052246
+                ],
+                "rotation": [
+                    -179.99948120117188,
+                    5.212121963500977,
+                    -179.99935913085938
+                ],
+                "scale": [
+                    9.0,
+                    9.0,
+                    9.0
+                ]
+            },
+            "uuid": "6bbcc305-ee03-4b1d-8c98-3b86c49bc8f2"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "meshPath": "Engine/Ressources/cube.obj",
+                        "texturePath": "Engine/Ressources/image.png"
+                    }
+                ],
+                [
+                    "BoxCollider",
+                    {
+                        "height": 1.0,
+                        "length": 1.0,
+                        "offset": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "width": 1.0
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": false
+                    }
+                ]
+            ],
+            "name": "Cube",
+            "transform": {
+                "position": [
+                    -19.832172393798828,
+                    -57.28642654418945,
+                    -51.348876953125
+                ],
+                "rotation": [
+                    160.9976806640625,
+                    -35.339698791503906,
+                    288.4355773925781
+                ],
+                "scale": [
+                    15.432588577270508,
+                    7.499985218048096,
+                    27.05048370361328
+                ]
+            },
+            "uuid": "820c5402-21ee-4d64-a53c-2c73e24d8a2c"
+        },
+        {
+            "childs": [
+                {
+                    "components": [
+                        [
+                            "Light",
+                            {
+                                "color": [
+                                    255,
+                                    0,
+                                    0,
+                                    255
+                                ],
+                                "intensity": 2.0,
+                                "range": 37.0,
+                                "type": 1
+                            }
+                        ]
+                    ],
+                    "name": "light",
+                    "transform": {
+                        "position": [
+                            0.0,
+                            18.261137008666992,
+                            0.0
+                        ],
+                        "rotation": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "uuid": "41ef2ee8-8efc-46da-ac07-e42e721f19a2"
+                }
+            ],
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "meshPath": "Engine/Ressources/lampadaire.obj",
+                        "texturePath": ""
+                    }
+                ]
+            ],
+            "name": "Lampadaire",
+            "transform": {
+                "position": [
+                    -19.29645347595215,
+                    -3.56502496288158e-05,
+                    21.170469284057617
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "uuid": "e2fa15f8-23dd-43fd-bd4e-125ecd84d8f8"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "meshPath": "Engine/Ressources/sphere.obj",
+                        "texturePath": ""
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ],
+                [
+                    "SphereCollider",
+                    {
+                        "offset": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "radius": 8.100000381469727
+                    }
+                ]
+            ],
+            "name": "GameObject (0)",
+            "transform": {
+                "position": [
+                    -29.854612350463867,
+                    7.883211135864258,
+                    29.70859146118164
+                ],
+                "rotation": [
+                    -6.398653567885049e-06,
+                    -1.0656716767698526e-05,
+                    2.1767969883512706e-05
+                ],
+                "scale": [
+                    8.0,
+                    8.0,
+                    8.0
+                ]
+            },
+            "uuid": "9264b3eb-5ff4-4827-8b9c-36e6bd18630a"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "meshPath": "Engine/Ressources/sphere.obj",
+                        "texturePath": ""
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ],
+                [
+                    "SphereCollider",
+                    {
+                        "offset": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "radius": 8.100000381469727
+                    }
+                ]
+            ],
+            "name": "GameObject (0)",
+            "transform": {
+                "position": [
+                    32.193111419677734,
+                    7.862820148468018,
+                    -12.735968589782715
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    8.0,
+                    8.0,
+                    8.0
+                ]
+            },
+            "uuid": "9264b3eb-5ff4-4827-8b9c-36e6bd18630a"
+        }
+    ]
+}
