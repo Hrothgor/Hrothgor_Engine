@@ -122,10 +122,10 @@ namespace hr {
 
         Texture2D *compilationIcon = AssetsManager::Get()->GetTextureAddr("Engine/Ressources/Icons/compilation-button.png");
         // TODO Remove this
-        LibraryManager libraryManagerTest;
+        //LibraryManager libraryManagerTest;
         //
         if (ImGui::ImageButton((ImTextureID)compilationIcon, ImVec2(32, 32)))
-            libraryManagerTest.LoadComponent("./libcomponents.so")->UpdateOnSimulation();
+            std::cout << "Recompile components" << std::endl;
 
         ImGui::SameLine();
         Texture2D *playIcon = AssetsManager::Get()->GetTextureAddr("Engine/Ressources/Icons/play-button.png");

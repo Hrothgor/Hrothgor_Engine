@@ -6,19 +6,19 @@
 */
 
 #include "InspectorPanel.hpp"
-#include "../../../Ecs/Engine.hpp"
-#include "../../../Ecs/GameObject.hpp"
+#include "Ecs/Engine.hpp"
+#include "Ecs/GameObject.hpp"
 
-#include "../../../Components/Transform.hpp"
-#include "../../../Components/Light.hpp"
-#include "../../../Components/MeshRenderer.hpp"
-#include "../../../Components/Collider/BoxCollider.hpp"
-#include "../../../Components/Collider/SphereCollider.hpp"
-#include "../../../Components/MainCamera3D.hpp"
-#include "../../../Components/RigidBody.hpp"
-#include "../../../Components/Particles/ParticleSystem.hpp"
+#include "Components/Transform.hpp"
+#include "Components/Light.hpp"
+#include "Components/MeshRenderer.hpp"
+#include "Components/Collider/BoxCollider.hpp"
+#include "Components/Collider/SphereCollider.hpp"
+#include "Components/MainCamera3D.hpp"
+#include "Components/RigidBody.hpp"
+#include "Components/Particles/ParticleSystem.hpp"
 
-#include "../../../Components/Custom/SphereSender.hpp"
+#include "Components/Custom/SphereSender.hpp"
 
 namespace hr {
     InspectorPanel::InspectorPanel()
