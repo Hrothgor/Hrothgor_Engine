@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2022
-** Physics_engine
+** Hrothgor_Engine
 ** File description:
 ** ParticleSystem
 */
@@ -56,6 +56,8 @@ namespace hr {
             void SetTextureType(TextureType textureType);
             int GetNumberOfRows() const;
             void SetNumberOfRows(int numberOfRows);
+            BlendMode GetBlendMode() const;
+            void SetBlendMode(BlendMode blendMode);
 
             int GetParticleCount() const;
             void DecreaseParticleCount();
@@ -88,6 +90,7 @@ namespace hr {
 
             TextureType _textureType = SIMPLE;
             int _numberOfRows = 1;
+            BlendMode _blendMode = BLEND_ALPHA;
 
             Texture2D _texture = {0};
             std::string _texturePath;

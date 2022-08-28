@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2022
-** Physics_engine
+** Hrothgor_Engine
 ** File description:
 ** ParticleRenderer
 */
@@ -10,6 +10,7 @@
 
 #include "Components/Transform.hpp"
 #include "Components/Particles/Particle.hpp"
+#include "Components/Particles/ParticleSystem.hpp"
 #include "Components/MainCamera3D.hpp"
 
 namespace hr {
@@ -30,8 +31,6 @@ namespace hr {
     {
         rlDisableDepthMask();
 
-        BeginBlendMode(BLEND_ADDITIVE);
-
         std::vector<Particle *> particles;
         for (auto part : _particles)
             if (part->Update(_camera->GetCamera3D()))
@@ -46,6 +45,7 @@ namespace hr {
         BeginFrame();
         Material material = LoadMaterialDefault();
         for (Particle *particle : _particles) {
+            BeginBlendMode(particle->GetParentSystem()->GetBlendMode());
             material.maps[MATERIAL_MAP_ALBEDO].texture = particle->GetTexture();
             material.maps[MATERIAL_MAP_ALBEDO].color = particle->GetStartColor();
             if (particle->GetTextureType() == ATLAS) {

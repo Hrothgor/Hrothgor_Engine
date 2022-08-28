@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2022
-** Physics_engine
+** Hrothgor_Engine
 ** File description:
 ** ImGuiLayer
 */
@@ -16,8 +16,6 @@
 
 #include "Tools/SaveLoad/LoadSystem.hpp"
 #include "Tools/SaveLoad/SaveSystem.hpp"
-
-#include "SharedLibrary/LibraryManager.hpp"
 
 namespace hr {
     ImGuiLayer::ImGuiLayer()
@@ -121,9 +119,7 @@ namespace hr {
             ImGui::SetCursorPosX(ImGui::GetCursorPosX() + off);
 
         Texture2D *compilationIcon = AssetsManager::Get()->GetTextureAddr("Engine/Ressources/Icons/compilation-button.png");
-        // TODO Remove this
-        //LibraryManager libraryManagerTest;
-        //
+
         if (ImGui::ImageButton((ImTextureID)compilationIcon, ImVec2(32, 32)))
             std::cout << "Recompile components" << std::endl;
 

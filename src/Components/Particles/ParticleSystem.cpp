@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2022
-** Physics_engine
+** Hrothgor_Engine
 ** File description:
 ** ParticleSystem
 */
@@ -191,6 +191,16 @@ namespace hr {
         _numberOfRows = numberOfRows;
     }
 
+    BlendMode ParticleSystem::GetBlendMode() const
+    {
+        return _blendMode;
+    }
+
+    void ParticleSystem::SetBlendMode(BlendMode blendMode)
+    {
+        _blendMode = blendMode;
+    }
+
     int ParticleSystem::GetParticleCount() const
     {
         return _count;
@@ -243,6 +253,9 @@ namespace hr {
                 UIElement::IntField("Number of rows", [this](){return GetNumberOfRows();}, [this](int val){SetNumberOfRows(val);});
                 break;
         }
+        enumNames = {"Alpha", "Additive", "Multiplied", "Add Colors", "Substract Colors", "Alpha premultiply"};
+        UIElement::EnumField("Blend Mode Type", [this](){return GetBlendMode();}, [this](int val){SetBlendMode((BlendMode)val);}, enumNames);
+
 
         UIElement::Header("Shape Emission");
         enumNames = {"Cone", "Sphere", "Static"};
@@ -265,7 +278,7 @@ namespace hr {
         switch (_emissionType) {
             case CONE: 
                 {
-                float hypothenuse = 2;
+                float hypothenuse = 4;
                 float length = cos(_coneAngle * DEG2RAD) * hypothenuse;
                 float radius = sin(_coneAngle * DEG2RAD) * hypothenuse;
                 DrawCylinderWiresEx(transform->GetPositionWorld(), GetTransform()->GetPositionWorld() + Vector3Multiply(transform->GetFront(), {length, length, length}),
@@ -297,6 +310,7 @@ namespace hr {
         json["texturePath"] = _texturePath;
         json["textureType"] = _textureType;
         json["numberOfRows"] = _numberOfRows;
+        json["blendMode"] = _blendMode;
         json["emissionType"] = _emissionType;
         json["coneAngle"] = _coneAngle;
 
@@ -316,6 +330,7 @@ namespace hr {
         _maxParticle = json["maxParticle"].get<int>();
         _textureType = (TextureType)json["textureType"].get<int>();
         _numberOfRows = json["numberOfRows"].get<int>();
+        _blendMode = (BlendMode)json["blendMode"].get<int>();
         _emissionType = (ParticleEmissionType)json["emissionType"].get<int>();
         _coneAngle = json["coneAngle"].get<float>();
 
@@ -336,6 +351,7 @@ namespace hr {
         ret->SetMaxParticle(_maxParticle);
         ret->SetTextureType(_textureType);
         ret->SetNumberOfRows(_numberOfRows);
+        ret->SetBlendMode(_blendMode);
         ret->SetEmissionType(_emissionType);
         ret->SetConeAngle(_coneAngle);
         return ret;

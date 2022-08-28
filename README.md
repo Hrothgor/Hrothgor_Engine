@@ -1,6 +1,6 @@
-# Physics_engine
+# Hrothgor_Engine
 
 Only supported on Linux at the moment. 
 
 ./build.sh to build
-./Physics_engine to start
+./Hrothgor_Engine to start

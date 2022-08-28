@@ -42,6 +42,8 @@ namespace hr {
             int GetNumberOfRows() const;
             void SetNumberOfRows(const int &numberOfRows);
 
+            ParticleSystem *GetParentSystem() const;
+
             float GetDistanceToCamera() const;
 
             Mesh GetMesh() const;

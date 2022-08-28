@@ -24,6 +24,11 @@
 // SOFTWARE.
 //
 
+#pragma GCC diagnostic ignored "-Wdeprecated-copy"
+#pragma GCC diagnostic ignored "-Wunused-function"
+#pragma GCC diagnostic ignored "-Wunused-but-set-variable"
+#pragma GCC diagnostic ignored "-Wsign-compare"
+
 #include "imgui.h"
 #ifndef IMGUI_DEFINE_MATH_OPERATORS
 #define IMGUI_DEFINE_MATH_OPERATORS
@@ -1428,7 +1433,6 @@ namespace IMGUIZMO_NAMESPACE
                   drawList->AddLine(baseSSpace, worldDirSSpaceNoScale, IM_COL32(0x40, 0x40, 0x40, 0xFF), 3.f);
                   drawList->AddCircleFilled(worldDirSSpaceNoScale, 6.f, IM_COL32(0x40, 0x40, 0x40, 0xFF));
                }
-               /*
                if (!hasTranslateOnAxis || gContext.mbUsing)
                {
                   drawList->AddLine(baseSSpace, worldDirSSpace, colors[i + 1], 3.f);

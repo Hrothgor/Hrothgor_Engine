@@ -131,6 +131,11 @@ namespace hr {
         _numberOfRows = numberOfRows;
     }
 
+    ParticleSystem *Particle::GetParentSystem() const
+    {
+        return _parent;
+    }
+
     float Particle::GetDistanceToCamera() const
     {
         return _distanceToCamera;

@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2022
-** Physics_engine
+** Hrothgor_Engine
 ** File description:
 ** Engine
 */
@@ -148,6 +148,7 @@ namespace hr {
         //     t -= GetFrameTime();
         // }
         // TODO NEED THREAD !
+        // TODO or maybe like Unreal (life span updated each frame)
     }
 
     std::vector<GameObject *> Engine::GetEntities() const

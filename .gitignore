@@ -31,7 +31,6 @@
 *.app
 
 build/*
-buildComponents/*
 
 #docs
 !docs/Makefile

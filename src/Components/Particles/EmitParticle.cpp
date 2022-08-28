@@ -1,6 +1,6 @@
 /*
 ** EPITECH PROJECT, 2022
-** Physics_engine
+** Hrothgor_Engine
 ** File description:
 ** EmitParticle
 */
@@ -40,7 +40,7 @@ namespace hr {
 
         Vector3 dir = { dirX + axis.x, dirY + axis.y, dirZ + axis.z };
         Vector3 rt = transform.GetRotationRadian();
-        rt = {rt.x * -1, rt.y, rt.z * -1};
+        rt = {rt.x * -1, rt.y, rt.z};
         dir = Vector3Transform(dir, MatrixRotateXYZ(rt));
         dir = Vector3Normalize(dir);
         return dir;
