@@ -6,9 +6,9 @@
 */
 
 #include "SceneHierarchyPanel.hpp"
-#include "../../../Ecs/Engine.hpp"
-#include "../../../Ecs/GameObject.hpp"
-#include "../../../Ecs/CreatePrimitive.hpp"
+#include "Ecs/Engine.hpp"
+#include "Ecs/GameObject.hpp"
+#include "Ecs/CreatePrimitive.hpp"
 
 namespace hr {
     SceneHierarchyPanel::SceneHierarchyPanel()

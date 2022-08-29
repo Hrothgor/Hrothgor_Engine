@@ -8,13 +8,13 @@
 #include "ViewPortPanel.hpp"
 #include "Guizmo.hpp"
 
-#include "../../DisplayManager.hpp"
-#include "../../../Ecs/Engine.hpp"
-#include "../../../Ecs/GameObject.hpp"
-#include "../../../Tools/SaveLoad/LoadSystem.hpp"
+#include "RenderEngine/DisplayManager.hpp"
+#include "Ecs/Engine.hpp"
+#include "Ecs/GameObject.hpp"
+#include "Tools/SaveLoad/LoadSystem.hpp"
 
-#include "../../../Components/MainCamera3D.hpp"
-#include "../../../Components/Transform.hpp"
+#include "Components/MainCamera3D.hpp"
+#include "Components/Transform.hpp"
 
 #include "Tools/String.hpp"
 

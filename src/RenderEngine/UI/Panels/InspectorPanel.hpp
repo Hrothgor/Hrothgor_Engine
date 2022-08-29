@@ -10,7 +10,7 @@
 
 #include "Include.hpp"
 #include "ImGuiPanel.hpp"
-#include "../../../Ecs/GameObject.hpp"
+#include "Ecs/GameObject.hpp"
 
 namespace hr {
     class InspectorPanel : public ImGuiPanel {
