@@ -11,11 +11,14 @@
 #include "Panels/InspectorPanel.hpp"
 #include "Panels/ViewPortPanel.hpp"
 #include "Panels/AssetsPanel.hpp"
+#include "Panels/ProfilerPanel.hpp"
 #include "Ecs/Engine.hpp"
 #include "RenderEngine/AssetsManager.hpp"
 
 #include "Tools/SaveLoad/LoadSystem.hpp"
 #include "Tools/SaveLoad/SaveSystem.hpp"
+
+#include "Profiler.hpp"
 
 namespace hr {
     ImGuiLayer::ImGuiLayer()
@@ -23,6 +26,7 @@ namespace hr {
         _panels.push_back(new SceneHierarchyPanel());
         _panels.push_back(new InspectorPanel());
         _panels.push_back(new ViewPortPanel());
+        _panels.push_back(new ProfilerPanel());
         _panels.push_back(new AssetsPanel());
     }
 
