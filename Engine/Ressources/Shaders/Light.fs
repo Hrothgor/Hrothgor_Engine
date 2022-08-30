@@ -75,6 +75,10 @@ void main()
         }
     }
 
+    if (texelColor.a < 0.5) {
+        discard;
+    }
+
     finalColor = (texelColor * ((colDiffuse + vec4(specular, 1.0)) * vec4(lightDot, 1.0)));
     finalColor += texelColor * (ambient/10.0) * colDiffuse;
 

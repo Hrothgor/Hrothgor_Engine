@@ -1,0 +1,51 @@
+{
+    "entities": [
+        {
+            "components": [
+                [
+                    "ParticleSystem",
+                    {
+                        "blendMode": 0,
+                        "coneAngle": 20.0,
+                        "emissionType": 0,
+                        "gravityModifier": 0.5,
+                        "lifeLength": 5.0,
+                        "maxParticle": 1000,
+                        "numberOfRows": 1,
+                        "pps": 10,
+                        "rotation": 0.0,
+                        "scale": 1.0,
+                        "speed": 1.0,
+                        "startColor": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "texturePath": "",
+                        "textureType": 0
+                    }
+                ]
+            ],
+            "name": "GameObject",
+            "transform": {
+                "position": [
+                    0.0,
+                    45.649227142333984,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "uuid": "520da2a7-d833-430e-aec8-be21d2ab99d9"
+        }
+    ]
+}

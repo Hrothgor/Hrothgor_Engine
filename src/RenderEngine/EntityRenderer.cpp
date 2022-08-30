@@ -50,6 +50,11 @@ namespace hr {
                 SetMaterialTexture(&(model.materials[0]), MATERIAL_MAP_DIFFUSE, texture);
             else if (model.materialCount > 0)
                 SetMaterialTexture(&(model.materials[0]), MATERIAL_MAP_DIFFUSE, (Texture2D){ rlGetTextureIdDefault(), 1, 1, 1, PIXELFORMAT_UNCOMPRESSED_R8G8B8A8 });
+
+            rlEnableBackfaceCulling();
+            if (meshRenderer->GetHasTransparency())
+                rlDisableBackfaceCulling();
+
             DrawModelEx(model, transform->GetPositionWorld(), axisAngle.axis, axisAngle.angle, transform->GetScaleWorld(), meshRenderer->GetColor());
         }
         EndFrame();
@@ -59,6 +64,7 @@ namespace hr {
     {
         _objects.clear();
         _lights.clear();
+        rlEnableBackfaceCulling();
     }
 
     void EntityRenderer::RegisterLight(GameObject *light)

@@ -13,6 +13,7 @@
                                     255,
                                     255
                                 ],
+                                "hasTransparency": false,
                                 "meshPath": "Engine/Ressources/bomb.obj",
                                 "texturePath": ""
                             }
@@ -49,6 +50,7 @@
                                     255,
                                     255
                                 ],
+                                "hasTransparency": false,
                                 "meshPath": "Engine/Ressources/bomb.obj",
                                 "texturePath": ""
                             }
@@ -85,6 +87,7 @@
                                     255,
                                     255
                                 ],
+                                "hasTransparency": false,
                                 "meshPath": "Engine/Ressources/bomb.obj",
                                 "texturePath": ""
                             }
@@ -121,6 +124,7 @@
                                     255,
                                     255
                                 ],
+                                "hasTransparency": false,
                                 "meshPath": "Engine/Ressources/bomb.obj",
                                 "texturePath": ""
                             }
@@ -157,6 +161,7 @@
                             255,
                             255
                         ],
+                        "hasTransparency": false,
                         "meshPath": "Engine/Ressources/dragon.obj",
                         "texturePath": ""
                     }
@@ -230,6 +235,7 @@
                             255,
                             255
                         ],
+                        "hasTransparency": false,
                         "meshPath": "Engine/Ressources/cube.obj",
                         "texturePath": ""
                     }
@@ -287,6 +293,7 @@
                             255,
                             255
                         ],
+                        "hasTransparency": false,
                         "meshPath": "Engine/Ressources/sphere.obj",
                         "texturePath": "Engine/Ressources/image.png"
                     }
@@ -342,6 +349,7 @@
                             255,
                             255
                         ],
+                        "hasTransparency": false,
                         "meshPath": "Engine/Ressources/cube.obj",
                         "texturePath": "Engine/Ressources/image.png"
                     }
@@ -485,6 +493,7 @@
                             255,
                             255
                         ],
+                        "hasTransparency": false,
                         "meshPath": "Engine/Ressources/lampadaire.obj",
                         "texturePath": ""
                     }
@@ -521,6 +530,7 @@
                             255,
                             255
                         ],
+                        "hasTransparency": false,
                         "meshPath": "Engine/Ressources/sphere.obj",
                         "texturePath": ""
                     }
@@ -576,6 +586,7 @@
                             255,
                             255
                         ],
+                        "hasTransparency": false,
                         "meshPath": "Engine/Ressources/sphere.obj",
                         "texturePath": ""
                     }

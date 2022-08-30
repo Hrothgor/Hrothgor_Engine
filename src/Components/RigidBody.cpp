@@ -7,6 +7,7 @@
 
 #include "RigidBody.hpp"
 #include "RenderEngine/UI/UIElement.hpp"
+#include "Tools/SaveLoad/JsonManager.hpp"
 #include "Guizmo.hpp"
 #include "Transform.hpp"
 #include "Ecs/GameObject.hpp"
@@ -197,18 +198,18 @@ namespace hr {
     {
         nlohmann::json json;
 
-        json["mass"] = _mass;
-        json["useGravity"] = _useGravity;
-        json["isDynamic"] = _isDynamic;
+        JsonManager::SaveFloat(json, "mass", _mass);
+        JsonManager::SaveBool(json, "useGravity", _useGravity);
+        JsonManager::SaveBool(json, "isDynamic", _isDynamic);
 
         return json;
     }
 
     void RigidBody::FromJson(const nlohmann::json &json)
     {
-        _mass = json["mass"].get<float>();
-        _useGravity = json["useGravity"].get<bool>();
-        _isDynamic = json["isDynamic"].get<bool>();
+        _mass = JsonManager::LoadFloat(json, "mass");
+        _useGravity = JsonManager::LoadBool(json, "useGravity");
+        _isDynamic = JsonManager::LoadBool(json, "isDynamic");
     }
 
     Component *RigidBody::Clone(GameObject *gameObject)

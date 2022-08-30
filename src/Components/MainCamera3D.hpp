@@ -36,7 +36,7 @@ namespace hr {
         private:
             Camera3D _camera;
             float _speed = 40;
-            float _turnSpeed = 40;
+            float _turnSpeed = 20;
     };
 }
 

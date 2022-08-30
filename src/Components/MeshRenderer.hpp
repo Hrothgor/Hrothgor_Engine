@@ -31,6 +31,9 @@ namespace hr {
             void SetColor(const Color &color);
             Color GetColor() const;
 
+            void SetHasTransparency(const bool &bHasTransparency);
+            bool GetHasTransparency() const;
+
             virtual void ImGuiRender() override;
 
             virtual nlohmann::json ToJson() const override;
@@ -46,6 +49,8 @@ namespace hr {
             std::string _texturePath;
 
             Color _color = WHITE;
+
+            bool _bHasTransparency = false;
     };
 }
 

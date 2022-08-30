@@ -8,6 +8,7 @@
 #include "Transform.hpp"
 #include "Ecs/GameObject.hpp"
 #include "RenderEngine/UI/UIElement.hpp"
+#include "Tools/SaveLoad/JsonManager.hpp"
 
 #include "Guizmo.hpp"
 
@@ -224,18 +225,18 @@ namespace hr {
     {
         nlohmann::json json;
 
-        json["position"] = {_position.x, _position.y, _position.z};
-        json["rotation"] = {_rotation.x, _rotation.y, _rotation.z};
-        json["scale"] = {_scale.x, _scale.y, _scale.z};
+        JsonManager::SaveVector3(json, "position", _position);
+        JsonManager::SaveVector3(json, "rotation", _rotation);
+        JsonManager::SaveVector3(json, "scale", _scale);
 
         return json;
     }
 
     void Transform::FromJson(const nlohmann::json &json)
     {
-        _position = {json["position"][0].get<float>(), json["position"][1].get<float>(), json["position"][2].get<float>()};
-        _rotation = {json["rotation"][0].get<float>(), json["rotation"][1].get<float>(), json["rotation"][2].get<float>()};
-        _scale = {json["scale"][0], json["scale"][1], json["scale"][2]};
+        _position = JsonManager::LoadVector3(json, "position");
+        _rotation = JsonManager::LoadVector3(json, "rotation");
+        _scale = JsonManager::LoadVector3(json, "scale");
     }
 
     Component *Transform::Clone(GameObject *gameObject)

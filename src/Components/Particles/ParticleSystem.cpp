@@ -8,6 +8,7 @@
 #include "ParticleSystem.hpp"
 #include "RenderEngine/Master3DRenderer.hpp"
 #include "RenderEngine/UI/UIElement.hpp"
+#include "Tools/SaveLoad/JsonManager.hpp"
 #include "RenderEngine/AssetsManager.hpp"
 
 #include "Components/Transform.hpp"
@@ -299,40 +300,40 @@ namespace hr {
     {
         nlohmann::json json;
 
-        json["pps"] = _pps;
-        json["maxParticle"] = _maxParticle;
-        json["scale"] = _scale;
-        json["rotation"] = _rotation;
-        json["speed"] = _speed;
-        json["gravityModifier"] = _gravityModifier;
-        json["lifeLength"] = _lifeLength;
-        json["startColor"] = {_startColor.r, _startColor.g, _startColor.b, _startColor.a};
-        json["texturePath"] = _texturePath;
-        json["textureType"] = _textureType;
-        json["numberOfRows"] = _numberOfRows;
-        json["blendMode"] = _blendMode;
-        json["emissionType"] = _emissionType;
-        json["coneAngle"] = _coneAngle;
+        JsonManager::SaveInt(json, "pps", _pps);
+        JsonManager::SaveInt(json, "maxParticle", _maxParticle);
+        JsonManager::SaveFloat(json, "scale", _scale);
+        JsonManager::SaveFloat(json, "rotation", _rotation);
+        JsonManager::SaveFloat(json, "speed", _speed);
+        JsonManager::SaveFloat(json, "gravityModifier", _gravityModifier);
+        JsonManager::SaveFloat(json, "lifeLength", _lifeLength);
+        JsonManager::SaveColor(json, "startColor", _startColor);
+        JsonManager::SaveString(json, "texturePath", _texturePath);
+        JsonManager::SaveInt(json, "textureType", (int)_textureType);
+        JsonManager::SaveInt(json, "numberOfRows", _numberOfRows);
+        JsonManager::SaveInt(json, "blendMode", (int)_blendMode);
+        JsonManager::SaveInt(json, "emissionType", (int)_emissionType);
+        JsonManager::SaveFloat(json, "coneAngle", _coneAngle);
 
         return json;
     }
 
     void ParticleSystem::FromJson(const nlohmann::json &json)
     {
-        _pps = json["pps"].get<int>();
-        _scale = json["scale"].get<float>();
-        _rotation = json["rotation"].get<float>();
-        _speed = json["speed"].get<float>();
-        _gravityModifier = json["gravityModifier"].get<float>();
-        _lifeLength = json["lifeLength"].get<float>();
-        _startColor = {json["startColor"][0].get<unsigned char>(), json["startColor"][1].get<unsigned char>(), json["startColor"][2].get<unsigned char>(), json["startColor"][3].get<unsigned char>()};
-        _texturePath = json["texturePath"].get<std::string>();
-        _maxParticle = json["maxParticle"].get<int>();
-        _textureType = (TextureType)json["textureType"].get<int>();
-        _numberOfRows = json["numberOfRows"].get<int>();
-        _blendMode = (BlendMode)json["blendMode"].get<int>();
-        _emissionType = (ParticleEmissionType)json["emissionType"].get<int>();
-        _coneAngle = json["coneAngle"].get<float>();
+        _pps = JsonManager::LoadInt(json, "pps");
+        _scale = JsonManager::LoadFloat(json, "scale");
+        _rotation = JsonManager::LoadFloat(json, "rotation");
+        _speed = JsonManager::LoadFloat(json, "speed");
+        _gravityModifier = JsonManager::LoadFloat(json, "gravityModifier");
+        _lifeLength = JsonManager::LoadFloat(json, "lifeLength");
+        _startColor = JsonManager::LoadColor(json, "startColor");
+        _texturePath = JsonManager::LoadString(json, "texturePath");
+        _maxParticle = JsonManager::LoadInt(json, "maxParticle");
+        _textureType = (TextureType) JsonManager::LoadInt(json, "textureType");
+        _numberOfRows = JsonManager::LoadInt(json, "numberOfRows");
+        _blendMode = (BlendMode) JsonManager::LoadInt(json, "blendMode");
+        _emissionType = (ParticleEmissionType) JsonManager::LoadInt(json, "emissionType");
+        _coneAngle = JsonManager::LoadFloat(json, "coneAngle");
 
         LoadTextureFromPath(_texturePath);
     }

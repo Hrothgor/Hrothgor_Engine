@@ -6,6 +6,7 @@
 */
 
 #include "Template.hpp"
+#include "Tools/SaveLoad/JsonManager.hpp"
 
 namespace hr {
     Template::Template(GameObject *gameObject)

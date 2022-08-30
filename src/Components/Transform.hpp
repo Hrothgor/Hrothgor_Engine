@@ -36,6 +36,7 @@ namespace hr {
             void SetPosition(Vector3 pos);
             void SetPosition(float x, float y, float z);
             void SetPositionFromWorld(float x, float y, float z);
+
             Vector3 GetRotation() const;
             Vector3 GetRotationRadian() const;
             Quaternion GetRotationQuaternion() const;
@@ -43,11 +44,13 @@ namespace hr {
             Matrix GetRotationMatrix() const;
             void SetRotation(Vector3 rotation);
             void SetRotation(float x, float y, float z);
+
             Vector3 GetScale() const;
             Vector3 GetScaleWorld() const;
             void SetScale(Vector3 scale);
             void SetScale(float x, float y, float z);
             void SetScaleFromWorld(float x, float y, float z);
+            
             Vector3 GetFront() const;
             std::vector<Vector3> GetLocalAxis() const;
 

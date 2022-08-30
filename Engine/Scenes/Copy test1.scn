@@ -13,6 +13,7 @@
                                     255,
                                     255
                                 ],
+                                "hasTransparency": false,
                                 "meshPath": "Engine/Ressources/bomb.obj",
                                 "texturePath": ""
                             }
@@ -49,6 +50,7 @@
                                     255,
                                     255
                                 ],
+                                "hasTransparency": false,
                                 "meshPath": "Engine/Ressources/bomb.obj",
                                 "texturePath": ""
                             }
@@ -85,6 +87,7 @@
                                     255,
                                     255
                                 ],
+                                "hasTransparency": false,
                                 "meshPath": "Engine/Ressources/bomb.obj",
                                 "texturePath": ""
                             }
@@ -121,6 +124,7 @@
                                     255,
                                     255
                                 ],
+                                "hasTransparency": false,
                                 "meshPath": "Engine/Ressources/bomb.obj",
                                 "texturePath": ""
                             }
@@ -157,6 +161,7 @@
                             255,
                             255
                         ],
+                        "hasTransparency": false,
                         "meshPath": "Engine/Ressources/dragon.obj",
                         "texturePath": ""
                     }
@@ -230,6 +235,7 @@
                             255,
                             255
                         ],
+                        "hasTransparency": false,
                         "meshPath": "Engine/Ressources/cube.obj",
                         "texturePath": ""
                     }
@@ -287,6 +293,7 @@
                             255,
                             255
                         ],
+                        "hasTransparency": false,
                         "meshPath": "Engine/Ressources/sphere.obj",
                         "texturePath": "Engine/Ressources/image.png"
                     }
@@ -342,6 +349,7 @@
                             255,
                             255
                         ],
+                        "hasTransparency": false,
                         "meshPath": "Engine/Ressources/cube.obj",
                         "texturePath": "Engine/Ressources/image.png"
                     }
@@ -438,6 +446,7 @@
                             255,
                             255
                         ],
+                        "hasTransparency": false,
                         "meshPath": "Engine/Ressources/lampadaire.obj",
                         "texturePath": ""
                     }
@@ -474,6 +483,7 @@
                             255,
                             255
                         ],
+                        "hasTransparency": false,
                         "meshPath": "Engine/Ressources/sphere.obj",
                         "texturePath": ""
                     }
@@ -529,6 +539,7 @@
                             255,
                             255
                         ],
+                        "hasTransparency": false,
                         "meshPath": "Engine/Ressources/sphere.obj",
                         "texturePath": ""
                     }
@@ -572,6 +583,43 @@
                 ]
             },
             "uuid": "9264b3eb-5ff4-4827-8b9c-36e6bd18630a"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "hasTransparency": true,
+                        "meshPath": "Engine/Ressources/fern.obj",
+                        "texturePath": "Engine/Ressources/fern.png"
+                    }
+                ]
+            ],
+            "name": "GameObject",
+            "transform": {
+                "position": [
+                    22.505874633789063,
+                    0.0,
+                    30.523590087890625
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "uuid": "86d02666-9750-4cde-a9ba-a0db64d4d13d"
         }
     ]
 }

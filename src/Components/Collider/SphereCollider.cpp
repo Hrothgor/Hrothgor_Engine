@@ -8,6 +8,7 @@
 #include "SphereCollider.hpp"
 #include "Components/Transform.hpp"
 #include "RenderEngine/UI/UIElement.hpp"
+#include "Tools/SaveLoad/JsonManager.hpp"
 #include "PhysicsEngine/Implementations/PhysicsAlgo.hpp"
 
 namespace hr {
@@ -77,16 +78,16 @@ namespace hr {
     {
         nlohmann::json json;
 
-        json["offset"] = {_offset.x, _offset.y, _offset.z};
-        json["radius"] = _radius;
+        JsonManager::SaveVector3(json, "offset", _offset);
+        JsonManager::SaveFloat(json, "radius", _radius);
 
         return json;
     }
 
     void SphereCollider::FromJson(const nlohmann::json &json)
     {
-        _offset = {json["offset"][0].get<float>(), json["offset"][1].get<float>(), json["offset"][2].get<float>()};
-        _radius = json["radius"].get<float>();
+        _offset = JsonManager::LoadVector3(json, "offset");
+        _radius = JsonManager::LoadFloat(json, "radius");
     }
 
     Component *SphereCollider::Clone(GameObject *gameObject)

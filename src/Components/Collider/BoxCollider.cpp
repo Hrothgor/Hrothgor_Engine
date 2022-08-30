@@ -8,6 +8,7 @@
 #include "BoxCollider.hpp"
 #include "Components/Transform.hpp"
 #include "RenderEngine/UI/UIElement.hpp"
+#include "Tools/SaveLoad/JsonManager.hpp"
 #include "PhysicsEngine/Implementations/PhysicsAlgo.hpp"
 
 namespace hr {
@@ -107,20 +108,20 @@ namespace hr {
     {
         nlohmann::json json;
 
-        json["offset"] = {_offset.x, _offset.y, _offset.z};
-        json["width"] = _width;
-        json["height"] = _height;
-        json["length"] = _length;
+        JsonManager::SaveVector3(json, "offset", _offset);
+        JsonManager::SaveFloat(json, "width", _width);
+        JsonManager::SaveFloat(json, "height", _height);
+        JsonManager::SaveFloat(json, "length", _length);
 
         return json;
     }
 
     void BoxCollider::FromJson(const nlohmann::json &json)
     {
-        _offset = {json["offset"][0].get<float>(), json["offset"][1].get<float>(), json["offset"][2].get<float>()};
-        _width = json["width"].get<float>();
-        _height = json["height"].get<float>();
-        _length = json["length"].get<float>();
+        _offset = JsonManager::LoadVector3(json, "offset");
+        _width = JsonManager::LoadFloat(json, "width");
+        _height = JsonManager::LoadFloat(json, "height");
+        _length = JsonManager::LoadFloat(json, "length");
     }
 
     Component *BoxCollider::Clone(GameObject *gameObject)

@@ -44,8 +44,15 @@ namespace hr {
         if (IsMouseButtonDown(MOUSE_BUTTON_RIGHT)) {
             Vector2 mouseDelta = GetMouseDelta();
             Vector3 rotation = transform->GetRotation();
-            rotation.y += mouseDelta.x * GetFrameTime() * _turnSpeed;
+
+            rotation.y -= mouseDelta.x * GetFrameTime() * _turnSpeed;
             rotation.z += mouseDelta.y * GetFrameTime() * _turnSpeed;
+
+            if (rotation.z > 89.0f)
+                rotation.z = 89.0f;
+            if (rotation.z < -89.0f)
+                rotation.z = -89.0f;
+
             transform->SetRotation(rotation);
         }
 

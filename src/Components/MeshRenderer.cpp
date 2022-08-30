@@ -7,6 +7,7 @@
 
 #include "MeshRenderer.hpp"
 #include "RenderEngine/UI/UIElement.hpp"
+#include "Tools/SaveLoad/JsonManager.hpp"
 #include "RenderEngine/Master3DRenderer.hpp"
 #include "Ecs/GameObject.hpp"
 #include "Tools/String.hpp"
@@ -74,29 +75,42 @@ namespace hr {
         return _color;
     }
 
+    void MeshRenderer::SetHasTransparency(const bool &bHasTransparency)
+    {
+        _bHasTransparency = bHasTransparency;
+    }
+
+    bool MeshRenderer::GetHasTransparency() const
+    {
+        return _bHasTransparency;
+    }
+
     void MeshRenderer::ImGuiRender()
     {
         UIElement::ModelField("Mesh", [this](){return GetMeshPath();}, [this](const std::string &str){LoadMeshFromPath(str);});
         UIElement::TextureField("Texture", [this](){return GetTexturePath();}, [this](const std::string &str){LoadTextureFromPath(str);});
         UIElement::ColorField("Color", [this](){return GetColor();}, [this](const Color &val){SetColor(val);});
+        UIElement::CheckBox("Has Transparency", [this](){return GetHasTransparency();}, [this](const bool &val){SetHasTransparency(val);});
     }
 
     nlohmann::json MeshRenderer::ToJson() const
     {
         nlohmann::json json;
 
-        json["meshPath"] = _meshPath;
-        json["texturePath"] = _texturePath;
-        json["color"] = {_color.r, _color.g, _color.b, _color.a};
+        JsonManager::SaveString(json, "meshPath", _meshPath);
+        JsonManager::SaveString(json, "texturePath", _texturePath);
+        JsonManager::SaveColor(json, "color", _color);
+        JsonManager::SaveBool(json, "hasTransparency", _bHasTransparency);
 
         return json;
     }
 
     void MeshRenderer::FromJson(const nlohmann::json &json)
     {
-        _meshPath = json["meshPath"].get<std::string>();
-        _texturePath = json["texturePath"].get<std::string>();
-        _color = {json["color"][0].get<unsigned char>(), json["color"][1].get<unsigned char>(), json["color"][2].get<unsigned char>(), json["color"][3].get<unsigned char>()};
+        _meshPath = JsonManager::LoadString(json, "meshPath");
+        _texturePath = JsonManager::LoadString(json, "texturePath");
+        _color = JsonManager::LoadColor(json, "color");
+        _bHasTransparency = JsonManager::LoadBool(json, "hasTransparency");
 
         LoadTextureFromPath(_texturePath);
         LoadMeshFromPath(_meshPath);
@@ -108,6 +122,7 @@ namespace hr {
         ret->LoadMeshFromPath(_meshPath);
         ret->LoadTextureFromPath(_texturePath);
         ret->SetColor(_color);
+        ret->SetHasTransparency(_bHasTransparency);
         return ret;
     }
 }

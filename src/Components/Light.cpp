@@ -10,6 +10,7 @@
 #include "Transform.hpp"
 #include "Ecs/GameObject.hpp"
 #include "RenderEngine/UI/UIElement.hpp"
+#include "Tools/SaveLoad/JsonManager.hpp"
 
 namespace hr {
     Light::Light(GameObject *gameObject)
@@ -120,20 +121,20 @@ namespace hr {
     {
         nlohmann::json json;
 
-        json["type"] = (int)_type;
-        json["range"] = _range;
-        json["color"] = {_color.r, _color.g, _color.b, _color.a};
-        json["intensity"] = _intensity;
+        JsonManager::SaveInt(json, "type", (int)_type);
+        JsonManager::SaveFloat(json, "range", _range);
+        JsonManager::SaveColor(json, "color", _color);
+        JsonManager::SaveFloat(json, "intensity", _intensity);
 
         return json;
     }
 
     void Light::FromJson(const nlohmann::json &json)
     {
-        _type = (LightType)json["type"].get<int>();
-        _range = json["range"].get<float>();
-        _color = {json["color"][0].get<unsigned char>(), json["color"][1].get<unsigned char>(), json["color"][2].get<unsigned char>(), json["color"][3].get<unsigned char>()};
-        _intensity = json["intensity"].get<float>();
+        _type = (LightType) JsonManager::LoadInt(json, "type");
+        _range = JsonManager::LoadFloat(json, "range");
+        _color = JsonManager::LoadColor(json, "color");
+        _intensity = JsonManager::LoadFloat(json, "intensity");
     }
 
     Component *Light::Clone(GameObject *gameObject)
