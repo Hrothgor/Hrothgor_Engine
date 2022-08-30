@@ -1,9 +1,11 @@
+#pragma once
+
 #include <glm/glm.hpp>
 #include "ProfilerTask.h"
 
 namespace ImGuiUtils
 {
-  glm::vec2 Vec2(ImVec2 vec)
+  inline glm::vec2 Vec2(ImVec2 vec)
   {
     return glm::vec2(vec.x, vec.y);
   }
@@ -368,7 +370,7 @@ namespace ImGuiUtils
 
       std::stringstream title;
       title.precision(2);
-      title << std::fixed << "Legit profiler [" << 1.0f / avgFrameTime << "fps\t" << avgFrameTime * 1000.0f << "ms]###ProfilerWindow";
+      title << std::fixed << "Profiler [" << 1.0f / avgFrameTime << "fps\t" << avgFrameTime * 1000.0f << "ms]###ProfilerWindow";
       //###AnimatedTitle
       ImGui::Begin(title.str().c_str(), 0, ImGuiWindowFlags_NoScrollbar);
       ImVec2 canvasSize = ImGui::GetContentRegionAvail();
@@ -392,7 +394,6 @@ namespace ImGuiUtils
 
         ImGui::SliderInt("Frame width", &frameWidth, 1, 4);
         ImGui::SliderInt("Frame spacing", &frameSpacing, 0, 2);
-        ImGui::SliderFloat("Transparency", &ImGui::GetStyle().Colors[ImGuiCol_WindowBg].w, 0.0f, 1.0f);
         ImGui::Columns(1);
       }
       if (!stopProfiling)

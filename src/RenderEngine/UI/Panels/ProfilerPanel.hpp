@@ -10,6 +10,7 @@
 
 #include "Include.hpp"
 #include "ImGuiPanel.hpp"
+#include "Profiler.hpp"
 
 namespace hr {
     class ProfilerPanel : public ImGuiPanel {
@@ -17,12 +18,14 @@ namespace hr {
             ProfilerPanel();
             ~ProfilerPanel();
 
-            virtual void Start() override {};
+            virtual void Start() override;
             virtual void OnEvent() override {};
             virtual void ImGuiRender() override;
             virtual void End() override {};
         protected:
         private:
+            ImGuiUtils::ProfilersWindow _profilerWindow;
+            std::vector<legit::ProfilerTask> _tasks;
     };
 }
 

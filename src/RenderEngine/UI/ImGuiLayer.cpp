@@ -18,8 +18,6 @@
 #include "Tools/SaveLoad/LoadSystem.hpp"
 #include "Tools/SaveLoad/SaveSystem.hpp"
 
-#include "Profiler.hpp"
-
 namespace hr {
     ImGuiLayer::ImGuiLayer()
     {
