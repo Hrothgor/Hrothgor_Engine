@@ -232,16 +232,16 @@ namespace hr {
     void ParticleSystem::ImGuiRender()
     {
         UIElement::Header("System Values");
-        UIElement::IntField("Particles per second", [this](){return GetPPS();}, [this](int val){SetPPS(val);});
-        UIElement::IntField("Max particle", [this](){return GetMaxParticle();}, [this](int val){SetMaxParticle(val);});
+        UIElement::IntField("Particles per second", _pps);
+        UIElement::IntField("Max particle", _maxParticle);
         
         UIElement::Header("Particles Values");
-        UIElement::FloatField("Scale", [this](){return GetScale();}, [this](float val){SetScale(val);});
-        UIElement::FloatField("Rotation", [this](){return GetRotation();}, [this](float val){SetRotation(val);});
-        UIElement::FloatField("Speed", [this](){return GetSpeed();}, [this](float val){SetSpeed(val);});
-        UIElement::FloatField("Gravity modifier", [this](){return GetGravityModifier();}, [this](float val){SetGravityModifier(val);});
-        UIElement::FloatField("Life length", [this](){return GetLifeLength();}, [this](float val){SetLifeLength(val);});
-        UIElement::ColorField("Start color", [this](){return GetStartColor();}, [this](Color val){SetStartColor(val);});
+        UIElement::FloatField("Scale", _scale);
+        UIElement::FloatField("Rotation", _rotation);
+        UIElement::FloatField("Speed", _speed);
+        UIElement::FloatField("Gravity modifier", _gravityModifier);
+        UIElement::FloatField("Life length", _lifeLength);
+        UIElement::ColorField("Start color", _startColor);
         
         UIElement::Header("Texture Values");
         UIElement::TextureField("Texture", [this](){return GetTexturePath();}, [this](const std::string &str){LoadTextureFromPath(str);});
@@ -251,7 +251,7 @@ namespace hr {
             case SIMPLE:
                 break;
             case ATLAS:
-                UIElement::IntField("Number of rows", [this](){return GetNumberOfRows();}, [this](int val){SetNumberOfRows(val);});
+                UIElement::IntField("Number of rows", _numberOfRows);
                 break;
         }
         enumNames = {"Alpha", "Additive", "Multiplied", "Add Colors", "Substract Colors", "Alpha premultiply"};
@@ -263,7 +263,7 @@ namespace hr {
         UIElement::EnumField("Emission Type", [this](){return GetEmissionType();}, [this](int val){SetEmissionType((ParticleEmissionType)val);}, enumNames);
         switch (_emissionType) {
             case CONE:
-                UIElement::FloatField("Cone Angle", [this](){return GetConeAngle();}, [this](float val){SetConeAngle(val);}, 0.2, 1, 89);
+                UIElement::FloatField("Cone Angle", _coneAngle, 0.2, 1, 89);
                 break;
             case SPHERE:
                 break;

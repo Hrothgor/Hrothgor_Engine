@@ -1,0 +1,230 @@
+{
+    "entities": [
+        {
+            "components": [
+                [
+                    "BoxCollider",
+                    {
+                        "height": 1.0,
+                        "length": 1.0,
+                        "offset": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "width": 1.0
+                    }
+                ],
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "hasTransparency": false,
+                        "meshPath": "Engine/Ressources/cube.obj",
+                        "texturePath": ""
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ]
+            ],
+            "name": "Box",
+            "transform": {
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    40.416656494140625,
+                    1.0,
+                    53.26856231689453
+                ]
+            },
+            "uuid": "ddeb1b87-8b78-41e6-8bab-5977500dd839"
+        },
+        {
+            "components": [
+                [
+                    "Light",
+                    {
+                        "color": [
+                            61,
+                            45,
+                            3,
+                            255
+                        ],
+                        "intensity": 0.7350000143051147,
+                        "range": 10.0,
+                        "type": 0
+                    }
+                ]
+            ],
+            "name": "Light",
+            "transform": {
+                "position": [
+                    -30.928565979003906,
+                    27.177249908447266,
+                    17.27552604675293
+                ],
+                "rotation": [
+                    -9.977420806884766,
+                    9.546611785888672,
+                    -25.700326919555664
+                ],
+                "scale": [
+                    0.9999980926513672,
+                    0.9999971985816956,
+                    0.9999927282333374
+                ]
+            },
+            "uuid": "46458609-050a-41a2-9c03-283434209969"
+        },
+        {
+            "childs": [
+                {
+                    "components": [
+                        [
+                            "Light",
+                            {
+                                "color": [
+                                    255,
+                                    251,
+                                    0,
+                                    255
+                                ],
+                                "intensity": 1.7350000143051147,
+                                "range": 50.0,
+                                "type": 1
+                            }
+                        ]
+                    ],
+                    "name": "Light",
+                    "transform": {
+                        "position": [
+                            9.196305274963379,
+                            22.60574722290039,
+                            0.0
+                        ],
+                        "rotation": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "uuid": "cd7bc99d-69d2-499a-9804-b0422ceaa4ca"
+                },
+                {
+                    "components": [
+                        [
+                            "ParticleSystem",
+                            {
+                                "blendMode": 1,
+                                "coneAngle": 20.0,
+                                "emissionType": 1,
+                                "gravityModifier": 0.0,
+                                "lifeLength": 0.5,
+                                "maxParticle": 1000,
+                                "numberOfRows": 1,
+                                "pps": 50,
+                                "rotation": 0.0,
+                                "scale": 1.0,
+                                "speed": 20.0,
+                                "startColor": [
+                                    247,
+                                    255,
+                                    0,
+                                    255
+                                ],
+                                "texturePath": "Engine/Ressources/default-particle.png",
+                                "textureType": 0
+                            }
+                        ]
+                    ],
+                    "name": "Particles",
+                    "transform": {
+                        "position": [
+                            9.665040969848633,
+                            23.942819595336914,
+                            6.8531341552734375
+                        ],
+                        "rotation": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "uuid": "cfab4d21-9141-4af0-822b-3f1967e80411"
+                }
+            ],
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "hasTransparency": false,
+                        "meshPath": "Engine/Ressources/lamp_low2.obj",
+                        "texturePath": "Engine/Ressources/fence.png"
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ]
+            ],
+            "name": "Mesh",
+            "transform": {
+                "position": [
+                    5.019739627838135,
+                    0.0,
+                    12.660571098327637
+                ],
+                "rotation": [
+                    0.0,
+                    55.58308792114258,
+                    0.0
+                ],
+                "scale": [
+                    5.839995384216309,
+                    5.839999198913574,
+                    5.8399977684021
+                ]
+            },
+            "uuid": "a249161b-a19e-4cbe-970c-831ff1689344"
+        }
+    ]
+}

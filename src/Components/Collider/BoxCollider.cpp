@@ -84,10 +84,10 @@ namespace hr {
 
     void BoxCollider::ImGuiRender()
     {
-        UIElement::Vector3Field("Offset", [this](){return GetOffset();}, [this](Vector3 vec){SetOffset(vec);});
-        UIElement::FloatField("Cube Width", [this](){return GetWidth();}, [this](float val){SetWidth(val);});
-        UIElement::FloatField("Cube Height", [this](){return GetHeight();}, [this](float val){SetHeight(val);});
-        UIElement::FloatField("Cube Length", [this](){return GetLength();}, [this](float val){SetLength(val);});
+        UIElement::Vector3Field("Offset", _offset);
+        UIElement::FloatField("Cube Width", _width);
+        UIElement::FloatField("Cube Height", _height);
+        UIElement::FloatField("Cube Length", _length);
     }
 
     void BoxCollider::OnDrawGizmos()

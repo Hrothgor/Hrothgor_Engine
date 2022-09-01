@@ -38,7 +38,7 @@ namespace hr {
             RigidBody *rb = object->GetComponent<RigidBody>();
 
             if (rb->GetUseGravity())
-                rb->AddForce(_gravity * rb->GetMass());
+                rb->AddForce(_gravity * (rb->GetMass() * 2));
 
             rb->AddVelocity(rb->GetForce() * GetFrameTime());
 

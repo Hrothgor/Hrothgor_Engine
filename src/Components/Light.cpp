@@ -93,11 +93,11 @@ namespace hr {
             case DIRECTIONAL:
                 break;
             case POINT:
-                UIElement::FloatField("Range", [this](){return GetRange();}, [this](int val){SetRange(val);}, 1, 0, 5000);
+                UIElement::FloatField("Range", _range, 1, 0, 5000);
                 break;
         }
-        UIElement::ColorField("Color", [this](){return GetColor();}, [this](Color col){SetColor(col);});
-        UIElement::SliderFloatField("Intensity", [this](){return GetIntensity();}, [this](float val){SetIntensity(val);}, 0, 2);
+        UIElement::ColorField("Color", _color);
+        UIElement::SliderFloatField("Intensity", _intensity, 0, 2);
     }
 
     void Light::OnDrawGizmos()

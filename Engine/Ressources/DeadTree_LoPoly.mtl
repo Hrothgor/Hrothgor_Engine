@@ -1,0 +1,16 @@
+newmtl pCylinder2SG
+illum 4
+Kd 0.40 0.40 0.40
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.20 0.29 0.32
+Ns 3.43
+newmtl pCylinder2SG1
+illum 4
+Kd 0.40 0.40 0.40
+Ka 0.00 0.00 0.00
+Tf 1.00 1.00 1.00
+Ni 1.00
+Ks 0.20 0.29 0.32
+Ns 3.43

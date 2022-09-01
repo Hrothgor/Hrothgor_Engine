@@ -216,9 +216,9 @@ namespace hr {
 
     void Transform::ImGuiRender()
     {
-        UIElement::Vector3Field("Position", [this](){return GetPosition();}, [this](Vector3 vec){SetPosition(vec);});
-        UIElement::Vector3Field("Rotation", [this](){return GetRotation();}, [this](Vector3 vec){SetRotation(vec);});
-        UIElement::Vector3Field("Scale", [this](){return GetScale();}, [this](Vector3 vec){SetScale(vec);});
+        UIElement::Vector3Field("Position", _position);
+        UIElement::Vector3Field("Rotation", _rotation);
+        UIElement::Vector3Field("Scale", _scale);
     }
 
     nlohmann::json Transform::ToJson() const

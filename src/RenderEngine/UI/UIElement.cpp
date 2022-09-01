@@ -33,26 +33,26 @@ namespace hr {
         ImGui::SetWindowFontScale(1);
     }
 
-    void UIElement::CheckBox(const std::string &label, std::function<bool()> getter, std::function<void(bool)> setter)
+    void UIElement::CheckBox(const std::string &label, bool &val)
     {
         StartField(label);
         
-        bool value = getter();
+        bool value = val;
     
         if (ImGui::Checkbox("", &value))
-            setter(value);
+            val = value;
 
         EndField();
     }
 
-    void UIElement::SliderFloatField(const std::string &label, std::function<float()> getter, std::function<void(float)> setter, float min, float max, const char* format, float power)
+    void UIElement::SliderFloatField(const std::string &label, float &val, float min, float max, const char* format, float power)
     {
         StartField(label);
 
-        float value = getter();
+        float value = val;
 
 		if (ImGui::SliderScalarN("", ImGuiDataType_Float, &value, 1, &min, &max, format, power))
-            setter(value);
+            val = value;
         
 		EndField();
     }
@@ -78,67 +78,67 @@ namespace hr {
 		EndField();
     }
 
-    void UIElement::IntField(const std::string &label, std::function<int()> getter, std::function<void(int)> setter, float speed, int min, int max, const char* format)
+    void UIElement::IntField(const std::string &label, int &val, float speed, int min, int max, const char* format)
     {
         StartField(label);
 
-        int value = getter();
+        int value = val;
 
 		if (ImGui::DragScalarN("", ImGuiDataType_S32, &value, 1, speed, &min, &max, format))
-            setter(value);
+            val = value;
 
 		EndField();
     }
 
-    void UIElement::FloatField(const std::string &label, std::function<float()> getter, std::function<void(float)> setter, float speed, float min, float max, const char* format)
+    void UIElement::FloatField(const std::string &label, float &val, float speed, float min, float max, const char* format)
     {
         StartField(label);
 
-        float value = getter();
+        float value = val;
 
 		if (ImGui::DragScalarN("", ImGuiDataType_Float, &value, 1, speed, &min, &max, format))
-            setter(value);
+            val = value;
 
 		EndField();
     }
 
-    void UIElement::Vector2Field(const std::string &label, std::function<Vector2()> getter, std::function<void(Vector2)> setter, float speed, float min, float max, const char* format)
+    void UIElement::Vector2Field(const std::string &label, Vector2 &val, float speed, float min, float max, const char* format)
     {
         StartField(label);
 
-        Vector2 vec = getter();
+        Vector2 vec = val;
         float value[2] = {vec.x, vec.y};
 
 		if (ImGui::DragScalarN("", ImGuiDataType_Float, value, 2, speed, &min, &max, format))
-            setter((Vector2){value[0], value[1]});
+            val = (Vector2){value[0], value[1]};
 
 		EndField();
     }
 
-    void UIElement::Vector3Field(const std::string &label, std::function<Vector3()> getter, std::function<void(Vector3)> setter, float speed, float min, float max, const char* format)
+    void UIElement::Vector3Field(const std::string &label, Vector3 &val, float speed, float min, float max, const char* format)
     {
         StartField(label);
 
-        Vector3 vec = getter();
+        Vector3 vec = val;
         float value[3] = {vec.x, vec.y, vec.z};
 
 		if (ImGui::DragScalarN("", ImGuiDataType_Float, value, 3, speed, &min, &max, format))
-            setter((Vector3){value[0], value[1], value[2]});
+            val = (Vector3){value[0], value[1], value[2]};
 
 		EndField();
     }
 
-    void UIElement::ColorField(const std::string &label, std::function<Color()> getter, std::function<void(Color)> setter)
+    void UIElement::ColorField(const std::string &label, Color &val)
     {
         StartField(label);
 
-        Color col = getter();
+        Color col = val;
         Vector4 nCol = ColorNormalize(col);
         float value[4] = {nCol.x, nCol.y, nCol.z, nCol.w};
 
 
 		if (ImGui::ColorEdit4("", value))
-            setter(ColorFromNormalized((Vector4){value[0], value[1], value[2], value[3]}));
+            val = ColorFromNormalized((Vector4){value[0], value[1], value[2], value[3]});
 
 		EndField();
     }

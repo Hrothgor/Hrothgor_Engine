@@ -61,8 +61,8 @@ namespace hr {
 
     void SphereCollider::ImGuiRender()
     {
-        UIElement::Vector3Field("Offset", [this](){return GetOffset();}, [this](Vector3 vec){SetOffset(vec);});
-        UIElement::FloatField("Sphere Radius", [this](){return GetRadius();}, [this](float val){SetRadius(val);});
+        UIElement::Vector3Field("Offset", _offset);
+        UIElement::FloatField("Sphere Radius", _radius);
     }
 
     void SphereCollider::OnDrawGizmos()

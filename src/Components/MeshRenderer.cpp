@@ -89,8 +89,8 @@ namespace hr {
     {
         UIElement::ModelField("Mesh", [this](){return GetMeshPath();}, [this](const std::string &str){LoadMeshFromPath(str);});
         UIElement::TextureField("Texture", [this](){return GetTexturePath();}, [this](const std::string &str){LoadTextureFromPath(str);});
-        UIElement::ColorField("Color", [this](){return GetColor();}, [this](const Color &val){SetColor(val);});
-        UIElement::CheckBox("Has Transparency", [this](){return GetHasTransparency();}, [this](const bool &val){SetHasTransparency(val);});
+        UIElement::ColorField("Color", _color);
+        UIElement::CheckBox("Has Transparency", _bHasTransparency);
     }
 
     nlohmann::json MeshRenderer::ToJson() const

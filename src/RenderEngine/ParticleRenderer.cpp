@@ -43,8 +43,9 @@ namespace hr {
     void ParticleRenderer::Draw()
     {
         BeginFrame();
-        Material material = LoadMaterialDefault();
         for (Particle *particle : _particles) {
+            Material material = LoadMaterialDefault();
+            
             BeginBlendMode(particle->GetParentSystem()->GetBlendMode());
             material.maps[MATERIAL_MAP_ALBEDO].texture = particle->GetTexture();
             material.maps[MATERIAL_MAP_ALBEDO].color = particle->GetStartColor();
@@ -57,8 +58,9 @@ namespace hr {
             Matrix transform = particle->GetTransform().GetTransformMatrix();
             transform = MatrixMultiply(particle->GetBillboardMatrix(), transform);
             DrawMesh(particle->GetMesh(), material, transform);
+
+            RL_FREE(material.maps);
         }
-        RL_FREE(material.maps);
         EndFrame();
     }
 

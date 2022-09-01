@@ -1,193 +1,6 @@
 {
     "entities": [
         {
-            "childs": [
-                {
-                    "components": [
-                        [
-                            "MeshRenderer",
-                            {
-                                "color": [
-                                    255,
-                                    255,
-                                    255,
-                                    255
-                                ],
-                                "hasTransparency": false,
-                                "meshPath": "Engine/Ressources/bomb.obj",
-                                "texturePath": ""
-                            }
-                        ]
-                    ],
-                    "name": "bomb1",
-                    "transform": {
-                        "position": [
-                            10.0,
-                            0.0,
-                            0.0
-                        ],
-                        "rotation": [
-                            0.0,
-                            0.0,
-                            0.0
-                        ],
-                        "scale": [
-                            1.0,
-                            1.0,
-                            1.0
-                        ]
-                    },
-                    "uuid": "0b2408f0-4c48-437d-b76c-a4b584dc6031"
-                },
-                {
-                    "components": [
-                        [
-                            "MeshRenderer",
-                            {
-                                "color": [
-                                    255,
-                                    255,
-                                    255,
-                                    255
-                                ],
-                                "hasTransparency": false,
-                                "meshPath": "Engine/Ressources/bomb.obj",
-                                "texturePath": ""
-                            }
-                        ]
-                    ],
-                    "name": "bomb2",
-                    "transform": {
-                        "position": [
-                            20.0,
-                            0.0,
-                            0.0
-                        ],
-                        "rotation": [
-                            0.0,
-                            0.0,
-                            0.0
-                        ],
-                        "scale": [
-                            1.0,
-                            1.0,
-                            1.0
-                        ]
-                    },
-                    "uuid": "c34a0c6f-8544-4f54-bba8-15b06d85dde2"
-                },
-                {
-                    "components": [
-                        [
-                            "MeshRenderer",
-                            {
-                                "color": [
-                                    255,
-                                    255,
-                                    255,
-                                    255
-                                ],
-                                "hasTransparency": false,
-                                "meshPath": "Engine/Ressources/bomb.obj",
-                                "texturePath": ""
-                            }
-                        ]
-                    ],
-                    "name": "bomb3",
-                    "transform": {
-                        "position": [
-                            30.0,
-                            0.0,
-                            0.0
-                        ],
-                        "rotation": [
-                            0.0,
-                            0.0,
-                            0.0
-                        ],
-                        "scale": [
-                            1.0,
-                            1.0,
-                            1.0
-                        ]
-                    },
-                    "uuid": "df139fd8-f6b7-4ace-824c-a0025a56b5ba"
-                },
-                {
-                    "components": [
-                        [
-                            "MeshRenderer",
-                            {
-                                "color": [
-                                    255,
-                                    255,
-                                    255,
-                                    255
-                                ],
-                                "hasTransparency": false,
-                                "meshPath": "Engine/Ressources/bomb.obj",
-                                "texturePath": ""
-                            }
-                        ]
-                    ],
-                    "name": "bomb4",
-                    "transform": {
-                        "position": [
-                            40.0,
-                            0.0,
-                            0.0
-                        ],
-                        "rotation": [
-                            0.0,
-                            0.0,
-                            0.0
-                        ],
-                        "scale": [
-                            1.0,
-                            1.0,
-                            1.0
-                        ]
-                    },
-                    "uuid": "bb7a271f-a532-4a3d-abc5-37057eecc83c"
-                }
-            ],
-            "components": [
-                [
-                    "MeshRenderer",
-                    {
-                        "color": [
-                            255,
-                            255,
-                            255,
-                            255
-                        ],
-                        "hasTransparency": false,
-                        "meshPath": "Engine/Ressources/dragon.obj",
-                        "texturePath": ""
-                    }
-                ]
-            ],
-            "name": "dragon",
-            "transform": {
-                "position": [
-                    7.492387771606445,
-                    1.6793216466903687,
-                    6.9507246017456055
-                ],
-                "rotation": [
-                    0.0,
-                    -0.0,
-                    0.0
-                ],
-                "scale": [
-                    1.0,
-                    1.0,
-                    1.0
-                ]
-            },
-            "uuid": "aa9615e5-813d-4907-8bcc-ada1714edb70"
-        },
-        {
             "components": [
                 [
                     "Light",
@@ -301,7 +114,7 @@
                 [
                     "RigidBody",
                     {
-                        "isDynamic": true,
+                        "isDynamic": false,
                         "mass": 1.0,
                         "useGravity": false
                     }
@@ -321,9 +134,9 @@
             "name": "Sphere",
             "transform": {
                 "position": [
-                    -10.200387954711914,
-                    24.041486740112305,
-                    3.931291103363037
+                    25.09214973449707,
+                    2.0627317428588867,
+                    21.803020477294922
                 ],
                 "rotation": [
                     -179.99948120117188,
@@ -370,7 +183,7 @@
                 [
                     "RigidBody",
                     {
-                        "isDynamic": true,
+                        "isDynamic": false,
                         "mass": 1.0,
                         "useGravity": false
                     }
@@ -379,19 +192,19 @@
             "name": "Cube",
             "transform": {
                 "position": [
-                    -4.235695838928223,
+                    37.11294174194336,
                     15.797687530517578,
                     -6.385210037231445
                 ],
                 "rotation": [
-                    148.89242553710938,
-                    -10.766501426696777,
-                    164.32664489746094
+                    129.62913513183594,
+                    44.92644119262695,
+                    -168.97857666015625
                 ],
                 "scale": [
-                    15.432588577270508,
+                    15.432509422302246,
                     7.499985218048096,
-                    27.05048370361328
+                    27.050464630126953
                 ]
             },
             "uuid": "820c5402-21ee-4d64-a53c-2c73e24d8a2c"
@@ -583,6 +396,168 @@
                 ]
             },
             "uuid": "9264b3eb-5ff4-4827-8b9c-36e6bd18630a"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "hasTransparency": false,
+                        "meshPath": "Engine/Ressources/cube.obj",
+                        "texturePath": "Engine/Ressources/image.png"
+                    }
+                ],
+                [
+                    "BoxCollider",
+                    {
+                        "height": 1.0,
+                        "length": 1.0,
+                        "offset": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "width": 1.0
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": false,
+                        "mass": 1.0,
+                        "useGravity": false
+                    }
+                ]
+            ],
+            "name": "Cube",
+            "transform": {
+                "position": [
+                    -29.63517189025879,
+                    15.797687530517578,
+                    -6.385210037231445
+                ],
+                "rotation": [
+                    48.84959411621094,
+                    -81.86849212646484,
+                    -106.88987731933594
+                ],
+                "scale": [
+                    15.432552337646484,
+                    7.499986171722412,
+                    27.050485610961914
+                ]
+            },
+            "uuid": "820c5402-21ee-4d64-a53c-2c73e24d8a2c"
+        },
+        {
+            "name": "spehre sender",
+            "transform": {
+                "position": [
+                    19.705856323242188,
+                    31.88041114807129,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "uuid": "9518192e-7f70-4f41-bd2b-4c4c67c05ebe"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "hasTransparency": false,
+                        "meshPath": "Engine/Ressources/sphere.obj",
+                        "texturePath": "Engine/Ressources/image.png"
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": false,
+                        "mass": 1.0,
+                        "useGravity": false
+                    }
+                ],
+                [
+                    "SphereCollider",
+                    {
+                        "offset": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "radius": 9.100000381469727
+                    }
+                ]
+            ],
+            "name": "Sphere",
+            "transform": {
+                "position": [
+                    -11.77836799621582,
+                    16.886999130249023,
+                    21.803020477294922
+                ],
+                "rotation": [
+                    -179.99948120117188,
+                    5.212121963500977,
+                    -179.99935913085938
+                ],
+                "scale": [
+                    9.0,
+                    9.0,
+                    9.0
+                ]
+            },
+            "uuid": "6bbcc305-ee03-4b1d-8c98-3b86c49bc8f2"
+        },
+        {
+            "components": [
+                [
+                    "SphereSender",
+                    null
+                ]
+            ],
+            "name": "spehre sender",
+            "transform": {
+                "position": [
+                    -9.806456565856934,
+                    31.88041114807129,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "uuid": "9518192e-7f70-4f41-bd2b-4c4c67c05ebe"
         }
     ]
 }

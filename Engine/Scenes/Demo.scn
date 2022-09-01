@@ -1,0 +1,2085 @@
+{
+    "entities": [
+        {
+            "components": [
+                [
+                    "BoxCollider",
+                    {
+                        "height": 1.0,
+                        "length": 1.0,
+                        "offset": [
+                            0.0,
+                            0.0,
+                            0.0
+                        ],
+                        "width": 1.0
+                    }
+                ],
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            46,
+                            37,
+                            20,
+                            255
+                        ],
+                        "hasTransparency": false,
+                        "meshPath": "Engine/Ressources/cube.obj",
+                        "texturePath": ""
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ]
+            ],
+            "name": "ground",
+            "transform": {
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    25.66364860534668,
+                    0.4406367838382721,
+                    28.1385555267334
+                ]
+            },
+            "uuid": "31883660-24d8-4d00-89da-24cc34cf02e9"
+        },
+        {
+            "components": [
+                [
+                    "Light",
+                    {
+                        "color": [
+                            133,
+                            68,
+                            30,
+                            255
+                        ],
+                        "intensity": 0.6159999966621399,
+                        "range": 10.0,
+                        "type": 0
+                    }
+                ]
+            ],
+            "name": "Light",
+            "transform": {
+                "position": [
+                    -41.45519256591797,
+                    14.773994445800781,
+                    -4.052552223205566
+                ],
+                "rotation": [
+                    0.16877494752407074,
+                    0.2511308193206787,
+                    -27.557907104492188
+                ],
+                "scale": [
+                    0.9999949932098389,
+                    0.9999944567680359,
+                    0.9999952912330627
+                ]
+            },
+            "uuid": "ca00ba04-a153-476c-bccc-5818748a55c9"
+        },
+        {
+            "childs": [
+                {
+                    "components": [
+                        [
+                            "ParticleSystem",
+                            {
+                                "blendMode": 0,
+                                "coneAngle": 57.0,
+                                "emissionType": 0,
+                                "gravityModifier": -0.5,
+                                "lifeLength": 3.0,
+                                "maxParticle": 1000,
+                                "numberOfRows": 8,
+                                "pps": 10,
+                                "rotation": 0.0,
+                                "scale": 5.0,
+                                "speed": 1.0,
+                                "startColor": [
+                                    255,
+                                    255,
+                                    255,
+                                    255
+                                ],
+                                "texturePath": "Engine/Ressources/smoke.png",
+                                "textureType": 1
+                            }
+                        ]
+                    ],
+                    "name": "smoke",
+                    "transform": {
+                        "position": [
+                            -4.411454200744629,
+                            24.616209030151367,
+                            -2.8688247203826904
+                        ],
+                        "rotation": [
+                            0.0,
+                            -0.0,
+                            90.0
+                        ],
+                        "scale": [
+                            0.9999996423721313,
+                            0.9999995231628418,
+                            0.9998606443405151
+                        ]
+                    },
+                    "uuid": "10e534d6-21fa-4414-9468-cd051b7e0c9d"
+                },
+                {
+                    "components": [
+                        [
+                            "ParticleSystem",
+                            {
+                                "blendMode": 0,
+                                "coneAngle": 57.0,
+                                "emissionType": 0,
+                                "gravityModifier": -0.5,
+                                "lifeLength": 3.0,
+                                "maxParticle": 1000,
+                                "numberOfRows": 8,
+                                "pps": 10,
+                                "rotation": 0.0,
+                                "scale": 5.0,
+                                "speed": 1.0,
+                                "startColor": [
+                                    255,
+                                    255,
+                                    255,
+                                    255
+                                ],
+                                "texturePath": "Engine/Ressources/smoke.png",
+                                "textureType": 1
+                            }
+                        ]
+                    ],
+                    "name": "smoke",
+                    "transform": {
+                        "position": [
+                            -4.411454200744629,
+                            20.31104850769043,
+                            -2.8688247203826904
+                        ],
+                        "rotation": [
+                            0.0,
+                            -0.0,
+                            90.0
+                        ],
+                        "scale": [
+                            0.9999996423721313,
+                            0.9999995231628418,
+                            0.9998699426651001
+                        ]
+                    },
+                    "uuid": "10e534d6-21fa-4414-9468-cd051b7e0c9d"
+                },
+                {
+                    "components": [
+                        [
+                            "ParticleSystem",
+                            {
+                                "blendMode": 0,
+                                "coneAngle": 57.0,
+                                "emissionType": 0,
+                                "gravityModifier": -0.5,
+                                "lifeLength": 3.0,
+                                "maxParticle": 1000,
+                                "numberOfRows": 8,
+                                "pps": 10,
+                                "rotation": 0.0,
+                                "scale": 5.0,
+                                "speed": 1.0,
+                                "startColor": [
+                                    255,
+                                    255,
+                                    255,
+                                    255
+                                ],
+                                "texturePath": "Engine/Ressources/smoke.png",
+                                "textureType": 1
+                            }
+                        ]
+                    ],
+                    "name": "smoke",
+                    "transform": {
+                        "position": [
+                            -4.411454200744629,
+                            22.058441162109375,
+                            -2.8688247203826904
+                        ],
+                        "rotation": [
+                            0.0,
+                            -0.0,
+                            90.0
+                        ],
+                        "scale": [
+                            0.9999996423721313,
+                            0.9999995231628418,
+                            0.9998630285263062
+                        ]
+                    },
+                    "uuid": "10e534d6-21fa-4414-9468-cd051b7e0c9d"
+                }
+            ],
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "hasTransparency": false,
+                        "meshPath": "Engine/Ressources/house.obj",
+                        "texturePath": "Engine/Ressources/house.png"
+                    }
+                ]
+            ],
+            "name": "HouseMesh",
+            "transform": {
+                "position": [
+                    -15.89736270904541,
+                    -0.2377571016550064,
+                    -2.5180346965789795
+                ],
+                "rotation": [
+                    0.0,
+                    58.410560607910156,
+                    0.0
+                ],
+                "scale": [
+                    10.2510347366333,
+                    10.251038551330566,
+                    10.25103759765625
+                ]
+            },
+            "uuid": "22f443ea-f0de-4c19-b63b-68b95c6e2ae6"
+        },
+        {
+            "childs": [
+                {
+                    "components": [
+                        [
+                            "Light",
+                            {
+                                "color": [
+                                    196,
+                                    181,
+                                    4,
+                                    255
+                                ],
+                                "intensity": 2.0,
+                                "range": 16.0,
+                                "type": 1
+                            }
+                        ]
+                    ],
+                    "name": "Light",
+                    "transform": {
+                        "position": [
+                            -2.1721503734588623,
+                            3.8527934551239014,
+                            0.0
+                        ],
+                        "rotation": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "uuid": "e083c31c-c1dc-4b4b-ae56-b34b982996bd"
+                },
+                {
+                    "components": [
+                        [
+                            "ParticleSystem",
+                            {
+                                "blendMode": 1,
+                                "coneAngle": 20.0,
+                                "emissionType": 1,
+                                "gravityModifier": 0.5,
+                                "lifeLength": 0.20000000298023224,
+                                "maxParticle": 1000,
+                                "numberOfRows": 1,
+                                "pps": 30,
+                                "rotation": 0.0,
+                                "scale": 1.0,
+                                "speed": 7.0,
+                                "startColor": [
+                                    233,
+                                    255,
+                                    0,
+                                    255
+                                ],
+                                "texturePath": "Engine/Ressources/default-particle.png",
+                                "textureType": 0
+                            }
+                        ]
+                    ],
+                    "name": "Particles",
+                    "transform": {
+                        "position": [
+                            -2.3299078941345215,
+                            3.773461103439331,
+                            0.0
+                        ],
+                        "rotation": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "uuid": "e0ec0a07-13c6-48ec-8661-0b32e649dc38"
+                }
+            ],
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "hasTransparency": false,
+                        "meshPath": "Engine/Ressources/lamp_low2.obj",
+                        "texturePath": "Engine/Ressources/lamp_low2_lamp_low2_lambert2SG_BaseColor.png"
+                    }
+                ]
+            ],
+            "name": "LampPost",
+            "transform": {
+                "position": [
+                    11.288461685180664,
+                    0.0,
+                    11.953278541564941
+                ],
+                "rotation": [
+                    0.0024065773468464613,
+                    -85.50755310058594,
+                    -0.0024156563449651003
+                ],
+                "scale": [
+                    0.9999938607215881,
+                    1.0,
+                    0.9999950528144836
+                ]
+            },
+            "uuid": "e785d9ba-ba2c-4c0e-9296-a0767ba39d7f"
+        },
+        {
+            "childs": [
+                {
+                    "components": [
+                        [
+                            "Light",
+                            {
+                                "color": [
+                                    196,
+                                    181,
+                                    4,
+                                    255
+                                ],
+                                "intensity": 2.0,
+                                "range": 16.0,
+                                "type": 1
+                            }
+                        ]
+                    ],
+                    "name": "Light",
+                    "transform": {
+                        "position": [
+                            2.314816474914551,
+                            3.8527934551239014,
+                            0.0
+                        ],
+                        "rotation": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "uuid": "e083c31c-c1dc-4b4b-ae56-b34b982996bd"
+                },
+                {
+                    "components": [
+                        [
+                            "ParticleSystem",
+                            {
+                                "blendMode": 1,
+                                "coneAngle": 20.0,
+                                "emissionType": 1,
+                                "gravityModifier": 0.5,
+                                "lifeLength": 0.20000000298023224,
+                                "maxParticle": 1000,
+                                "numberOfRows": 1,
+                                "pps": 30,
+                                "rotation": 0.0,
+                                "scale": 1.0,
+                                "speed": 7.0,
+                                "startColor": [
+                                    233,
+                                    255,
+                                    0,
+                                    255
+                                ],
+                                "texturePath": "Engine/Ressources/default-particle.png",
+                                "textureType": 0
+                            }
+                        ]
+                    ],
+                    "name": "Particles",
+                    "transform": {
+                        "position": [
+                            1.6472434997558594,
+                            3.773461103439331,
+                            0.0
+                        ],
+                        "rotation": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "uuid": "e0ec0a07-13c6-48ec-8661-0b32e649dc38"
+                }
+            ],
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "hasTransparency": false,
+                        "meshPath": "Engine/Ressources/lamp_low2.obj",
+                        "texturePath": "Engine/Ressources/lamp_low2_lamp_low2_lambert2SG_BaseColor.png"
+                    }
+                ]
+            ],
+            "name": "LampPost",
+            "transform": {
+                "position": [
+                    -13.173373222351074,
+                    0.0,
+                    17.956682205200195
+                ],
+                "rotation": [
+                    -0.00019665084255393595,
+                    79.35159301757813,
+                    -0.00020045771088916808
+                ],
+                "scale": [
+                    0.9999979138374329,
+                    1.0,
+                    0.9999982118606567
+                ]
+            },
+            "uuid": "e785d9ba-ba2c-4c0e-9296-a0767ba39d7f"
+        },
+        {
+            "childs": [
+                {
+                    "components": [
+                        [
+                            "Light",
+                            {
+                                "color": [
+                                    196,
+                                    181,
+                                    4,
+                                    255
+                                ],
+                                "intensity": 2.0,
+                                "range": 16.0,
+                                "type": 1
+                            }
+                        ]
+                    ],
+                    "name": "Light",
+                    "transform": {
+                        "position": [
+                            -2.1721503734588623,
+                            3.8527934551239014,
+                            0.0
+                        ],
+                        "rotation": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "uuid": "e083c31c-c1dc-4b4b-ae56-b34b982996bd"
+                },
+                {
+                    "components": [
+                        [
+                            "ParticleSystem",
+                            {
+                                "blendMode": 1,
+                                "coneAngle": 20.0,
+                                "emissionType": 1,
+                                "gravityModifier": 0.5,
+                                "lifeLength": 0.20000000298023224,
+                                "maxParticle": 1000,
+                                "numberOfRows": 1,
+                                "pps": 30,
+                                "rotation": 0.0,
+                                "scale": 1.0,
+                                "speed": 7.0,
+                                "startColor": [
+                                    233,
+                                    255,
+                                    0,
+                                    255
+                                ],
+                                "texturePath": "Engine/Ressources/default-particle.png",
+                                "textureType": 0
+                            }
+                        ]
+                    ],
+                    "name": "Particles",
+                    "transform": {
+                        "position": [
+                            -2.3299078941345215,
+                            3.773461103439331,
+                            0.0
+                        ],
+                        "rotation": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            1.0
+                        ]
+                    },
+                    "uuid": "e0ec0a07-13c6-48ec-8661-0b32e649dc38"
+                }
+            ],
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "hasTransparency": false,
+                        "meshPath": "Engine/Ressources/lamp_low2.obj",
+                        "texturePath": "Engine/Ressources/lamp_low2_lamp_low2_lambert2SG_BaseColor.png"
+                    }
+                ]
+            ],
+            "name": "LampPost",
+            "transform": {
+                "position": [
+                    4.949504852294922,
+                    0.0,
+                    -2.1837730407714844
+                ],
+                "rotation": [
+                    179.9989776611328,
+                    -79.76738739013672,
+                    -179.9989776611328
+                ],
+                "scale": [
+                    0.9999948143959045,
+                    1.0,
+                    0.9999959468841553
+                ]
+            },
+            "uuid": "e785d9ba-ba2c-4c0e-9296-a0767ba39d7f"
+        },
+        {
+            "childs": [
+                {
+                    "components": [
+                        [
+                            "MeshRenderer",
+                            {
+                                "color": [
+                                    255,
+                                    255,
+                                    255,
+                                    255
+                                ],
+                                "hasTransparency": false,
+                                "meshPath": "Engine/Ressources/fence.obj",
+                                "texturePath": "Engine/Ressources/fence.png"
+                            }
+                        ],
+                        [
+                            "RigidBody",
+                            {
+                                "isDynamic": true,
+                                "mass": 1.0,
+                                "useGravity": true
+                            }
+                        ]
+                    ],
+                    "name": "Fence",
+                    "transform": {
+                        "position": [
+                            6.075367450714111,
+                            1.6951602697372437,
+                            15.819801330566406
+                        ],
+                        "rotation": [
+                            0.0010729043278843164,
+                            -85.1928939819336,
+                            -0.0007482619257643819
+                        ],
+                        "scale": [
+                            2.491198778152466,
+                            2.4911985397338867,
+                            2.491197347640991
+                        ]
+                    },
+                    "uuid": "a03d5e90-45b6-47a6-883e-aa1bca803e2e"
+                },
+                {
+                    "components": [
+                        [
+                            "MeshRenderer",
+                            {
+                                "color": [
+                                    255,
+                                    255,
+                                    255,
+                                    255
+                                ],
+                                "hasTransparency": false,
+                                "meshPath": "Engine/Ressources/fence.obj",
+                                "texturePath": "Engine/Ressources/fence.png"
+                            }
+                        ],
+                        [
+                            "RigidBody",
+                            {
+                                "isDynamic": true,
+                                "mass": 1.0,
+                                "useGravity": true
+                            }
+                        ]
+                    ],
+                    "name": "Fence",
+                    "transform": {
+                        "position": [
+                            -8.796355247497559,
+                            1.6951638460159302,
+                            21.81110191345215
+                        ],
+                        "rotation": [
+                            -0.0016970128053799272,
+                            86.59526824951172,
+                            -0.0017340434715151787
+                        ],
+                        "scale": [
+                            2.491199016571045,
+                            2.4911999702453613,
+                            2.4911997318267822
+                        ]
+                    },
+                    "uuid": "a03d5e90-45b6-47a6-883e-aa1bca803e2e"
+                },
+                {
+                    "components": [
+                        [
+                            "MeshRenderer",
+                            {
+                                "color": [
+                                    255,
+                                    255,
+                                    255,
+                                    255
+                                ],
+                                "hasTransparency": false,
+                                "meshPath": "Engine/Ressources/fence.obj",
+                                "texturePath": "Engine/Ressources/fence.png"
+                            }
+                        ],
+                        [
+                            "RigidBody",
+                            {
+                                "isDynamic": true,
+                                "mass": 1.0,
+                                "useGravity": true
+                            }
+                        ]
+                    ],
+                    "name": "Fence",
+                    "transform": {
+                        "position": [
+                            1.6911606788635254,
+                            1.6950337886810303,
+                            3.906245231628418
+                        ],
+                        "rotation": [
+                            7.222646672744304e-05,
+                            -56.19371795654297,
+                            -7.877516327425838e-05
+                        ],
+                        "scale": [
+                            2.491199016571045,
+                            2.4911999702453613,
+                            2.4911997318267822
+                        ]
+                    },
+                    "uuid": "a03d5e90-45b6-47a6-883e-aa1bca803e2e"
+                },
+                {
+                    "components": [
+                        [
+                            "MeshRenderer",
+                            {
+                                "color": [
+                                    255,
+                                    255,
+                                    255,
+                                    255
+                                ],
+                                "hasTransparency": false,
+                                "meshPath": "Engine/Ressources/fence.obj",
+                                "texturePath": "Engine/Ressources/fence.png"
+                            }
+                        ],
+                        [
+                            "RigidBody",
+                            {
+                                "isDynamic": true,
+                                "mass": 1.0,
+                                "useGravity": true
+                            }
+                        ]
+                    ],
+                    "name": "Fence",
+                    "transform": {
+                        "position": [
+                            -8.796355247497559,
+                            1.6951638460159302,
+                            11.927247047424316
+                        ],
+                        "rotation": [
+                            -179.99989318847656,
+                            66.98450469970703,
+                            -179.99989318847656
+                        ],
+                        "scale": [
+                            2.4911997318267822,
+                            2.4911999702453613,
+                            2.4911997318267822
+                        ]
+                    },
+                    "uuid": "a03d5e90-45b6-47a6-883e-aa1bca803e2e"
+                }
+            ],
+            "name": "Fences",
+            "transform": {
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "uuid": "78bb3a9c-91d0-4168-a787-cf4c0e46fcaf"
+        },
+        {
+            "childs": [
+                {
+                    "childs": [
+                        {
+                            "components": [
+                                [
+                                    "ParticleSystem",
+                                    {
+                                        "blendMode": 0,
+                                        "coneAngle": 20.0,
+                                        "emissionType": 0,
+                                        "gravityModifier": 0.10000000149011612,
+                                        "lifeLength": 1.0,
+                                        "maxParticle": 1000,
+                                        "numberOfRows": 4,
+                                        "pps": 10,
+                                        "rotation": 0.0,
+                                        "scale": 0.4000000059604645,
+                                        "speed": 5.0,
+                                        "startColor": [
+                                            62,
+                                            34,
+                                            6,
+                                            255
+                                        ],
+                                        "texturePath": "Engine/Ressources/particleAtlasCosmic.png",
+                                        "textureType": 1
+                                    }
+                                ]
+                            ],
+                            "name": "Particles",
+                            "transform": {
+                                "position": [
+                                    1.4669151306152344,
+                                    8.721135139465332,
+                                    0.1916332244873047
+                                ],
+                                "rotation": [
+                                    0.0,
+                                    -0.0,
+                                    -90.0
+                                ],
+                                "scale": [
+                                    1.5099997520446777,
+                                    1.5099997520446777,
+                                    1.5099815130233765
+                                ]
+                            },
+                            "uuid": "9bb24684-26c4-4bf9-8d1e-80b3fc4ad41f"
+                        },
+                        {
+                            "components": [
+                                [
+                                    "ParticleSystem",
+                                    {
+                                        "blendMode": 0,
+                                        "coneAngle": 20.0,
+                                        "emissionType": 0,
+                                        "gravityModifier": 0.10000000149011612,
+                                        "lifeLength": 1.0,
+                                        "maxParticle": 1000,
+                                        "numberOfRows": 4,
+                                        "pps": 10,
+                                        "rotation": 0.0,
+                                        "scale": 0.4000000059604645,
+                                        "speed": 5.0,
+                                        "startColor": [
+                                            62,
+                                            34,
+                                            6,
+                                            255
+                                        ],
+                                        "texturePath": "Engine/Ressources/particleAtlasCosmic.png",
+                                        "textureType": 1
+                                    }
+                                ]
+                            ],
+                            "name": "Particles",
+                            "transform": {
+                                "position": [
+                                    -2.0386667251586914,
+                                    7.585995674133301,
+                                    -1.0006561279296875
+                                ],
+                                "rotation": [
+                                    0.0,
+                                    -0.0,
+                                    -90.0
+                                ],
+                                "scale": [
+                                    1.5099997520446777,
+                                    1.5099997520446777,
+                                    1.5099815130233765
+                                ]
+                            },
+                            "uuid": "9bb24684-26c4-4bf9-8d1e-80b3fc4ad41f"
+                        },
+                        {
+                            "components": [
+                                [
+                                    "ParticleSystem",
+                                    {
+                                        "blendMode": 0,
+                                        "coneAngle": 20.0,
+                                        "emissionType": 0,
+                                        "gravityModifier": 0.10000000149011612,
+                                        "lifeLength": 1.0,
+                                        "maxParticle": 1000,
+                                        "numberOfRows": 4,
+                                        "pps": 10,
+                                        "rotation": 0.0,
+                                        "scale": 0.4000000059604645,
+                                        "speed": 5.0,
+                                        "startColor": [
+                                            62,
+                                            34,
+                                            6,
+                                            255
+                                        ],
+                                        "texturePath": "Engine/Ressources/particleAtlasCosmic.png",
+                                        "textureType": 1
+                                    }
+                                ]
+                            ],
+                            "name": "Particles",
+                            "transform": {
+                                "position": [
+                                    1.4669151306152344,
+                                    6.042364120483398,
+                                    3.1871566772460938
+                                ],
+                                "rotation": [
+                                    0.0,
+                                    -0.0,
+                                    -90.0
+                                ],
+                                "scale": [
+                                    1.5099997520446777,
+                                    1.5099997520446777,
+                                    1.5099815130233765
+                                ]
+                            },
+                            "uuid": "9bb24684-26c4-4bf9-8d1e-80b3fc4ad41f"
+                        }
+                    ],
+                    "components": [
+                        [
+                            "MeshRenderer",
+                            {
+                                "color": [
+                                    73,
+                                    39,
+                                    0,
+                                    255
+                                ],
+                                "hasTransparency": false,
+                                "meshPath": "Engine/Ressources/DeadTree_LoPoly.obj",
+                                "texturePath": "Engine/Ressources/smol_house.png"
+                            }
+                        ]
+                    ],
+                    "name": "Tree",
+                    "transform": {
+                        "position": [
+                            -18.864639282226563,
+                            0.5949048399925232,
+                            15.34376049041748
+                        ],
+                        "rotation": [
+                            0.0,
+                            8.288992881774902,
+                            0.0
+                        ],
+                        "scale": [
+                            0.13159999251365662,
+                            0.1316000074148178,
+                            0.13159999251365662
+                        ]
+                    },
+                    "uuid": "9036cebf-aa5d-4f79-8a19-f2fa40ebf6bd"
+                },
+                {
+                    "childs": [
+                        {
+                            "components": [
+                                [
+                                    "ParticleSystem",
+                                    {
+                                        "blendMode": 0,
+                                        "coneAngle": 20.0,
+                                        "emissionType": 0,
+                                        "gravityModifier": 0.10000000149011612,
+                                        "lifeLength": 1.0,
+                                        "maxParticle": 1000,
+                                        "numberOfRows": 4,
+                                        "pps": 10,
+                                        "rotation": 0.0,
+                                        "scale": 0.4000000059604645,
+                                        "speed": 5.0,
+                                        "startColor": [
+                                            62,
+                                            34,
+                                            6,
+                                            255
+                                        ],
+                                        "texturePath": "Engine/Ressources/particleAtlasCosmic.png",
+                                        "textureType": 1
+                                    }
+                                ]
+                            ],
+                            "name": "Particles",
+                            "transform": {
+                                "position": [
+                                    1.4669151306152344,
+                                    8.721135139465332,
+                                    0.1916332244873047
+                                ],
+                                "rotation": [
+                                    0.0,
+                                    -0.0,
+                                    -90.0
+                                ],
+                                "scale": [
+                                    1.5099997520446777,
+                                    1.5099997520446777,
+                                    1.5099815130233765
+                                ]
+                            },
+                            "uuid": "9bb24684-26c4-4bf9-8d1e-80b3fc4ad41f"
+                        },
+                        {
+                            "components": [
+                                [
+                                    "ParticleSystem",
+                                    {
+                                        "blendMode": 0,
+                                        "coneAngle": 20.0,
+                                        "emissionType": 0,
+                                        "gravityModifier": 0.10000000149011612,
+                                        "lifeLength": 1.0,
+                                        "maxParticle": 1000,
+                                        "numberOfRows": 4,
+                                        "pps": 10,
+                                        "rotation": 0.0,
+                                        "scale": 0.4000000059604645,
+                                        "speed": 5.0,
+                                        "startColor": [
+                                            62,
+                                            34,
+                                            6,
+                                            255
+                                        ],
+                                        "texturePath": "Engine/Ressources/particleAtlasCosmic.png",
+                                        "textureType": 1
+                                    }
+                                ]
+                            ],
+                            "name": "Particles",
+                            "transform": {
+                                "position": [
+                                    -2.0386667251586914,
+                                    7.585995674133301,
+                                    -1.0006561279296875
+                                ],
+                                "rotation": [
+                                    0.0,
+                                    -0.0,
+                                    -90.0
+                                ],
+                                "scale": [
+                                    1.5099997520446777,
+                                    1.5099997520446777,
+                                    1.5099815130233765
+                                ]
+                            },
+                            "uuid": "9bb24684-26c4-4bf9-8d1e-80b3fc4ad41f"
+                        },
+                        {
+                            "components": [
+                                [
+                                    "ParticleSystem",
+                                    {
+                                        "blendMode": 0,
+                                        "coneAngle": 20.0,
+                                        "emissionType": 0,
+                                        "gravityModifier": 0.10000000149011612,
+                                        "lifeLength": 1.0,
+                                        "maxParticle": 1000,
+                                        "numberOfRows": 4,
+                                        "pps": 10,
+                                        "rotation": 0.0,
+                                        "scale": 0.4000000059604645,
+                                        "speed": 5.0,
+                                        "startColor": [
+                                            62,
+                                            34,
+                                            6,
+                                            255
+                                        ],
+                                        "texturePath": "Engine/Ressources/particleAtlasCosmic.png",
+                                        "textureType": 1
+                                    }
+                                ]
+                            ],
+                            "name": "Particles",
+                            "transform": {
+                                "position": [
+                                    1.4669151306152344,
+                                    6.042364120483398,
+                                    3.1871566772460938
+                                ],
+                                "rotation": [
+                                    0.0,
+                                    -0.0,
+                                    -90.0
+                                ],
+                                "scale": [
+                                    1.5099997520446777,
+                                    1.5099997520446777,
+                                    1.5099815130233765
+                                ]
+                            },
+                            "uuid": "9bb24684-26c4-4bf9-8d1e-80b3fc4ad41f"
+                        }
+                    ],
+                    "components": [
+                        [
+                            "MeshRenderer",
+                            {
+                                "color": [
+                                    73,
+                                    39,
+                                    0,
+                                    255
+                                ],
+                                "hasTransparency": false,
+                                "meshPath": "Engine/Ressources/DeadTree_LoPoly.obj",
+                                "texturePath": "Engine/Ressources/smol_house.png"
+                            }
+                        ]
+                    ],
+                    "name": "Tree",
+                    "transform": {
+                        "position": [
+                            11.504030227661133,
+                            0.5949048399925232,
+                            20.381059646606445
+                        ],
+                        "rotation": [
+                            0.0,
+                            -0.0,
+                            0.0
+                        ],
+                        "scale": [
+                            0.1316000074148178,
+                            0.1316000074148178,
+                            0.1316000074148178
+                        ]
+                    },
+                    "uuid": "9036cebf-aa5d-4f79-8a19-f2fa40ebf6bd"
+                },
+                {
+                    "childs": [
+                        {
+                            "components": [
+                                [
+                                    "ParticleSystem",
+                                    {
+                                        "blendMode": 0,
+                                        "coneAngle": 20.0,
+                                        "emissionType": 0,
+                                        "gravityModifier": 0.10000000149011612,
+                                        "lifeLength": 1.0,
+                                        "maxParticle": 1000,
+                                        "numberOfRows": 4,
+                                        "pps": 10,
+                                        "rotation": 0.0,
+                                        "scale": 0.4000000059604645,
+                                        "speed": 5.0,
+                                        "startColor": [
+                                            62,
+                                            34,
+                                            6,
+                                            255
+                                        ],
+                                        "texturePath": "Engine/Ressources/particleAtlasCosmic.png",
+                                        "textureType": 1
+                                    }
+                                ]
+                            ],
+                            "name": "Particles",
+                            "transform": {
+                                "position": [
+                                    1.4669151306152344,
+                                    8.721135139465332,
+                                    0.1916332244873047
+                                ],
+                                "rotation": [
+                                    0.0,
+                                    -0.0,
+                                    -90.0
+                                ],
+                                "scale": [
+                                    1.5099997520446777,
+                                    1.5099997520446777,
+                                    1.5099815130233765
+                                ]
+                            },
+                            "uuid": "9bb24684-26c4-4bf9-8d1e-80b3fc4ad41f"
+                        },
+                        {
+                            "components": [
+                                [
+                                    "ParticleSystem",
+                                    {
+                                        "blendMode": 0,
+                                        "coneAngle": 20.0,
+                                        "emissionType": 0,
+                                        "gravityModifier": 0.10000000149011612,
+                                        "lifeLength": 1.0,
+                                        "maxParticle": 1000,
+                                        "numberOfRows": 4,
+                                        "pps": 10,
+                                        "rotation": 0.0,
+                                        "scale": 0.4000000059604645,
+                                        "speed": 5.0,
+                                        "startColor": [
+                                            62,
+                                            34,
+                                            6,
+                                            255
+                                        ],
+                                        "texturePath": "Engine/Ressources/particleAtlasCosmic.png",
+                                        "textureType": 1
+                                    }
+                                ]
+                            ],
+                            "name": "Particles",
+                            "transform": {
+                                "position": [
+                                    -2.0386667251586914,
+                                    7.585995674133301,
+                                    -1.0006561279296875
+                                ],
+                                "rotation": [
+                                    0.0,
+                                    -0.0,
+                                    -90.0
+                                ],
+                                "scale": [
+                                    1.5099997520446777,
+                                    1.5099997520446777,
+                                    1.5099815130233765
+                                ]
+                            },
+                            "uuid": "9bb24684-26c4-4bf9-8d1e-80b3fc4ad41f"
+                        },
+                        {
+                            "components": [
+                                [
+                                    "ParticleSystem",
+                                    {
+                                        "blendMode": 0,
+                                        "coneAngle": 20.0,
+                                        "emissionType": 0,
+                                        "gravityModifier": 0.10000000149011612,
+                                        "lifeLength": 1.0,
+                                        "maxParticle": 1000,
+                                        "numberOfRows": 4,
+                                        "pps": 10,
+                                        "rotation": 0.0,
+                                        "scale": 0.4000000059604645,
+                                        "speed": 5.0,
+                                        "startColor": [
+                                            62,
+                                            34,
+                                            6,
+                                            255
+                                        ],
+                                        "texturePath": "Engine/Ressources/particleAtlasCosmic.png",
+                                        "textureType": 1
+                                    }
+                                ]
+                            ],
+                            "name": "Particles",
+                            "transform": {
+                                "position": [
+                                    1.4669151306152344,
+                                    6.042364120483398,
+                                    3.1871566772460938
+                                ],
+                                "rotation": [
+                                    0.0,
+                                    -0.0,
+                                    -90.0
+                                ],
+                                "scale": [
+                                    1.5099997520446777,
+                                    1.5099997520446777,
+                                    1.5099815130233765
+                                ]
+                            },
+                            "uuid": "9bb24684-26c4-4bf9-8d1e-80b3fc4ad41f"
+                        }
+                    ],
+                    "components": [
+                        [
+                            "MeshRenderer",
+                            {
+                                "color": [
+                                    73,
+                                    39,
+                                    0,
+                                    255
+                                ],
+                                "hasTransparency": false,
+                                "meshPath": "Engine/Ressources/DeadTree_LoPoly.obj",
+                                "texturePath": "Engine/Ressources/smol_house.png"
+                            }
+                        ]
+                    ],
+                    "name": "Tree",
+                    "transform": {
+                        "position": [
+                            11.504030227661133,
+                            0.5949048399925232,
+                            -11.0804443359375
+                        ],
+                        "rotation": [
+                            0.0,
+                            -35.59772872924805,
+                            0.0
+                        ],
+                        "scale": [
+                            0.13159999251365662,
+                            0.1316000074148178,
+                            0.13159999251365662
+                        ]
+                    },
+                    "uuid": "9036cebf-aa5d-4f79-8a19-f2fa40ebf6bd"
+                },
+                {
+                    "childs": [
+                        {
+                            "components": [
+                                [
+                                    "ParticleSystem",
+                                    {
+                                        "blendMode": 0,
+                                        "coneAngle": 20.0,
+                                        "emissionType": 0,
+                                        "gravityModifier": 0.10000000149011612,
+                                        "lifeLength": 1.0,
+                                        "maxParticle": 1000,
+                                        "numberOfRows": 4,
+                                        "pps": 10,
+                                        "rotation": 0.0,
+                                        "scale": 0.4000000059604645,
+                                        "speed": 5.0,
+                                        "startColor": [
+                                            62,
+                                            34,
+                                            6,
+                                            255
+                                        ],
+                                        "texturePath": "Engine/Ressources/particleAtlasCosmic.png",
+                                        "textureType": 1
+                                    }
+                                ]
+                            ],
+                            "name": "Particles",
+                            "transform": {
+                                "position": [
+                                    1.4669151306152344,
+                                    8.721135139465332,
+                                    0.1916332244873047
+                                ],
+                                "rotation": [
+                                    0.0,
+                                    -0.0,
+                                    -90.0
+                                ],
+                                "scale": [
+                                    1.5099997520446777,
+                                    1.5099997520446777,
+                                    1.5099815130233765
+                                ]
+                            },
+                            "uuid": "9bb24684-26c4-4bf9-8d1e-80b3fc4ad41f"
+                        },
+                        {
+                            "components": [
+                                [
+                                    "ParticleSystem",
+                                    {
+                                        "blendMode": 0,
+                                        "coneAngle": 20.0,
+                                        "emissionType": 0,
+                                        "gravityModifier": 0.10000000149011612,
+                                        "lifeLength": 1.0,
+                                        "maxParticle": 1000,
+                                        "numberOfRows": 4,
+                                        "pps": 10,
+                                        "rotation": 0.0,
+                                        "scale": 0.4000000059604645,
+                                        "speed": 5.0,
+                                        "startColor": [
+                                            62,
+                                            34,
+                                            6,
+                                            255
+                                        ],
+                                        "texturePath": "Engine/Ressources/particleAtlasCosmic.png",
+                                        "textureType": 1
+                                    }
+                                ]
+                            ],
+                            "name": "Particles",
+                            "transform": {
+                                "position": [
+                                    -2.0386667251586914,
+                                    7.585995674133301,
+                                    -1.0006561279296875
+                                ],
+                                "rotation": [
+                                    0.0,
+                                    -0.0,
+                                    -90.0
+                                ],
+                                "scale": [
+                                    1.5099997520446777,
+                                    1.5099997520446777,
+                                    1.5099815130233765
+                                ]
+                            },
+                            "uuid": "9bb24684-26c4-4bf9-8d1e-80b3fc4ad41f"
+                        },
+                        {
+                            "components": [
+                                [
+                                    "ParticleSystem",
+                                    {
+                                        "blendMode": 0,
+                                        "coneAngle": 20.0,
+                                        "emissionType": 0,
+                                        "gravityModifier": 0.10000000149011612,
+                                        "lifeLength": 1.0,
+                                        "maxParticle": 1000,
+                                        "numberOfRows": 4,
+                                        "pps": 10,
+                                        "rotation": 0.0,
+                                        "scale": 0.4000000059604645,
+                                        "speed": 5.0,
+                                        "startColor": [
+                                            62,
+                                            34,
+                                            6,
+                                            255
+                                        ],
+                                        "texturePath": "Engine/Ressources/particleAtlasCosmic.png",
+                                        "textureType": 1
+                                    }
+                                ]
+                            ],
+                            "name": "Particles",
+                            "transform": {
+                                "position": [
+                                    1.4669151306152344,
+                                    6.042364120483398,
+                                    3.1871566772460938
+                                ],
+                                "rotation": [
+                                    0.0,
+                                    -0.0,
+                                    -90.0
+                                ],
+                                "scale": [
+                                    1.5099997520446777,
+                                    1.5099997520446777,
+                                    1.5099815130233765
+                                ]
+                            },
+                            "uuid": "9bb24684-26c4-4bf9-8d1e-80b3fc4ad41f"
+                        }
+                    ],
+                    "components": [
+                        [
+                            "MeshRenderer",
+                            {
+                                "color": [
+                                    73,
+                                    39,
+                                    0,
+                                    255
+                                ],
+                                "hasTransparency": false,
+                                "meshPath": "Engine/Ressources/DeadTree_LoPoly.obj",
+                                "texturePath": "Engine/Ressources/smol_house.png"
+                            }
+                        ]
+                    ],
+                    "name": "Tree",
+                    "transform": {
+                        "position": [
+                            -4.628611087799072,
+                            0.5949048399925232,
+                            -11.0804443359375
+                        ],
+                        "rotation": [
+                            0.0,
+                            -35.59772872924805,
+                            0.0
+                        ],
+                        "scale": [
+                            0.13159999251365662,
+                            0.1316000074148178,
+                            0.13159999251365662
+                        ]
+                    },
+                    "uuid": "9036cebf-aa5d-4f79-8a19-f2fa40ebf6bd"
+                }
+            ],
+            "name": "Forest",
+            "transform": {
+                "position": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ]
+            },
+            "uuid": "42fc2a26-12b5-427d-b83e-6d30af0b4911"
+        },
+        {
+            "childs": [
+                {
+                    "components": [
+                        [
+                            "ParticleSystem",
+                            {
+                                "blendMode": 1,
+                                "coneAngle": 34.20000076293945,
+                                "emissionType": 0,
+                                "gravityModifier": 0.30000001192092896,
+                                "lifeLength": 5.0,
+                                "maxParticle": 1000,
+                                "numberOfRows": 1,
+                                "pps": 10,
+                                "rotation": 0.0,
+                                "scale": 1.0,
+                                "speed": 5.0,
+                                "startColor": [
+                                    255,
+                                    255,
+                                    255,
+                                    255
+                                ],
+                                "texturePath": "Engine/Ressources/particleStar.png",
+                                "textureType": 0
+                            }
+                        ]
+                    ],
+                    "name": "Particle",
+                    "transform": {
+                        "position": [
+                            0.0,
+                            10.216324806213379,
+                            0.0
+                        ],
+                        "rotation": [
+                            0.0,
+                            -0.0,
+                            90.0
+                        ],
+                        "scale": [
+                            1.0,
+                            1.0,
+                            0.999988853931427
+                        ]
+                    },
+                    "uuid": "ec0d1d8f-cf4d-4809-a03e-c7a73b62ba09"
+                }
+            ],
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "hasTransparency": false,
+                        "meshPath": "Engine/Ressources/smol_house.obj",
+                        "texturePath": "Engine/Ressources/smol_house.png"
+                    }
+                ]
+            ],
+            "name": "SmolHouse",
+            "transform": {
+                "position": [
+                    17.95821189880371,
+                    -0.20519140362739563,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -54.796607971191406,
+                    0.0
+                ],
+                "scale": [
+                    1.3699994087219238,
+                    1.3700000047683716,
+                    1.3699994087219238
+                ]
+            },
+            "uuid": "e856cdf7-43bb-430a-ae0d-b88b2e08b148"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "hasTransparency": true,
+                        "meshPath": "Engine/Ressources/fern.obj",
+                        "texturePath": "Engine/Ressources/fern.png"
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ]
+            ],
+            "name": "Fern",
+            "transform": {
+                "position": [
+                    -0.31151771545410156,
+                    0.0,
+                    -14.740791320800781
+                ],
+                "rotation": [
+                    0.0,
+                    42.028011322021484,
+                    0.0
+                ],
+                "scale": [
+                    0.6479201316833496,
+                    0.6479200124740601,
+                    0.6479201316833496
+                ]
+            },
+            "uuid": "49a4db8b-1283-41fd-88e5-d587b47ce674"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "hasTransparency": true,
+                        "meshPath": "Engine/Ressources/fern.obj",
+                        "texturePath": "Engine/Ressources/fern.png"
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ]
+            ],
+            "name": "Fern",
+            "transform": {
+                "position": [
+                    9.268743515014648,
+                    0.0,
+                    23.956443786621094
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    0.8098999857902527,
+                    0.8098999857902527,
+                    0.8098999857902527
+                ]
+            },
+            "uuid": "49a4db8b-1283-41fd-88e5-d587b47ce674"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "hasTransparency": true,
+                        "meshPath": "Engine/Ressources/fern.obj",
+                        "texturePath": "Engine/Ressources/fern.png"
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ]
+            ],
+            "name": "Fern",
+            "transform": {
+                "position": [
+                    -19.3631534576416,
+                    0.0,
+                    23.956443786621094
+                ],
+                "rotation": [
+                    0.0,
+                    42.028011322021484,
+                    0.0
+                ],
+                "scale": [
+                    0.6479201316833496,
+                    0.6479200124740601,
+                    0.6479201316833496
+                ]
+            },
+            "uuid": "49a4db8b-1283-41fd-88e5-d587b47ce674"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            255,
+                            255,
+                            255,
+                            255
+                        ],
+                        "hasTransparency": true,
+                        "meshPath": "Engine/Ressources/fern.obj",
+                        "texturePath": "Engine/Ressources/fern.png"
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ]
+            ],
+            "name": "Fern",
+            "transform": {
+                "position": [
+                    16.989397048950195,
+                    0.0,
+                    11.7092866897583
+                ],
+                "rotation": [
+                    0.0,
+                    42.028011322021484,
+                    0.0
+                ],
+                "scale": [
+                    0.6479201316833496,
+                    0.6479200124740601,
+                    0.6479201316833496
+                ]
+            },
+            "uuid": "49a4db8b-1283-41fd-88e5-d587b47ce674"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            68,
+                            68,
+                            8,
+                            255
+                        ],
+                        "hasTransparency": true,
+                        "meshPath": "Engine/Ressources/grassModel.obj",
+                        "texturePath": "Engine/Ressources/grassTexture.png"
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ]
+            ],
+            "name": "Grass",
+            "transform": {
+                "position": [
+                    -15.269285202026367,
+                    0.0,
+                    19.518640518188477
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    0.8999999165534973,
+                    0.8999999165534973,
+                    0.8999999165534973
+                ]
+            },
+            "uuid": "e5d6aecb-bab6-4e0f-b1b6-cc568f3eb175"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            68,
+                            68,
+                            8,
+                            255
+                        ],
+                        "hasTransparency": true,
+                        "meshPath": "Engine/Ressources/grassModel.obj",
+                        "texturePath": "Engine/Ressources/grassTexture.png"
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ]
+            ],
+            "name": "Grass",
+            "transform": {
+                "position": [
+                    -2.352842330932617,
+                    0.0,
+                    17.13315773010254
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    0.8999999165534973,
+                    0.8999999165534973,
+                    0.8999999165534973
+                ]
+            },
+            "uuid": "e5d6aecb-bab6-4e0f-b1b6-cc568f3eb175"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            68,
+                            68,
+                            8,
+                            255
+                        ],
+                        "hasTransparency": true,
+                        "meshPath": "Engine/Ressources/grassModel.obj",
+                        "texturePath": "Engine/Ressources/grassTexture.png"
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ]
+            ],
+            "name": "Grass",
+            "transform": {
+                "position": [
+                    -2.352842330932617,
+                    0.0,
+                    3.4408748149871826
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    0.8999999165534973,
+                    0.8999999165534973,
+                    0.8999999165534973
+                ]
+            },
+            "uuid": "e5d6aecb-bab6-4e0f-b1b6-cc568f3eb175"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            68,
+                            68,
+                            8,
+                            255
+                        ],
+                        "hasTransparency": true,
+                        "meshPath": "Engine/Ressources/grassModel.obj",
+                        "texturePath": "Engine/Ressources/grassTexture.png"
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ]
+            ],
+            "name": "Grass",
+            "transform": {
+                "position": [
+                    13.09722900390625,
+                    0.0,
+                    3.4408748149871826
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    0.8999999165534973,
+                    0.8999999165534973,
+                    0.8999999165534973
+                ]
+            },
+            "uuid": "e5d6aecb-bab6-4e0f-b1b6-cc568f3eb175"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            68,
+                            68,
+                            8,
+                            255
+                        ],
+                        "hasTransparency": true,
+                        "meshPath": "Engine/Ressources/grassModel.obj",
+                        "texturePath": "Engine/Ressources/grassTexture.png"
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ]
+            ],
+            "name": "Grass",
+            "transform": {
+                "position": [
+                    17.340734481811523,
+                    0.0,
+                    19.518640518188477
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    0.8999999165534973,
+                    0.8999999165534973,
+                    0.8999999165534973
+                ]
+            },
+            "uuid": "e5d6aecb-bab6-4e0f-b1b6-cc568f3eb175"
+        }
+    ]
+}

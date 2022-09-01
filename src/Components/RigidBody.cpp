@@ -118,7 +118,7 @@ namespace hr {
 
     void RigidBody::AddForce(Vector3 force)
     {
-        _force = _force + force;
+        _force += force;
     }
 
     Vector3 RigidBody::GetVelocity() const
@@ -189,9 +189,9 @@ namespace hr {
 
     void RigidBody::ImGuiRender()
     {
-        UIElement::FloatField("Mass", [this](){return GetMass();}, [this](float val){SetMass(val);});
-        UIElement::CheckBox("Use Gravity", [this](){return GetUseGravity();}, [this](bool val){SetUseGravity(val);});
-        UIElement::CheckBox("Is Dynamic", [this](){return GetIsDynamic();}, [this](bool val){SetIsDynamic(val);});
+        UIElement::FloatField("Mass", _mass);
+        UIElement::CheckBox("Use Gravity", _useGravity);
+        UIElement::CheckBox("Is Dynamic", _isDynamic);
     }
 
     nlohmann::json RigidBody::ToJson() const
