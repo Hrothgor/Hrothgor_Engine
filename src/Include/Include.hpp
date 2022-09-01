@@ -11,7 +11,7 @@
 #define WIDTH 1920.0
 #define HEIGHT 1080.0
 
-#define MAX_LIGHTS 100
+#define MAX_LIGHTS 20
 
 #include <string>
 #include <iostream>

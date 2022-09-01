@@ -15,7 +15,7 @@ out vec4 finalColor;
 
 // NOTE: Add here your custom variables
 
-#define     MAX_LIGHTS              100
+#define     MAX_LIGHTS              20
 #define     LIGHT_DIRECTIONAL       0
 #define     LIGHT_POINT             1
 
@@ -42,6 +42,10 @@ void main()
     vec3 normal = normalize(fragNormal);
     vec3 viewD = normalize(viewPos - fragPosition);
     vec3 specular = vec3(0.0);
+
+    if (texelColor.a < 0.5) {
+        discard;
+    }
 
     // NOTE: Implement here your fragment shader code
 
@@ -73,10 +77,6 @@ void main()
             if (NdotL > 0.0) specCo = pow(max(0.0, dot(viewD, reflect(-(light), normal))), 16.0); // 16 refers to shine
             specular += specCo * intensity;
         }
-    }
-
-    if (texelColor.a < 0.5) {
-        discard;
     }
 
     finalColor = (texelColor * ((colDiffuse + vec4(specular, 1.0)) * vec4(lightDot, 1.0)));

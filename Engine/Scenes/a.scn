@@ -1,0 +1,49 @@
+{
+    "entities": [
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            74,
+                            255,
+                            0,
+                            255
+                        ],
+                        "hasTransparency": false,
+                        "meshPath": "Engine/Ressources/cube.obj",
+                        "texturePath": ""
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ]
+            ],
+            "name": "Mesh",
+            "transform": {
+                "position": [
+                    0.0,
+                    7.278034210205078,
+                    0.0
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1000.0,
+                    1.0,
+                    1000.0
+                ]
+            },
+            "uuid": "695ca78b-0b49-4901-b6d7-2cd55512daca"
+        }
+    ]
+}
