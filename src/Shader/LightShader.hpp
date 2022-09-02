@@ -39,6 +39,7 @@ namespace hr {
         protected:
         private:
             std::vector<std::vector<int>> _locations;
+            int _locationNbLights;
     };
 }
 

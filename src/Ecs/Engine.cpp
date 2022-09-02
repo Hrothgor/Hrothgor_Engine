@@ -22,7 +22,7 @@ namespace hr {
     Engine::Engine()
     {
         SetTraceLogLevel(TraceLogLevel::LOG_WARNING);
-        InitWindow(0, 0, "Physics Engine");
+        InitWindow(0, 0, "Hrothgor Engine");
         rlImGuiSetup(true);
         ToggleFullscreen();
         InitAudioDevice();

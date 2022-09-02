@@ -9,13 +9,14 @@ in vec3 fragNormal;
 // Input uniform values
 uniform sampler2D texture0;
 uniform vec4 colDiffuse;
+uniform int nbLights;
 
 // Output fragment color
-out vec4 finalColor;
+out vec4 out_Pixel;
 
 // NOTE: Add here your custom variables
 
-#define     MAX_LIGHTS              20
+#define     MAX_LIGHTS              100
 #define     LIGHT_DIRECTIONAL       0
 #define     LIGHT_POINT             1
 
@@ -49,7 +50,7 @@ void main()
 
     // NOTE: Implement here your fragment shader code
 
-    for (int i = 0; i < MAX_LIGHTS; i++)
+    for (int i = 0; i < nbLights && i < MAX_LIGHTS; i++)
     {
         if (lights[i].enabled == 1)
         {
@@ -64,6 +65,10 @@ void main()
             if (lights[i].type == LIGHT_POINT)
             {
                 float dist = abs(distance(lights[i].position, fragPosition));
+                if (dist > lights[i].range)
+                {
+                    continue;
+                }
                 light = normalize(lights[i].position - fragPosition);
                 float attenuation = max(lights[i].range - dist, 0);
                 attenuation /= lights[i].range;
@@ -79,9 +84,9 @@ void main()
         }
     }
 
-    finalColor = (texelColor * ((colDiffuse + vec4(specular, 1.0)) * vec4(lightDot, 1.0)));
+    vec4 finalColor = (texelColor * ((colDiffuse + vec4(specular, 1.0)) * vec4(lightDot, 1.0)));
     finalColor += texelColor * (ambient/10.0) * colDiffuse;
 
     // Gamma correction
-    finalColor = pow(finalColor, vec4(1.0/2.2));
+    out_Pixel = pow(finalColor, vec4(1.0/2.2));
 }

@@ -18,6 +18,8 @@ namespace hr {
         for (int i = 0; i < MAX_LIGHTS; i++)
             _locations[i] = GetLocations(i);
 
+        _locationNbLights = GetShaderLocation(_shader, "nbLights");
+
         int ambientLoc = GetShaderLocation(_shader, "ambient");
         float ambientValue[4] =  { 0.1, 0.1, 0.1, 1.0 };
         SetShaderValue(_shader, ambientLoc, &ambientValue, SHADER_UNIFORM_VEC4);
@@ -63,14 +65,16 @@ namespace hr {
 
     void LightShader::UpdateLightsLoc(std::vector<GameObject *> lights)
     {
+        int nbLights = MAX_LIGHTS;
         for (unsigned int i = 0; i < MAX_LIGHTS; i++) {
             if (i < lights.size()) {
                 UpdateLightLoc(lights[i]->GetComponent<Light>(), i);
             } else {
-                int enabled = 0;
-                SetShaderValue(_shader, _locations[i][LOC_ENABLED], &enabled, SHADER_UNIFORM_INT);
+                nbLights = i;
+                break;
             }
         }
+        SetShaderValue(_shader, _locationNbLights, &nbLights, SHADER_UNIFORM_INT);
     }
 
     std::vector<int> LightShader::GetLocations(int id) const
