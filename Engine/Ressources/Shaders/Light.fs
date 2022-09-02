@@ -38,10 +38,10 @@ void main()
 {
     // Texel color fetching from texture sampler
     vec4 texelColor = texture(texture0, fragTexCoord);
-    vec3 lightDot = vec3(0.0);
     vec3 normal = normalize(fragNormal);
     vec3 viewD = normalize(viewPos - fragPosition);
-    vec3 specular = vec3(0.0);
+    vec3 totalDiffuse = vec3(0.0);
+    vec3 totalSpecular = vec3(0.0);
 
     if (texelColor.a < 0.5) {
         discard;
@@ -51,12 +51,12 @@ void main()
 
     for (int i = 0; i < nbLights; i++)
     {
-        vec3 light = vec3(0.0);
+        vec3 toLight = vec3(0.0);
         float intensity = lights[i].intensity;
 
         if (lights[i].type == LIGHT_DIRECTIONAL)
         {
-            light = -normalize(lights[i].target - lights[i].position);
+            toLight = normalize(lights[i].position - lights[i].target);
         }
 
         if (lights[i].type == LIGHT_POINT)
@@ -66,21 +66,25 @@ void main()
             {
                 continue;
             }
-            light = normalize(lights[i].position - fragPosition);
+            toLight = normalize(lights[i].position - fragPosition);
             float attenuation = lights[i].range - dist;
             attenuation /= lights[i].range;
             intensity *= attenuation;
         }
 
-        float NdotL = max(dot(normal, light), 0.0);
-        lightDot += lights[i].color.rgb * NdotL * intensity;
+        // Diffuse
+        float NdotL = dot(normal, toLight);
+        float brightness = max(NdotL, 0.0);
+        totalDiffuse += lights[i].color.rgb * brightness * intensity;
 
+        // Specular
         float specCo = 0.0;
-        if (NdotL > 0.0) specCo = pow(max(0.0, dot(viewD, reflect(-(light), normal))), 16.0); // 16 refers to shine
-        specular += specCo * intensity;
+        if (NdotL > 0.0)
+            specCo = pow(max(dot(viewD, reflect(-(toLight), normal)), 0.0), 16.0); // 16 refers to shine
+        totalSpecular += specCo * intensity;
     }
 
-    vec4 finalColor = (texelColor * ((colDiffuse + vec4(specular, 1.0)) * vec4(lightDot, 1.0)));
+    vec4 finalColor = (texelColor * ((colDiffuse + vec4(totalSpecular, 1.0)) * vec4(totalDiffuse, 1.0)));
     finalColor += texelColor * (ambient/10.0) * colDiffuse;
 
     // Gamma correction
