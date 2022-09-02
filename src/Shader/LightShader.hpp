@@ -16,8 +16,7 @@ namespace hr {
     class GameObject;
 
     enum LightShaderLoc {
-        LOC_ENABLED = 0,
-        LOC_TYPE,
+        LOC_TYPE = 0,
         LOC_TARGET,
         LOC_POS,
         LOC_RANGE,

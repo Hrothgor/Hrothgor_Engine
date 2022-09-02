@@ -21,7 +21,6 @@ out vec4 out_Pixel;
 #define     LIGHT_POINT             1
 
 struct Light {
-    int enabled;
     int type;
     vec3 target;
     vec3 position;
@@ -50,38 +49,35 @@ void main()
 
     // NOTE: Implement here your fragment shader code
 
-    for (int i = 0; i < nbLights && i < MAX_LIGHTS; i++)
+    for (int i = 0; i < nbLights; i++)
     {
-        if (lights[i].enabled == 1)
+        vec3 light = vec3(0.0);
+        float intensity = lights[i].intensity;
+
+        if (lights[i].type == LIGHT_DIRECTIONAL)
         {
-            vec3 light = vec3(0.0);
-            float intensity = lights[i].intensity;
-
-            if (lights[i].type == LIGHT_DIRECTIONAL)
-            {
-                light = -normalize(lights[i].target - lights[i].position);
-            }
-
-            if (lights[i].type == LIGHT_POINT)
-            {
-                float dist = abs(distance(lights[i].position, fragPosition));
-                if (dist > lights[i].range)
-                {
-                    continue;
-                }
-                light = normalize(lights[i].position - fragPosition);
-                float attenuation = max(lights[i].range - dist, 0);
-                attenuation /= lights[i].range;
-                intensity *= attenuation;
-            }
-
-            float NdotL = max(dot(normal, light), 0.0);
-            lightDot += lights[i].color.rgb * NdotL * intensity;
-
-            float specCo = 0.0;
-            if (NdotL > 0.0) specCo = pow(max(0.0, dot(viewD, reflect(-(light), normal))), 16.0); // 16 refers to shine
-            specular += specCo * intensity;
+            light = -normalize(lights[i].target - lights[i].position);
         }
+
+        if (lights[i].type == LIGHT_POINT)
+        {
+            float dist = abs(distance(lights[i].position, fragPosition));
+            if (dist > lights[i].range)
+            {
+                continue;
+            }
+            light = normalize(lights[i].position - fragPosition);
+            float attenuation = lights[i].range - dist;
+            attenuation /= lights[i].range;
+            intensity *= attenuation;
+        }
+
+        float NdotL = max(dot(normal, light), 0.0);
+        lightDot += lights[i].color.rgb * NdotL * intensity;
+
+        float specCo = 0.0;
+        if (NdotL > 0.0) specCo = pow(max(0.0, dot(viewD, reflect(-(light), normal))), 16.0); // 16 refers to shine
+        specular += specCo * intensity;
     }
 
     vec4 finalColor = (texelColor * ((colDiffuse + vec4(specular, 1.0)) * vec4(lightDot, 1.0)));

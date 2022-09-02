@@ -37,9 +37,6 @@ namespace hr {
 
     void LightShader::UpdateLightLoc(Light *light, int id)
     {
-        int enabled = 1;
-        SetShaderValue(_shader, _locations[id][LOC_ENABLED], &enabled, SHADER_UNIFORM_INT);
-
         int type = light->GetType();
         SetShaderValue(_shader, _locations[id][LOC_TYPE], &type, SHADER_UNIFORM_INT);
 
@@ -81,7 +78,6 @@ namespace hr {
     {
         std::vector<int> locations(LOC_LIGHT_SHADER_COUNT, 0);
 
-        locations[LOC_ENABLED] = GetShaderLocation(_shader, ("lights[" + std::to_string(id) + "].enabled").c_str());
         locations[LOC_TYPE] = GetShaderLocation(_shader, ("lights[" + std::to_string(id) + "].type").c_str());
         locations[LOC_TARGET] = GetShaderLocation(_shader, ("lights[" + std::to_string(id) + "].target").c_str());
         locations[LOC_POS] = GetShaderLocation(_shader, ("lights[" + std::to_string(id) + "].position").c_str());
