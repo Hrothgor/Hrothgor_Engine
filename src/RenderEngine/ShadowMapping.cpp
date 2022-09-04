@@ -29,18 +29,18 @@ namespace hr {
 
     int ShadowMapping::CreateFrameBuffer()
     {
-        int frameBuffer = 0;
+        GLuint frameBuffer = 0;
 
         glGenFramebuffers(1, &frameBuffer);
-        glBindFramebuffer(GL_FRAMEBUFFER, FramebufferName);
-        glDrawBuffer(GL_NONE);
+        glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
+        glDrawBuffers(0, GL_NONE);
 
         return frameBuffer;
     }
 
     int ShadowMapping::CreateDepthBuffer(int width, int height)
     {
-        int depthTexture = 0;
+        GLuint depthTexture = 0;
 
         glGenTextures(1, &depthTexture);
         glBindTexture(GL_TEXTURE_2D, depthTexture);
@@ -50,14 +50,14 @@ namespace hr {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
 
-        glFramebufferTexture(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, depthTexture, 0);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, depthTexture, 0, 0);
 
         return depthTexture;
     }
 
     void ShadowMapping::End()
     {
-        glDeleteFramebuffers(_fbo);
-        glDeleteTextures(_shadowMapTexture);
+        glDeleteFramebuffers(1, (GLuint *)&_fbo);
+        glDeleteTextures(1, (GLuint *)&_shadowMapTexture);
     }
 }
