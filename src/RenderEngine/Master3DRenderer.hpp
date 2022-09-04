@@ -12,6 +12,7 @@
 #include "EntityRenderer.hpp"
 #include "ParticleRenderer.hpp"
 #include "GizmosRenderer.hpp"
+#include "UI/ImGuiLayer.hpp"
 
 namespace hr {
     class MainCamera3D;
@@ -25,6 +26,8 @@ namespace hr {
             void Start();
             void End();
 
+            void Clear(Color color);
+
             void BeginFrame();
             void Draw();
             void EndFrame();
@@ -34,12 +37,19 @@ namespace hr {
             void RegisterLight(GameObject *light);
             void RegisterParticle(Particle *particles);
 
+            RenderTexture GetRenderTexture() const;
+            Texture *GetFrameBufferTexture();
+
         protected:
         private:
+            RenderTexture _renderTexture;
+
             MainCamera3D *_camera;
             EntityRenderer _entityRenderer;
             ParticleRenderer _particleRenderer;
             GizmosRenderer _gizmosRenderer;
+
+            ImGuiLayer _imGuiLayer;
 
         protected:
             static Master3DRenderer *instance;

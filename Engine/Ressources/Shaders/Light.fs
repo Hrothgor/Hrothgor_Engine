@@ -14,8 +14,6 @@ uniform int nbLights;
 // Output fragment color
 out vec4 out_Pixel;
 
-// NOTE: Add here your custom variables
-
 #define     MAX_LIGHTS              100
 #define     LIGHT_DIRECTIONAL       0
 #define     LIGHT_POINT             1
@@ -46,8 +44,6 @@ void main()
     if (texelColor.a < 0.5) {
         discard;
     }
-
-    // NOTE: Implement here your fragment shader code
 
     for (int i = 0; i < nbLights; i++)
     {

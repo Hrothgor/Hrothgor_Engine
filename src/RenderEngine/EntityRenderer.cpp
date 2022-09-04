@@ -44,6 +44,7 @@ namespace hr {
             Model model = meshRenderer->GetModel();
             Texture texture = meshRenderer->GetTexture();
             AxisAngle axisAngle = transform->GetRotationAxisAngle();
+            
             for (int i = 0; i < model.materialCount; i++)
                 model.materials[i].shader = _lightShader.GetShader();
             if (model.materialCount > 0 && texture.id != 0)

@@ -8,7 +8,7 @@
 #include "ViewPortPanel.hpp"
 #include "Guizmo.hpp"
 
-#include "RenderEngine/DisplayManager.hpp"
+#include "RenderEngine/Master3DRenderer.hpp"
 #include "Ecs/Engine.hpp"
 #include "Ecs/GameObject.hpp"
 #include "Tools/SaveLoad/LoadSystem.hpp"
@@ -62,7 +62,7 @@ namespace hr {
             if (Engine::Get()->GetProjectName() == "") {
                 ImGui::Image((ImTextureID)0, size, ImVec2 {0, 1}, ImVec2 {1, 0}, ImVec4 {0, 0, 0, 1});
             } else {
-                ImGui::Image((ImTextureID)DisplayManager::Get()->GetFrameBufferTexture(), size, ImVec2 {0, 1}, ImVec2 {1, 0});
+                ImGui::Image((ImTextureID)Master3DRenderer::Get()->GetFrameBufferTexture(), size, ImVec2 {0, 1}, ImVec2 {1, 0});
             }
             DrawGuizmo();
 

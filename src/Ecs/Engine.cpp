@@ -6,7 +6,7 @@
 */
 
 #include "Engine.hpp"
-#include "RenderEngine/DisplayManager.hpp"
+#include "RenderEngine/Master3DRenderer.hpp"
 #include "PhysicsEngine/PhysicsWorld.hpp"
 #include "Tools/SaveLoad/SaveSystem.hpp"
 #include "Tools/SaveLoad/LoadSystem.hpp"
@@ -45,7 +45,7 @@ namespace hr {
     void Engine::Start()
     {
         SetSelectedEntity(nullptr);
-        DisplayManager::Get()->Start();
+        Master3DRenderer::Get()->Start();
         _mainCamera->Start();
         std::vector<GameObject *> cpy = _entities;
         for (auto ent : cpy)
@@ -87,8 +87,7 @@ namespace hr {
                         PhysicsWorld::Get()->Update();
                     }
                 }
-                DisplayManager::Get()->Clear(DARKGRAY);
-                DisplayManager::Get()->Draw();
+                Master3DRenderer::Get()->Draw();
             }
             EndDrawing();
         }
@@ -100,7 +99,7 @@ namespace hr {
         for (auto ent : _entities)
             if (ent->GetParent() == nullptr)
                 ent->End();
-        DisplayManager::Get()->End();
+        Master3DRenderer::Get()->End();
         rlImGuiShutdown();
         CloseAudioDevice();
         CloseWindow();

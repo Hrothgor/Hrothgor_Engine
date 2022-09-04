@@ -16,6 +16,7 @@ namespace hr {
 
     Master3DRenderer::Master3DRenderer()
     {
+        _renderTexture = LoadRenderTexture(GetScreenWidth(), GetScreenHeight());
     }
 
     Master3DRenderer::~Master3DRenderer()
@@ -24,10 +25,17 @@ namespace hr {
 
     void Master3DRenderer::Start()
     {
+        _imGuiLayer.Start();
+
         _camera = Engine::Get()->GetMainCamera()->GetComponent<MainCamera3D>();
         _entityRenderer.Start();
         _particleRenderer.Start();
         _gizmosRenderer.Start();
+    }
+
+    void Master3DRenderer::Clear(Color color)
+    {
+        ClearBackground(color);
     }
 
     void Master3DRenderer::BeginFrame()
@@ -42,11 +50,22 @@ namespace hr {
 
     void Master3DRenderer::Draw()
     {
-        BeginFrame();
-        _entityRenderer.Draw();
-        _particleRenderer.Draw();
-        _gizmosRenderer.Draw();
-        EndFrame();
+        if (IsWindowResized()) {
+            UnloadRenderTexture(_renderTexture);
+            _renderTexture = LoadRenderTexture(GetScreenWidth(), GetScreenHeight());
+        }
+
+        BeginTextureMode(_renderTexture);
+            ClearBackground(DARKBLUE);
+            BeginFrame();
+                _entityRenderer.Draw();
+                _particleRenderer.Draw();
+                _gizmosRenderer.Draw();
+            EndFrame();
+            DrawText(std::to_string(GetFPS()).c_str(), 0, 0, 50, RED);
+        EndTextureMode();
+        
+        _imGuiLayer.Draw();
     }
 
     void Master3DRenderer::RegisterGizmos(GameObject *object)
@@ -69,10 +88,24 @@ namespace hr {
         _particleRenderer.RegisterParticle(particles);
     }
 
+    RenderTexture Master3DRenderer::GetRenderTexture() const
+    {
+        return _renderTexture;
+    }
+
+    Texture *Master3DRenderer::GetFrameBufferTexture()
+    {
+        return &(_renderTexture.texture);
+    }
+
     void Master3DRenderer::End()
     {
+        _imGuiLayer.End();
+
         _entityRenderer.End();
         _particleRenderer.End();
         _gizmosRenderer.End();
+
+        UnloadRenderTexture(_renderTexture);
     }
 }

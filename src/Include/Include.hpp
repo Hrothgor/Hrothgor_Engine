@@ -28,6 +28,8 @@
 #include <chrono>
 #include <any>
 
+#include <GLES3/gl3.h>
+
 #include "raylib.h"
 #include "raymath.h"
 #include "rlgl.h"
