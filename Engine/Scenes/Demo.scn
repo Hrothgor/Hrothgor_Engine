@@ -106,10 +106,10 @@
                                 "coneAngle": 57.0,
                                 "emissionType": 0,
                                 "gravityModifier": -0.5,
-                                "lifeLength": 3.0,
+                                "lifeLength": 5.0,
                                 "maxParticle": 1000,
                                 "numberOfRows": 8,
-                                "pps": 10,
+                                "pps": 30,
                                 "rotation": 0.0,
                                 "scale": 5.0,
                                 "speed": 1.0,
@@ -127,9 +127,9 @@
                     "name": "smoke",
                     "transform": {
                         "position": [
-                            -4.411454200744629,
-                            24.616209030151367,
-                            -2.8688247203826904
+                            -4.870621681213379,
+                            19.647581100463867,
+                            -3.6720869541168213
                         ],
                         "rotation": [
                             0.0,
@@ -139,101 +139,7 @@
                         "scale": [
                             0.9999996423721313,
                             0.9999995231628418,
-                            0.9998606443405151
-                        ]
-                    },
-                    "uuid": "10e534d6-21fa-4414-9468-cd051b7e0c9d"
-                },
-                {
-                    "components": [
-                        [
-                            "ParticleSystem",
-                            {
-                                "blendMode": 0,
-                                "coneAngle": 57.0,
-                                "emissionType": 0,
-                                "gravityModifier": -0.5,
-                                "lifeLength": 3.0,
-                                "maxParticle": 1000,
-                                "numberOfRows": 8,
-                                "pps": 10,
-                                "rotation": 0.0,
-                                "scale": 5.0,
-                                "speed": 1.0,
-                                "startColor": [
-                                    255,
-                                    255,
-                                    255,
-                                    255
-                                ],
-                                "texturePath": "Engine/Ressources/smoke.png",
-                                "textureType": 1
-                            }
-                        ]
-                    ],
-                    "name": "smoke",
-                    "transform": {
-                        "position": [
-                            -4.411454200744629,
-                            20.31104850769043,
-                            -2.8688247203826904
-                        ],
-                        "rotation": [
-                            0.0,
-                            -0.0,
-                            90.0
-                        ],
-                        "scale": [
-                            0.9999996423721313,
-                            0.9999995231628418,
-                            0.9998699426651001
-                        ]
-                    },
-                    "uuid": "10e534d6-21fa-4414-9468-cd051b7e0c9d"
-                },
-                {
-                    "components": [
-                        [
-                            "ParticleSystem",
-                            {
-                                "blendMode": 0,
-                                "coneAngle": 57.0,
-                                "emissionType": 0,
-                                "gravityModifier": -0.5,
-                                "lifeLength": 3.0,
-                                "maxParticle": 1000,
-                                "numberOfRows": 8,
-                                "pps": 10,
-                                "rotation": 0.0,
-                                "scale": 5.0,
-                                "speed": 1.0,
-                                "startColor": [
-                                    255,
-                                    255,
-                                    255,
-                                    255
-                                ],
-                                "texturePath": "Engine/Ressources/smoke.png",
-                                "textureType": 1
-                            }
-                        ]
-                    ],
-                    "name": "smoke",
-                    "transform": {
-                        "position": [
-                            -4.411454200744629,
-                            22.058441162109375,
-                            -2.8688247203826904
-                        ],
-                        "rotation": [
-                            0.0,
-                            -0.0,
-                            90.0
-                        ],
-                        "scale": [
-                            0.9999996423721313,
-                            0.9999995231628418,
-                            0.9998630285263062
+                            0.9998192191123962
                         ]
                     },
                     "uuid": "10e534d6-21fa-4414-9468-cd051b7e0c9d"
@@ -1855,6 +1761,546 @@
                 ]
             },
             "uuid": "49a4db8b-1283-41fd-88e5-d587b47ce674"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            167,
+                            97,
+                            27,
+                            255
+                        ],
+                        "hasTransparency": true,
+                        "meshPath": "Engine/Ressources/grassModel.obj",
+                        "texturePath": "Engine/Ressources/grassTexture.png"
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ]
+            ],
+            "name": "Grass",
+            "transform": {
+                "position": [
+                    10.86458683013916,
+                    0.0,
+                    2.0542373657226563
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.2698397636413574,
+                    1.2698397636413574,
+                    1.269840121269226
+                ]
+            },
+            "uuid": "abc984d7-8448-4ac1-825d-beb039946dcc"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            167,
+                            97,
+                            27,
+                            255
+                        ],
+                        "hasTransparency": true,
+                        "meshPath": "Engine/Ressources/grassModel.obj",
+                        "texturePath": "Engine/Ressources/grassTexture.png"
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ]
+            ],
+            "name": "Grass",
+            "transform": {
+                "position": [
+                    0.008555686101317406,
+                    0.0,
+                    14.222850799560547
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.2698397636413574,
+                    1.2698397636413574,
+                    1.269840121269226
+                ]
+            },
+            "uuid": "abc984d7-8448-4ac1-825d-beb039946dcc"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            167,
+                            97,
+                            27,
+                            255
+                        ],
+                        "hasTransparency": true,
+                        "meshPath": "Engine/Ressources/grassModel.obj",
+                        "texturePath": "Engine/Ressources/grassTexture.png"
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ]
+            ],
+            "name": "Grass",
+            "transform": {
+                "position": [
+                    12.675154685974121,
+                    0.0,
+                    14.222850799560547
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.2698397636413574,
+                    1.2698397636413574,
+                    1.269840121269226
+                ]
+            },
+            "uuid": "abc984d7-8448-4ac1-825d-beb039946dcc"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            167,
+                            97,
+                            27,
+                            255
+                        ],
+                        "hasTransparency": true,
+                        "meshPath": "Engine/Ressources/grassModel.obj",
+                        "texturePath": "Engine/Ressources/grassTexture.png"
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ]
+            ],
+            "name": "Grass",
+            "transform": {
+                "position": [
+                    -10.057499885559082,
+                    0.0,
+                    14.222850799560547
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.2698397636413574,
+                    1.2698397636413574,
+                    1.269840121269226
+                ]
+            },
+            "uuid": "abc984d7-8448-4ac1-825d-beb039946dcc"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            167,
+                            97,
+                            27,
+                            255
+                        ],
+                        "hasTransparency": true,
+                        "meshPath": "Engine/Ressources/grassModel.obj",
+                        "texturePath": "Engine/Ressources/grassTexture.png"
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ]
+            ],
+            "name": "Grass",
+            "transform": {
+                "position": [
+                    -10.057499885559082,
+                    0.0,
+                    -5.385130405426025
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.2698397636413574,
+                    1.2698397636413574,
+                    1.269840121269226
+                ]
+            },
+            "uuid": "abc984d7-8448-4ac1-825d-beb039946dcc"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            167,
+                            97,
+                            27,
+                            255
+                        ],
+                        "hasTransparency": true,
+                        "meshPath": "Engine/Ressources/grassModel.obj",
+                        "texturePath": "Engine/Ressources/grassTexture.png"
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ]
+            ],
+            "name": "Grass",
+            "transform": {
+                "position": [
+                    2.731539249420166,
+                    0.0,
+                    -5.385130405426025
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.2698397636413574,
+                    1.2698397636413574,
+                    1.269840121269226
+                ]
+            },
+            "uuid": "abc984d7-8448-4ac1-825d-beb039946dcc"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            167,
+                            97,
+                            27,
+                            255
+                        ],
+                        "hasTransparency": true,
+                        "meshPath": "Engine/Ressources/grassModel.obj",
+                        "texturePath": "Engine/Ressources/grassTexture.png"
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ]
+            ],
+            "name": "Grass",
+            "transform": {
+                "position": [
+                    13.068549156188965,
+                    0.0,
+                    -5.385130405426025
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.2698397636413574,
+                    1.2698397636413574,
+                    1.269840121269226
+                ]
+            },
+            "uuid": "abc984d7-8448-4ac1-825d-beb039946dcc"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            167,
+                            97,
+                            27,
+                            255
+                        ],
+                        "hasTransparency": true,
+                        "meshPath": "Engine/Ressources/grassModel.obj",
+                        "texturePath": "Engine/Ressources/grassTexture.png"
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ]
+            ],
+            "name": "Grass",
+            "transform": {
+                "position": [
+                    13.068549156188965,
+                    0.0,
+                    -14.642599105834961
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.2698397636413574,
+                    1.2698397636413574,
+                    1.269840121269226
+                ]
+            },
+            "uuid": "abc984d7-8448-4ac1-825d-beb039946dcc"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            167,
+                            97,
+                            27,
+                            255
+                        ],
+                        "hasTransparency": true,
+                        "meshPath": "Engine/Ressources/grassModel.obj",
+                        "texturePath": "Engine/Ressources/grassTexture.png"
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ]
+            ],
+            "name": "Grass",
+            "transform": {
+                "position": [
+                    1.0377734899520874,
+                    0.0,
+                    -14.642599105834961
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.2698397636413574,
+                    1.2698397636413574,
+                    1.269840121269226
+                ]
+            },
+            "uuid": "abc984d7-8448-4ac1-825d-beb039946dcc"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            167,
+                            97,
+                            27,
+                            255
+                        ],
+                        "hasTransparency": true,
+                        "meshPath": "Engine/Ressources/grassModel.obj",
+                        "texturePath": "Engine/Ressources/grassTexture.png"
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ]
+            ],
+            "name": "Grass",
+            "transform": {
+                "position": [
+                    -8.13541316986084,
+                    0.0,
+                    -14.642599105834961
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.2698397636413574,
+                    1.2698397636413574,
+                    1.269840121269226
+                ]
+            },
+            "uuid": "abc984d7-8448-4ac1-825d-beb039946dcc"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            167,
+                            97,
+                            27,
+                            255
+                        ],
+                        "hasTransparency": true,
+                        "meshPath": "Engine/Ressources/grassModel.obj",
+                        "texturePath": "Engine/Ressources/grassTexture.png"
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ]
+            ],
+            "name": "Grass",
+            "transform": {
+                "position": [
+                    -8.13541316986084,
+                    0.0,
+                    2.0542373657226563
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.2698397636413574,
+                    1.2698397636413574,
+                    1.269840121269226
+                ]
+            },
+            "uuid": "abc984d7-8448-4ac1-825d-beb039946dcc"
+        },
+        {
+            "components": [
+                [
+                    "MeshRenderer",
+                    {
+                        "color": [
+                            167,
+                            97,
+                            27,
+                            255
+                        ],
+                        "hasTransparency": true,
+                        "meshPath": "Engine/Ressources/grassModel.obj",
+                        "texturePath": "Engine/Ressources/grassTexture.png"
+                    }
+                ],
+                [
+                    "RigidBody",
+                    {
+                        "isDynamic": true,
+                        "mass": 1.0,
+                        "useGravity": true
+                    }
+                ]
+            ],
+            "name": "Grass",
+            "transform": {
+                "position": [
+                    10.86458683013916,
+                    0.0,
+                    2.0542373657226563
+                ],
+                "rotation": [
+                    0.0,
+                    -0.0,
+                    0.0
+                ],
+                "scale": [
+                    1.2698397636413574,
+                    1.2698397636413574,
+                    1.269840121269226
+                ]
+            },
+            "uuid": "abc984d7-8448-4ac1-825d-beb039946dcc"
         }
     ]
 }

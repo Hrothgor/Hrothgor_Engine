@@ -21,11 +21,14 @@ namespace hr {
 
     void ParticleShader::UpdateParticleLoc(Particle *particle)
     {
-        float elapsedTime = particle->GetElapsedTime();
-        SetShaderValue(_shader, _locations[LOC_ELAPSEDTIME], &elapsedTime, SHADER_UNIFORM_FLOAT);
+        float textoffset1[2] = {particle->GetTexOffset1().x, particle->GetTexOffset1().y};
+        SetShaderValue(_shader, _locations[LOC_TEXTOFFSET1], &textoffset1, SHADER_UNIFORM_VEC2);
 
-        float lifeLength = particle->GetLifeLength();
-        SetShaderValue(_shader, _locations[LOC_LIFELENGTH], &lifeLength, SHADER_UNIFORM_FLOAT);
+        float textoffset2[2] = {particle->GetTexOffset2().x, particle->GetTexOffset2().y};
+        SetShaderValue(_shader, _locations[LOC_TEXTOFFSET2], &textoffset2, SHADER_UNIFORM_VEC2);
+
+        float blend = particle->GetBlendFactor();
+        SetShaderValue(_shader, _locations[LOC_BLEND], &blend, SHADER_UNIFORM_FLOAT);
 
         int numberOfRows = particle->GetNumberOfRows();
         SetShaderValue(_shader, _locations[LOC_NUMBEROFROWS], &numberOfRows, SHADER_UNIFORM_INT);
@@ -35,8 +38,9 @@ namespace hr {
     {
         std::vector<int> locations(LOC_PARTICLE_SHADER_COUNT, 0);
 
-        locations[LOC_ELAPSEDTIME] = GetShaderLocation(_shader, "elapsedTime");
-        locations[LOC_LIFELENGTH] = GetShaderLocation(_shader, "lifeLength");
+        locations[LOC_TEXTOFFSET1] = GetShaderLocation(_shader, "texOffset1");
+        locations[LOC_TEXTOFFSET2] = GetShaderLocation(_shader, "texOffset2");
+        locations[LOC_BLEND] = GetShaderLocation(_shader, "blend");
         locations[LOC_NUMBEROFROWS] = GetShaderLocation(_shader, "numberOfRows");
 
         return locations;

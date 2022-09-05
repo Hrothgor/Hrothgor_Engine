@@ -25,6 +25,7 @@ namespace hr {
             ~Particle();
 
             bool Update(Camera3D camera);
+            void updateTextureCoordInfo();
             void RotateTowardCamera(Camera3D camera);
 
             Transform GetTransform() const;
@@ -50,6 +51,10 @@ namespace hr {
             Texture GetTexture() const;
             void SetTexture(const Texture &texture);
 
+            Vector2 GetTexOffset1() const;
+            Vector2 GetTexOffset2() const;
+            float GetBlendFactor() const;
+
             Matrix GetBillboardMatrix() const;
 
             float GetElapsedTime() const;
@@ -71,6 +76,10 @@ namespace hr {
             
             Mesh _mesh = {0};
             Texture _texture = {0};
+
+            Vector2 _texOffset1 = {0};
+            Vector2 _texOffset2 = {0};
+            float _blendFactor = 0;
             
             Matrix _billboardMatrix;
 

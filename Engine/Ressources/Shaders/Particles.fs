@@ -3,11 +3,11 @@
 // Input vertex attributes (from vertex shader)
 in vec2 fragTexCoord1;
 in vec2 fragTexCoord2;
-in float blend;
 
 // Input uniform values
 uniform sampler2D texture0;
 uniform vec4 colDiffuse;
+uniform float blend;
 
 // Output fragment color
 out vec4 out_Pixel;

@@ -15,8 +15,9 @@ namespace hr {
     class Particle;
 
     enum ParticleShaderLoc {
-        LOC_ELAPSEDTIME = 0,
-        LOC_LIFELENGTH,
+        LOC_TEXTOFFSET1 = 0,
+        LOC_TEXTOFFSET2,
+        LOC_BLEND,
         LOC_NUMBEROFROWS,
         LOC_PARTICLE_SHADER_COUNT
     };
