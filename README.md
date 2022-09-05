@@ -8,5 +8,5 @@ Only supported on Linux at the moment.
 ./Hrothgor_Engine to start
 
 Lib you may have to install: <br>
-&nbsp &nbsp glm -> sudo apt install libglm-dev <br>
-&nbsp &nbsp make -> sudo apt install build-essential <br>
+&nbsp; &nbsp; glm -> sudo apt install libglm-dev <br>
+&nbsp; &nbsp; make -> sudo apt install build-essential <br>
