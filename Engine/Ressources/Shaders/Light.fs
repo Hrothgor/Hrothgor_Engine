@@ -3,8 +3,9 @@
 // Input vertex attributes (from vertex shader)
 in vec3 fragPosition;
 in vec2 fragTexCoord;
-in vec4 fragColor;
 in vec3 fragNormal;
+
+in vec3 toCameraVector;
 
 // Input uniform values
 uniform sampler2D texture0;
@@ -37,7 +38,8 @@ void main()
     // Texel color fetching from texture sampler
     vec4 texelColor = texture(texture0, fragTexCoord);
     vec3 normal = normalize(fragNormal);
-    vec3 viewD = normalize(viewPos - fragPosition);
+    vec3 unitToCameraVector = normalize(toCameraVector);
+
     vec3 totalDiffuse = vec3(0.0);
     vec3 totalSpecular = vec3(0.0);
 
@@ -75,9 +77,16 @@ void main()
 
         // Specular
         float specCo = 0.0;
-        if (NdotL > 0.0)
-            specCo = pow(max(dot(viewD, reflect(-(toLight), normal)), 0.0), 16.0); // 16 refers to shine
-        totalSpecular += specCo * intensity;
+
+        vec3 unitToCameraVector = normalize(toCameraVector);
+        vec3 lightDirection = -toLight;
+        vec3 reflectedLightDirection = reflect(lightDirection, normal);
+
+        float specularFactor = dot(reflectedLightDirection, unitToCameraVector);
+        specularFactor = max(specularFactor, 0.0);
+        totalSpecular += pow(specularFactor, 80) * 0.2 * lights[i].color.rgb  * intensity;
+        // 80 refers to shine Damper
+        // 0.2 refers to reflectivity
     }
 
     vec4 finalColor = (texelColor * ((colDiffuse + vec4(totalSpecular, 1.0)) * vec4(totalDiffuse, 1.0)));

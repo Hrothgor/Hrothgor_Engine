@@ -12,8 +12,6 @@ uniform vec4 colDiffuse;
 // Output fragment color
 out vec4 out_Pixel;
 
-// NOTE: Add here your custom variables
-
 void main(void)
 {
     vec4 color1 = texture(texture0, fragTexCoord1);

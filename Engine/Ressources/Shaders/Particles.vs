@@ -16,8 +16,6 @@ out vec2 fragTexCoord1;
 out vec2 fragTexCoord2;
 out float blend;
 
-// NOTE: Add here your custom variables
-
 void main()
 {
     float lifeFactor = elapsedTime / lifeLength;
