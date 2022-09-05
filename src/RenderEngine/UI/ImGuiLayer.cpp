@@ -12,6 +12,7 @@
 #include "Panels/ViewPortPanel.hpp"
 #include "Panels/AssetsPanel.hpp"
 #include "Panels/ProfilerPanel.hpp"
+#include "Panels/EnvironmentPanel.hpp"
 #include "Ecs/Engine.hpp"
 #include "RenderEngine/AssetsManager.hpp"
 
@@ -23,6 +24,7 @@ namespace hr {
     {
         _panels.push_back(new SceneHierarchyPanel());
         _panels.push_back(new InspectorPanel());
+        _panels.push_back(new EnvironmentPanel());
         _panels.push_back(new ViewPortPanel());
         _panels.push_back(new ProfilerPanel());
         _panels.push_back(new AssetsPanel());

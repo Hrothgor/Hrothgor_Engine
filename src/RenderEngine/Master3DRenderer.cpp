@@ -17,6 +17,7 @@ namespace hr {
     Master3DRenderer::Master3DRenderer()
     {
         _renderTexture = LoadRenderTexture(GetScreenWidth(), GetScreenHeight());
+        _backgroundColor = DARKBLUE;
     }
 
     Master3DRenderer::~Master3DRenderer()
@@ -33,9 +34,14 @@ namespace hr {
         _gizmosRenderer.Start();
     }
 
-    void Master3DRenderer::Clear(Color color)
+    void Master3DRenderer::SetBackgroundColor(Color color)
     {
-        ClearBackground(color);
+        _backgroundColor = color;
+    }
+
+    Color Master3DRenderer::GetBackgroundColor() const
+    {
+        return _backgroundColor;
     }
 
     void Master3DRenderer::BeginFrame()
@@ -56,7 +62,7 @@ namespace hr {
         }
 
         BeginTextureMode(_renderTexture);
-            ClearBackground(DARKBLUE);
+            ClearBackground(_backgroundColor);
             BeginFrame();
                 _entityRenderer.Draw();
                 _particleRenderer.Draw();

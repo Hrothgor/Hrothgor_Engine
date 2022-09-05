@@ -26,7 +26,8 @@ namespace hr {
             void Start();
             void End();
 
-            void Clear(Color color);
+            void SetBackgroundColor(Color color);
+            Color GetBackgroundColor() const;
 
             void BeginFrame();
             void Draw();
@@ -43,6 +44,7 @@ namespace hr {
         protected:
         private:
             RenderTexture _renderTexture;
+            Color _backgroundColor;
 
             MainCamera3D *_camera;
             EntityRenderer _entityRenderer;
