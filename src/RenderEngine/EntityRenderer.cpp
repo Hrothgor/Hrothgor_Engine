@@ -80,6 +80,6 @@ namespace hr {
 
     void EntityRenderer::End()
     {
-        UnloadShader(_lightShader.GetShader());
+        _lightShader.End();
     }
 }

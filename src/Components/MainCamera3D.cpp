@@ -15,7 +15,7 @@ namespace hr {
     {
         _name = "MainCamera3D";
         _camera = { 0 };
-        _camera.position = {0, 0, 0};
+        _camera.position = { 0, 0, 0 };
         _camera.target = { 0.0, 0.0, 0.0 };
         _camera.up = { 0.0, 1.0, 0.0 };
         _camera.fovy = 60;

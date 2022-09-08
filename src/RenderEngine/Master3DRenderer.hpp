@@ -9,6 +9,7 @@
 #define MASTER3DRENDERER_HPP_
 
 #include "Include.hpp"
+#include "ShadowMapping/ShadowMapEntityRenderer.hpp"
 #include "EntityRenderer.hpp"
 #include "ParticleRenderer.hpp"
 #include "GizmosRenderer.hpp"
@@ -41,10 +42,15 @@ namespace hr {
             RenderTexture GetRenderTexture() const;
             Texture *GetFrameBufferTexture();
 
+            Texture *GetShadowMapTexture();
+
         protected:
         private:
             RenderTexture _renderTexture;
+            RenderTexture _shadowMapTexture;
             Color _backgroundColor;
+
+            ShadowMapEntityRenderer _shadowMapEntityRenderer;
 
             MainCamera3D *_camera;
             EntityRenderer _entityRenderer;

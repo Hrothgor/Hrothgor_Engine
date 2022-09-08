@@ -54,31 +54,31 @@ namespace hr {
     void ViewPortPanel::ImGuiRender()
     {
         ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2 {0, 0});
-        if (ImGui::Begin("Viewport", &_isOpen, ImGuiWindowFlags_NoScrollbar)) {
-            bool isFocus = ImGui::IsWindowFocused() || ImGui::IsWindowHovered();
-            ActiveEvent(isFocus);
+        ImGui::Begin("Viewport", &_isOpen, ImGuiWindowFlags_NoScrollbar);
 
-            ImVec2 size = ImGui::GetContentRegionAvail();
-            if (Engine::Get()->GetProjectName() == "") {
-                ImGui::Image((ImTextureID)0, size, ImVec2 {0, 1}, ImVec2 {1, 0}, ImVec4 {0, 0, 0, 1});
-            } else {
-                ImGui::Image((ImTextureID)Master3DRenderer::Get()->GetFrameBufferTexture(), size, ImVec2 {0, 1}, ImVec2 {1, 0});
-            }
-            DrawGuizmo();
+        bool isFocus = ImGui::IsWindowFocused() || ImGui::IsWindowHovered();
+        ActiveEvent(isFocus);
 
-            if (ImGui::BeginDragDropTarget())
-            {
-                if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("SCENE_PAYLOAD"))
-                {
-                    char *path = static_cast<char *>(payload->Data);
-                    std::string name = String::NameByPath(path);
-                    name = name.substr(0, name.find("."));
-                    LoadSystem::LoadProject(name);
-                }
-                ImGui::EndDragDropTarget();
-            }
-            ImGui::End();
+        ImVec2 size = ImGui::GetContentRegionAvail();
+        if (Engine::Get()->GetProjectName() == "") {
+            ImGui::Image((ImTextureID)0, size, ImVec2 {0, 1}, ImVec2 {1, 0}, ImVec4 {0, 0, 0, 1});
+        } else {
+            ImGui::Image((ImTextureID)Master3DRenderer::Get()->GetFrameBufferTexture(), size, ImVec2 {0, 1}, ImVec2 {1, 0});
         }
+        DrawGuizmo();
+
+        if (ImGui::BeginDragDropTarget())
+        {
+            if (const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("SCENE_PAYLOAD"))
+            {
+                char *path = static_cast<char *>(payload->Data);
+                std::string name = String::NameByPath(path);
+                name = name.substr(0, name.find("."));
+                LoadSystem::LoadProject(name);
+            }
+            ImGui::EndDragDropTarget();
+        }
+        ImGui::End();
         ImGui::PopStyleVar();
     }
 

@@ -14,9 +14,11 @@
 namespace hr {
     Master3DRenderer *Master3DRenderer::instance = nullptr;
 
+
     Master3DRenderer::Master3DRenderer()
     {
         _renderTexture = LoadRenderTexture(GetScreenWidth(), GetScreenHeight());
+        _shadowMapTexture = LoadRenderTexture(1024, 1024);
         _backgroundColor = DARKBLUE;
     }
 
@@ -27,6 +29,8 @@ namespace hr {
     void Master3DRenderer::Start()
     {
         _imGuiLayer.Start();
+
+        _shadowMapEntityRenderer.Start();
 
         _camera = Engine::Get()->GetMainCamera()->GetComponent<MainCamera3D>();
         _entityRenderer.Start();
@@ -61,6 +65,20 @@ namespace hr {
             _renderTexture = LoadRenderTexture(GetScreenWidth(), GetScreenHeight());
         }
 
+        Camera testCam = { 0 };
+        testCam.position = { -100, 200, -50 };
+        testCam.target = { 0.0, 0.0, 0.0 };
+        testCam.up = { 0.0, 1.0, 0.0 };
+        testCam.fovy = 200;
+        testCam.projection = CAMERA_ORTHOGRAPHIC;
+
+        BeginTextureMode(_shadowMapTexture);
+            ClearBackground(WHITE);
+            BeginMode3D(testCam);
+            _shadowMapEntityRenderer.Draw();
+            EndMode3D();
+        EndTextureMode();
+
         BeginTextureMode(_renderTexture);
             ClearBackground(_backgroundColor);
             BeginFrame();
@@ -81,6 +99,7 @@ namespace hr {
 
     void Master3DRenderer::RegisterObject(GameObject *model)
     {
+        _shadowMapEntityRenderer.RegisterObject(model);
         _entityRenderer.RegisterObject(model);
     }
 
@@ -94,6 +113,19 @@ namespace hr {
         _particleRenderer.RegisterParticle(particles);
     }
 
+    void Master3DRenderer::End()
+    {
+        _imGuiLayer.End();
+
+        _shadowMapEntityRenderer.End();
+
+        _entityRenderer.End();
+        _particleRenderer.End();
+        _gizmosRenderer.End();
+
+        UnloadRenderTexture(_renderTexture);
+    }
+
     RenderTexture Master3DRenderer::GetRenderTexture() const
     {
         return _renderTexture;
@@ -104,14 +136,8 @@ namespace hr {
         return &(_renderTexture.texture);
     }
 
-    void Master3DRenderer::End()
+    Texture *Master3DRenderer::GetShadowMapTexture()
     {
-        _imGuiLayer.End();
-
-        _entityRenderer.End();
-        _particleRenderer.End();
-        _gizmosRenderer.End();
-
-        UnloadRenderTexture(_renderTexture);
+        return &(_shadowMapTexture.texture);
     }
 }
