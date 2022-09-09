@@ -16,26 +16,25 @@ namespace hr {
             ShadowMapFrameBuffer();
             ~ShadowMapFrameBuffer();
 
-            void End();
-
             void BindFrameBuffer();
             void UnbindFrameBuffer();
 
-            int GetFrameBuffer() const;
-            int *GetShadowMap();
+            void SetResolution(int resolution);
+            int GetResolution() const;
+
+            RenderTexture GetRenderTexture() const;
+            Texture GetDepthTexture() const;
+            Texture *GetShadowMap();
             
+            void End();
+
         protected:
         private:
-            int CreateFrameBuffer();
-            int CreateDepthBuffer(int width, int height);
+            RenderTexture LoadRenderTextureWithDepthTexture(int width, int height);
 
-            RenderTexture _depthTexture;
+            RenderTexture _renderTexture;
 
-            int _fbo;
-            int _shadowMapTexture;
-
-            int _textureWidth = 2048;
-            int _textureHeight = 2048;
+            int _resolution = 2048;
     };
 }
 

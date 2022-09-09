@@ -6,7 +6,7 @@
 */
 
 #include "ShadowMapPanel.hpp"
-#include "RenderEngine/Master3DRenderer.hpp"
+#include "RenderEngine/ShadowMapping/ShadowMapMasterRenderer.hpp"
 
 namespace hr {
     ShadowMapPanel::ShadowMapPanel()
@@ -23,7 +23,7 @@ namespace hr {
         ImGui::Begin("Shadow Map view", &_isOpen, ImGuiWindowFlags_NoScrollbar);
 
         ImVec2 size = ImGui::GetContentRegionAvail();
-        ImGui::Image((ImTextureID)Master3DRenderer::Get()->GetShadowMapTexture(), size, ImVec2 {0, 1}, ImVec2 {1, 0});
+        ImGui::Image((ImTextureID)ShadowMapMasterRenderer::Get()->FrameBuffer.GetShadowMap(), size, ImVec2 {0, 1}, ImVec2 {1, 0});
 
         ImGui::End();
         ImGui::PopStyleVar();

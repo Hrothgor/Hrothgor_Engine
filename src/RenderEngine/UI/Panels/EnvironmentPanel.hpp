@@ -22,6 +22,8 @@ namespace hr {
             virtual void ImGuiRender() override;
             virtual void End() override {};
 
+            void StartField(const std::string &label);
+            void EndField();
         protected:
         private:
     };

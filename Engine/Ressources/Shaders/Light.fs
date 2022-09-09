@@ -5,10 +5,12 @@ in vec3 fragPosition;
 in vec2 fragTexCoord;
 in vec3 fragNormal;
 
+in vec4 fragPosLightSpace;
 in vec3 toCameraVector;
 
 // Input uniform values
 uniform sampler2D texture0;
+uniform sampler2D shadowMap;
 uniform vec4 colDiffuse;
 uniform int nbLights;
 
@@ -30,8 +32,38 @@ struct Light {
 
 // Input lighting values
 uniform Light lights[MAX_LIGHTS];
-uniform vec4 ambient;
 uniform vec3 viewPos;
+
+// Shadow Const
+const int pcfCount = 1;
+
+float ShadowCalculation(vec4 fragPosLightSpace, float bias)
+{
+    // perform perspective divide
+    vec3 projCoords = fragPosLightSpace.xyz / fragPosLightSpace.w;   
+    // transform to [0,1] range
+    projCoords = projCoords * 0.5 + 0.5;
+    // get depth of current fragment from light's perspective
+    float currentDepth = projCoords.z;
+
+    // check whether current frag pos is in shadow
+    float shadow = 0;
+    vec2 texelSize = 1.0 / textureSize(shadowMap, 0);
+
+    for(int x = -pcfCount; x <= pcfCount; ++x)
+    {
+        for(int y = -pcfCount; y <= pcfCount; ++y)
+        {
+            // get closest depth value from light's perspective (using [0,1] range fragPosLight as coords)
+            float pcfDepth = texture(shadowMap, projCoords.xy + vec2(x, y) * texelSize).r; 
+            shadow += currentDepth - bias > pcfDepth ? 1.0 : 0.0;        
+        }    
+    }
+    int pcfTotalTexels = (pcfCount * 2 + 1) * (pcfCount * 2 + 1);
+    shadow /= pcfTotalTexels;
+
+    return shadow;
+}
 
 void main()
 {
@@ -47,6 +79,8 @@ void main()
         discard;
     }
 
+    vec3 shadowLightDir = vec3(0.0);
+
     for (int i = 0; i < nbLights; i++)
     {
         vec3 toLight = vec3(0.0);
@@ -55,6 +89,7 @@ void main()
         if (lights[i].type == LIGHT_DIRECTIONAL)
         {
             toLight = normalize(lights[i].position - lights[i].target);
+            shadowLightDir = -toLight;
         }
 
         if (lights[i].type == LIGHT_POINT)
@@ -89,8 +124,13 @@ void main()
         // 0.2 refers to reflectivity
     }
 
-    vec4 finalColor = (texelColor * ((colDiffuse + vec4(totalSpecular, 1.0)) * vec4(totalDiffuse, 1.0)));
-    finalColor += texelColor * (ambient/10.0) * colDiffuse;
+    float shadow = ShadowCalculation(fragPosLightSpace, 0.001);
+
+    vec4 diffuse = vec4(totalDiffuse, 1.0) * (1.0 - shadow);
+    vec4 specular = vec4(totalSpecular, 1.0);
+
+    vec4 finalColor = texelColor * (colDiffuse + specular) * diffuse;
+    finalColor += texelColor * vec4(0.01, 0.01, 0.01, 1.0) * colDiffuse;
 
     // Gamma correction
     out_Pixel = pow(finalColor, vec4(1.0/2.2));

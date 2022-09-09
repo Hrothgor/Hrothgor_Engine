@@ -17,8 +17,11 @@ namespace hr {
             ShadowShader();
             ~ShadowShader();
 
+            void UpdateLightSpaceMatrix(Matrix mat);
+
         protected:
         private:
+            int _locationLightSpaceMatrix;
     };
 }
 

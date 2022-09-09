@@ -9,8 +9,8 @@
 #define SHADOWMAPENTITYRENDERER_HPP_
 
 #include "Include.hpp"
-#include "ShadowMapFrameBuffer.hpp"
 #include "Shader/ShadowShader.hpp"
+#include "ShadowMapFrameBuffer.hpp"
 
 namespace hr {
     class GameObject;
@@ -23,19 +23,16 @@ namespace hr {
             void Start();
             void End();
 
-            void BeginFrame();
-            void Draw();
+            void BeginFrame(Matrix lightSpaceMatrix);
+            void Draw(Matrix lightSpaceMatrix);
             void EndFrame();
 
             void RegisterObject(GameObject *model);
-
-            int *GetShadowMapTexture();
 
         protected:
         private:
             std::vector<GameObject *> _objects;
             ShadowShader _shadowShader;
-            ShadowMapFrameBuffer _shadowFBO;
     };
 }
 

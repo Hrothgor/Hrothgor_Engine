@@ -33,12 +33,16 @@ namespace hr {
             void UpdateCameraLoc(Camera3D camera);
             void UpdateLightLoc(Light *light, int id);
             void UpdateLightsLoc(std::vector<GameObject *> lights);
+            void UpdateLightSpaceMatrix(Matrix mat);
+            void UpdateShadowMap(Texture texture);
 
-            std::vector<int> GetLocations(int id) const;
+            std::vector<int> GetLocationsLight(int id) const;
         protected:
         private:
-            std::vector<std::vector<int>> _locations;
+            std::vector<std::vector<int>> _locationsLights;
             int _locationNbLights;
+            int _locationLightSpaceMatrix;
+            int _locationShadowMap;
     };
 }
 

@@ -7,6 +7,7 @@
 
 #include "EnvironmentPanel.hpp"
 #include "RenderEngine/Master3DRenderer.hpp"
+#include "RenderEngine/ShadowMapping/ShadowMapMasterRenderer.hpp"
 
 namespace hr {
     EnvironmentPanel::EnvironmentPanel()
@@ -17,30 +18,59 @@ namespace hr {
     {
     }
 
-    void EnvironmentPanel::ImGuiRender()
+    void EnvironmentPanel::StartField(const std::string &label)
     {
-        ImGui::Begin("Environment", &_isOpen);
-
         ImGui::Columns(2);
-        ImGui::TextUnformatted("Background Color");
+        ImGui::TextUnformatted(label.c_str());
 		ImGui::PushItemWidth(-1);
 		ImGui::NextColumn();
 		ImGui::PushItemWidth(-1);
-        ImGui::PushID("Background Color");
+        ImGui::PushID(label.c_str());
+    }
 
-        Color col = Master3DRenderer::Get()->GetBackgroundColor();
-        Vector4 nCol = ColorNormalize(col);
-        float value[4] = {nCol.x, nCol.y, nCol.z, nCol.w};
-
-        if (ImGui::ColorEdit4("", value)) {
-            Color newCol = ColorFromNormalized((Vector4){value[0], value[1], value[2], value[3]});
-            Master3DRenderer::Get()->SetBackgroundColor(newCol);
-        }
-
+    void EnvironmentPanel::EndField()
+    {
         ImGui::PopID();
 		ImGui::PopItemWidth();
 		ImGui::NextColumn();
         ImGui::Columns();
+    }
+
+    void EnvironmentPanel::ImGuiRender()
+    {
+        ImGui::Begin("Environment", &_isOpen);
+
+        // Background Color
+        StartField("Background Color");
+
+        Color col = Master3DRenderer::Get()->GetBackgroundColor();
+        Vector4 nCol = ColorNormalize(col);
+        float bCol[4] = {nCol.x, nCol.y, nCol.z, nCol.w};
+
+        if (ImGui::ColorEdit4("", bCol)) {
+            Color newCol = ColorFromNormalized((Vector4){bCol[0], bCol[1], bCol[2], bCol[3]});
+            Master3DRenderer::Get()->SetBackgroundColor(newCol);
+        }
+
+        EndField();
+        //
+
+        // Shadow Map
+        ImGui::SetWindowFontScale(1.5);
+        ImGui::TextColored(ImVec4(9.0 / 255, 94.0 / 255, 149.0 / 255, 1), "Shadow Map");
+        ImGui::SetWindowFontScale(1);
+
+        ImGui::BeginDisabled(); // Disabled for the moment
+            StartField("Map resolution");
+
+            int resolution = ShadowMapMasterRenderer::Get()->FrameBuffer.GetResolution();
+            int minRes = 1;
+            if (ImGui::DragScalarN("", ImGuiDataType_S32, &resolution, 1, 1, &minRes))
+                ShadowMapMasterRenderer::Get()->FrameBuffer.SetResolution(resolution);
+
+            EndField();
+        ImGui::EndDisabled();
+        //
 
         ImGui::End();
     }

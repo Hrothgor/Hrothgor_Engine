@@ -10,69 +10,90 @@
 namespace hr {
     ShadowMapFrameBuffer::ShadowMapFrameBuffer()
     {
-        _fbo = CreateFrameBuffer();
-        _shadowMapTexture = CreateDepthBuffer(_textureWidth, _textureHeight);
-        UnbindFrameBuffer();
+        _renderTexture = LoadRenderTextureWithDepthTexture(_resolution, _resolution);
     }
 
     ShadowMapFrameBuffer::~ShadowMapFrameBuffer()
     {
     }
 
+    RenderTexture2D ShadowMapFrameBuffer::LoadRenderTextureWithDepthTexture(int width, int height)
+    {
+        RenderTexture2D target = {0};
+
+        target.id = rlLoadFramebuffer(width, height);   // Load an empty framebuffer
+
+        if (target.id > 0)
+        {
+            rlEnableFramebuffer(target.id);
+
+            // Create color texture (default to RGBA)
+            target.texture.id = rlLoadTexture(NULL, width, height, PIXELFORMAT_UNCOMPRESSED_R8G8B8A8, 1);
+            target.texture.width = width;
+            target.texture.height = height;
+            target.texture.format = PIXELFORMAT_UNCOMPRESSED_R8G8B8A8;
+            target.texture.mipmaps = 1;
+
+            // Create depth texture
+            target.depth.id = rlLoadTextureDepth(width, height, false);
+            target.depth.width = width;
+            target.depth.height = height;
+            target.depth.format = 19;       //DEPTH_COMPONENT_24BIT?
+            target.depth.mipmaps = 1;
+
+            // Attach color texture and depth texture to FBO
+            rlFramebufferAttach(target.id, target.texture.id, RL_ATTACHMENT_COLOR_CHANNEL0, RL_ATTACHMENT_TEXTURE2D, 0);
+            rlFramebufferAttach(target.id, target.depth.id, RL_ATTACHMENT_DEPTH, RL_ATTACHMENT_TEXTURE2D, 0);
+
+            // Check if fbo is complete with attachments (valid)
+            if (rlFramebufferComplete(target.id)) TRACELOG(LOG_INFO, "FBO: [ID %i] Framebuffer object created successfully", target.id);
+
+            rlDisableFramebuffer();
+        } 
+        else TRACELOG(LOG_WARNING, "FBO: Framebuffer object can not be created");
+
+        return target;
+    }
+
     void ShadowMapFrameBuffer::BindFrameBuffer()
     {
-        glBindTexture(GL_TEXTURE_2D, 0);
-        glBindFramebuffer(GL_DRAW_FRAMEBUFFER, _fbo);
-        glViewport(0, 0, _textureWidth, _textureHeight);
+        BeginTextureMode(_renderTexture);
     }
 
     void ShadowMapFrameBuffer::UnbindFrameBuffer()
     {
-        glBindFramebuffer(GL_FRAMEBUFFER, 0);
-        glViewport(0, 0, GetScreenWidth(), GetScreenHeight());
+        EndTextureMode();
     }
 
-    int ShadowMapFrameBuffer::GetFrameBuffer() const
+    void ShadowMapFrameBuffer::SetResolution(int resolution)
     {
-        return _fbo;
+        _resolution = resolution;
+        UnloadRenderTexture(_renderTexture);
+        _renderTexture = LoadRenderTextureWithDepthTexture(_resolution, _resolution);
     }
 
-    int *ShadowMapFrameBuffer::GetShadowMap()
+    int ShadowMapFrameBuffer::GetResolution() const
     {
-        return &(_shadowMapTexture);
+        return _resolution;
     }
 
-    int ShadowMapFrameBuffer::CreateFrameBuffer()
+    RenderTexture ShadowMapFrameBuffer::GetRenderTexture() const
     {
-        GLuint frameBuffer = 0;
-
-        glGenFramebuffers(1, &frameBuffer);
-        glBindFramebuffer(GL_FRAMEBUFFER, frameBuffer);
-        glDrawBuffers(0, GL_NONE);
-
-        return frameBuffer;
+        return _renderTexture;
     }
 
-    int ShadowMapFrameBuffer::CreateDepthBuffer(int width, int height)
+    Texture ShadowMapFrameBuffer::GetDepthTexture() const
     {
-        GLuint depthTexture = 0;
+        return _renderTexture.depth;
+    }
 
-        glGenTextures(1, &depthTexture);
-        glBindTexture(GL_TEXTURE_2D, depthTexture);
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT16, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-
-        glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, depthTexture, 0, 0);
-
-        return depthTexture;
+    Texture *ShadowMapFrameBuffer::GetShadowMap()
+    {
+        return &(_renderTexture.texture);
     }
 
     void ShadowMapFrameBuffer::End()
     {
-        glDeleteFramebuffers(1, (GLuint *)&_fbo);
-        glDeleteTextures(1, (GLuint *)&_shadowMapTexture);
+        UnloadRenderTexture(_renderTexture);
     }
 }

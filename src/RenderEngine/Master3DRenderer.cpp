@@ -8,17 +8,16 @@
 #include "Master3DRenderer.hpp"
 #include "Ecs/GameObject.hpp"
 #include "Ecs/Engine.hpp"
+#include "ShadowMapping/ShadowMapMasterRenderer.hpp"
 
 #include "Components/MainCamera3D.hpp"
 
 namespace hr {
     Master3DRenderer *Master3DRenderer::instance = nullptr;
 
-
     Master3DRenderer::Master3DRenderer()
     {
         _renderTexture = LoadRenderTexture(GetScreenWidth(), GetScreenHeight());
-        _shadowMapTexture = LoadRenderTexture(1024, 1024);
         _backgroundColor = DARKBLUE;
     }
 
@@ -30,7 +29,7 @@ namespace hr {
     {
         _imGuiLayer.Start();
 
-        _shadowMapEntityRenderer.Start();
+        ShadowMapMasterRenderer::Get()->Start();
 
         _camera = Engine::Get()->GetMainCamera()->GetComponent<MainCamera3D>();
         _entityRenderer.Start();
@@ -65,19 +64,7 @@ namespace hr {
             _renderTexture = LoadRenderTexture(GetScreenWidth(), GetScreenHeight());
         }
 
-        Camera testCam = { 0 };
-        testCam.position = { -100, 200, -50 };
-        testCam.target = { 0.0, 0.0, 0.0 };
-        testCam.up = { 0.0, 1.0, 0.0 };
-        testCam.fovy = 200;
-        testCam.projection = CAMERA_ORTHOGRAPHIC;
-
-        BeginTextureMode(_shadowMapTexture);
-            ClearBackground(WHITE);
-            BeginMode3D(testCam);
-            _shadowMapEntityRenderer.Draw();
-            EndMode3D();
-        EndTextureMode();
+        ShadowMapMasterRenderer::Get()->Draw();
 
         BeginTextureMode(_renderTexture);
             ClearBackground(_backgroundColor);
@@ -99,7 +86,7 @@ namespace hr {
 
     void Master3DRenderer::RegisterObject(GameObject *model)
     {
-        _shadowMapEntityRenderer.RegisterObject(model);
+        ShadowMapMasterRenderer::Get()->RegisterObject(model);
         _entityRenderer.RegisterObject(model);
     }
 
@@ -117,7 +104,7 @@ namespace hr {
     {
         _imGuiLayer.End();
 
-        _shadowMapEntityRenderer.End();
+        ShadowMapMasterRenderer::Get()->End();
 
         _entityRenderer.End();
         _particleRenderer.End();
@@ -134,10 +121,5 @@ namespace hr {
     Texture *Master3DRenderer::GetFrameBufferTexture()
     {
         return &(_renderTexture.texture);
-    }
-
-    Texture *Master3DRenderer::GetShadowMapTexture()
-    {
-        return &(_shadowMapTexture.texture);
     }
 }

@@ -25,25 +25,14 @@ namespace hr {
 
     }
 
-    void ShadowMapEntityRenderer::BeginFrame()
+    void ShadowMapEntityRenderer::BeginFrame(Matrix lightSpaceMatrix)
     {
-        // _shadowFBO.BindFrameBuffer();
-
-        // Matrix orthoLight = MatrixOrtho(
-        //     -100, 100, 
-        //     -100, 100, 
-        //     -100, 100);
-        // Matrix viewLight = MatrixLookAt(
-        //     { -100, 200, -50 },
-        //     {0, 0, 0},
-        //     {0, 1, 0});
-        // Matrix lightSpaceMatrix = MatrixMultiply(orthoLight, viewLight);
-        // _shadowShader.UpdateLightSpaceMatrix(lightSpaceMatrix);
+        _shadowShader.UpdateLightSpaceMatrix(lightSpaceMatrix);
     }
 
-    void ShadowMapEntityRenderer::Draw()
+    void ShadowMapEntityRenderer::Draw(Matrix lightSpaceMatrix)
     {
-        BeginFrame();
+        BeginFrame(lightSpaceMatrix);
         for (GameObject *object : _objects) {
             Transform *transform = object->GetTransform();
             MeshRenderer *meshRenderer = object->GetComponent<MeshRenderer>();
@@ -59,18 +48,19 @@ namespace hr {
             else if (model.materialCount > 0)
                 SetMaterialTexture(&(model.materials[0]), MATERIAL_MAP_DIFFUSE, (Texture2D){ rlGetTextureIdDefault(), 1, 1, 1, PIXELFORMAT_UNCOMPRESSED_R8G8B8A8 });
 
-            rlEnableBackfaceCulling();
             if (meshRenderer->GetHasTransparency())
                 rlDisableBackfaceCulling();
 
             DrawModelEx(model, transform->GetPositionWorld(), axisAngle.axis, axisAngle.angle, transform->GetScaleWorld(), meshRenderer->GetColor());
+        
+            if (meshRenderer->GetHasTransparency())
+                rlEnableBackfaceCulling();
         }
         EndFrame();
     }
 
     void ShadowMapEntityRenderer::EndFrame()
     {
-        // _shadowFBO.UnbindFrameBuffer();
         _objects.clear();
         rlEnableBackfaceCulling();
     }
@@ -83,10 +73,5 @@ namespace hr {
     void ShadowMapEntityRenderer::RegisterObject(GameObject *object)
     {
         _objects.push_back(object);
-    }
-
-    int *ShadowMapEntityRenderer::GetShadowMapTexture()
-    {
-        return _shadowFBO.GetShadowMap();
     }
 }

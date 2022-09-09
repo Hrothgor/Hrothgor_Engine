@@ -13,16 +13,14 @@
 namespace hr {
     LightShader::LightShader()
         : DefaultShader("Engine/Ressources/Shaders/Light.vs", "Engine/Ressources/Shaders/Light.fs")
-        , _locations(MAX_LIGHTS)
+        , _locationsLights(MAX_LIGHTS)
     {
         for (int i = 0; i < MAX_LIGHTS; i++)
-            _locations[i] = GetLocations(i);
+            _locationsLights[i] = GetLocationsLight(i);
 
         _locationNbLights = GetShaderLocation(_shader, "nbLights");
-
-        int ambientLoc = GetShaderLocation(_shader, "ambient");
-        float ambientValue[4] =  { 0.1, 0.1, 0.1, 1.0 };
-        SetShaderValue(_shader, ambientLoc, &ambientValue, SHADER_UNIFORM_VEC4);
+        _locationLightSpaceMatrix = GetShaderLocation(_shader, "lightSpaceMatrix");
+        _locationShadowMap = GetShaderLocation(_shader, "shadowMap");
     }
 
     LightShader::~LightShader()
@@ -38,26 +36,26 @@ namespace hr {
     void LightShader::UpdateLightLoc(Light *light, int id)
     {
         int type = light->GetType();
-        SetShaderValue(_shader, _locations[id][LOC_TYPE], &type, SHADER_UNIFORM_INT);
+        SetShaderValue(_shader, _locationsLights[id][LOC_TYPE], &type, SHADER_UNIFORM_INT);
 
         float target[3] = {light->GetTarget().x, light->GetTarget().y, light->GetTarget().z};
-        SetShaderValue(_shader, _locations[id][LOC_TARGET], &target, SHADER_UNIFORM_VEC3);
+        SetShaderValue(_shader, _locationsLights[id][LOC_TARGET], &target, SHADER_UNIFORM_VEC3);
 
         Transform *transform = light->GetTransform();
         float pos[3] = {transform->GetPositionWorld().x,
                         transform->GetPositionWorld().y,
                         transform->GetPositionWorld().z};
-        SetShaderValue(_shader, _locations[id][LOC_POS], &pos, SHADER_UNIFORM_VEC3);
+        SetShaderValue(_shader, _locationsLights[id][LOC_POS], &pos, SHADER_UNIFORM_VEC3);
 
         float range = light->GetRange();
-        SetShaderValue(_shader, _locations[id][LOC_RANGE], &range, SHADER_UNIFORM_FLOAT);
+        SetShaderValue(_shader, _locationsLights[id][LOC_RANGE], &range, SHADER_UNIFORM_FLOAT);
 
         Vector4 vec = ColorNormalize(light->GetColor());
         float color[4] = {vec.x, vec.y, vec.z, vec.w};
-        SetShaderValue(_shader, _locations[id][LOC_COLOR], &color, SHADER_UNIFORM_VEC4);
+        SetShaderValue(_shader, _locationsLights[id][LOC_COLOR], &color, SHADER_UNIFORM_VEC4);
 
         float intensity = light->GetIntensity();
-        SetShaderValue(_shader, _locations[id][LOC_INTENSITY], &intensity, SHADER_UNIFORM_FLOAT);
+        SetShaderValue(_shader, _locationsLights[id][LOC_INTENSITY], &intensity, SHADER_UNIFORM_FLOAT);
     }
 
     void LightShader::UpdateLightsLoc(std::vector<GameObject *> lights)
@@ -74,7 +72,17 @@ namespace hr {
         SetShaderValue(_shader, _locationNbLights, &nbLights, SHADER_UNIFORM_INT);
     }
 
-    std::vector<int> LightShader::GetLocations(int id) const
+    void LightShader::UpdateLightSpaceMatrix(Matrix mat)
+    {
+        SetShaderValueMatrix(_shader, _locationLightSpaceMatrix, mat);
+    }
+
+    void LightShader::UpdateShadowMap(Texture texture)
+    {
+        SetShaderValueTexture(_shader, _locationShadowMap, texture);
+    }
+
+    std::vector<int> LightShader::GetLocationsLight(int id) const
     {
         std::vector<int> locations(LOC_LIGHT_SHADER_COUNT, 0);
 

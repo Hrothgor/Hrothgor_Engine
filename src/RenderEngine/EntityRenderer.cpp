@@ -8,6 +8,7 @@
 #include "EntityRenderer.hpp"
 #include "Ecs/Engine.hpp"
 #include "Ecs/GameObject.hpp"
+#include "ShadowMapping/ShadowMapMasterRenderer.hpp"
 
 #include "Components/Transform.hpp"
 #include "Components/MeshRenderer.hpp"
@@ -32,6 +33,8 @@ namespace hr {
     {
         _lightShader.UpdateLightsLoc(_lights);
         _lightShader.UpdateCameraLoc(_camera->GetCamera3D());
+        _lightShader.UpdateLightSpaceMatrix(ShadowMapMasterRenderer::Get()->GetLightSpaceMatrix());
+        _lightShader.UpdateShadowMap(ShadowMapMasterRenderer::Get()->FrameBuffer.GetDepthTexture());
     }
 
     void EntityRenderer::Draw()
