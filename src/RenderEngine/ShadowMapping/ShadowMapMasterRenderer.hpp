@@ -30,6 +30,9 @@ namespace hr {
 
             void RegisterObject(GameObject *model);
 
+            void SetLightViewFOV(int fov);
+            int GetlightViewFOV() const;
+
             Matrix GetLightSpaceMatrix() const;
 
             ShadowMapFrameBuffer FrameBuffer;

@@ -28,6 +28,7 @@
 #include <chrono>
 #include <any>
 
+#include <GL/gl.h>
 #include <GLES3/gl3.h>
 
 #include "raylib.h"

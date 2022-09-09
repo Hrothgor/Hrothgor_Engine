@@ -72,6 +72,16 @@ namespace hr {
         _entityRenderer.RegisterObject(model);
     }
 
+    void ShadowMapMasterRenderer::SetLightViewFOV(int fov)
+    {
+        _lightView.fovy = fov;
+    }
+
+    int ShadowMapMasterRenderer::GetlightViewFOV() const
+    {
+        return _lightView.fovy;
+    }
+
     Matrix ShadowMapMasterRenderer::GetLightSpaceMatrix() const
     {
         return _lightSpaceMatrix;

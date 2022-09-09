@@ -7,6 +7,8 @@
 
 #include "ShadowMapFrameBuffer.hpp"
 
+
+
 namespace hr {
     ShadowMapFrameBuffer::ShadowMapFrameBuffer()
     {
@@ -15,6 +17,26 @@ namespace hr {
 
     ShadowMapFrameBuffer::~ShadowMapFrameBuffer()
     {
+    }
+
+    unsigned int ShadowMapFrameBuffer::LoadTextureDepth(int width, int height)
+    {
+        unsigned int id = 0;
+
+        glGenTextures(1, &id);
+        glBindTexture(GL_TEXTURE_2D, id);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT32, width, height, 0, GL_DEPTH_COMPONENT, GL_FLOAT, NULL);
+
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
+        float borderColor[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+        glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
+
+        glBindTexture(GL_TEXTURE_2D, 0);
+
+        return id;
     }
 
     RenderTexture2D ShadowMapFrameBuffer::LoadRenderTextureWithDepthTexture(int width, int height)
@@ -35,7 +57,7 @@ namespace hr {
             target.texture.mipmaps = 1;
 
             // Create depth texture
-            target.depth.id = rlLoadTextureDepth(width, height, false);
+            target.depth.id = LoadTextureDepth(width, height);
             target.depth.width = width;
             target.depth.height = height;
             target.depth.format = 19;       //DEPTH_COMPONENT_24BIT?

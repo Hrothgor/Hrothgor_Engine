@@ -30,6 +30,7 @@ namespace hr {
 
         protected:
         private:
+            unsigned int LoadTextureDepth(int width, int height);
             RenderTexture LoadRenderTextureWithDepthTexture(int width, int height);
 
             RenderTexture _renderTexture;

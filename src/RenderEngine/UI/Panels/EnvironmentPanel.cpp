@@ -70,6 +70,16 @@ namespace hr {
 
             EndField();
         ImGui::EndDisabled();
+
+        StartField("Light FOV");
+
+        int fov = ShadowMapMasterRenderer::Get()->GetlightViewFOV();
+        int minFOV = 1;
+        if (ImGui::DragScalarN("", ImGuiDataType_S32, &fov, 1, 1, &minFOV))
+            ShadowMapMasterRenderer::Get()->SetLightViewFOV(fov);
+
+        EndField();
+
         //
 
         ImGui::End();
